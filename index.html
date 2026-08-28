@@ -152,17 +152,17 @@
               this project is about.
             </li>
             <li>
-              <strong>Graph retrieval did not beat the vector baseline
-                here.</strong>
-              Both paths were run over all 300 questions and both produced
-              3 confidently wrong answers against the baseline's 5, which is not
-              a difference this sample can resolve. Both declined about 90% of
-              the questions, which turns out to be roughly right: they come from
-              people who had already read the documentation and said so. The graph was alone in answering 15
-              correctly and the vector path alone in 12, which an exact paired
-              test puts at p = 0.70 (<a href="#retrieval">Part 5</a>). The
-              experiment is also underpowered, for a reason worth knowing about
-              the demand signal.
+              <strong>Using the graph to pick what the assistant reads did not
+                beat ordinary similarity search.</strong>
+              Both were run over the same 300 questions. The graph did not make
+              the assistant more right, 23 correct against 24, and it did make it
+              more cautious, 3 confidently wrong against 5
+              (<a href="#retrieval">Part 5</a>). The test was also too small to
+              have caught a modest difference, and the reason is the most
+              interesting thing the project found by accident: those 300
+              questions come, by construction, from people the documentation had
+              already failed. Excellent for finding gaps. Useless as a benchmark
+              of answering.
             </li>
           </ul>
         </section>
