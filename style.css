@@ -543,15 +543,15 @@ caption {
   border-top: 1px solid var(--border-subtle);
 }
 
-/* Verdict words in a matrix. Colour is never the only signal: the word is
-   the signal, and the colour only agrees with it. */
+/* Verdict words in a matrix. Color is never the only signal: the word is
+   the signal, and the color only agrees with it. */
 .yes { color: var(--success-text); font-weight: 600; }
 .no { color: var(--error-text); font-weight: 600; }
 .partial { color: var(--warning-text); font-weight: 600; }
 .unclear { color: var(--text-muted); font-weight: 600; }
 
 /* A proportional bar behind a number in a table cell. Accent is the
-   measurement colour in this system and is never a status. */
+   measurement color in this system and is never a status. */
 .bar {
   display: block;
   height: 6px;
@@ -1104,7 +1104,7 @@ caption {
 }
 
 /* The commonest status by a distance: 139 of 153. Neutral rather than a
-   warning colour, because "nobody has checked this" is not a defect claim. */
+   warning color, because "nobody has checked this" is not a defect claim. */
 .tag-unchecked {
   background: var(--surface-sunken);
   color: var(--text-muted);

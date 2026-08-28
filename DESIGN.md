@@ -19,7 +19,7 @@ job is to publish a stylesheet. The cost is that a change has to be applied four
 times, which is why the rule is: when you touch one, check the others.
 
 `style.css` is this project's own layer. It names three roles the core does not
-have, once per colour scheme:
+have, once per color scheme:
 
 | Role | What it is for |
 |---|---|
@@ -34,7 +34,7 @@ is exactly what breaks dark mode, because the ramps do not invert.
 
 `prefers-color-scheme`, no toggle, nothing persisted. There is nothing worth
 storing for someone who visits once, and a toggle is a control that has to be
-found, labelled, positioned and remembered.
+found, labeled, positioned and remembered.
 
 Dark is not an inversion of light. Five things diverge on purpose, and they are
 documented in `tokens.css` next to the values: hover goes lighter rather than
@@ -78,7 +78,7 @@ matters most is the one that is an absence, so it is drawn as a claim with a
 count behind it, "0 sections define this concept, out of 570 checked", rather
 than as a blank space.
 
-Colour is never the only signal. Finding types carry a word as well as a tint,
+Color is never the only signal. Finding types carry a word as well as a tint,
 verdict cells carry a word, and the proportional bars use the accent ramp, which
 in this system means measurement and never status.
 

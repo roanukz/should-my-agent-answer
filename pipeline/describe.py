@@ -74,7 +74,9 @@ For each item, return:
                the documentation does not. If you think this candidate is not a
                real gap, say that here instead.
 
-Write plainly. Do not use an em dash or an en dash anywhere in your output.
+Write plainly. Two house rules, both checked afterwards: use US spelling (color,
+behavior, normalize, recognize, labeled), and do not use an em dash or an en dash
+anywhere in your output.
 
 Return JSON only, keyed by finding id:
 

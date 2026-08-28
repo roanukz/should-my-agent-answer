@@ -58,9 +58,9 @@ def wilson(successes: int, total: int, z: float = 1.959963985) -> list[float]:
         return [0.0, 0.0]
     p = successes / total
     denominator = 1 + z * z / total
-    centre = (p + z * z / (2 * total)) / denominator
+    center = (p + z * z / (2 * total)) / denominator
     half = (z / denominator) * math.sqrt(p * (1 - p) / total + z * z / (4 * total * total))
-    return [round(max(0.0, centre - half), 4), round(min(1.0, centre + half), 4)]
+    return [round(max(0.0, center - half), 4), round(min(1.0, center + half), 4)]
 
 
 def load():

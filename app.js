@@ -311,7 +311,7 @@
     /* Two different notes, written by two passes that never saw each other.
        gap_note says what the thread answer supplies that the docs do not.
        validation_note is the independent checker's verdict, including when it
-       says the finding does not hold up. Labelled, because an unlabelled
+       says the finding does not hold up. Labeled, because an unlabelled
        sentence here would read as the tool agreeing with itself. */
     if (f.gap_note) {
       var gap = el('p', 'cite');

@@ -11,7 +11,7 @@ Both paths produce the same committed JSON, and both go through the same
 validator, which is the part that actually matters.
 
 THE VALIDATOR IS THE INVARIANT. A model asked for a verbatim span will
-sometimes paraphrase, normalise whitespace, or quietly invent one. So no span is
+sometimes paraphrase, normalize whitespace, or quietly invent one. So no span is
 believed. Every span is searched for in the file the edge claims it came from,
 and an edge whose span is not found there is dropped, not downgraded. The count
 of dropped edges is reported and lands in the manifest, because a silent drop
@@ -139,10 +139,10 @@ Return one JSON object per section, keyed by section id, like:
 
 
 # --------------------------------------------------------------------------
-# Normalisation used by the validator
+# Normalization used by the validator
 # --------------------------------------------------------------------------
 
-def normalise(text: str) -> str:
+def normalize(text: str) -> str:
     """Collapse the differences a model introduces without changing meaning.
 
     Unicode NFKC (so a curly quote matches a straight one), whitespace runs to a
@@ -181,13 +181,13 @@ def locate_span(span: str, haystack: str, base_line: int,
 
     base_line is the file line number of haystack's first line.
     """
-    transform = transform or normalise
+    transform = transform or normalize
     norm_span = transform(span)
     if len(norm_span) < MIN_SPAN_CHARS:
         return None
 
     lines = haystack.splitlines()
-    # Build a normalised copy of the haystack plus a map back to line numbers.
+    # Build a normalized copy of the haystack plus a map back to line numbers.
     pieces: list[str] = []
     line_of_char: list[int] = []
     for offset, line in enumerate(lines):
@@ -413,7 +413,7 @@ def cmd_assemble() -> int:
                     continue
                 cid = concept_id(label)
                 span = str(edge.get("span", "") or "")
-                if len(normalise(span)) < MIN_SPAN_CHARS:
+                if len(normalize(span)) < MIN_SPAN_CHARS:
                     stats["dropped_short_span"] += 1
                     continue
 
@@ -423,7 +423,7 @@ def cmd_assemble() -> int:
                 # but the heading line, which evidences the title and not the
                 # claim.
                 heading_line = section["text"].splitlines()[0] if section["text"] else ""
-                if normalise(span) == normalise(heading_line):
+                if normalize(span) == normalize(heading_line):
                     stats["dropped_heading_only_span"] += 1
                     continue
 
@@ -576,7 +576,7 @@ the spelling or casing of one that is on the list.
 
 The span must be copied verbatim from the question's TITLE or BODY, at least 12
 characters, and contiguous. Whitespace runs and curly-vs-straight quotes are
-normalised for you. Everything else must match, and a span the validator cannot
+normalized for you. Everything else must match, and a span the validator cannot
 find in the thread file loses its edge.
 
 Return between one and six concepts per question. Prefer the few that the
@@ -710,11 +710,11 @@ def cmd_assemble_questions() -> int:
     for node in nodes:
         if node["type"] != "Concept":
             continue
-        by_label[normalise(node["label"])] = node["id"]
+        by_label[normalize(node["label"])] = node["id"]
         for surface in node.get("surface_forms", []):
-            by_label.setdefault(normalise(surface), node["id"])
+            by_label.setdefault(normalize(surface), node["id"])
         for alias in node.get("aliases", []):
-            by_label.setdefault(normalise(alias), node["id"])
+            by_label.setdefault(normalize(alias), node["id"])
 
     questions = {q["id"]: q for q in load_questions()}
     outputs = sorted(QWORK_OUT.glob("qbatch-*.json"))
@@ -745,13 +745,13 @@ def cmd_assemble_questions() -> int:
             for item in result.get("asks_about", []) or []:
                 stats["raw"] += 1
                 label = clean_label(str(item.get("concept", "")))
-                cid = by_label.get(normalise(label))
+                cid = by_label.get(normalize(label))
                 if cid is None:
                     stats["dropped_unknown_concept"] += 1
                     unknown_labels[label] = unknown_labels.get(label, 0) + 1
                     continue
                 span = str(item.get("span", "") or "")
-                if len(normalise(span)) < MIN_SPAN_CHARS:
+                if len(normalize(span)) < MIN_SPAN_CHARS:
                     stats["dropped_short_span"] += 1
                     continue
                 found = locate_span(span, thread_text, 1)
@@ -762,7 +762,7 @@ def cmd_assemble_questions() -> int:
                     # the markup characters removed from both sides.
                     found = locate_span(
                         span, thread_text, 1,
-                        transform=lambda t: strip_markdown_markers(normalise(t)))
+                        transform=lambda t: strip_markdown_markers(normalize(t)))
                     recovered = found is not None
                 if found is None:
                     stats["dropped_no_span"] += 1

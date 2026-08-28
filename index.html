@@ -121,7 +121,7 @@
               Google Research measured it: models handed no supporting context
               answered incorrectly about 10% of the time, and models handed
               <em>insufficient</em> context about 66% of the time
-              (<a href="#outcomes">Part 1</a>). Every prioritisation signal a
+              (<a href="#outcomes">Part 1</a>). Every prioritization signal a
               content team has surfaces the first case and none of them surface
               the second.
             </li>
@@ -252,7 +252,7 @@
                 <rect x="529" y="78" width="22" height="18" rx="2" fill="var(--surface)" stroke="var(--border-subtle)" />
                 <rect x="555" y="78" width="22" height="18" rx="2" fill="var(--surface)" stroke="var(--border-subtle)" />
                 <text x="410" y="140" class="d-cap">Your pages, chopped into pieces. The five</text>
-                <text x="410" y="156" class="d-cap">in colour are the ones that looked closest</text>
+                <text x="410" y="156" class="d-cap">in color are the ones that looked closest</text>
 
                 <rect x="624" y="44" width="152" height="66" rx="6"
                       fill="var(--surface-sunken)" stroke="var(--border-default)" />
@@ -310,7 +310,7 @@
 
 
           <p>
-            That third case is easier to recognise when you watch one happen.
+            That third case is easier to recognize when you watch one happen.
             This is a real one, produced by ordinary similarity search over the
             same 60 pages, which is what almost every documentation assistant
             does today (<a href="#retrieval">Part 5</a>), and scored against the
@@ -357,7 +357,7 @@
                   That the timing figure the asker quoted is measured before the
                   first byte arrives, so it already includes the round trip, and
                   the server is spending that time computing the response rather
-                  than serialising it.
+                  than serializing it.
                 </p>
                 <p>Different problem. Different fix.</p>
               </div>
@@ -408,14 +408,14 @@
           <p class="section-kicker">Part 2</p>
           <h2>Why nobody sees the third one</h2>
           <p>
-            Content teams do not prioritise at random. They prioritise from
+            Content teams do not prioritize at random. They prioritize from
             signals, and there are four of them.
           </p>
 
           <div class="table-scroll">
             <table>
               <caption>
-                Every routine prioritisation signal surfaces the safe failure and
+                Every routine prioritization signal surfaces the safe failure and
                 misses the dangerous one.
               </caption>
               <thead>
@@ -835,7 +835,7 @@
               <caption>
                 Only the middle column was built and measured here. The other two
                 are argued, and the third was rejected on its documented
-                behaviour rather than on a benchmark I ran.
+                behavior rather than on a benchmark I ran.
               </caption>
               <thead>
                 <tr>
@@ -960,7 +960,7 @@
             verbatim span will sometimes paraphrase, so no span is believed. Each
             one is searched for in the file its edge claims it came from, and an
             edge whose span is not found there is <em>dropped</em>, not
-            downgraded to low confidence. The permitted normalisations are
+            downgraded to low confidence. The permitted normalizations are
             Unicode form, whitespace, quote and dash shapes, and case, and that
             is the complete list.
           </p>
@@ -1252,7 +1252,7 @@
                   <td><a href="tool.html#F1-0006"><code>fastapi.encoders</code></a></td>
                   <td>
                     how to give jsonable_encoder a rule for a type it does not
-                    recognise
+                    recognize
                   </td>
                   <td class="no">No</td>
                 </tr>
@@ -1518,8 +1518,8 @@
             <code>SCORE ID: q:13029::graph</code>, so the prompt named the path
             that produced the answer, and the similarity answer came first in all
             300 pairs. That is a defect in the setup, it is on the record in
-            <code>data/work/compare/score/in/</code>, and if it favoured anything
-            it favoured the graph.
+            <code>data/work/compare/score/in/</code>, and if it favored anything
+            it favored the graph.
           </p>
           <p>
             <strong>The graph did not make the assistant more right.</strong> 23
@@ -1820,7 +1820,7 @@
             ships 153, and the 78.6% covers only the 14 near misses. Every orphan
             concept and every retrieval collision carries
             <code>validated: null</code> in <code>data/findings.json</code> and is
-            labelled "Not independently checked" on its card, which is the honest
+            labeled "Not independently checked" on its card, which is the honest
             label and not a reassuring one.
           </p>
 
@@ -1860,7 +1860,7 @@
             It says nothing about <em>recall</em>, the other half of that pair:
             of the gaps really out there, how many the pipeline found. How many
             it never noticed is not measured here and could not be, because
-            measuring it would need the hand labelling this design was built to
+            measuring it would need the hand labeling this design was built to
             avoid. Every guard in the pipeline also pushes the same way: the span
             validator, the scope rule and the definition sweep each drop findings
             rather than add them, so they buy precision with recall. Fourteen
@@ -1877,7 +1877,7 @@
               <strong>It does not measure recall, and cannot.</strong> Every
               number here is about precision: of the gaps reported, how many are
               real. How many real gaps were never noticed is unmeasured, and
-              measuring it would need the hand labelling this whole design exists
+              measuring it would need the hand labeling this whole design exists
               to avoid. Every fix in <a href="#validation">Part 6</a> traded
               recall for precision, so fourteen near misses over 60 pages is a
               floor and not an estimate.
@@ -1923,7 +1923,7 @@
             <li>
               <strong>One corpus, and a developer one.</strong> Everything here is
               FastAPI, so the method generalises in principle and is demonstrated
-              in exactly one place. A consumer help centre is a different writing
+              in exactly one place. A consumer help center is a different writing
               problem with no code samples to extract concepts from.
             </li>
             <li>
@@ -2022,7 +2022,7 @@
                 </title>
                 <desc id="flow-desc">
                   Seven steps from noticing a documentation problem to shipping a
-                  fix: notice, locate, prioritise, assign, write, review, ship.
+                  fix: notice, locate, prioritize, assign, write, review, ship.
                   This project covers the first two and part of the third. The
                   remaining four and a half are done by a person somewhere else.
                 </desc>
@@ -2043,7 +2043,7 @@
                 <rect x="294" y="44" width="104" height="50" rx="5"
                       fill="var(--surface-sunken)" stroke="var(--fill-border)"
                       stroke-width="2" stroke-dasharray="5 3" />
-                <text x="346" y="66" class="d-flow">Prioritise</text>
+                <text x="346" y="66" class="d-flow">Prioritize</text>
                 <text x="346" y="83" class="d-flow-sub">demand only</text>
 
                 <rect x="440" y="44" width="104" height="50" rx="5"

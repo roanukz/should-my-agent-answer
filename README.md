@@ -29,9 +29,9 @@ answered incorrectly about 66 percent of the time. Partial information is far
 more dangerous than none.
 ([arXiv 2411.06037](https://arxiv.org/abs/2411.06037))
 
-Content teams prioritise from complaints, escalations, and searches that return
+Content teams prioritize from complaints, escalations, and searches that return
 nothing. All three surface only the second case. The third case generates no
-signal at all, so it never gets prioritised, and it is the one doing the damage.
+signal at all, so it never gets prioritized, and it is the one doing the damage.
 
 ## What it does
 
@@ -204,7 +204,7 @@ comparison is underpowered, and for a reason worth knowing: 282 of the 300
 threads carry FastAPI's Questions template, in which the asker confirms they
 already read the tutorial and did not find the answer. The sample is selected
 for being unanswerable from the documentation, so both paths declining about 90%
-of it is close to correct behaviour rather than a retrieval failure.
+of it is close to correct behavior rather than a retrieval failure.
 
 ## Related
 
@@ -214,6 +214,6 @@ maps a whole documentation set and finds which articles will make an agent
 answer wrongly. That one is a linter for the page in front of you; this one is a
 map of everything you own.
 
-## Licence
+## License
 
 MIT. See [LICENSE](LICENSE).

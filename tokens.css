@@ -1,6 +1,6 @@
 /* ===========================================================================
    TOKENS - the design system's raw values.
-   Direction A: cool grey neutrals, anodised teal primary, 6px radius,
+   Direction A: cool gray neutrals, anodized teal primary, 6px radius,
    1.25 type ratio, system fonts only.
 
    Nothing in here is specific to Takeout Fixer. This file is the portable
@@ -18,7 +18,7 @@
      values: nothing in the app should use them directly. Use the role
      tokens further down, so dark mode keeps working. */
 
-  /* Neutral - hue 218, cool. Never passes through pure grey. */
+  /* Neutral - hue 218, cool. Never passes through pure gray. */
   --neutral-50:  #f7f8f9;
   --neutral-100: #eef0f3;
   --neutral-200: #dfe3e8;
@@ -34,7 +34,7 @@
   /* White sits outside the neutral ramp and is its own token. */
   --white: #ffffff;
 
-  /* Primary - anodised teal, hue 197. Teal not blue, so blue stays free
+  /* Primary - anodized teal, hue 197. Teal not blue, so blue stays free
      for info and notice. */
   --primary-50:  #eef6f8;
   --primary-100: #d7ebf0;
@@ -249,7 +249,7 @@
 
 
   /* --- Elevation - two levels only ------------------------------------
-     Shadow colour is neutral-950 at low alpha, never pure black. */
+     Shadow color is neutral-950 at low alpha, never pure black. */
   --elev-1: 0 1px 2px rgba(16, 20, 26, 0.06), 0 1px 1px rgba(16, 20, 26, 0.04);
   --elev-2: 0 4px 12px rgba(16, 20, 26, 0.10), 0 1px 2px rgba(16, 20, 26, 0.06);
 }

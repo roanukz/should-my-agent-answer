@@ -78,12 +78,12 @@ class EvidenceInvariantTest(unittest.TestCase):
                 unfindable.append((edge["id"], "no such file: " + evidence["path"]))
                 continue
             if source not in cache:
-                cache[source] = extract.normalise(source.read_text(encoding="utf-8"))
+                cache[source] = extract.normalize(source.read_text(encoding="utf-8"))
             checked += 1
-            span = extract.normalise(evidence["span"])
+            span = extract.normalize(evidence["span"])
             if span in cache[source]:
                 continue
-            # The one extra normalisation, and only for a question span.
+            # The one extra normalization, and only for a question span.
             loose_span = extract.strip_markdown_markers(span)
             loose_hay = extract.strip_markdown_markers(cache[source])
             if loose_span not in loose_hay:
@@ -112,8 +112,8 @@ class EvidenceInvariantTest(unittest.TestCase):
             if start < 1 or end > len(lines):
                 wrong.append((edge["id"], "line range outside the file"))
                 continue
-            window = extract.normalise("\n".join(lines[start - 1: end]))
-            span = extract.normalise(evidence["span"])
+            window = extract.normalize("\n".join(lines[start - 1: end]))
+            span = extract.normalize(evidence["span"])
             if span in window:
                 continue
             if extract.strip_markdown_markers(span) in extract.strip_markdown_markers(window):
@@ -488,3 +488,63 @@ class ManifestLedgerTest(unittest.TestCase):
         self.assertEqual(
             gap, drops,
             "the manifest lost an edge between proposed and kept without saying why")
+
+
+class SpellingTest(unittest.TestCase):
+    """US spelling, in everything the project writes.
+
+    Source data is exempt: data/raw/ holds fetched FastAPI pages and discussion
+    threads, and those are quoted verbatim elsewhere, so editing them would
+    break the evidence invariant. Two identifiers are exempt because they are
+    not English words.
+    """
+
+    BRITISH = re.compile(
+        r"\b(colour\w*|behaviour\w*|organis\w*|prioritis\w*|normalis\w*"
+        r"|recognis\w*|summaris\w*|categoris\w*|minimis\w*|maximis\w*"
+        r"|analyse\w*|licence|defence|centre[sd]?|favour\w*|labelling"
+        r"|labelled|modelling|modelled|cancelled|cancelling|fulfil|whilst"
+        r"|amongst|practise\w*|programme|apologis\w*|utilis\w*|specialis\w*"
+        r"|standardis\w*|serialis\w*|initialis\w*|optimis\w*|characteris\w*"
+        r"|anodis\w*|grey)\b",
+        re.I)
+
+    EXEMPT = ("aria-labelledby", "labelledby", "CancelledError")
+
+    SOURCES = ("index.html", "tool.html", "app.js", "style.css", "tokens.css",
+               "README.md", "DESIGN.md", "DECISIONS.md", "CLAUDE.md",
+               "pipeline/fetch.py", "pipeline/sections.py", "pipeline/extract.py",
+               "pipeline/build_graph.py", "pipeline/find.py", "pipeline/describe.py",
+               "pipeline/compare.py", "pipeline/validate.py", "pipeline/manifest.py",
+               "pipeline/site_data.py", "pipeline/llm.py", "pipeline/run.sh",
+               "tests/test_find.py", "tests/test_invariant.py")
+
+    def scrub(self, text: str) -> str:
+        for token in self.EXEMPT:
+            text = text.replace(token, " ")
+        return text
+
+    def test_no_british_spelling_in_anything_this_project_writes(self) -> None:
+        offenders = []
+        for rel in self.SOURCES:
+            path = ROOT / rel
+            if not path.exists():
+                continue
+            body = self.scrub(path.read_text(encoding="utf-8"))
+            # This test file names the forms it bans, so skip its own pattern.
+            if rel == "tests/test_invariant.py":
+                body = body.split("class SpellingTest")[0]
+            for match in self.BRITISH.finditer(body):
+                line = body[:match.start()].count("\n") + 1
+                offenders.append(f"{rel}:{line} {match.group(0)}")
+        self.assertEqual(offenders, [], f"{len(offenders)} British spellings")
+
+    def test_no_british_spelling_in_strings_that_render_to_a_reader(self) -> None:
+        """Model-written prose ships to the page, so it is held to the same rule."""
+        offenders = []
+        for finding in load("findings.json")["findings"]:
+            for field in ("missing", "validation_note", "gap_note", "concept_label"):
+                value = finding.get(field) or ""
+                for match in self.BRITISH.finditer(self.scrub(value)):
+                    offenders.append(f"{finding['id']}.{field}: {match.group(0)}")
+        self.assertEqual(offenders, [])

@@ -1,6 +1,6 @@
 """Answer every question twice, once from vector retrieval and once from the graph.
 
-Sections 5 to 8 of the design build and analyse a graph. That is knowledge graph
+Sections 5 to 8 of the design build and analyze a graph. That is knowledge graph
 work. GraphRAG means the graph drives RETRIEVAL that feeds GENERATION, and this
 is the file that closes that loop, so it is also what turns a diagnosis into a
 comparison.

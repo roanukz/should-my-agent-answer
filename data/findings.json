@@ -507,7 +507,7 @@
         35,
         52
       ],
-      "missing": "how to give jsonable_encoder a rule for a type it does not recognise, such as packaging.version.Version",
+      "missing": "how to give jsonable_encoder a rule for a type it does not recognize, such as packaging.version.Version",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",

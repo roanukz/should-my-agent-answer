@@ -88,10 +88,10 @@ def out_of_scope(label: str) -> bool:
     stay. A multi-word label counts only if EVERY word is language surface,
     which is what keeps "async generator" and "path operation" in scope.
     """
-    normalised = label.strip().lower()
-    if normalised in OWNED_ELSEWHERE:
+    normalized = label.strip().lower()
+    if normalized in OWNED_ELSEWHERE:
         return True
-    words = [w for w in re.split(r"[^a-z0-9_]+", normalised) if w]
+    words = [w for w in re.split(r"[^a-z0-9_]+", normalized) if w]
     if not words:
         return True
     return all(w in PYTHON_SURFACE for w in words)

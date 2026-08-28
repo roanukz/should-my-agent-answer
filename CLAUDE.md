@@ -24,7 +24,7 @@ The invariant is enforced mechanically, never by trusting the model. `extract.py
 searches for every returned span in the file the edge claims it came from and DROPS any
 edge whose span is not found there. Dropped counts are reported and land in
 `data/manifest.json`. Do not relax the search into fuzzy matching. The permitted
-normalisations are Unicode NFKC, whitespace collapsing, quote and dash flattening, and
+normalizations are Unicode NFKC, whitespace collapsing, quote and dash flattening, and
 case folding.
 
 There is exactly one addition, and only for a span copied out of a question. GitHub's
@@ -57,6 +57,12 @@ from either page. No hosted service. No downstream impact claim: this measures
 documentation, not a deployed assistant.
 
 ## House style for anything a reader sees
+- **US spelling throughout.** Color, behavior, normalize, recognize, prioritize,
+  labeled, center, gray, license, practice, while, among. This covers prose, code
+  identifiers and comments, and any model-generated string that renders into a
+  page. The exceptions are things that are not English words: `aria-labelledby`,
+  `CancelledError`, and anything quoted verbatim from a source file or a
+  discussion thread, which is data and is never edited.
 - No em dashes and no en dashes anywhere in visible copy, including `<title>` and
   `data/` strings that render into a page. Rebuild the sentence with a conjunction
   rather than swapping in a full stop, which reads choppy.
