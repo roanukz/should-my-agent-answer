@@ -293,3 +293,116 @@ class DiagramAccuracyTest(unittest.TestCase):
         for match in re.finditer(r'<(?:image|use)\b[^>]*>', self.page):
             self.fail(f"figure pulls an external resource: {match.group(0)[:80]}")
         self.assertNotIn("url(http", self.page)
+
+
+class PublishedNumbersTest(unittest.TestCase):
+    """Every figure the essay prints, recomputed from the data it cites.
+
+    Added after an independent review found nine stale or wrong numbers on the
+    page, including an edge count that contradicted the diagram fifty lines
+    above it. Each of these is a number a reader can check, so each one is a
+    number the test suite should check first.
+    """
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
+        cls.findings = load("findings.json")["findings"]
+        cls.answers = load("answers.json")
+
+    def of_type(self, kind: str):
+        return [f for f in self.findings if f["type"] == kind]
+
+    def threads_reached(self, kind: str) -> int:
+        return len({q for f in self.of_type(kind) for q in f["questions"]})
+
+    def test_the_threads_reached_column_counts_distinct_threads(self) -> None:
+        """Not the sum of demand: one thread raised two near misses."""
+        self.assertEqual(self.threads_reached("near_miss"), 20)
+        self.assertEqual(self.threads_reached("retrieval_collision"), 116)
+        for value in (20, 116):
+            self.assertIn(f'<td class="num">{value}</td>', self.page)
+
+    def test_findings_counts_on_the_page_match_the_file(self) -> None:
+        for kind, n in (("near_miss", 14), ("orphan_concept", 40),
+                        ("retrieval_collision", 99)):
+            self.assertEqual(len(self.of_type(kind)), n)
+
+    def test_the_answers_table_and_its_caption_agree(self) -> None:
+        summary = self.answers["summary"]
+        scored = sum(
+            v for path in ("vector", "graph")
+            for k, v in summary[path].items() if k != "unscored")
+        self.assertEqual(scored, 598)
+        self.assertIn("598 of 600 answers scored", self.page)
+
+    def test_the_paired_comparison_runs_on_correctness_discordant_pairs(self) -> None:
+        paired = self.answers["summary"]["paired"]
+        discordant = paired["vector_only_correct"] + paired["graph_only_correct"]
+        self.assertEqual(discordant, 27)
+        self.assertIn("the 27 questions where exactly one path", self.page)
+
+    def test_the_page_does_not_claim_the_scoring_was_blind(self) -> None:
+        """It was not: the scoring prompt names the path in every block."""
+        self.assertNotIn("without being told which retrieval path", self.page)
+        self.assertIn("The scorer was not blind", self.page)
+
+    def test_every_traversal_string_on_the_page_is_verbatim_in_the_data(self) -> None:
+        """The guard against the worst kind of error this page could make.
+
+        A callout headed "as committed" once carried a traversal line that was
+        reconstructed rather than copied. On a page whose argument is that every
+        claim is checkable in the repository, a quote that is not in the
+        repository is the one defect that cannot be excused, so it is tested.
+        """
+        import html as htmllib
+        import re
+        committed = set()
+        for result in self.answers["results"]:
+            for step in result["graph"].get("traversal", []):
+                committed.add(re.sub(r"\s+", " ", step).strip())
+
+        quoted = re.findall(
+            r"<code[^>]*>\s*(q:\d+ ASKS_ABOUT[^<]*|sec:\S[^<]*REQUIRES[^<]*?)\s*</code\s*>",
+            self.page)
+        self.assertTrue(quoted, "no traversal quotes found to check")
+        for raw in quoted:
+            step = re.sub(r"\s+", " ", htmllib.unescape(raw)).strip()
+            self.assertIn(step, committed,
+                          f"traversal quoted on the page is not in answers.json: {step}")
+
+    def test_the_worked_example_is_a_question_the_hop_actually_changed(self) -> None:
+        import re
+        result = next(r for r in self.answers["results"] if r["question_id"] == "q:13108")
+        retrieved = set(result["graph"]["retrieved"])
+        hopped = {m.group(1)
+                  for step in result["graph"]["traversal"]
+                  for m in [re.search(r"REQUIRES \S+ -> DEFINES -> (sec:\S+)$", step)]
+                  if m}
+        self.assertTrue(retrieved & hopped,
+                        "the example must be one where a hop reached the final set")
+        self.assertEqual(result["graph"]["verdict"], "correct")
+        self.assertNotEqual(result["vector"]["verdict"], "correct")
+
+    def test_the_definition_sweeps_report_what_landed(self) -> None:
+        # Derived from the graph, because the report file describes only the
+        # invocation that wrote it and the adjudication pass ran last.
+        edges = load("graph/edges.json")["edges"]
+        landed = sum(1 for e in edges if e["extractor"] == "definition-sweep")
+        self.assertEqual(landed, 101, "72 from the first sweep, 29 from the second")
+        self.assertIn("recovered 29 more definitions", self.page)
+        self.assertIn("72 the\n              first sweep added", self.page)
+
+    def test_the_page_accounts_for_every_round_one_finding(self) -> None:
+        """Nine held up, six rejections survived the fixes, and round two has 14."""
+        round_one = load("validation-round-1.json")["results"]
+        valid = {r["concept_label"] for r in round_one if r["verdict"] == "valid"}
+        invalid = {r["concept_label"] for r in round_one if r["verdict"] == "invalid"}
+        final = {f["concept_label"] for f in self.of_type("near_miss")}
+        self.assertEqual(len(valid), 9)
+        self.assertEqual(len(final), 14)
+        self.assertEqual(len(final & invalid), 6)
+        dropped = valid - final
+        self.assertEqual(dropped, {"async"},
+                         "the page explains exactly one confirmed finding being cut")
+        self.assertIn("round two checks fourteen and not fifteen", self.page)

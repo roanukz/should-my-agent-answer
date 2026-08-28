@@ -137,10 +137,10 @@
             <li>
               <strong>The first independent check failed, and that is the
                 result worth reading.</strong>
-              9 of 33 near misses survived it. Under the build plan's own floor,
-              which stopped the work before any of it was published
-              (<a href="#validation">Part 6</a>). Three of my own mistakes caused
-              it. After fixing them, 11 of 14 survived, unanimously across three
+              9 of 33 near misses survived it, well under the 70% floor the
+              build plan had set as a stop condition, so the work stopped before
+              any of it was published (<a href="#validation">Part 6</a>). Three
+              of my own mistakes caused that rate. After fixing them, 11 of 14 survived, unanimously across three
               readers each. Both rounds are on this page, because a gap-finding
               tool is judged on its false positives and reporting only the second
               number would be the same failure this project is about.
@@ -221,7 +221,7 @@
           <h2>Why nobody sees the third one</h2>
           <p>
             Content teams do not prioritise at random. They prioritise from
-            signals, and there are three of them.
+            signals, and there are four of them.
           </p>
 
           <div class="table-scroll">
@@ -480,7 +480,7 @@
                     This section explains what the thing is or how to use it. A
                     reader who knew nothing could learn it here
                   </td>
-                  <td class="num">885</td>
+                  <td class="num">914</td>
                 </tr>
                 <tr>
                   <th scope="row">REQUIRES</th>
@@ -951,10 +951,12 @@
                 <tr>
                   <th scope="row">F1 Near miss</th>
                   <td class="num">14</td>
-                  <td class="num">21</td>
+                  <td class="num">20</td>
                   <td>
-                    Two of them were asked about by more than one person. The
-                    rest were asked once, which is what a long tail looks like
+                    Two of them were asked about by more than one person, and one
+                    thread raised two of these gaps at once, so fourteen findings
+                    reach twenty threads. The rest were asked once, which is what
+                    a long tail looks like
                   </td>
                 </tr>
                 <tr>
@@ -970,7 +972,7 @@
                 <tr>
                   <th scope="row">F3 Retrieval collision</th>
                   <td class="num">99</td>
-                  <td class="num">115</td>
+                  <td class="num">116</td>
                   <td>
                     12 of them caught more than one question. Each one is a
                     question, so demand is never zero
@@ -994,8 +996,8 @@
             <table>
               <caption>
                 Every row links to the finding in the explorer, where the proof
-                path, the evidence spans and the confirming answer are one click
-                away.
+                path and the evidence spans are one click away, along with the
+                confirming answer on the thirteen that have one.
               </caption>
               <thead>
                 <tr>
@@ -1149,9 +1151,12 @@
           <h3>Fourteen is a small number, and that is the point</h3>
           <p>
             An earlier version of this section reported 57 near misses. It was
-            wrong, and how it was wrong is <a href="#validation">Part 6</a>. What
-            is worth saying here is what the surviving fourteen have in common:
-            almost all of them are demand of one. One person asked, once.
+            wrong, and it was corrected in two steps. A first sweep for
+            definitions the extractor had missed cut 57 to the 33 that went into
+            validation, and what the independent check then did to those 33 is
+            <a href="#validation">Part 6</a>. What is worth saying here is what
+            the surviving fourteen have in common: almost all of them are demand
+            of one. One person asked, once.
           </p>
 
           <div class="pullquote">
@@ -1165,8 +1170,8 @@
             That is why demand is on every finding rather than being used as a
             filter. Two of the fourteen have real recurring demand, and a content
             lead with a week to spend should spend it on those two. The other
-            twelve are a backlog, correctly identified and correctly ranked
-            below them. A tool that could not tell those apart would hand over
+            twelve are a backlog, ranked correctly below them, and three of those
+            twelve are the ones that did not hold up. A tool that could not tell those apart would hand over
             153 equally urgent tasks, which is the same as handing over nothing.
           </p>
         </section>
@@ -1203,9 +1208,10 @@
                   <th scope="row">B, graph retrieval</th>
                   <td>
                     Seed on the Sections that DEFINE the concepts the question
-                    asks about. Then one hop: for each seed, also retrieve the
-                    Sections that DEFINE anything that seed REQUIRES. Capped at
-                    five to match
+                    asks about, or, where nothing defines a concept, on the
+                    Sections that REQUIRE or MENTION it. Then one hop: for each
+                    seed, also retrieve the Sections that DEFINE anything that
+                    seed REQUIRES. At most five, to match
                   </td>
                 </tr>
               </tbody>
@@ -1216,25 +1222,33 @@
             The traversal is the point. Path B can pull in the prerequisite a
             section depends on. Path A cannot, because a prerequisite is not
             lexically similar to the question that needs it. Across the 300
-            questions the two paths never once returned the same five sections,
+            questions the two paths never once returned the same set of sections,
             and in 282 of them the graph reached at least one section the vector
             path did not.
+          </p>
+          <p>
+            The two paths were not always given the same budget, which matters
+            for reading the scores. The vector path always returned five
+            sections. The graph returned five on 268 questions, fewer on 15, and
+            nothing at all on 17, where the extractor found no concept on the
+            question, so the traversal had no seed to start from. Those 17 are
+            declines by construction rather than judgements about retrieved
+            material.
           </p>
 
           <h3>A question where the traversal did something</h3>
           <p>
-            Discussion 14334 asks why
-            <code>jsonable_encoder</code> is not respecting <code>exclude</code>
-            on a <code>Field</code>.
+            Discussion 13108 asks how to get a frontend API and a backend API
+            onto separate Swagger pages.
           </p>
 
           <div class="table-scroll">
             <table>
               <caption>
-                The vector path retrieves five things about excluding and about
-                OpenAPI. The graph path retrieves the section on the actual
-                function, and then the section that defines Field, which is what
-                the question turns on.
+                The question yields only four seed sections, so the fifth slot is
+                the one the hop filled. It reaches Import APIRouter, which is what
+                lets the answer rule an APIRouter out and reach for a mounted
+                second application instead.
               </caption>
               <thead>
                 <tr>
@@ -1244,27 +1258,24 @@
               </thead>
               <tbody>
                 <tr>
+                  <td>Metadata and Docs URLs / Docs URLs</td>
+                  <td>First Steps / Interactive API docs</td>
+                </tr>
+                <tr>
+                  <td>Path Parameters / Documentation</td>
+                  <td>Metadata and Docs URLs / Docs URLs</td>
+                </tr>
+                <tr>
                   <td>Declare Request Example Data / Pydantic and FastAPI examples</td>
-                  <td>
-                    Return a Response Directly / Using the jsonable_encoder in a
-                    Response
-                  </td>
+                  <td>Declare Request Example Data / Body with multiple examples</td>
                 </tr>
                 <tr>
-                  <td>Custom Response / JSON Responses</td>
-                  <td>Body Fields / Import Field</td>
+                  <td>Tutorial User Guide</td>
+                  <td>Static Files / What is "Mounting"</td>
                 </tr>
                 <tr>
-                  <td>Path Operation Advanced Configuration / Custom OpenAPI content type</td>
-                  <td>Body Fields / Declare model attributes</td>
-                </tr>
-                <tr>
-                  <td>Query Parameters and String Validations / Exclude parameters from OpenAPI</td>
-                  <td>Body Fields / Add extra information</td>
-                </tr>
-                <tr>
-                  <td>Response Model / response_model Priority</td>
-                  <td>Body Fields</td>
+                  <td>First Steps / Interactive API docs</td>
+                  <td>Bigger Applications / Import APIRouter</td>
                 </tr>
               </tbody>
             </table>
@@ -1272,23 +1283,44 @@
 
           <p>
             The step that got it there is recorded on the answer, in the same
-            form as every other claim in this repository:
+            form as every other claim in this repository. These two lines are
+            copied out of <code>data/answers.json</code> and can be grepped for:
           </p>
 
           <div class="callout callout-info">
             <h4>The traversal, as committed</h4>
             <p>
               <code
-                >q:14334 ASKS_ABOUT concept:jsonable_encoder &rarr; DEFINES
-                &rarr; sec:advanced/response-directly#using-the-jsonable-encoder-in-a-response</code
+                >q:13108 ASKS_ABOUT concept:sub_application -&gt; DEFINES -&gt; 1
+                section(s)</code
               >
             </p>
             <p>
               <code
-                >sec:advanced/response-directly#using-the-jsonable-encoder-in-a-response
-                REQUIRES concept:basemodel &rarr; DEFINES &rarr;
-                sec:tutorial/body#create-your-data-model</code
+                >sec:tutorial/static-files#what-is-mounting REQUIRES
+                concept:apirouter -&gt; DEFINES -&gt;
+                sec:tutorial/bigger-applications#import-apirouter</code
               >
+            </p>
+          </div>
+
+          <p>
+            The vector path declined this one. The graph path was scored correct,
+            and its answer uses the section the hop pulled in: each application
+            gets its own Swagger page, so the way to do this is to mount a second
+            application rather than to add a router.
+          </p>
+
+          <div class="callout callout-warning">
+            <h4>How often the hop actually reaches the answer</h4>
+            <p>
+              Rarely, and the design is why. Seeds are ranked first and the list
+              is capped at five, so the one hop only reaches the final five when
+              a question yields fewer than five seed sections. Across the 300
+              questions a hopped-in section survives into the context 70 times,
+              and this example is one of only three where that happened
+              <em>and</em> the graph was scored correct while the vector path was
+              not.
             </p>
           </div>
 
@@ -1299,16 +1331,25 @@
             <strong>confidently wrong</strong>, meaning it asserts an answer that
             contradicts or omits the key fact with no hedge, and
             <strong>declined</strong>, meaning it said it could not answer from
-            the material. The scorer saw the two answers side by side without
-            being told which retrieval path produced which.
+            the material. Both answers to a question sat in the same batch, each
+            scored on its own against that reply rather than as a comparison
+            between the two. The scorer was not blind: every block is headed
+            <code>SCORE ID: q:13029::vector</code> or
+            <code>SCORE ID: q:13029::graph</code>, so the prompt named the path
+            that produced the answer, and the vector answer came first in all 300
+            pairs. That is a defect in the setup and it is on the record in
+            <code>data/work/compare/score/in/</code>. If it favoured anything it
+            favoured the graph, whose three-answer lead is already not
+            significant.
           </p>
 
           <div class="table-scroll">
             <table>
               <caption>
-                300 questions, both paths, 599 of 600 answers scored. One answer
-                came back without a verdict and is counted as unscored rather
-                than assigned to a bucket.
+                300 questions, both paths, 598 of 600 answers scored. One
+                question came back without a verdict on either path, so both of
+                its answers are counted as unscored rather than assigned to a
+                bucket.
               </caption>
               <thead>
                 <tr>
@@ -1342,7 +1383,8 @@
           <p>
             On correctness the graph path is ahead by three, and because both
             paths answered the same 300 questions the comparison is paired, so
-            the informative cases are the 32 where the two verdicts differ. The
+            the informative cases are the 27 questions where exactly one path
+            got it right. The
             graph was alone in being correct on 15 of them and the vector path
             alone on 12. An exact McNemar test on that split gives
             <strong>p = 0.70</strong>.
@@ -1421,6 +1463,13 @@
             in under, so that is what happened, and this is the number.
           </p>
 
+          <p>
+            Round one did not see 57 near misses. A first definition sweep had
+            already taken them to 33, by finding real definitions for 74 of the
+            164 concepts nothing appeared to define, and 33 is the population
+            round one checked.
+          </p>
+
           <div class="table-scroll">
             <table>
               <caption>
@@ -1462,8 +1511,9 @@
 
           <h3>What round one caught</h3>
           <p>
-            Every one of the 24 rejections was my mistake, in one of three
-            kinds.
+            I took all 24 rejections as my own mistake, in one of three kinds.
+            Four of them turned out to be round one's error instead, which only
+            became clear after the fixes.
           </p>
           <ul>
             <li>
@@ -1478,11 +1528,24 @@
               it cannot be quietly tuned to make a number look better.
             </li>
             <li>
+              <strong>The scope rule cut one finding round one had
+                confirmed.</strong>
+              <code>async</code> is a bare Python keyword, so explaining it is
+              Python's job rather than FastAPI's, and the rule removed it. Round
+              one had called <code>async def</code>, <code>await</code> and
+              <code>async for</code> out of scope in the same pass, so this is
+              round one's own reasoning applied to the case it made an exception
+              for. The deletion was deliberate and the rule stayed. It is also
+              why round two checks fourteen and not fifteen: round one's nine,
+              minus <code>async</code>, plus the six rejections that survived the
+              fixes.
+            </li>
+            <li>
               <strong>Sixteen were definitions my extractor had missed.</strong>
               The corpus does explain the thing and the graph did not know. A
               second sweep, rewritten around the specific places the checker had
-              found them, recovered 32 more definitions on top of the 74 the
-              first sweep found.
+              found them, recovered 29 more definitions on top of the 72 the
+              first sweep added.
             </li>
             <li>
               <strong>One was a name local to a code sample</strong>, which the
@@ -1513,7 +1576,7 @@
 
           <h3>Round one was itself wrong four times</h3>
           <p>
-            Six findings survived the fixes that round one had rejected. Rather
+            Six of the findings round one had rejected survived the fixes. Rather
             than assume either side was right, three independent readers were
             given round one's own file-and-line evidence and asked to confirm or
             refute it. They found round one wrong on four of the six. The line it
@@ -1552,9 +1615,10 @@
             A threshold at this population size would be decided by two or three
             items. Round two's interval runs from 0.52 to 0.92, so a gate at 90%
             and a gate at 60% would disagree about the same fourteen findings.
-            RefusalBench human validated 180 items and scored 93.1%, which means a
-            90% gate would fail work done by a funded team with expert
-            annotators.
+            RefusalBench human validated 180 items and scored 93.1%, a rate whose
+            Wilson 95% interval runs from 0.88 to 0.96, so a 90% gate could not
+            separate work done by a funded team with expert annotators from
+            failure.
           </p>
           <p>
             So the number is reported with its interval and no gate is drawn. The
@@ -1608,9 +1672,10 @@
             </li>
             <li>
               <strong>Extraction quality bounds everything downstream.</strong>
-              This is not a hedge, it is the measured behaviour: one bad line in
-              one prompt sent the first validation round to 27%, and it took an
-              independent check plus two sweeps to find why. Whatever is still
+              This is not a hedge, it is the measured behaviour: three mistakes
+              of my own sent the first validation round to 27%, the costliest a
+              single line in one extraction prompt, and it took an independent
+              check plus a rewritten definition sweep to find them. Whatever is still
               wrong in the extraction is still in these counts.
             </li>
             <li>
@@ -1746,10 +1811,11 @@
     <footer class="site-footer">
       <div class="wrap">
         <p>
-          Corpus pinned at fastapi/fastapi commit
-          <code>49033471</code>. All results committed and reproducible with
-          <code>pipeline/run.sh</code>. Neither page on this site makes a network
-          call.
+          Corpus pinned at fastapi/fastapi commit <code>49033471</code>. All
+          results are committed. <code>pipeline/run.sh</code> rebuilds them from
+          <code>data/raw/</code>, and the steps that need a model will land near
+          these numbers rather than exactly on them. Neither page on this site
+          makes a network call.
         </p>
         <p>
           Related:

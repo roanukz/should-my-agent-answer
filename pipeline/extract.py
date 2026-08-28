@@ -1107,6 +1107,11 @@ def cmd_assemble_definitions() -> int:
     (GRAPH / "edges.json").write_text(
         json.dumps({"schema_version": 1, "edges": edges}, indent=2, ensure_ascii=False),
         encoding="utf-8")
+    # This report used to describe only the invocation that wrote it, so a later
+    # run overwrote "added: 29" with "added: 0" and the landed total vanished.
+    # The running total is what anyone actually wants to know.
+    stats["sweep_edges_in_graph"] = sum(
+        1 for e in edges if e["extractor"] == "definition-sweep")
     (GRAPH / "definition_sweep_report.json").write_text(
         json.dumps(stats, indent=2), encoding="utf-8")
 

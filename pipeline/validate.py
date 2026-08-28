@@ -9,8 +9,9 @@ wrong is that the extractor missed a DEFINES edge that is sitting in the docs.
 There is no pass or fail gate, on purpose. At n=50 the Wilson 95 percent
 interval around 43/50 runs from about 0.74 to 0.93, so a binary threshold at 90
 percent would be decided by two or three items. RefusalBench human validated 180
-items and scored 93.1 percent, so a 90 percent gate would fail work done by a
-funded team with expert annotators. Report the observed rate and the interval,
+items and scored 93.1 percent, a rate whose Wilson 95 percent interval runs from
+0.88 to 0.96, so a 90 percent gate could not separate work done by a funded team
+with expert annotators from failure. Report the observed rate and the interval,
 and let the reader judge.
 
 The one number that does trigger action is the floor in the build plan: under
