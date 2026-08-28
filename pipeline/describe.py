@@ -160,9 +160,11 @@ def cmd_assemble() -> int:
         if missing:
             finding["missing"] = missing
             filled += 1
+        # Its own field. `validation_note` belongs to validate.py, and having
+        # both write the same key meant whichever ran last silently won.
         note = str(record.get("note", "")).strip()
         if note:
-            finding["validation_note"] = note
+            finding["gap_note"] = note
         excerpt = str(record.get("confirming_excerpt", "")).strip()
         if excerpt and finding["questions"]:
             lead = finding["questions"][0]

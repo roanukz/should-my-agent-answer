@@ -26,7 +26,10 @@ this file must stay a deterministic function of the graph.
 
 from __future__ import annotations
 
+import builtins
 import json
+import keyword
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -43,6 +46,55 @@ WORK = DATA / "work"
 # explanation of. F1 is protected from those by requiring real demand; F2 has no
 # such gate, so it gets this one.
 MIN_SECTIONS_FOR_ORPHAN = 2
+
+# --------------------------------------------------------------------------
+# What is not a documentation gap
+#
+# Added after the first validation round came back at 9 valid out of 33. Seven
+# of the twenty-four rejections were the same complaint: "the FastAPI docs never
+# explain `str`" is true, and useless, because explaining `str` is Python's job.
+#
+# The rule this encodes: a gap is only a gap if closing it is THIS documentation
+# set's responsibility. Python's own language surface is not, and neither is a
+# third-party tool that has its own documentation.
+#
+# The language part is generated rather than hand-written, from Python's keyword
+# list and its builtins, so it cannot be quietly tuned to make a number look
+# better. The short list underneath it is the part that is a judgement call, so
+# it is kept small, written out in full, and every entry is here because the
+# thing has its own documentation elsewhere.
+# --------------------------------------------------------------------------
+
+PYTHON_SURFACE = (
+    {k.lower() for k in keyword.kwlist}
+    | {k.lower() for k in keyword.softkwlist}
+    | {name.lower() for name in dir(builtins) if not name.startswith("_")}
+)
+
+OWNED_ELSEWHERE = {
+    "type annotation", "type annotations", "type hint", "type hints",
+    "annotation", "annotations",          # Python's typing surface
+    "pip", "uv", "uv run", "venv",        # packaging tools, own docs
+    "deployment", "deploy",               # a lifecycle stage, not a thing
+    "python", "fastapi",                  # the subject, not a dependency
+}
+
+
+def out_of_scope(label: str) -> bool:
+    """True when defining this belongs to somebody other than these 60 pages.
+
+    A label made only of Python keywords and builtins counts, so `async def`,
+    `async for` and `await` all go, while `response_model` and `jsonable_encoder`
+    stay. A multi-word label counts only if EVERY word is language surface,
+    which is what keeps "async generator" and "path operation" in scope.
+    """
+    normalised = label.strip().lower()
+    if normalised in OWNED_ELSEWHERE:
+        return True
+    words = [w for w in re.split(r"[^a-z0-9_]+", normalised) if w]
+    if not words:
+        return True
+    return all(w in PYTHON_SURFACE for w in words)
 
 # F3: how close the runner-up's concept overlap has to be to the winner's before
 # the two are genuinely competing for the same retrieval slot.
@@ -114,6 +166,22 @@ class Index:
     def asked_by(self, cid: str) -> list[dict]:
         return self.into_concept[cid]["ASKS_ABOUT"]
 
+    def has_prose_evidence(self, cid: str) -> bool:
+        """Does the corpus ever discuss this in prose, rather than only show it?
+
+        Reported on every finding, never used to filter one out. It was a filter
+        for one revision, and it removed four findings an independent check had
+        already confirmed, because a concept that only ever appears inside code
+        samples is exactly what a real gap in third-party API surface looks like.
+        As a label on the card it tells a reader how the corpus treats the thing.
+        Related: `out_of_scope`, which IS a filter, and says so.
+        """
+        for etype in ("REQUIRES", "MENTIONS"):
+            for edge in self.into_concept[cid][etype]:
+                if edge["evidence"].get("kind") == "prose":
+                    return True
+        return False
+
 
 def evidence_of(edge: dict) -> dict:
     return {
@@ -169,6 +237,8 @@ def find_near_miss(idx: Index) -> list[dict]:
     out = []
     for concept in idx.concepts:
         cid = concept["id"]
+        if out_of_scope(concept["label"]):
+            continue
         asks = idx.asked_by(cid)
         requires = idx.requires(cid)
         if not asks or not requires:
@@ -237,9 +307,11 @@ def find_near_miss(idx: Index) -> list[dict]:
             "mentions_count": len(idx.mentions(cid)),
             "requires_count": len(requires),
             "requires_evidence_kind": req_edge["evidence"].get("kind", "prose"),
+            "code_samples_only": not idx.has_prose_evidence(cid),
             "confirming_answer": None,
             "validated": None,
             "validation_note": "",
+            "gap_note": "",
         })
 
     out.sort(key=lambda f: (-f["demand"], -f["requires_count"], f["concept"]))
@@ -258,6 +330,8 @@ def find_orphans(idx: Index, near_miss_concepts: set[str]) -> list[dict]:
         cid = concept["id"]
         if cid in near_miss_concepts:
             continue  # already reported, with more evidence, as F1
+        if out_of_scope(concept["label"]):
+            continue
         if idx.defines(cid):
             continue
         requires = idx.requires(cid)
@@ -303,6 +377,7 @@ def find_orphans(idx: Index, near_miss_concepts: set[str]) -> list[dict]:
             "mentions_count": len(mentions),
             "questions": sorted({e["from"] for e in asks}),
             "in_edges_total": len(in_edges),
+            "code_samples_only": not idx.has_prose_evidence(cid),
         })
 
     out.sort(key=lambda f: (-f["demand"], -f["in_edges_total"], f["concept"]))

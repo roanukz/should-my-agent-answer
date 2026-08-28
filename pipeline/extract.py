@@ -880,22 +880,45 @@ THE CORPUS IS EXACTLY THESE FILES AND NOTHING ELSE:
 A definition on fastapi.tiangolo.com in a page that is not under data/raw/docs/
 does not count. Neither do the Starlette, Pydantic or SQLModel docs.
 
-FOR EACH CONCEPT:
-  1. grep data/raw/docs/ for the label and for every surface form listed. Search
-     for the words, not just the exact string, and look at page titles and
-     headings first.
-  2. Read around the strongest hits. You are looking for text that TEACHES: it
-     says what the thing is, or shows and explains how to use it, such that a
-     reader who knew nothing could learn it there. A name appearing in a code
-     sample with no explanation is not a definition. A sentence that merely uses
-     the thing correctly is not a definition.
-  3. If you find one, return the file path, the line number, and the VERBATIM
-     span that does the teaching, copied character for character from the file.
-     A validator searches for your span in that file and drops it if it is not
-     there, so copy and paste; do not retype.
-  4. If you do not find one, say so. That is the expected answer for many of
-     these and it is just as useful as a hit. Do not manufacture a definition
-     out of a sentence that merely uses the term.
+FOR EACH CONCEPT, in this order. An earlier version of this pass missed real
+definitions and an independent check caught them, so these steps are the exact
+places it was looking in the wrong order.
+
+  1. READ THE SECTIONS LISTED UNDER "REFERENCED BY", STARTING WITH THE FIRST.
+     The commonest miss by a distance: the sentence that looks like a dependency
+     is ALSO the defining sentence. A section headed "What is Form Data" that
+     says HTML forms send data in a special encoding both depends on the term
+     and teaches it. Open those files and read them before you search anything.
+
+  2. READ THE WHOLE PAGE around each hit, not the matching line. A term is often
+     taught by its parts in neighbouring subsections: "path operation" is
+     defined by a subsection called "Path" followed by one called "Operation".
+     A term is also often introduced a few sections ABOVE the one that leans on
+     it, on the same page.
+
+  3. NOW grep data/raw/docs/ for the label, for every surface form listed, and
+     for the individual words. Check page titles and headings first: the first
+     pass was told to skip the concept named after the page it was reading, so
+     the page that explains a thing is the page most likely to be missing its
+     edge.
+
+  4. Also check data/raw/docs_src/ prose comments, and check whether an install
+     or setup instruction teaches the thing in passing. "Install HTTPX, the
+     Requests-style client TestClient is built on" is a definition.
+
+  5. Decide. A definition TEACHES: a reader who knew nothing could learn what the
+     thing is or how to use it. A name in a code sample with no surrounding
+     explanation is not one. A sentence that merely uses the term correctly is
+     not one. Be strict about that, and equally strict about not missing a real
+     one.
+
+  6. If you find one, return the file path, the line number, and the VERBATIM
+     span that does the teaching, copied character for character out of the file
+     with a tool. A validator searches for your span in that file and drops it if
+     it is not there, so copy and paste; do not retype.
+
+  7. If you genuinely do not find one, say so. That is the right answer for many
+     of these. Do not manufacture a definition out of incidental usage.
 
 Return JSON only, keyed by concept id:
 
@@ -1017,7 +1040,8 @@ def cmd_assemble_definitions() -> int:
             print(f"  unreadable: {path.name}")
 
     stats = {"reported": 0, "not_defined": 0, "added": 0, "dropped_no_span": 0,
-             "dropped_unknown_section": 0, "dropped_unknown_concept": 0}
+             "dropped_unknown_section": 0, "dropped_unknown_concept": 0,
+             "already_present": 0}
     new_edges = []
     existing = {(e["from"], e["to"], e["type"]) for e in edges}
 
@@ -1056,6 +1080,7 @@ def cmd_assemble_definitions() -> int:
         sec, located, span_path = hit
         key = (sec["id"], cid, "DEFINES")
         if key in existing:
+            stats["already_present"] += 1
             continue
         existing.add(key)
         new_edges.append({
@@ -1075,7 +1100,7 @@ def cmd_assemble_definitions() -> int:
         })
         stats["added"] += 1
 
-    edges = [e for e in edges if e["extractor"] != "definition-sweep"] + new_edges
+    edges = edges + new_edges
     edges.sort(key=lambda e: (e["type"], e["from"], e["to"]))
     for i, edge in enumerate(edges):
         edge["id"] = f"e:{i:05d}"

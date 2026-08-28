@@ -287,8 +287,24 @@
       proof.appendChild(box);
     }
 
+    /* Two different notes, written by two passes that never saw each other.
+       gap_note says what the thread answer supplies that the docs do not.
+       validation_note is the independent checker's verdict, including when it
+       says the finding does not hold up. Labelled, because an unlabelled
+       sentence here would read as the tool agreeing with itself. */
+    if (f.gap_note) {
+      var gap = el('p', 'cite');
+      gap.appendChild(el('strong', null, 'What the answer adds: '));
+      gap.appendChild(document.createTextNode(f.gap_note));
+      proof.appendChild(gap);
+    }
     if (f.validation_note) {
-      proof.appendChild(el('p', 'cite', f.validation_note));
+      var check = el('p', 'cite');
+      check.appendChild(el('strong', null,
+        f.validated === false ? 'Independent check, did not hold up: '
+                              : 'Independent check: '));
+      check.appendChild(document.createTextNode(f.validation_note));
+      proof.appendChild(check);
     }
 
     card.appendChild(proof);
@@ -382,9 +398,9 @@
     if (validation) {
       items.push([
         Math.round(validation.observed_rate * 100) + '%',
-        'Of ' + validation.n + ' sampled near misses held up on an independent check. ' +
-        'Wilson 95 percent interval ' + validation.wilson_95[0].toFixed(2) +
-        ' to ' + validation.wilson_95[1].toFixed(2)
+        'Of ' + validation.n + ' near misses held up when three independent readers ' +
+        'checked every one against the corpus. Wilson 95 percent interval ' +
+        validation.wilson_95[0].toFixed(2) + ' to ' + validation.wilson_95[1].toFixed(2)
       ]);
     } else if (answers.wrong_confident_rate) {
       items.push([

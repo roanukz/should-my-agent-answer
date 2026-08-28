@@ -25,7 +25,7 @@ KEEP = (
     "id", "type", "demand", "concept", "concept_label", "concept_kind",
     "section", "section_heading", "doc_title", "doc_url", "section_path",
     "section_lines", "missing", "proof_path", "questions", "question_titles",
-    "confirming_answer", "validated", "validation_note", "requires_count",
+    "confirming_answer", "validated", "validation_note", "gap_note", "requires_count",
     "mentions_count", "requires_evidence_kind", "sections_referencing",
     "answer_holder", "rival", "in_edges_total",
 )

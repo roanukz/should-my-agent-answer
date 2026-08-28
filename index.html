@@ -67,24 +67,24 @@
             >
           </div>
           <div class="fact">
-            <span class="fact-value">5,370</span>
+            <span class="fact-value">9 of 33</span>
             <span class="fact-label"
-              >Edges in the graph, every one carrying the sentence that justifies
-              it and the lines it came from</span
+              >Findings survived the first independent check. That result stopped
+              the build, and it is the most useful number here</span
             >
           </div>
           <div class="fact">
-            <span class="fact-value">45%</span>
+            <span class="fact-value">11 of 14</span>
             <span class="fact-label"
-              >Of the gaps the first pass reported were not gaps. A recheck found
-              them before any of this was published</span
+              >Survived after the extraction was fixed, unanimous across three
+              readers each. Wilson 95 percent 0.52 to 0.92</span
             >
           </div>
           <div class="fact">
-            <span class="fact-value">{{WC_DELTA}}</span>
+            <span class="fact-value">p = 0.70</span>
             <span class="fact-label"
-              >Fewer confidently wrong answers from graph retrieval than from the
-              vector baseline, over 300 real questions</span
+              >Graph retrieval against a vector baseline over 300 real questions.
+              No measurable difference</span
             >
           </div>
         </div>
@@ -131,27 +131,29 @@
               that justifies it, crossed it against 300 answered questions from
               the project's own GitHub Discussions, and looked for articles that
               depend on something the documentation never explains
-              (<a href="#built">Part 3</a>).
+              (<a href="#built">Part 3</a>). It produced 153 findings, 14 of them
+              near misses (<a href="#found">Part 4</a>).
             </li>
             <li>
-              <strong>The check that mattered most was the one that deleted
-                work.</strong>
-              A second pass over every reported gap found that 45% of them were
-              not gaps: the documentation did explain the thing and my first
-              extraction pass had missed it. Those findings are gone
-              (<a href="#found">Part 4</a>), and the number is on this page
-              because a tool that reports gaps has to be judged on its false
-              positives, not its total.
+              <strong>The first independent check failed, and that is the
+                result worth reading.</strong>
+              9 of 33 near misses survived it. Under the build plan's own floor,
+              which stopped the work before any of it was published
+              (<a href="#validation">Part 6</a>). Three of my own mistakes caused
+              it. After fixing them, 11 of 14 survived, unanimously across three
+              readers each. Both rounds are on this page, because a gap-finding
+              tool is judged on its false positives and reporting only the second
+              number would be the same failure this project is about.
             </li>
             <li>
-              <strong>Graph retrieval is a real improvement and not a
-                large one.</strong>
-              Answering all 300 questions twice, once from a vector baseline and
-              once by traversing the graph, moved the confidently wrong rate
-              from {{WC_VECTOR}} to {{WC_GRAPH}}
-              (<a href="#retrieval">Part 5</a>). The comparison has been
-              published before on other corpora, and this reproduces it rather
-              than claiming it.
+              <strong>Graph retrieval did not beat the vector baseline
+                here.</strong>
+              Both paths answered all 300 questions and both produced exactly 5
+              confidently wrong answers. The graph was alone in answering 15
+              correctly and the vector path alone in 12, which an exact paired
+              test puts at p = 0.70 (<a href="#retrieval">Part 5</a>). The
+              experiment is also underpowered, for a reason worth knowing about
+              the demand signal.
             </li>
           </ul>
         </section>
@@ -439,6 +441,9 @@
               <strong>zero</strong> were dropped for an unfindable span. That is
               not a sign the check was unnecessary. It is a sign the instruction
               worked, and it is only knowable <em>because</em> the check exists.
+              The check earned its place later, in
+              <a href="#validation">Part 6</a>, when it rejected two spans I was
+              trying to add myself.
             </p>
             <p>
               The same check on question spans dropped 13% on the first attempt,
@@ -519,29 +524,29 @@
             <table>
               <caption>
                 Over 60 pages, 570 sections, 967 concepts and 300 answered
-                threads.
+                threads. 5,399 edges, every one carrying its evidence span.
               </caption>
               <thead>
                 <tr>
                   <th scope="col">Type</th>
                   <th scope="col" class="num">Findings</th>
-                  <th scope="col" class="num">With demand above zero</th>
+                  <th scope="col" class="num">Threads reached</th>
                   <th scope="col">What that means here</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th scope="row">F1 Near miss</th>
-                  <td class="num">33</td>
-                  <td class="num">33</td>
+                  <td class="num">14</td>
+                  <td class="num">21</td>
                   <td>
-                    Touching 77 of the 300 threads. 13 of them were asked about
-                    by more than one person
+                    Two of them were asked about by more than one person. The
+                    rest were asked once, which is what a long tail looks like
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">F2 Orphan concept</th>
-                  <td class="num">59</td>
+                  <td class="num">40</td>
                   <td class="num">0</td>
                   <td>
                     Zero by construction: any orphan somebody asked about is
@@ -551,8 +556,8 @@
                 </tr>
                 <tr>
                   <th scope="row">F3 Retrieval collision</th>
-                  <td class="num">98</td>
-                  <td class="num">98</td>
+                  <td class="num">99</td>
+                  <td class="num">115</td>
                   <td>
                     12 of them caught more than one question. Each one is a
                     question, so demand is never zero
@@ -562,145 +567,194 @@
             </table>
           </div>
 
-          <h3>The recheck that removed a third of the findings</h3>
+          <h3>The near misses, in full</h3>
           <p>
-            The first version of this section reported 57 near misses and 108
-            orphan concepts. It was wrong, and the way it was wrong is the most
-            useful thing in this teardown.
+            There are only fourteen, so here they all are rather than a top ten,
+            with the fact the documentation never supplies. The three marked as
+            not holding up were rejected by the independent check in
+            <a href="#validation">Part 6</a> and are still listed, because a
+            table that quietly drops its own failures is not evidence of
+            anything.
           </p>
-          <p>
-            My extraction prompt told the model not to emit a concept named after
-            the page it was reading, on the reasoning that a page's own subject
-            is not a dependency. The effect was the opposite of the intent. The
-            page called <em>Middleware</em> is exactly the page that explains what
-            middleware is, and it became the one page in the corpus that never
-            recorded doing so, while five other pages recorded depending on it.
-            The graph then reported, correctly given what it had been told,
-            that the FastAPI documentation never explains middleware.
-          </p>
-          <p>
-            So I added a pass that goes back over every concept nothing defines
-            and searches the corpus again, with an agent that has to produce a
-            verbatim span or say plainly that it found nothing. It checked 164
-            concepts and found real definitions for <strong>74</strong> of them.
-          </p>
-
-          <div class="callout callout-warning">
-            <h4>45% of the reported gaps were not gaps</h4>
-            <p>
-              Near misses fell from 57 to 33 and orphan concepts from 108 to 59.
-              A third of everything this tool was going to publish would have
-              been an instruction to write documentation that already existed.
-            </p>
-            <p>
-              The prompt is fixed for future runs, and the recheck stays in the
-              pipeline anyway, because the general failure it catches is not
-              specific to that one bad instruction: an extractor that misses a
-              DEFINES edge produces a finding that looks exactly like a real one.
-            </p>
-          </div>
-
-          <h3>The ten most asked about</h3>
 
           <div class="table-scroll">
             <table>
               <caption>
                 Every row links to the finding in the explorer, where the proof
-                path and the confirming answer are one click away.
+                path, the evidence spans and the confirming answer are one click
+                away.
               </caption>
               <thead>
                 <tr>
                   <th scope="col" class="num">Threads</th>
-                  <th scope="col">The concept nothing explains</th>
-                  <th scope="col">The article that looks like the answer</th>
+                  <th scope="col">Concept</th>
+                  <th scope="col">What the documentation never says</th>
+                  <th scope="col">Held up</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0001">15</a></td>
-                  <td><code>async def</code></td>
-                  <td>Stream Data / Files and Async</td>
-                </tr>
-                <tr>
-                  <td class="num"><a href="tool.html#F1-0002">10</a></td>
-                  <td>Starlette</td>
-                  <td>Handling Errors / Install custom exception handlers</td>
-                </tr>
-                <tr>
-                  <td class="num"><a href="tool.html#F1-0003">7</a></td>
-                  <td><code>fastapi</code> command</td>
-                  <td>
-                    Bigger Applications / Configure the entrypoint in
-                    pyproject.toml
-                  </td>
-                </tr>
-                <tr>
-                  <td class="num"><a href="tool.html#F1-0004">6</a></td>
+                  <td class="num"><a href="tool.html#F1-0001">6</a></td>
                   <td>event loop</td>
-                  <td>Stream Data / Files and Async</td>
+                  <td>
+                    how to run a coroutine on the main thread's event loop from a
+                    sync path operation function, which FastAPI runs on a
+                    threadpool worker
+                  </td>
+                  <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0005">6</a></td>
-                  <td>deployment</td>
-                  <td>First Steps / Deploy to other cloud providers</td>
-                </tr>
-                <tr>
-                  <td class="num"><a href="tool.html#F1-0006">6</a></td>
-                  <td>FastAPI CLI</td>
-                  <td>First Steps / Deploy your app</td>
-                </tr>
-                <tr>
-                  <td class="num"><a href="tool.html#F1-0007">4</a></td>
-                  <td>async generator</td>
-                  <td>Custom Response / StreamingResponse</td>
-                </tr>
-                <tr>
-                  <td class="num"><a href="tool.html#F1-0008">3</a></td>
+                  <td class="num"><a href="tool.html#F1-0002">3</a></td>
                   <td><code>APIRoute</code></td>
                   <td>
-                    Path Operation Advanced Configuration / Using the function
-                    name as the operationId
+                    which parts of APIRoute are safe to subclass, given that
+                    overriding its constructor is not a supported extension point
                   </td>
+                  <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0009">3</a></td>
-                  <td>exception</td>
-                  <td>Dependencies with yield / A dependency with yield and try</td>
+                  <td class="num"><a href="tool.html#F1-0004">1</a></td>
+                  <td><code>EmailStr</code></td>
+                  <td>
+                    how to declare an optional EmailStr form field that accepts an
+                    empty submission, which browsers send as an empty string
+                  </td>
+                  <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0010">3</a></td>
-                  <td><code>uvicorn.run</code></td>
-                  <td>Debugging / Call uvicorn</td>
+                  <td class="num"><a href="tool.html#F1-0005">1</a></td>
+                  <td><code>exc.errors()</code></td>
+                  <td>
+                    when WebSocketRequestValidationError applies, which is only
+                    during the connection stage before accept
+                  </td>
+                  <td class="yes">Yes</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0007">1</a></td>
+                  <td>port</td>
+                  <td>
+                    which layer returns a 502 with an empty body while uvicorn is
+                    already listening on the port
+                  </td>
+                  <td class="yes">Yes</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0008">1</a></td>
+                  <td><code>session.exec</code></td>
+                  <td>
+                    which select session.exec requires, the one from sqlmodel
+                    rather than the one from sqlalchemy
+                  </td>
+                  <td class="yes">Yes</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0009">1</a></td>
+                  <td>host</td>
+                  <td>
+                    how to check whether a server bound to 0.0.0.0 is actually
+                    reachable from a client
+                  </td>
+                  <td class="yes">Yes</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0010">1</a></td>
+                  <td><code>jwt.decode</code></td>
+                  <td>
+                    which jwt.decode arguments handle a token carrying an aud
+                    claim, the audience value or the verify_aud option
+                  </td>
+                  <td class="yes">Yes</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0011">1</a></td>
+                  <td><code>Literal</code></td>
+                  <td>
+                    what Enum gives predefined parameter values that
+                    typing.Literal does not, and when each one fits
+                  </td>
+                  <td class="yes">Yes</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0013">1</a></td>
+                  <td><code>ValidationError</code></td>
+                  <td>
+                    how to return a validation style error for one body field from
+                    inside a path operation function, and what shape each entry in
+                    the detail list must take
+                  </td>
+                  <td class="yes">Yes</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0014">1</a></td>
+                  <td>virtual environment</td>
+                  <td>
+                    which Python version a virtual environment for running
+                    FastAPI's own test suite must use
+                  </td>
+                  <td class="yes">Yes</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0003">1</a></td>
+                  <td>path operation</td>
+                  <td>
+                    how to attach several named OpenAPI examples to a response
+                    declared on an APIRouter
+                  </td>
+                  <td class="no">No</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0006">1</a></td>
+                  <td><code>fastapi.encoders</code></td>
+                  <td>
+                    how to give jsonable_encoder a rule for a type it does not
+                    recognise
+                  </td>
+                  <td class="no">No</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0012">1</a></td>
+                  <td><code>TokenData</code></td>
+                  <td>
+                    why the tutorial declares a TokenData model rather than passing
+                    the decoded username straight through
+                  </td>
+                  <td class="no">No</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <p>
-            Look at that list honestly and a pattern jumps out. <code>async def</code>,
-            event loop, deployment, the FastAPI CLI: FastAPI documents all of
-            these, on pages that are not in this corpus, because the scope rule
-            took the tutorial and the first nine advanced pages and
-            <code>async.md</code>, <code>fastapi-cli.md</code> and the whole
-            <code>deployment/</code> directory sit outside it.
+            These are the shape a content team can act on. Not "improve the
+            security docs", but "the OAuth2 page never says which
+            <code>jwt.decode</code> argument handles an audience claim, and here
+            is the thread where somebody had to be told". That is a work item
+            with a reader attached to it.
+          </p>
+
+          <h3>Fourteen is a small number, and that is the point</h3>
+          <p>
+            An earlier version of this section reported 57 near misses. It was
+            wrong, and how it was wrong is <a href="#validation">Part 6</a>. What
+            is worth saying here is what the surviving fourteen have in common:
+            almost all of them are demand of one. One person asked, once.
           </p>
 
           <div class="pullquote">
             <p>
-              A corpus boundary and a documentation gap are the same thing from
-              the retriever's side.
+              A gap nobody has asked about twice is still a gap, and it is not
+              this quarter's work.
             </p>
           </div>
 
           <p>
-            That is not an excuse for the result, it is the most transferable
-            thing in it. If your assistant indexes your tutorial and not your
-            reference, then for that assistant those concepts genuinely are
-            undefined, and it will answer from the tutorial page that depends on
-            them exactly as this predicts. The finding is correct with respect to
-            the corpus it was given, which is the same corpus the assistant would
-            be given, and the fix is either to write the page or to widen the
-            index. Both are decisions somebody has to make on purpose.
+            That is why demand is on every finding rather than being used as a
+            filter. Two of the fourteen have real recurring demand, and a content
+            lead with a week to spend should spend it on those two. The other
+            twelve are a backlog, correctly identified and correctly ranked
+            below them. A tool that could not tell those apart would hand over
+            153 equally urgent tasks, which is the same as handing over nothing.
           </p>
         </section>
 
@@ -832,12 +886,17 @@
             <strong>confidently wrong</strong>, meaning it asserts an answer that
             contradicts or omits the key fact with no hedge, and
             <strong>declined</strong>, meaning it said it could not answer from
-            the material.
+            the material. The scorer saw the two answers side by side without
+            being told which retrieval path produced which.
           </p>
 
           <div class="table-scroll">
             <table>
-              <caption>{{SCORE_CAPTION}}</caption>
+              <caption>
+                300 questions, both paths, 599 of 600 answers scored. One answer
+                came back without a verdict and is counted as unscored rather
+                than assigned to a bucket.
+              </caption>
               <thead>
                 <tr>
                   <th scope="col">Path</th>
@@ -849,29 +908,92 @@
               <tbody>
                 <tr>
                   <th scope="row">A, vector</th>
-                  <td class="num">{{V_CORRECT}}</td>
-                  <td class="num">{{V_WRONG}}</td>
-                  <td class="num">{{V_DECL}}</td>
+                  <td class="num">25</td>
+                  <td class="num">5</td>
+                  <td class="num">269</td>
                 </tr>
                 <tr>
                   <th scope="row">B, graph</th>
-                  <td class="num">{{G_CORRECT}}</td>
-                  <td class="num">{{G_WRONG}}</td>
-                  <td class="num">{{G_DECL}}</td>
+                  <td class="num">28</td>
+                  <td class="num">5</td>
+                  <td class="num">266</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          {{SCORE_PROSE}}
+          <p>
+            The headline metric this block exists to produce is the confidently
+            wrong rate per path. It is <strong>5 and 5</strong>. Identical.
+          </p>
+          <p>
+            On correctness the graph path is ahead by three, and because both
+            paths answered the same 300 questions the comparison is paired, so
+            the informative cases are the 32 where the two verdicts differ. The
+            graph was alone in being correct on 15 of them and the vector path
+            alone on 12. An exact McNemar test on that split gives
+            <strong>p = 0.70</strong>.
+          </p>
+
+          <div class="pullquote">
+            <p>
+              On this corpus, graph retrieval did not measurably beat the vector
+              baseline.
+            </p>
+          </div>
+
+          <p>
+            The traversal above is real and it does reach prerequisites lexical
+            similarity cannot. It just did not change enough answers to be
+            distinguishable from chance at this sample size, and reporting a
+            three-answer lead as a result would be a worse mistake than reporting
+            the null.
+          </p>
+
+          <h3>Why the experiment is underpowered, which is its own finding</h3>
+          <p>
+            Both paths declined about 90% of the questions, so the entire
+            comparison rests on the 30 or so each one actually answered. That is
+            not the retrieval, it is the question set.
+          </p>
+
+          <div class="callout callout-warning">
+            <h4>282 of the 300 threads carry FastAPI's bug-report template</h4>
+            <p>
+              The Questions category on that repository is used mostly for bug
+              reports, version-specific breakage and feature discussion, not for
+              "how do I". A documentation assistant genuinely cannot answer
+              "background tasks run asynchronously only on Windows", and
+              declining is the correct behaviour, not a failure of retrieval.
+            </p>
+            <p>
+              I checked whether my own generation prompt had caused the
+              abstaining, since it told the agent what was being measured, which
+              is a good way to change the behaviour under test. Three batches
+              rerun without that line declined 11 of 15 instead of 12 of 15. The
+              prompt was not the cause. The corpus is.
+            </p>
+          </div>
+
+          <p>
+            This is a real cost of the decision in <a href="#built">Part 3</a> to
+            use public discussions as the demand signal. It works well for
+            finding gaps, because the fourteen near misses in
+            <a href="#found">Part 4</a> all came from these same threads. It works
+            badly as an answerability benchmark, because most of these questions
+            were never answerable from documentation by anyone. A real team's
+            search log would not have that problem, and this is the clearest
+            place where free ground truth turned out to be worth exactly what was
+            paid for it.
+          </p>
 
           <div class="callout callout-notice">
             <h4>Prior work on exactly this comparison</h4>
             <p>
-              A vector against graph retrieval comparison on abstention
-              behaviour has been published before. This reproduces the comparison
-              on a new corpus and does not claim the idea. Treat the numbers
-              above as one more data point rather than as a result.
+              A vector against graph retrieval comparison on abstention behaviour
+              has been published before. This reproduces the comparison on a new
+              corpus and does not claim the idea. Treat the numbers above as one
+              more data point, and a null one.
             </p>
           </div>
         </section>
@@ -880,41 +1002,167 @@
           <p class="section-kicker">Part 6</p>
           <h2>Validation</h2>
           <p>
-            50 near-miss findings drawn uniformly at random with a fixed seed.
-            Each one handed to an independent check that was told to be sceptical,
-            given the corpus, and told to go looking for a definition rather than
-            to judge from memory. The verdict is valid only when no section
-            explains the concept <em>and</em> the thread answer supplies a fact
-            the corpus does not contain.
+            The build plan set one hard rule for this step: if observed validity
+            comes in under roughly 70%, stop and fix extraction before building
+            anything on top, and report the real number whatever it is. It came
+            in under, so that is what happened, and this is the number.
           </p>
 
-          {{VALIDATION_BLOCK}}
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Both rounds checked every near-miss finding rather than a sample,
+                because in each case the population was smaller than the target
+                of 50. The rate therefore has no sampling error, and the interval
+                describes the method rather than the draw.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Round</th>
+                  <th scope="col" class="num">Checked</th>
+                  <th scope="col" class="num">Held up</th>
+                  <th scope="col" class="num">Rate</th>
+                  <th scope="col">Wilson 95%</th>
+                  <th scope="col">Readers each</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1, as first built</th>
+                  <td class="num">33</td>
+                  <td class="num">9</td>
+                  <td class="num">27.3%</td>
+                  <td>0.15 to 0.44</td>
+                  <td class="num">1</td>
+                </tr>
+                <tr>
+                  <th scope="row">2, after the fixes</th>
+                  <td class="num">14</td>
+                  <td class="num">11</td>
+                  <td class="num">78.6%</td>
+                  <td>0.52 to 0.92</td>
+                  <td class="num">3, unanimous on all 14</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>What round one caught</h3>
+          <p>
+            Every one of the 24 rejections was my mistake, in one of three
+            kinds.
+          </p>
+          <ul>
+            <li>
+              <strong>Seven were not documentation gaps at all.</strong> The
+              concept space contained bare Python keywords and builtins, so the
+              tool was reporting that the FastAPI documentation never explains
+              <code>str</code>. True, and useless, because explaining
+              <code>str</code> is Python's job. The fix is a scope rule: a gap
+              only counts if closing it is this documentation set's
+              responsibility. The language half of that rule is generated from
+              Python's own keyword list and builtins rather than hand-written, so
+              it cannot be quietly tuned to make a number look better.
+            </li>
+            <li>
+              <strong>Sixteen were definitions my extractor had missed.</strong>
+              The corpus does explain the thing and the graph did not know. A
+              second sweep, rewritten around the specific places the checker had
+              found them, recovered 32 more definitions on top of the 74 the
+              first sweep found.
+            </li>
+            <li>
+              <strong>One was a name local to a code sample</strong>, which the
+              tutorial defines in the very sample it is teaching.
+            </li>
+          </ul>
+
+          <h3>The fix that had to be undone</h3>
+          <p>
+            While fixing those I added a rule that excluded any concept the
+            corpus only ever shows inside code samples, reasoning that such a
+            thing is an example variable rather than a documented concept. It cut
+            the near misses to six and the numbers looked much better.
+          </p>
+          <p>
+            It had also deleted four findings that round one had explicitly
+            confirmed as real: <code>jwt.decode</code>, <code>session.exec</code>,
+            <code>exc.errors()</code> and <code>Literal</code>. Appearing only
+            inside code samples is not evidence that something is an example
+            variable. It is exactly what a genuine gap in third-party API surface
+            looks like, which is the whole category this tool exists to find.
+          </p>
+          <p>
+            The rule was removed. It survives as a label on each card rather than
+            a filter, so a reader can see how the corpus treats a concept without
+            the tool having silently decided for them.
+          </p>
+
+          <h3>Round one was itself wrong four times</h3>
+          <p>
+            Six findings survived the fixes that round one had rejected. Rather
+            than assume either side was right, three independent readers were
+            given round one's own file-and-line evidence and asked to confirm or
+            refute it. They found round one wrong on four of the six. The line it
+            cited as defining "port" defines <em>origin</em>, and port is only
+            named inside that definition. The line it cited for "host" is not
+            prose at all, it is inside a fenced code block.
+          </p>
+          <p>
+            On the two where the readers agreed a definition existed, the
+            proposed spans went through the same validator as every other edge
+            and both were rejected, because each one straddles a section
+            boundary. No edge was added on a span that could not be checked, and
+            the invariant held under pressure from me rather than from a model.
+          </p>
+
+          <div class="callout callout-info">
+            <h4>The path operation case is worth its own paragraph</h4>
+            <p>
+              Three readers agreed the corpus defines "path operation", and it
+              does: First Steps gives it a titled step, then defines "Path" in one
+              subsection and "Operation" in the next. No single heading-scoped
+              chunk defines it, and the parent that ties the two halves together
+              is two lines long.
+            </p>
+            <p>
+              The graph is section-level because retrieval is chunk-level. So the
+              page teaches it and no retrievable piece of the page does, which is
+              a real retrieval problem wearing the costume of a false positive.
+              It is counted as a false positive above, because that is the honest
+              call under the rule as written.
+            </p>
+          </div>
 
           <h3>Why there is no pass or fail gate</h3>
           <p>
-            A threshold at this sample size would be decided by two or three
-            items. At 43 valid out of 50, the Wilson 95% interval runs from about
-            0.74 to 0.93, so a binary gate at 90% and a binary gate at 75% would
-            disagree about the same sample. RefusalBench human validated 180
-            items and scored 93.1%, which means a 90% gate would fail work done
-            by a funded team with expert annotators.
+            A threshold at this population size would be decided by two or three
+            items. Round two's interval runs from 0.52 to 0.92, so a gate at 90%
+            and a gate at 60% would disagree about the same fourteen findings.
+            RefusalBench human validated 180 items and scored 93.1%, which means a
+            90% gate would fail work done by a funded team with expert
+            annotators.
           </p>
           <p>
-            So the number is reported with its interval and no gate is drawn.
-            There is one threshold in the build plan, and it is an instruction to
-            me rather than a claim to a reader: below roughly 70%, stop and fix
-            extraction instead of building anything on top.
+            So the number is reported with its interval and no gate is drawn. The
+            one threshold that exists is the 70% floor, and it is an instruction
+            to me rather than a claim to a reader. It fired, and it did its job.
           </p>
 
           <h3>What this does and does not establish</h3>
           <p>
-            It establishes that a randomly drawn near miss is, at the observed
-            rate, a genuine absence in the corpus confirmed by an answer written
-            outside it. It says nothing at all about
-            <em>recall</em>: how many real gaps the pipeline never noticed is not
-            measured here and could not be, because measuring it would need the
-            hand labelling this design was built to avoid. The number is a
-            precision estimate on a sample of 50, and nothing more.
+            It establishes that at the observed rate, a near miss in the final
+            set is a genuine absence in this corpus, confirmed by an answer
+            written outside it, and that three independent readers agree on every
+            one of the fourteen.
+          </p>
+          <p>
+            It says nothing about <em>recall</em>. How many real gaps the pipeline
+            never noticed is not measured here and could not be, because
+            measuring it would need the hand labelling this design was built to
+            avoid. Worse, the fixes in this section were all precision fixes, and
+            every one of them can only have lowered recall. Fourteen near misses
+            across 60 pages is a floor, not an estimate.
           </p>
         </section>
 
@@ -924,41 +1172,60 @@
 
           <ul>
             <li>
-              <strong>One corpus.</strong> Everything here is FastAPI. Nothing has
-              been run against a second documentation set, so the method
-              generalises in principle and is demonstrated in exactly one place.
+              <strong>It does not measure recall, and cannot.</strong> Every
+              number here is about precision: of the gaps reported, how many are
+              real. How many real gaps were never noticed is unmeasured, and
+              measuring it would need the hand labelling this whole design exists
+              to avoid. Every fix in <a href="#validation">Part 6</a> traded
+              recall for precision, so fourteen near misses over 60 pages is a
+              floor and not an estimate.
             </li>
             <li>
-              <strong>Developer documentation, not a consumer help centre.</strong>
-              The buyer this is aimed at is a content team at a software company,
-              and the corpus is a developer tutorial. Those are different writing
-              problems, and a help centre has no equivalent of a code sample to
-              extract concepts from.
+              <strong>The retrieval comparison is underpowered.</strong> Both
+              paths declined about 90% of the questions, so the comparison rests
+              on around thirty answers each. A null at p = 0.70 on that base is
+              weak evidence of no difference, not evidence of no difference.
             </li>
             <li>
-              <strong>Extraction quality bounds every number downstream.</strong>
+              <strong>The demand signal is a bug tracker.</strong> 282 of the 300
+              threads carry FastAPI's bug-report template. That is fine for
+              finding gaps and poor for benchmarking answerability, and it is the
+              price of the free ground truth in <a href="#built">Part 3</a>. A
+              real team's search log would be a different and better input.
+            </li>
+            <li>
+              <strong>Extraction quality bounds everything downstream.</strong>
               This is not a hedge, it is the measured behaviour: one bad line in
-              one prompt produced 45% false positives, and it took a second pass
-              to find them. Every count on this page inherits whatever is still
-              wrong in the extraction that produced it.
+              one prompt sent the first validation round to 27%, and it took an
+              independent check plus two sweeps to find why. Whatever is still
+              wrong in the extraction is still in these counts.
             </li>
             <li>
-              <strong>Demand comes from public discussions, not a search log.</strong>
-              A real team has the queries their users typed, including the ones
-              that got a confident wrong answer. This has only the questions
-              somebody cared enough to post in public, which is a smaller and
-              differently shaped set.
+              <strong>A corpus boundary looks exactly like a documentation
+                gap.</strong>
+              Several early findings were concepts FastAPI documents on pages
+              outside the 60. The scope rule now removes the ones that are
+              Python's job, and the general problem does not go away: from a
+              retriever's side, a page you did not index and a page nobody wrote
+              are the same thing. That is a genuine property of the problem
+              rather than a flaw in the tool, and it means the output has to be
+              read against the index a real assistant would be given.
+            </li>
+            <li>
+              <strong>One corpus, and a developer one.</strong> Everything here is
+              FastAPI, so the method generalises in principle and is demonstrated
+              in exactly one place. A consumer help centre is a different writing
+              problem with no code samples to extract concepts from.
             </li>
             <li>
               <strong>A sample, not an audit.</strong> 60 of 155 English pages and
               300 of roughly 3,900 answered threads. The counts are counts within
-              that slice and are not an estimate of the whole.
+              that slice.
             </li>
             <li>
               <strong>No claim about a deployed assistant.</strong> This measures
               documentation. It does not measure escalations, deflection, or
-              anything that happened to a real user, and no number here should be
-              read as predicting one.
+              anything that happened to a real user.
             </li>
           </ul>
         </section>
@@ -1042,7 +1309,7 @@
           <p class="section-kicker">The tool</p>
           <h2>Try it</h2>
           <p>
-            The explorer holds all 190 findings against the real corpus. Every
+            The explorer holds all 153 findings against the real corpus. Every
             card carries a "How this was computed" toggle that opens the graph
             path, the verbatim sentence behind each hop, and a link to the exact
             lines of the exact file at the pinned commit.

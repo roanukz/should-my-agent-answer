@@ -122,6 +122,10 @@ pipeline/
   llm.py            the API path for every step that needs a model
   run.sh            one command, end to end
 
+tests/
+  test_find.py      fixture graphs with known F1, F2 and F3 findings
+  test_invariant.py the committed data, re-checked from outside the pipeline
+
 data/
   raw/              the fetched pages, code samples and threads
   graph/            nodes.json and edges.json, every edge with its span
@@ -155,12 +159,43 @@ it the same way. The committed results here came from the second path.
 python3 -m unittest discover -s tests -v
 ```
 
-Fixture graphs small enough to reason about completely, where the right answer
-is known before the code runs: a near miss that should fire and three neighbours
-that should not, an orphan that should fire and two that should not, a collision
-that should fire and two arrangements that should not, the demand ranking, the
-span validator's rejection cases, and the Wilson interval against its published
+44 tests in two files.
+
+`test_find.py` runs the finders over fixture graphs small enough to reason about
+completely, where the right answer is known before the code runs: a near miss
+that should fire and three neighbours that should not, an orphan that should fire
+and two that should not, a collision that should fire and two arrangements that
+should not, the demand ranking, the scope rule, the span validator's rejection
+cases, the exact McNemar test, and the Wilson interval against its published
 value.
+
+`test_invariant.py` checks the committed data rather than the code that wrote it.
+The one that matters re-reads all 5,399 edges and searches for each evidence span
+in the source file that edge names, and separately checks that the line range it
+cites is where the span actually sits. The invariant is only worth anything if it
+can be checked from outside the extractor that produced it.
+
+## What it found
+
+| | Count | Held up on an independent check |
+|---|---|---|
+| Near miss | 14 | 11 of 14, unanimous across three readers each. Wilson 95% 0.52 to 0.92 |
+| Orphan concept | 40 | not checked; these are the tail nobody has asked about |
+| Retrieval collision | 99 | not checked |
+
+The first validation round scored 9 of 33, below the build plan's 70% floor, and
+stopped the work. Every one of the 24 rejections was a mistake of mine, and the
+[teardown](https://roanukz.github.io/should-my-agent-answer/#validation) walks
+through all three kinds and the fix that had to be undone. Both rounds are
+reported. A gap-finding tool is judged on its false positives, and publishing
+only the second number would be the same failure this project is about.
+
+Answering all 300 questions from both retrieval paths produced 5 confidently
+wrong answers each. The graph path was alone in answering 15 correctly and the
+vector path alone in 12, which an exact paired McNemar test puts at p = 0.70. On
+this corpus graph retrieval did not measurably beat the vector baseline, and the
+comparison is underpowered because 282 of the 300 threads are bug reports that no
+documentation set could answer.
 
 ## Related
 

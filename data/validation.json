@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "sampled_at": "2026-08-28T06:05:07Z",
+  "sample_size": 14,
+  "census": true,
+  "sampling": "every finding of type near_miss; the population is smaller than the target of 50, so this is a census rather than a sample",
+  "population": {
+    "near_miss": 14
+  },
+  "readers_per_finding": 3,
+  "unanimous": 14,
+  "results": [
+    {
+      "finding_id": "F1-0001",
+      "concept_label": "event loop",
+      "verdict": "valid",
+      "readers": 3,
+      "votes_valid": 3,
+      "reason": "All five corpus mentions of the event loop use it as a given (stream-data.md:91,101, custom-response.md:184, stream-json-lines.md:97, server-sent-events.md:60) and none has the event loop as its subject, so the corpus never says it runs in the main thread while a def endpoint runs in a worker thread, and it contains no lifespan, app.state, get_event_loop or run_coroutine_threadsafe material at all.",
+      "evidence": ""
+    },
+    {
+      "finding_id": "F1-0002",
+      "concept_label": "APIRoute",
+      "verdict": "valid",
+      "readers": 3,
+      "votes_valid": 3,
+      "reason": "APIRoute appears in prose only at path-operation-advanced-configuration.md:21 and bigger-applications.md:399-401, where the subject is what the generate_unique_id function receives and what include_router keeps alive rather than what an APIRoute is, and route_class, add_api_route and get_route_handler appear nowhere in the 60 files, so the answer's fact that overriding the APIRoute constructor is unsupported is genuinely absent.",
+      "evidence": ""
+    },
+    {
+      "finding_id": "F1-0003",
+      "concept_label": "path operation",
+      "verdict": "invalid",
+      "readers": 3,
+      "votes_valid": 0,
+      "reason": "First Steps devotes a titled step to creating a path operation and defines both halves in prose, with line 257 whose subject is Path and line 281 whose subject is Operation, so the extractor missed a DEFINES edge on what is also the corpus's own central subject with 65 REQUIRES edges.",
+      "evidence": "data/raw/docs/tutorial/first-steps.md:253 (heading 'Step 3: create a *path operation*'), with the definitions at :257 and :281"
+    },
+    {
+      "finding_id": "F1-0004",
+      "concept_label": "EmailStr",
+      "verdict": "valid",
+      "readers": 3,
+      "votes_valid": 3,
+      "reason": "The single prose line, response-model.md:77, has the email-validator install step as its subject and never says what EmailStr is or validates, every other occurrence sits inside docs_src code files, and the corpus has nothing on empty form strings or BeforeValidator beyond a link out at query-params-str-validations.md:377.",
+      "evidence": ""
+    },
+    {
+      "finding_id": "F1-0005",
+      "concept_label": "exc.errors()",
+      "verdict": "valid",
+      "readers": 3,
+      "votes_valid": 3,
+      "reason": "exc.errors() occurs only inside two docs_src code samples and never in prose, and while handling-errors.md:182 explicitly explains the sibling attribute .body the page never explains what .errors() returns, and the corpus contains no WebSocket material at all so the answer's WebSocketRequestValidationError versus WebSocketException fact is absent.",
+      "evidence": ""
+    },
+    {
+      "finding_id": "F1-0006",
+      "concept_label": "fastapi.encoders",
+      "verdict": "invalid",
+      "readers": 3,
+      "votes_valid": 0,
+      "reason": "The corpus does explain this concept: tutorial/encoder.md is a dedicated section whose subject is the jsonable_encoder() function that fastapi.encoders provides, the depending section links straight to it and shows how to call it, and the thread answer supplies only a maintainer's opinion declining a feature request rather than a fact the corpus lacks.",
+      "evidence": "data/raw/docs/tutorial/encoder.md:7"
+    },
+    {
+      "finding_id": "F1-0007",
+      "concept_label": "port",
+      "verdict": "valid",
+      "readers": 3,
+      "votes_valid": 3,
+      "reason": "No prose anywhere in the 60 files explains what a port is or how the port argument to uvicorn.run is set; the only prose hits are cors.md:7 and cors.md:19, whose subject is the definition of an origin, and the two debugging.md hits sit inside fenced Python blocks, while the thread answer supplies the absent fact that an empty 502 comes from a proxy or firewall between client and server rather than from FastAPI.",
+      "evidence": ""
+    },
+    {
+      "finding_id": "F1-0008",
+      "concept_label": "session.exec",
+      "verdict": "valid",
+      "readers": 3,
+      "votes_valid": 3,
+      "reason": "session.exec appears only in the docs_src code samples and never in prose; sql-databases.md:132 explains reading heroes with select(), limit and offset but never says what .exec() is, and the thread answer supplies the absent fact that select must be imported from sqlmodel rather than sqlalchemy for session.exec to work.",
+      "evidence": ""
+    },
+    {
+      "finding_id": "F1-0009",
+      "concept_label": "host",
+      "verdict": "valid",
+      "readers": 3,
+      "votes_valid": 3,
+      "reason": "The host parameter appears only inside the fenced Python blocks at debugging.md:48 and debugging.md:70 and in the docs_src sample, the one other prose hit (static-files.md:7) uses host as a verb about hosting a frontend, and nothing in the corpus explains what host=\"0.0.0.0\" binds to, while the thread answer adds the absent fact about proxies and firewalls sitting between client and server.",
+      "evidence": ""
+    },
+    {
+      "finding_id": "F1-0010",
+      "concept_label": "jwt.decode",
+      "verdict": "valid",
+      "readers": 3,
+      "votes_valid": 3,
+      "reason": "jwt.decode appears only in the docs_src sample; oauth2-jwt.md:165 is a step instruction telling the reader to decode and verify the token, not an explanation of the function or its parameters, and the words audience, aud and verify_aud appear nowhere in the corpus, so the thread answer's fix supplies a genuinely absent fact.",
+      "evidence": ""
+    },
+    {
+      "finding_id": "F1-0011",
+      "concept_label": "Literal",
+      "verdict": "valid",
+      "readers": 3,
+      "votes_valid": 3,
+      "reason": "The string Literal appears nowhere in the 60 docs files, only in two docs_src samples, so no prose teaches what typing.Literal is or how it compares to Enum, while path-params.md:131-137 teaches Enum for predefined values and never names Literal as an alternative, which is exactly the fact the thread answer supplies.",
+      "evidence": ""
+    },
+    {
+      "finding_id": "F1-0012",
+      "concept_label": "TokenData",
+      "verdict": "invalid",
+      "readers": 3,
+      "votes_valid": 0,
+      "reason": "TokenData is not an undefined external concept but a two-line Pydantic model that the tutorial's own sample defines in full and uses nowhere else in the corpus, so it falls under the name-local-to-one-code-sample exclusion rather than being a real gap.",
+      "evidence": "data/raw/docs_src/security/tutorial004_an_py310.py:34"
+    },
+    {
+      "finding_id": "F1-0013",
+      "concept_label": "ValidationError",
+      "verdict": "valid",
+      "readers": 3,
+      "votes_valid": 3,
+      "reason": "Pydantic's ValidationError is used unexplained at tutorial007_py310.py:30 in the highlighted span, and the only two docs hits are not it: additional-responses.md:128-162 sits inside a fenced JSON block where ValidationError names an OpenAPI schema component, and handling-errors.md:122-182 has RequestValidationError, a different FastAPI class, as its subject, with no section comparing the two or saying what to raise from a route to flag a field.",
+      "evidence": ""
+    },
+    {
+      "finding_id": "F1-0014",
+      "concept_label": "virtual environment",
+      "verdict": "valid",
+      "readers": 3,
+      "votes_valid": 3,
+      "reason": "The corpus instructs the reader to create and activate a virtual environment at tutorial/index.md:109 but never explains what one is or how to make it, and the only other prose mention at line 79 has uv add as its subject rather than the virtual environment, with line 111 deferring the detailed steps to an off-corpus guide that does not count.",
+      "evidence": ""
+    }
+  ],
+  "by_type": {
+    "near_miss": {
+      "n": 14,
+      "valid": 11,
+      "invalid": 3,
+      "unchecked": 0,
+      "observed_rate": 0.7857,
+      "wilson_95": [
+        0.5241,
+        0.9243
+      ]
+    }
+  },
+  "note": "Every near-miss finding was checked, so the observed rate has no sampling error: it is exactly the rate for this corpus and this run. The interval is reported anyway, as the uncertainty about the method rather than about the sample, and it is wide because the population is small."
+}

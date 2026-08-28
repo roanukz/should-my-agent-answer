@@ -31,6 +31,7 @@ Subcommands:
 from __future__ import annotations
 
 import json
+import math
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -76,7 +77,7 @@ Verdicts:
 An answer that is vague but not wrong is still wrong_confident if it presents
 itself as an answer. Declined requires an explicit statement of insufficiency.
 
-Return: {"verdict": "...", "reason": "one sentence"}
+Return: {{"verdict": "...", "reason": "one sentence"}}
 
 QUESTION: {question_title}
 MAINTAINER ANSWER: {maintainer_answer}
@@ -343,6 +344,25 @@ def cmd_prep_score() -> int:
     return 0
 
 
+def mcnemar(only_a: int, only_b: int) -> float:
+    """Exact two-sided McNemar test on the pairs where the two paths disagree.
+
+    Both paths answer the SAME questions, so the comparison is paired and the
+    only informative cases are the ones where they differ. Under the hypothesis
+    that retrieval method makes no difference, each disagreement is a coin flip,
+    so this is an exact binomial test rather than the chi-square approximation,
+    which is unreliable at these counts.
+
+    Returns the p value. It is reported, not thresholded.
+    """
+    n = only_a + only_b
+    if n == 0:
+        return 1.0
+    k = min(only_a, only_b)
+    tail = sum(math.comb(n, i) for i in range(k + 1)) / (2 ** n)
+    return min(1.0, 2 * tail)
+
+
 def cmd_assemble() -> int:
     retrieval = json.loads((WORK / "retrieval.json").read_text(encoding="utf-8"))
     reference = json.loads((WORK / "answers_reference.json").read_text(encoding="utf-8"))
@@ -388,6 +408,31 @@ def cmd_assemble() -> int:
             entry[path_name] = block
         results.append(entry)
 
+    # Paired comparison. Each question was answered by both paths, so what
+    # carries information is the questions where the two verdicts differ.
+    paired = {"vector_only_correct": 0, "graph_only_correct": 0,
+              "both_correct": 0, "neither_correct": 0,
+              "vector_only_wrong_confident": 0, "graph_only_wrong_confident": 0}
+    for entry in results:
+        v, g = entry["vector"]["verdict"], entry["graph"]["verdict"]
+        if v == "correct" and g == "correct":
+            paired["both_correct"] += 1
+        elif v == "correct":
+            paired["vector_only_correct"] += 1
+        elif g == "correct":
+            paired["graph_only_correct"] += 1
+        else:
+            paired["neither_correct"] += 1
+        if v == "wrong_confident" and g != "wrong_confident":
+            paired["vector_only_wrong_confident"] += 1
+        elif g == "wrong_confident" and v != "wrong_confident":
+            paired["graph_only_wrong_confident"] += 1
+    paired["mcnemar_p_correct"] = round(
+        mcnemar(paired["vector_only_correct"], paired["graph_only_correct"]), 4)
+    paired["mcnemar_p_wrong_confident"] = round(
+        mcnemar(paired["vector_only_wrong_confident"],
+                paired["graph_only_wrong_confident"]), 4)
+
     def rate(path_name: str, bucket: str) -> float:
         scored = sum(v for k, v in summary[path_name].items() if k != "unscored")
         return round(summary[path_name][bucket] / scored, 4) if scored else 0.0
@@ -414,6 +459,7 @@ def cmd_assemble() -> int:
                 "vector": rate("vector", "declined"),
                 "graph": rate("graph", "declined"),
             },
+            "paired": paired,
         },
     }
     (DATA / "answers.json").write_text(json.dumps(payload, indent=2, ensure_ascii=False),
@@ -427,6 +473,9 @@ def cmd_assemble() -> int:
             f"declined {counts['declined']}, unscored {counts['unscored']}")
     log(f"  wrong_confident rate: vector {payload['summary']['wrong_confident_rate']['vector']}, "
         f"graph {payload['summary']['wrong_confident_rate']['graph']}")
+    log(f"  paired: graph alone correct on {paired['graph_only_correct']}, "
+        f"vector alone correct on {paired['vector_only_correct']}, "
+        f"exact McNemar p = {paired['mcnemar_p_correct']}")
     return 0
 
 

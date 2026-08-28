@@ -7,7 +7,7 @@
   "discussion_threads": 300,
   "run_date": "2026-08-28",
   "nodes": 2197,
-  "edges": 5370,
+  "edges": 5399,
   "nodes_by_type": {
     "Doc": 60,
     "Section": 570,
@@ -19,19 +19,19 @@
     "ANSWERED_BY": 300,
     "ASKS_ABOUT": 960,
     "CONTAINS": 570,
-    "DEFINES": 885,
+    "DEFINES": 914,
     "LINKS_TO": 50,
     "MENTIONS": 994,
     "REQUIRES": 1611
   },
   "findings": {
-    "near_miss": 33,
-    "orphan_concept": 59,
-    "retrieval_collision": 98
+    "near_miss": 14,
+    "orphan_concept": 40,
+    "retrieval_collision": 99
   },
   "extractor": "claude-code-batch",
-  "embedding_model": "",
-  "generator": "",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "generator": "claude-code-batch",
   "extraction": {
     "batches": 79,
     "edges_proposed": 3509,
@@ -47,7 +47,55 @@
     "questions_mapped": 283,
     "questions_total": 300
   },
-  "validation": {},
-  "retrieval_comparison": {},
-  "pipeline_commit": "127bf63e8ff3458cc15fd0febcfd0bfd36c02356"
+  "validation": {
+    "near_miss": {
+      "n": 14,
+      "valid": 11,
+      "invalid": 3,
+      "unchecked": 0,
+      "observed_rate": 0.7857,
+      "wilson_95": [
+        0.5241,
+        0.9243
+      ]
+    }
+  },
+  "retrieval_comparison": {
+    "n": 300,
+    "vector": {
+      "correct": 25,
+      "wrong_confident": 5,
+      "declined": 269,
+      "unscored": 1
+    },
+    "graph": {
+      "correct": 28,
+      "wrong_confident": 5,
+      "declined": 266,
+      "unscored": 1
+    },
+    "wrong_confident_rate": {
+      "vector": 0.0167,
+      "graph": 0.0167
+    },
+    "correct_rate": {
+      "vector": 0.0836,
+      "graph": 0.0936
+    },
+    "declined_rate": {
+      "vector": 0.8997,
+      "graph": 0.8896
+    },
+    "paired": {
+      "vector_only_correct": 12,
+      "graph_only_correct": 15,
+      "both_correct": 13,
+      "neither_correct": 260,
+      "vector_only_wrong_confident": 3,
+      "graph_only_wrong_confident": 3,
+      "mcnemar_p_correct": 0.7011,
+      "mcnemar_p_wrong_confident": 1.0
+    }
+  },
+  "pipeline_commit": "bb654afcbac75fc24889d55b22b1b8fce0e567d5"
 }

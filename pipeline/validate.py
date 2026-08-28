@@ -66,12 +66,19 @@ def load():
     return payload, nodes, sections
 
 
-def draw_sample(findings: list[dict]) -> list[dict]:
+def draw_sample(findings: list[dict]) -> tuple[list[dict], bool]:
+    """Returns the drawn findings and whether it turned out to be a census.
+
+    The design asked for 50 drawn uniformly at random. When the population is
+    smaller than that, drawing 50 means checking all of them, and saying
+    "sampled 50" would be wrong in a way that matters: a census has no sampling
+    error at all, and the interval then says something different.
+    """
     pool = [f for f in findings if f["type"] == "near_miss"]
-    rng = random.Random(SEED)
     if len(pool) <= SAMPLE_SIZE:
-        return sorted(pool, key=lambda f: f["id"])
-    return sorted(rng.sample(pool, SAMPLE_SIZE), key=lambda f: f["id"])
+        return sorted(pool, key=lambda f: f["id"]), True
+    rng = random.Random(SEED)
+    return sorted(rng.sample(pool, SAMPLE_SIZE), key=lambda f: f["id"]), False
 
 
 HEADER = """\
@@ -125,7 +132,7 @@ actually sits.
 
 def cmd_prep() -> int:
     payload, nodes, sections = load()
-    sample = draw_sample(payload["findings"])
+    sample, census = draw_sample(payload["findings"])
     WORK.mkdir(parents=True, exist_ok=True)
     (WORK / "in").mkdir(exist_ok=True)
     (WORK / "out").mkdir(exist_ok=True)
@@ -171,11 +178,17 @@ def cmd_prep() -> int:
     (WORK / "sample.json").write_text(json.dumps({
         "sample_size": len(sample),
         "seed": SEED,
-        "sampling": f"uniform random over findings of type near_miss, seed {SEED}",
+        "census": census,
+        "sampling": (
+            "every finding of type near_miss; the population is smaller than the "
+            f"target of {SAMPLE_SIZE}, so this is a census rather than a sample"
+            if census else
+            f"uniform random over findings of type near_miss, seed {SEED}"),
         "finding_ids": [f["id"] for f in sample],
         "batches": batches,
     }, indent=2), encoding="utf-8")
-    log(f"{len(batches)} validation batches over {len(sample)} sampled near-miss findings")
+    kind = "every" if census else "a random sample of"
+    log(f"{len(batches)} validation batches over {kind} {len(sample)} near-miss findings")
     log(f"  population: {sum(1 for f in payload['findings'] if f['type'] == 'near_miss')}")
     return 0
 
@@ -185,32 +198,51 @@ def cmd_assemble() -> int:
     meta = json.loads((WORK / "sample.json").read_text(encoding="utf-8"))
     by_id = {f["id"]: f for f in payload["findings"]}
 
-    verdicts: dict[str, dict] = {}
+    # Each finding may be read by several independent checkers. The verdict is
+    # the majority, and the split is recorded, because a 2-1 verdict and a 3-0
+    # verdict are not the same evidence and reporting them as one number would
+    # hide that. A single reader per finding still works: the majority of one
+    # is itself.
+    ballots: dict[str, list[dict]] = {}
     for path in sorted((WORK / "out").glob("val-*.json")):
         try:
-            verdicts.update(json.loads(path.read_text(encoding="utf-8")))
+            ballot_file = json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             log(f"  unreadable: {path.name}")
+            continue
+        for fid, record in ballot_file.items():
+            ballots.setdefault(fid, []).append(record)
 
     results = []
     counts: Counter = Counter()
+    unanimous = 0
     for fid in meta["finding_ids"]:
-        record = verdicts.get(fid) or {}
-        verdict = str(record.get("verdict", "")).lower()
-        if verdict not in ("valid", "invalid"):
+        cast = ballots.get(fid, [])
+        votes = [str(r.get("verdict", "")).lower() for r in cast]
+        votes = [v for v in votes if v in ("valid", "invalid")]
+        if not votes:
             verdict = "unchecked"
+        else:
+            verdict = "valid" if votes.count("valid") * 2 > len(votes) else "invalid"
+            if votes.count(verdict) == len(votes):
+                unanimous += 1
         counts[verdict] += 1
+        agreeing = [r for r, v in zip(cast, [str(x.get("verdict", "")).lower() for x in cast])
+                    if v == verdict]
+        lead = agreeing[0] if agreeing else (cast[0] if cast else {})
         results.append({
             "finding_id": fid,
             "concept_label": by_id[fid]["concept_label"] if fid in by_id else "",
             "verdict": verdict,
-            "reason": record.get("reason", ""),
-            "evidence": record.get("evidence", ""),
+            "readers": len(votes),
+            "votes_valid": votes.count("valid"),
+            "reason": lead.get("reason", ""),
+            "evidence": lead.get("evidence", ""),
         })
         if fid in by_id and verdict != "unchecked":
             by_id[fid]["validated"] = verdict == "valid"
-            if record.get("reason"):
-                by_id[fid]["validation_note"] = record["reason"]
+            if lead.get("reason"):
+                by_id[fid]["validation_note"] = lead["reason"]
 
     checked = counts["valid"] + counts["invalid"]
     observed = round(counts["valid"] / checked, 4) if checked else 0.0
@@ -220,10 +252,13 @@ def cmd_assemble() -> int:
         "schema_version": 1,
         "sampled_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "sample_size": meta["sample_size"],
+        "census": meta.get("census", False),
         "sampling": meta["sampling"],
         "population": {
             "near_miss": sum(1 for f in payload["findings"] if f["type"] == "near_miss"),
         },
+        "readers_per_finding": max((r["readers"] for r in results), default=0),
+        "unanimous": unanimous,
         "results": results,
         "by_type": {
             "near_miss": {
@@ -235,9 +270,15 @@ def cmd_assemble() -> int:
                 "wilson_95": interval,
             }
         },
-        "note": ("Interval is wide at n=50 by design. Reported, not gated. "
-                 "The observed rate is the point estimate and the interval is "
-                 "what the sample actually supports."),
+        "note": (
+            ("Every near-miss finding was checked, so the observed rate has no "
+             "sampling error: it is exactly the rate for this corpus and this run. "
+             "The interval is reported anyway, as the uncertainty about the method "
+             "rather than about the sample, and it is wide because the population "
+             "is small.")
+            if meta.get("census") else
+            "Interval is wide at n=50 by design. Reported, not gated. The observed "
+            "rate is the point estimate and the interval is what the sample supports."),
     }
     (DATA / "validation.json").write_text(json.dumps(out, indent=2, ensure_ascii=False),
                                           encoding="utf-8")
@@ -247,6 +288,9 @@ def cmd_assemble() -> int:
     log("")
     log(f"near_miss: {counts['valid']}/{checked} valid, observed {observed:.3f}, "
         f"Wilson 95 percent [{interval[0]:.3f}, {interval[1]:.3f}]")
+    if results and results[0]["readers"] > 1:
+        log(f"  {results[0]['readers']} readers per finding, "
+            f"{unanimous}/{checked} unanimous")
     if counts["unchecked"]:
         log(f"  {counts['unchecked']} sampled findings came back without a verdict")
     if checked and observed < STOP_BELOW:

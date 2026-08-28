@@ -2,290 +2,13 @@
   "schema_version": 1,
   "manifest_ref": "data/manifest.json",
   "counts": {
-    "near_miss": 33,
-    "orphan_concept": 59,
-    "retrieval_collision": 98
+    "near_miss": 14,
+    "orphan_concept": 40,
+    "retrieval_collision": 99
   },
   "findings": [
     {
       "id": "F1-0001",
-      "type": "near_miss",
-      "demand": 15,
-      "concept": "concept:async_def",
-      "concept_label": "async def",
-      "concept_kind": "term",
-      "section": "sec:advanced/stream-data#files-and-async",
-      "section_heading": "Files and Async",
-      "doc_title": "Stream Data",
-      "doc_url": "https://fastapi.tiangolo.com/advanced/stream-data/#files-and-async",
-      "section_path": "docs/en/docs/advanced/stream-data.md",
-      "section_lines": [
-        85,
-        110
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:00482",
-          "from": "q:13338",
-          "to": "concept:async_def",
-          "evidence": {
-            "span": "async def test_sample_class(sample_fastapi_client):",
-            "path": "data/raw/discussions/13338.md",
-            "lines": [
-              50,
-              50
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:03947",
-          "from": "sec:advanced/stream-data#files-and-async",
-          "to": "concept:async_def",
-          "evidence": {
-            "span": "you can simply declare the *path operation function* with regular `def` instead of `async def`",
-            "path": "docs/en/docs/advanced/stream-data.md",
-            "lines": [
-              101,
-              101
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:13338",
-        "q:13101",
-        "q:13724",
-        "q:14339",
-        "q:13990",
-        "q:13973",
-        "q:13646",
-        "q:13732",
-        "q:13138",
-        "q:13501",
-        "q:13334",
-        "q:13382",
-        "q:13538",
-        "q:13087",
-        "q:13245"
-      ],
-      "question_titles": [
-        "Unable to mock Dependency in unit test",
-        "How to handle sync endpoints with multithreading most appropriately",
-        "how to make backgroud tasks that are added in one path operation call to run concurrently?",
-        "Differences in how synchronous and asynchronous requests are handled",
-        "Background tasks run asynchronous only on Windows and in dev mode",
-        "Async or sync dependencies",
-        "FastAPI.exception_handlers typing inconsistency",
-        "Understanding benchmarking and setting up Async (Postgres+asyncpg vs Postgres+psycopg2) in FastAPI"
-      ],
-      "shared_concepts": [
-        "concept:await",
-        "concept:blocking_operation",
-        "concept:def",
-        "concept:event_loop",
-        "concept:threadpool_worker"
-      ],
-      "other_requiring_sections": [
-        "sec:tutorial/background-tasks#create-a-task-function",
-        "sec:tutorial/background-tasks#using-backgroundtasks",
-        "sec:tutorial/body-nested-models#bodies-of-arbitrary-dicts",
-        "sec:tutorial/dependencies/index#to-async-or-not-to-async",
-        "sec:tutorial/first-steps#first-steps",
-        "sec:tutorial/first-steps#step-4-define-the-path-operation-function",
-        "sec:tutorial/stream-json-lines#stream-json-lines-with-fastapi",
-        "sec:tutorial/testing#using-testclient"
-      ],
-      "mentions_count": 0,
-      "requires_count": 9,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0002",
-      "type": "near_miss",
-      "demand": 10,
-      "concept": "concept:starlette",
-      "concept_label": "Starlette",
-      "concept_kind": "term",
-      "section": "sec:tutorial/handling-errors#install-custom-exception-handlers",
-      "section_heading": "Install custom exception handlers",
-      "doc_title": "Handling Errors",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/handling-errors/#install-custom-exception-handlers",
-      "section_path": "docs/en/docs/tutorial/handling-errors.md",
-      "section_lines": [
-        82,
-        111
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:00704",
-          "from": "q:13709",
-          "to": "concept:starlette",
-          "evidence": {
-            "span": "As marimo are Starlette, not FastAPI apps",
-            "path": "data/raw/discussions/13709.md",
-            "lines": [
-              34,
-              34
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04551",
-          "from": "sec:tutorial/handling-errors#install-custom-exception-handlers",
-          "to": "concept:starlette",
-          "evidence": {
-            "span": "You can add custom exception handlers with [the same exception utilities from Starlette](https://starlette.dev/exceptions/).",
-            "path": "docs/en/docs/tutorial/handling-errors.md",
-            "lines": [
-              84,
-              84
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:13709",
-        "q:13872",
-        "q:13740",
-        "q:14812",
-        "q:14321",
-        "q:15593",
-        "q:15042",
-        "q:14424",
-        "q:14116",
-        "q:14218"
-      ],
-      "question_titles": [
-        "OpenAPI docs for mounted Starlette apps (marimo)?",
-        "Dependency updates",
-        "Undocumented explicit URL decoding for query params.",
-        "AttributeError while using HTTP_422_UPROCESSABLE_CONTENT from fastapi.status",
-        "isinstance(file, UploadFile) returns False",
-        "Does Starlette GHSA-86qp-5c8j-p5mr affect FastAPI installations using Starlette <= 1.0.0?",
-        "Class Based MiddleWare API?",
-        "starlette dependnecy seems to have been found with a CVE-2025-62727. Why does fastapi still allow the vulnerable version?"
-      ],
-      "shared_concepts": [
-        "concept:request"
-      ],
-      "other_requiring_sections": [
-        "sec:advanced/response-cookies#more-info",
-        "sec:tutorial/background-tasks#technical-details",
-        "sec:tutorial/handling-errors#fastapis-httpexception-vs-starlettes-httpexception",
-        "sec:tutorial/path-params#openapi-support",
-        "sec:tutorial/path-params#path-convertor"
-      ],
-      "mentions_count": 16,
-      "requires_count": 6,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0003",
-      "type": "near_miss",
-      "demand": 7,
-      "concept": "concept:fastapi_command",
-      "concept_label": "fastapi command",
-      "concept_kind": "term",
-      "section": "sec:tutorial/bigger-applications#configure-the-entrypoint-in-pyproject-toml",
-      "section_heading": "Configure the entrypoint in pyproject.toml",
-      "doc_title": "Bigger Applications - Multiple Files",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/bigger-applications/#configure-the-entrypoint-in-pyproject-toml",
-      "section_path": "docs/en/docs/tutorial/bigger-applications.md",
-      "section_lines": [
-        468,
-        498
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:01115",
-          "from": "q:15084",
-          "to": "concept:fastapi_command",
-          "evidence": {
-            "span": "running by fastapi run test.py --root-path /api/v1",
-            "path": "data/raw/discussions/15084.md",
-            "lines": [
-              38,
-              38
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04027",
-          "from": "sec:tutorial/bigger-applications#configure-the-entrypoint-in-pyproject-toml",
-          "to": "concept:fastapi_command",
-          "evidence": {
-            "span": "That way the `fastapi` command will know where to find your app.",
-            "path": "docs/en/docs/tutorial/bigger-applications.md",
-            "lines": [
-              483,
-              483
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:15084",
-        "q:13602",
-        "q:14765",
-        "q:14207",
-        "q:14768",
-        "q:13784",
-        "q:14094"
-      ],
-      "question_titles": [
-        "swagger not display",
-        "[Feature Request] Add CLI Tool for creating models, routes, middlewares etc",
-        "[SOLVED] fastapi run not responding to ctrl+c if workers >= 3",
-        "No such option: --forwarded-allow-ips",
-        "Specify log level to the fastapi command",
-        "Is the fastapi run command production-ready?",
-        "Difference between `fastapi dev` and `fastapi run --reload`"
-      ],
-      "shared_concepts": [
-        "concept:fastapi_dev"
-      ],
-      "other_requiring_sections": [
-        "sec:tutorial/first-steps#configure-the-app-entrypoint-in-pyproject-toml"
-      ],
-      "mentions_count": 0,
-      "requires_count": 2,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0004",
       "type": "near_miss",
       "demand": 6,
       "concept": "concept:event_loop",
@@ -300,7 +23,7 @@
         85,
         110
       ],
-      "missing": "",
+      "missing": "how to run a coroutine on the main thread's event loop from a sync path operation function, which FastAPI executes on a threadpool worker thread",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -318,7 +41,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:03950",
+          "edge": "e:03979",
           "from": "sec:advanced/stream-data#files-and-async",
           "to": "concept:event_loop",
           "evidence": {
@@ -365,242 +88,22 @@
       "mentions_count": 1,
       "requires_count": 3,
       "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": false,
+      "confirming_answer": {
+        "id": "ans:13621",
+        "excerpt": "You need to get event loop in the main thread and save it somewhere (e.g. in app state):",
+        "author": "YuriiMotov",
+        "is_maintainer": true,
+        "url": "https://github.com/fastapi/fastapi/discussions/13621#discussioncomment-12849957",
+        "question_id": "q:13621",
+        "question_title": "What is the best way to ensure async event loops are initialized in non-async fastapi endpoints?"
+      },
+      "validated": true,
+      "validation_note": "All five corpus mentions of the event loop use it as a given (stream-data.md:91,101, custom-response.md:184, stream-json-lines.md:97, server-sent-events.md:60) and none has the event loop as its subject, so the corpus never says it runs in the main thread while a def endpoint runs in a worker thread, and it contains no lifespan, app.state, get_event_loop or run_coroutine_threadsafe material at all.",
+      "gap_note": "The answer explains the loop lives in the main thread and shows saving it so worker threads can submit coroutines to it."
     },
     {
-      "id": "F1-0005",
-      "type": "near_miss",
-      "demand": 6,
-      "concept": "concept:deployment",
-      "concept_label": "deployment",
-      "concept_kind": "term",
-      "section": "sec:tutorial/first-steps#deploy-to-other-cloud-providers",
-      "section_heading": "Deploy to other cloud providers",
-      "doc_title": "First Steps",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/first-steps/#deploy-to-other-cloud-providers",
-      "section_path": "docs/en/docs/tutorial/first-steps.md",
-      "section_lines": [
-        414,
-        419
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:01148",
-          "from": "q:15278",
-          "to": "concept:deployment",
-          "evidence": {
-            "span": "I was trying to deploy my first fastapi app",
-            "path": "data/raw/discussions/15278.md",
-            "lines": [
-              41,
-              41
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04488",
-          "from": "sec:tutorial/first-steps#deploy-to-other-cloud-providers",
-          "to": "concept:deployment",
-          "evidence": {
-            "span": "You can deploy FastAPI apps to any cloud provider you choose.",
-            "path": "docs/en/docs/tutorial/first-steps.md",
-            "lines": [
-              416,
-              416
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:15278",
-        "q:13989",
-        "q:14038",
-        "q:14082",
-        "q:15211",
-        "q:13784"
-      ],
-      "question_titles": [
-        "Deployment problem",
-        "FastAPI docs: Deta deployment instructions may be outdated",
-        "Ambiguous root-path handling",
-        "[ FastAPI Docs ] Should the `Previous Steps before Starting` include `LifeSpan`?",
-        "Deploy problem using command line",
-        "Is the fastapi run command production-ready?"
-      ],
-      "shared_concepts": [],
-      "other_requiring_sections": [],
-      "mentions_count": 1,
-      "requires_count": 1,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0006",
-      "type": "near_miss",
-      "demand": 6,
-      "concept": "concept:fastapi_cli",
-      "concept_label": "fastapi CLI",
-      "concept_kind": "term",
-      "section": "sec:tutorial/first-steps#deploy-your-app-optional",
-      "section_heading": "Deploy your app (optional)",
-      "doc_title": "First Steps",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/first-steps/#deploy-your-app-optional",
-      "section_path": "docs/en/docs/tutorial/first-steps.md",
-      "section_lines": [
-        207,
-        228
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:01125",
-          "from": "q:15132",
-          "to": "concept:fastapi_cli",
-          "evidence": {
-            "span": "Root path configured via FastAPI CLI with --root-path",
-            "path": "data/raw/discussions/15132.md",
-            "lines": [
-              118,
-              118
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04489",
-          "from": "sec:tutorial/first-steps#deploy-your-app-optional",
-          "to": "concept:fastapi_cli",
-          "evidence": {
-            "span": "The CLI will automatically detect your FastAPI application",
-            "path": "docs/en/docs/tutorial/first-steps.md",
-            "lines": [
-              225,
-              225
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:15132",
-        "q:13602",
-        "q:14292",
-        "q:14765",
-        "q:13372",
-        "q:13080"
-      ],
-      "question_titles": [
-        "Different sub-application behaviour when using FastAPI(root_path=...) vs --root-path CLI option",
-        "[Feature Request] Add CLI Tool for creating models, routes, middlewares etc",
-        "Is there any command for creating fastapi app?",
-        "[SOLVED] fastapi run not responding to ctrl+c if workers >= 3",
-        "fastapi-cli major issue",
-        "RuntimeError : Expected ASGI message 'websocket.accept' or 'websocket.close', but got 'http.response.start'"
-      ],
-      "shared_concepts": [],
-      "other_requiring_sections": [],
-      "mentions_count": 0,
-      "requires_count": 1,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0007",
-      "type": "near_miss",
-      "demand": 4,
-      "concept": "concept:async_generator",
-      "concept_label": "async generator",
-      "concept_kind": "term",
-      "section": "sec:advanced/custom-response#streamingresponse",
-      "section_heading": "StreamingResponse",
-      "doc_title": "Custom Response - HTML, Stream, File, others",
-      "doc_url": "https://fastapi.tiangolo.com/advanced/custom-response/#streamingresponse",
-      "section_path": "docs/en/docs/advanced/custom-response.md",
-      "section_lines": [
-        174,
-        197
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:00694",
-          "from": "q:13707",
-          "to": "concept:async_generator",
-          "evidence": {
-            "span": "async def event_generator():",
-            "path": "data/raw/discussions/13707.md",
-            "lines": [
-              33,
-              33
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:03850",
-          "from": "sec:advanced/custom-response#streamingresponse",
-          "to": "concept:async_generator",
-          "evidence": {
-            "span": "Takes an async generator or a normal generator/iterator (a function with `yield`) and streams the response body.",
-            "path": "docs/en/docs/advanced/custom-response.md",
-            "lines": [
-              176,
-              176
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:13707",
-        "q:14336",
-        "q:13660",
-        "q:13238"
-      ],
-      "question_titles": [
-        "Tracking interruption point during large language model output streaming using FastAPI StreamingResponse",
-        "`await` stalls inside finally block when using StreamingResponse",
-        "How does StreamingResponse work?",
-        "solve_dependencies occasionally raises RuntimeError: generator didn't yield"
-      ],
-      "shared_concepts": [
-        "concept:task_cancellation",
-        "concept:yield"
-      ],
-      "other_requiring_sections": [],
-      "mentions_count": 0,
-      "requires_count": 1,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0008",
+      "id": "F1-0002",
       "type": "near_miss",
       "demand": 3,
       "concept": "concept:apiroute",
@@ -615,7 +118,7 @@
         17,
         32
       ],
-      "missing": "",
+      "missing": "which parts of APIRoute are safe to subclass, given that overriding its constructor is not a supported extension point",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -633,7 +136,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:03891",
+          "edge": "e:03920",
           "from": "sec:advanced/path-operation-advanced-configuration#using-the-path-operation-function-name-as-the-operationid",
           "to": "concept:apiroute",
           "evidence": {
@@ -666,379 +169,22 @@
       "mentions_count": 1,
       "requires_count": 1,
       "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": false,
+      "confirming_answer": {
+        "id": "ans:15547",
+        "excerpt": "I never expected people to subclass and modify the constructor of the APIRoute, modifying the constructor is not something done and explained in the docs, so it's not really currently a supported behavior or feature",
+        "author": "tiangolo",
+        "is_maintainer": true,
+        "url": "https://github.com/fastapi/fastapi/discussions/15547#discussioncomment-16957183",
+        "question_id": "q:15547",
+        "question_title": "Custom APIRoute classes with explicit constructors fail after strict_content_type was added"
+      },
+      "validated": true,
+      "validation_note": "APIRoute appears in prose only at path-operation-advanced-configuration.md:21 and bigger-applications.md:399-401, where the subject is what the generate_unique_id function receives and what include_router keeps alive rather than what an APIRoute is, and route_class, add_api_route and get_route_handler appear nowhere in the 60 files, so the answer's fact that overriding the APIRoute constructor is unsupported is genuinely absent.",
+      "gap_note": "The maintainer states that changing the APIRoute constructor in a subclass is unsupported, a boundary no documentation page draws."
     },
     {
-      "id": "F1-0009",
-      "type": "near_miss",
-      "demand": 3,
-      "concept": "concept:exception",
-      "concept_label": "exception",
-      "concept_kind": "term",
-      "section": "sec:tutorial/dependencies/dependencies-with-yield#a-dependency-with-yield-and-try",
-      "section_heading": "A dependency with yield and try",
-      "doc_title": "Dependencies with yield",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#a-dependency-with-yield-and-try",
-      "section_path": "docs/en/docs/tutorial/dependencies/dependencies-with-yield.md",
-      "section_lines": [
-        50,
-        61
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:00421",
-          "from": "q:13242",
-          "to": "concept:exception",
-          "evidence": {
-            "span": "I have to handle a lot of exceptions with the same handler",
-            "path": "data/raw/discussions/13242.md",
-            "lines": [
-              25,
-              25
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04312",
-          "from": "sec:tutorial/dependencies/dependencies-with-yield#a-dependency-with-yield-and-try",
-          "to": "concept:exception",
-          "evidence": {
-            "span": "you'll receive any exception that was thrown when using the dependency",
-            "path": "docs/en/docs/tutorial/dependencies/dependencies-with-yield.md",
-            "lines": [
-              52,
-              52
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:13242",
-        "q:14071",
-        "q:13741"
-      ],
-      "question_titles": [
-        "[Feature] Add support for several exception types in exception handlers.",
-        "Duplicate and verbose exception stacktrace if middleware exits",
-        "Empty response on 500 status code in Angular response"
-      ],
-      "shared_concepts": [],
-      "other_requiring_sections": [],
-      "mentions_count": 1,
-      "requires_count": 1,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0010",
-      "type": "near_miss",
-      "demand": 3,
-      "concept": "concept:uvicorn_run",
-      "concept_label": "uvicorn.run",
-      "concept_kind": "function",
-      "section": "sec:tutorial/debugging#call-uvicorn",
-      "section_heading": "Call uvicorn",
-      "doc_title": "Debugging",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/debugging/#call-uvicorn",
-      "section_path": "docs/en/docs/tutorial/debugging.md",
-      "section_lines": [
-        5,
-        10
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:00340",
-          "from": "q:13076",
-          "to": "concept:uvicorn_run",
-          "evidence": {
-            "span": "uvicorn.run(app, loop=\"asyncio\")",
-            "path": "data/raw/discussions/13076.md",
-            "lines": [
-              43,
-              43
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04257",
-          "from": "sec:tutorial/debugging#call-uvicorn",
-          "to": "concept:uvicorn_run",
-          "evidence": {
-            "span": "uvicorn.run(app, host=\"0.0.0.0\", port=8000)",
-            "path": "docs_src/debugging/tutorial001_py310.py",
-            "lines": [
-              15,
-              15
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:13076",
-        "q:13553",
-        "q:13068"
-      ],
-      "question_titles": [
-        "StreamingResponse causes crash with default uvicorn.run(app) configuration",
-        "Cannot access to my service!",
-        "Fastapi. The 'reload' hangs and the application does not restart"
-      ],
-      "shared_concepts": [
-        "concept:host",
-        "concept:port",
-        "concept:uvicorn"
-      ],
-      "other_requiring_sections": [],
-      "mentions_count": 1,
-      "requires_count": 1,
-      "requires_evidence_kind": "code",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0011",
-      "type": "near_miss",
-      "demand": 2,
-      "concept": "concept:async",
-      "concept_label": "async",
-      "concept_kind": "term",
-      "section": "sec:tutorial/server-sent-events#non-async-path-operation-functions",
-      "section_heading": "Non-async *path operation functions*",
-      "doc_title": "Server-Sent Events (SSE)",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/server-sent-events/#non-async-path-operation-functions",
-      "section_path": "docs/en/docs/tutorial/server-sent-events.md",
-      "section_lines": [
-        56,
-        65
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:00387",
-          "from": "q:13138",
-          "to": "concept:async",
-          "evidence": {
-            "span": "adopt asynchronous patterns in FastAPI",
-            "path": "data/raw/discussions/13138.md",
-            "lines": [
-              87,
-              87
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:05175",
-          "from": "sec:tutorial/server-sent-events#non-async-path-operation-functions",
-          "to": "concept:async",
-          "evidence": {
-            "span": "You can also use regular `def` functions (without `async`)",
-            "path": "docs/en/docs/tutorial/server-sent-events.md",
-            "lines": [
-              58,
-              58
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:13138",
-        "q:13545"
-      ],
-      "question_titles": [
-        "Is Refactoring a Large Synchronous FastAPI Application to Asynchronous Worth the Effort?",
-        "Make HTTPBase __call__ sync"
-      ],
-      "shared_concepts": [
-        "concept:def"
-      ],
-      "other_requiring_sections": [
-        "sec:advanced/stream-data#non-async-path-operation-functions",
-        "sec:tutorial/dependencies/dependencies-with-yield#a-database-dependency-with-yield",
-        "sec:tutorial/request-files#uploadfile",
-        "sec:tutorial/stream-json-lines#non-async-path-operation-functions"
-      ],
-      "mentions_count": 1,
-      "requires_count": 5,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0012",
-      "type": "near_miss",
-      "demand": 2,
-      "concept": "concept:html_forms",
-      "concept_label": "HTML forms",
-      "concept_kind": "term",
-      "section": "sec:tutorial/request-files#what-is-form-data",
-      "section_heading": "What is \"Form Data\"",
-      "doc_title": "Request Files",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/request-files/#what-is-form-data",
-      "section_path": "docs/en/docs/tutorial/request-files.md",
-      "section_lines": [
-        112,
-        135
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:01207",
-          "from": "q:15743",
-          "to": "concept:html_forms",
-          "evidence": {
-            "span": "I try to model a Html Form that has an optional email field.",
-            "path": "data/raw/discussions/15743.md",
-            "lines": [
-              58,
-              58
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04864",
-          "from": "sec:tutorial/request-files#what-is-form-data",
-          "to": "concept:html_forms",
-          "evidence": {
-            "span": "The way HTML forms (`<form></form>`) send the data to the server normally uses a \"special\" encoding",
-            "path": "docs/en/docs/tutorial/request-files.md",
-            "lines": [
-              114,
-              114
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:15743",
-        "q:13380"
-      ],
-      "question_titles": [
-        "Form with optional Email fails, what is the best practise here?",
-        "[bug] Impossible to have checkbox in form with default `True` value"
-      ],
-      "shared_concepts": [
-        "concept:form",
-        "concept:form_data"
-      ],
-      "other_requiring_sections": [
-        "sec:tutorial/request-forms#about-form-fields"
-      ],
-      "mentions_count": 0,
-      "requires_count": 2,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0013",
-      "type": "near_miss",
-      "demand": 2,
-      "concept": "concept:orjson",
-      "concept_label": "orjson",
-      "concept_kind": "object",
-      "section": "sec:advanced/custom-response#custom-response-class",
-      "section_heading": "Custom response class",
-      "doc_title": "Custom Response - HTML, Stream, File, others",
-      "doc_url": "https://fastapi.tiangolo.com/advanced/custom-response/#custom-response-class",
-      "section_path": "docs/en/docs/advanced/custom-response.md",
-      "section_lines": [
-        219,
-        246
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:01098",
-          "from": "q:14980",
-          "to": "concept:orjson",
-          "evidence": {
-            "span": "deprecating ORJSONResponse and UJSONResponse might be premature",
-            "path": "data/raw/discussions/14980.md",
-            "lines": [
-              7,
-              7
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:03801",
-          "from": "sec:advanced/custom-response#custom-response-class",
-          "to": "concept:orjson",
-          "evidence": {
-            "span": "return orjson.dumps(content, option=orjson.OPT_INDENT_2)",
-            "path": "docs_src/custom_response/tutorial009c_py310.py",
-            "lines": [
-              14,
-              14
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:14980",
-        "q:13455"
-      ],
-      "question_titles": [
-        "Consider Pydantic serialization for exception handlers before deprecating ORJSONResponse",
-        "Fetching a lot of time series data"
-      ],
-      "shared_concepts": [
-        "concept:response"
-      ],
-      "other_requiring_sections": [],
-      "mentions_count": 1,
-      "requires_count": 1,
-      "requires_evidence_kind": "code",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0014",
+      "id": "F1-0003",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:path_operation",
@@ -1053,7 +199,7 @@
         415,
         443
       ],
-      "missing": "",
+      "missing": "how to attach several named OpenAPI examples to a response declared in the responses parameter of an APIRouter, rather than the single example json_schema_extra produces",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -1071,7 +217,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04061",
+          "edge": "e:04090",
           "from": "sec:tutorial/bigger-applications#include-an-apirouter-with-a-custom-prefix-tags-responses-and-dependencies",
           "to": "concept:path_operation",
           "evidence": {
@@ -1168,246 +314,22 @@
       "mentions_count": 9,
       "requires_count": 65,
       "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": false,
+      "confirming_answer": {
+        "id": "ans:13798",
+        "excerpt": "As an alternative, you can provide examples outside of response object schema (as an examples field of response media type object):",
+        "author": "YuriiMotov",
+        "is_maintainer": true,
+        "url": "https://github.com/fastapi/fastapi/discussions/13798#discussioncomment-13508108",
+        "question_id": "q:13798",
+        "question_title": "How to specify multiple \"named\" OpenAPI examples with additional responses on the router?"
+      },
+      "validated": false,
+      "validation_note": "First Steps devotes a titled step to creating a path operation and defines both halves in prose, with line 257 whose subject is Path and line 281 whose subject is Operation, so the extractor missed a DEFINES edge on what is also the corpus's own central subject with 65 REQUIRES edges.",
+      "gap_note": "The answer shows examples belong in the response media type content object, since Swagger ignores multiple examples placed in the schema."
     },
     {
-      "id": "F1-0015",
-      "type": "near_miss",
-      "demand": 1,
-      "concept": "concept:str",
-      "concept_label": "str",
-      "concept_kind": "class",
-      "section": "sec:tutorial/query-params#required-query-parameters",
-      "section_heading": "Required query parameters",
-      "doc_title": "Query Parameters",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/query-params/#required-query-parameters",
-      "section_path": "docs/en/docs/tutorial/query-params.md",
-      "section_lines": [
-        123,
-        188
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:00306",
-          "from": "q:13036",
-          "to": "concept:str",
-          "evidence": {
-            "span": "Commas in long str query param",
-            "path": "data/raw/discussions/13036.md",
-            "lines": [
-              1,
-              1
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04782",
-          "from": "sec:tutorial/query-params#required-query-parameters",
-          "to": "concept:str",
-          "evidence": {
-            "span": "is a required query parameter of type `str`",
-            "path": "docs/en/docs/tutorial/query-params.md",
-            "lines": [
-              133,
-              133
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:13036"
-      ],
-      "question_titles": [
-        "Commas in long str query param cause truncation and other weird behavior"
-      ],
-      "shared_concepts": [
-        "concept:enum"
-      ],
-      "other_requiring_sections": [
-        "sec:tutorial/body-nested-models#bodies-of-arbitrary-dicts",
-        "sec:tutorial/body-nested-models#special-types-and-validation",
-        "sec:tutorial/dependencies/sub-dependencies#first-dependency-dependable",
-        "sec:tutorial/dependencies/sub-dependencies#second-dependency-dependable-and-dependant",
-        "sec:tutorial/encoder#using-the-jsonable-encoder",
-        "sec:tutorial/extra-data-types#extra-data-types",
-        "sec:tutorial/extra-data-types#other-data-types",
-        "sec:tutorial/path-params#compare-enumeration-members",
-        "sec:tutorial/path-params#create-an-enum-class",
-        "sec:tutorial/path-params#get-the-enumeration-value",
-        "sec:tutorial/path-params#path-convertor",
-        "sec:tutorial/query-params#optional-parameters",
-        "sec:tutorial/response-model#response-model-include-and-response-model-exclude",
-        "sec:tutorial/security/first-steps#what-it-does"
-      ],
-      "mentions_count": 6,
-      "requires_count": 15,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0016",
-      "type": "near_miss",
-      "demand": 1,
-      "concept": "concept:int",
-      "concept_label": "int",
-      "concept_kind": "class",
-      "section": "sec:tutorial/path-params#data-validation",
-      "section_heading": "Data validation",
-      "doc_title": "Path Parameters",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/path-params/#data-validation",
-      "section_path": "docs/en/docs/tutorial/path-params.md",
-      "section_lines": [
-        45,
-        78
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:00335",
-          "from": "q:13071",
-          "to": "concept:int",
-          "evidence": {
-            "span": "async def read_user(password: int):",
-            "path": "data/raw/discussions/13071.md",
-            "lines": [
-              34,
-              34
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04672",
-          "from": "sec:tutorial/path-params#data-validation",
-          "to": "concept:int",
-          "evidence": {
-            "span": "because the path parameter `item_id` had a value of `\"foo\"`, which is not an `int`.",
-            "path": "docs/en/docs/tutorial/path-params.md",
-            "lines": [
-              65,
-              65
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:13071"
-      ],
-      "question_titles": [
-        "farsi(persian) does not verified in the get method"
-      ],
-      "shared_concepts": [
-        "concept:data_validation",
-        "concept:path_parameter"
-      ],
-      "other_requiring_sections": [
-        "sec:tutorial/body-nested-models#bodies-of-arbitrary-dicts",
-        "sec:tutorial/extra-data-types#extra-data-types",
-        "sec:tutorial/path-params#data-conversion",
-        "sec:tutorial/path-params#path-parameters-with-types",
-        "sec:tutorial/query-params#query-parameters",
-        "sec:tutorial/query-params#required-query-parameters"
-      ],
-      "mentions_count": 3,
-      "requires_count": 7,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0017",
-      "type": "near_miss",
-      "demand": 1,
-      "concept": "concept:type_annotations",
-      "concept_label": "type annotations",
-      "concept_kind": "term",
-      "section": "sec:tutorial/response-model#response-model-return-type",
-      "section_heading": "Response Model - Return Type",
-      "doc_title": "Response Model - Return Type",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/response-model/",
-      "section_path": "docs/en/docs/tutorial/response-model.md",
-      "section_lines": [
-        1,
-        22
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:01025",
-          "from": "q:14464",
-          "to": "concept:type_annotations",
-          "evidence": {
-            "span": "from __future__ import annotations",
-            "path": "data/raw/discussions/14464.md",
-            "lines": [
-              33,
-              33
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04955",
-          "from": "sec:tutorial/response-model#response-model-return-type",
-          "to": "concept:type_annotations",
-          "evidence": {
-            "span": "You can use **type annotations** the same way you would for input data in function **parameters**",
-            "path": "docs/en/docs/tutorial/response-model.md",
-            "lines": [
-              5,
-              5
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:14464"
-      ],
-      "question_titles": [
-        "Breaking change in dependency type inspection in FastAPI 0.123.7"
-      ],
-      "shared_concepts": [],
-      "other_requiring_sections": [
-        "sec:tutorial/body#request-body-path-query-parameters",
-        "sec:tutorial/path-params#path-parameters-with-types",
-        "sec:tutorial/request-files#optional-file-upload",
-        "sec:tutorial/response-model#return-type-and-data-filtering",
-        "sec:tutorial/sql-databases#create-a-hero"
-      ],
-      "mentions_count": 2,
-      "requires_count": 6,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0018",
+      "id": "F1-0004",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:emailstr",
@@ -1422,7 +344,7 @@
         69,
         108
       ],
-      "missing": "",
+      "missing": "how to declare an optional EmailStr form field that accepts an empty submission, which browsers send as an empty string rather than omitting the field",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -1440,7 +362,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04964",
+          "edge": "e:04993",
           "from": "sec:tutorial/response-model#return-the-same-input-data",
           "to": "concept:emailstr",
           "evidence": {
@@ -1474,87 +396,22 @@
       "mentions_count": 0,
       "requires_count": 5,
       "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": false,
+      "confirming_answer": {
+        "id": "ans:15743",
+        "excerpt": "The best solution is to use Pydantic's BeforeValidator to intercept the data before standard validation runs, converting any empty string into None.",
+        "author": "strangeleo02",
+        "is_maintainer": false,
+        "url": "https://github.com/fastapi/fastapi/discussions/15743#discussioncomment-17287355",
+        "question_id": "q:15743",
+        "question_title": "Form with optional Email fails, what is the best practise here?"
+      },
+      "validated": true,
+      "validation_note": "The single prose line, response-model.md:77, has the email-validator install step as its subject and never says what EmailStr is or validates, every other occurrence sits inside docs_src code files, and the corpus has nothing on empty form strings or BeforeValidator beyond a link out at query-params-str-validations.md:377.",
+      "gap_note": "The answer names the empty string browsers submit and shows a BeforeValidator that converts it to None before validation."
     },
     {
-      "id": "F1-0019",
-      "type": "near_miss",
-      "demand": 1,
-      "concept": "concept:await",
-      "concept_label": "await",
-      "concept_kind": "term",
-      "section": "sec:tutorial/background-tasks#create-a-task-function",
-      "section_heading": "Create a task function",
-      "doc_title": "Background Tasks",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/background-tasks/#create-a-task-function",
-      "section_path": "docs/en/docs/tutorial/background-tasks.md",
-      "section_lines": [
-        22,
-        35
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:00576",
-          "from": "q:13538",
-          "to": "concept:await",
-          "evidence": {
-            "span": "the slow call is awaited and blocks",
-            "path": "data/raw/discussions/13538.md",
-            "lines": [
-              48,
-              48
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:03988",
-          "from": "sec:tutorial/background-tasks#create-a-task-function",
-          "to": "concept:await",
-          "evidence": {
-            "span": "And as the write operation doesn't use `async` and `await`",
-            "path": "docs/en/docs/tutorial/background-tasks.md",
-            "lines": [
-              32,
-              32
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:13538"
-      ],
-      "question_titles": [
-        "how to add a non-blocking endpoint that calls an awaitable function but can't await it"
-      ],
-      "shared_concepts": [
-        "concept:async_def",
-        "concept:backgroundtasks",
-        "concept:def"
-      ],
-      "other_requiring_sections": [
-        "sec:advanced/custom-response#streamingresponse",
-        "sec:advanced/stream-data#files-and-async",
-        "sec:tutorial/testing#using-testclient"
-      ],
-      "mentions_count": 1,
-      "requires_count": 4,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0020",
+      "id": "F1-0005",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:exc_errors",
@@ -1569,7 +426,7 @@
         180,
         217
       ],
-      "missing": "",
+      "missing": "when WebSocketRequestValidationError applies, which is only during the connection stage before websocket.accept()",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -1587,7 +444,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04574",
+          "edge": "e:04603",
           "from": "sec:tutorial/handling-errors#use-the-requestvalidationerror-body",
           "to": "concept:exc_errors",
           "evidence": {
@@ -1620,12 +477,22 @@
       "mentions_count": 0,
       "requires_count": 2,
       "requires_evidence_kind": "code",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": true,
+      "confirming_answer": {
+        "id": "ans:14698",
+        "excerpt": "I think WebSocketRequestValidationError is intended to be used during the connection stage only (before await websocket.accept()).",
+        "author": "YuriiMotov",
+        "is_maintainer": true,
+        "url": "https://github.com/fastapi/fastapi/discussions/14698#discussioncomment-15543082",
+        "question_id": "q:14698",
+        "question_title": "Bug: WebSocket validation exception crashes server due to invalid close reason type"
+      },
+      "validated": true,
+      "validation_note": "exc.errors() occurs only inside two docs_src code samples and never in prose, and while handling-errors.md:182 explicitly explains the sibling attribute .body the page never explains what .errors() returns, and the corpus contains no WebSocket material at all so the answer's WebSocketRequestValidationError versus WebSocketException fact is absent.",
+      "gap_note": "The answer scopes that error to before accept and points to WebSocketException with a string reason for open connections."
     },
     {
-      "id": "F1-0021",
+      "id": "F1-0006",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:fastapi_encoders",
@@ -1640,7 +507,7 @@
         35,
         52
       ],
-      "missing": "",
+      "missing": "how to give jsonable_encoder a rule for a type it does not recognise, such as packaging.version.Version",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -1658,7 +525,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:03927",
+          "edge": "e:03956",
           "from": "sec:advanced/response-directly#using-the-jsonable-encoder-in-a-response",
           "to": "concept:fastapi_encoders",
           "evidence": {
@@ -1691,81 +558,14 @@
       "mentions_count": 0,
       "requires_count": 2,
       "requires_evidence_kind": "code",
+      "code_samples_only": true,
       "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "validated": false,
+      "validation_note": "The corpus does explain this concept: tutorial/encoder.md is a dedicated section whose subject is the jsonable_encoder() function that fastapi.encoders provides, the depending section links straight to it and shows how to call it, and the thread answer supplies only a maintainer's opinion declining a feature request rather than a fact the corpus lacks.",
+      "gap_note": "The answer only declines the proposal and never states how jsonable_encoder treats unknown types or names the custom_encoder hook."
     },
     {
-      "id": "F1-0022",
-      "type": "near_miss",
-      "demand": 1,
-      "concept": "concept:httpx",
-      "concept_label": "httpx",
-      "concept_kind": "term",
-      "section": "sec:tutorial/testing#using-testclient",
-      "section_heading": "Using TestClient",
-      "doc_title": "Testing",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/testing/#using-testclient",
-      "section_path": "docs/en/docs/tutorial/testing.md",
-      "section_lines": [
-        9,
-        58
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:00708",
-          "from": "q:13710",
-          "to": "concept:httpx",
-          "evidence": {
-            "span": "AsyncClient (httpx)",
-            "path": "data/raw/discussions/13710.md",
-            "lines": [
-              68,
-              68
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:05365",
-          "from": "sec:tutorial/testing#using-testclient",
-          "to": "concept:httpx",
-          "evidence": {
-            "span": "To use `TestClient`, first install [`httpx`](https://www.python-httpx.org).",
-            "path": "docs/en/docs/tutorial/testing.md",
-            "lines": [
-              13,
-              13
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:13710"
-      ],
-      "question_titles": [
-        "Dependency Caching For External HTTP calls"
-      ],
-      "shared_concepts": [],
-      "other_requiring_sections": [
-        "sec:tutorial/testing#extended-testing-file"
-      ],
-      "mentions_count": 1,
-      "requires_count": 2,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0023",
+      "id": "F1-0007",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:port",
@@ -1780,7 +580,7 @@
         5,
         10
       ],
-      "missing": "",
+      "missing": "which layer returns a 502 with an empty body while uvicorn is already listening on port 8000",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -1798,7 +598,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04256",
+          "edge": "e:04285",
           "from": "sec:tutorial/debugging#call-uvicorn",
           "to": "concept:port",
           "evidence": {
@@ -1832,12 +632,22 @@
       "mentions_count": 0,
       "requires_count": 2,
       "requires_evidence_kind": "code",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": false,
+      "confirming_answer": {
+        "id": "ans:13553",
+        "excerpt": "your example is fine and i'm quite sure that the response is not from Fastapi.\nYou should check your proxy, firewall or anything between your client and your server.",
+        "author": "luzzodev",
+        "is_maintainer": false,
+        "url": "https://github.com/fastapi/fastapi/discussions/13553#discussioncomment-12665083",
+        "question_id": "q:13553",
+        "question_title": "Cannot access to my service!"
+      },
+      "validated": true,
+      "validation_note": "No prose anywhere in the 60 files explains what a port is or how the port argument to uvicorn.run is set; the only prose hits are cors.md:7 and cors.md:19, whose subject is the definition of an origin, and the two debugging.md hits sit inside fenced Python blocks, while the thread answer supplies the absent fact that an empty 502 comes from a proxy or firewall between client and server rather than from FastAPI.",
+      "gap_note": "The answer places the 502 outside FastAPI and points at the proxy or firewall, which no page in the corpus mentions."
     },
     {
-      "id": "F1-0024",
+      "id": "F1-0008",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:session_exec",
@@ -1852,7 +662,7 @@
         303,
         308
       ],
-      "missing": "",
+      "missing": "which select session.exec requires, the one from sqlmodel rather than the one from sqlalchemy",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -1870,7 +680,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:05281",
+          "edge": "e:05310",
           "from": "sec:tutorial/sql-databases#read-heroes-with-heropublic",
           "to": "concept:session_exec",
           "evidence": {
@@ -1904,151 +714,22 @@
       "mentions_count": 0,
       "requires_count": 2,
       "requires_evidence_kind": "code",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": true,
+      "confirming_answer": {
+        "id": "ans:13482",
+        "excerpt": "The problem was that I imported the wrong select function.\nWrong\nfrom sqlalchemy import select\nCorrect\nfrom sqlmodel import select",
+        "author": "maxmantz",
+        "is_maintainer": false,
+        "url": "https://github.com/fastapi/fastapi/discussions/13482#discussioncomment-12480543",
+        "question_id": "q:13482",
+        "question_title": "Unable to use exec when querying data in FastAPI"
+      },
+      "validated": true,
+      "validation_note": "session.exec appears only in the docs_src code samples and never in prose; sql-databases.md:132 explains reading heroes with select(), limit and offset but never says what .exec() is, and the thread answer supplies the absent fact that select must be imported from sqlmodel rather than sqlalchemy for session.exec to work.",
+      "gap_note": "The answer names the exact import that makes session.exec work, which the tutorial code shows but never states."
     },
     {
-      "id": "F1-0025",
-      "type": "near_miss",
-      "demand": 1,
-      "concept": "concept:accept",
-      "concept_label": "Accept",
-      "concept_kind": "term",
-      "section": "sec:tutorial/frontend#client-side-routing",
-      "section_heading": "Client-Side Routing",
-      "doc_title": "Frontend",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/frontend/#client-side-routing",
-      "section_path": "docs/en/docs/tutorial/frontend.md",
-      "section_lines": [
-        45,
-        66
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:01229",
-          "from": "q:15979",
-          "to": "concept:accept",
-          "evidence": {
-            "span": "checking the Accept header first would fix the navigation case",
-            "path": "data/raw/discussions/15979.md",
-            "lines": [
-              63,
-              63
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04518",
-          "from": "sec:tutorial/frontend#client-side-routing",
-          "to": "concept:accept",
-          "evidence": {
-            "span": "requests that explicitly accept HTML with `Accept: text/html` or `Accept: application/xhtml+xml`",
-            "path": "docs/en/docs/tutorial/frontend.md",
-            "lines": [
-              55,
-              55
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:15979"
-      ],
-      "question_titles": [
-        "app.frontend() with fallback=\"index.html\" returns 404 for client side routes that have a dot in the last path segment (like /users/john.doe or /v/1.2.3)"
-      ],
-      "shared_concepts": [
-        "concept:404",
-        "concept:app_frontend",
-        "concept:fallback",
-        "concept:index_html"
-      ],
-      "other_requiring_sections": [],
-      "mentions_count": 0,
-      "requires_count": 1,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0026",
-      "type": "near_miss",
-      "demand": 1,
-      "concept": "concept:async_for",
-      "concept_label": "async for",
-      "concept_kind": "term",
-      "section": "sec:advanced/stream-data#files-and-async",
-      "section_heading": "Files and Async",
-      "doc_title": "Stream Data",
-      "doc_url": "https://fastapi.tiangolo.com/advanced/stream-data/#files-and-async",
-      "section_path": "docs/en/docs/advanced/stream-data.md",
-      "section_lines": [
-        85,
-        110
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:00383",
-          "from": "q:13126",
-          "to": "concept:async_for",
-          "evidence": {
-            "span": "async for chunk in request.stream():",
-            "path": "data/raw/discussions/13126.md",
-            "lines": [
-              38,
-              38
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:03948",
-          "from": "sec:advanced/stream-data#files-and-async",
-          "to": "concept:async_for",
-          "evidence": {
-            "span": "they don't have an `await file.read()`, or `async for chunk in file`.",
-            "path": "docs/en/docs/advanced/stream-data.md",
-            "lines": [
-              89,
-              89
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:13126"
-      ],
-      "question_titles": [
-        "Streaming response while streaming request (full-duplex)"
-      ],
-      "shared_concepts": [],
-      "other_requiring_sections": [],
-      "mentions_count": 0,
-      "requires_count": 1,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0027",
+      "id": "F1-0009",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:host",
@@ -2063,7 +744,7 @@
         5,
         10
       ],
-      "missing": "",
+      "missing": "how to check whether a server bound to host 0.0.0.0 is actually reachable from a client",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -2081,7 +762,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04255",
+          "edge": "e:04284",
           "from": "sec:tutorial/debugging#call-uvicorn",
           "to": "concept:host",
           "evidence": {
@@ -2113,12 +794,22 @@
       "mentions_count": 0,
       "requires_count": 1,
       "requires_evidence_kind": "code",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": true,
+      "confirming_answer": {
+        "id": "ans:13553",
+        "excerpt": "You should check your proxy, firewall or anything between your client and your server.\nAre you able to reach doc from your browser?",
+        "author": "luzzodev",
+        "is_maintainer": false,
+        "url": "https://github.com/fastapi/fastapi/discussions/13553#discussioncomment-12665083",
+        "question_id": "q:13553",
+        "question_title": "Cannot access to my service!"
+      },
+      "validated": true,
+      "validation_note": "The host parameter appears only inside the fenced Python blocks at debugging.md:48 and debugging.md:70 and in the docs_src sample, the one other prose hit (static-files.md:7) uses host as a verb about hosting a frontend, and nothing in the corpus explains what host=\"0.0.0.0\" binds to, while the thread answer adds the absent fact about proxies and firewalls sitting between client and server.",
+      "gap_note": "The answer gives a reachability test and blames the network path, which the docs never mention beside host 0.0.0.0."
     },
     {
-      "id": "F1-0028",
+      "id": "F1-0010",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:jwt_decode",
@@ -2133,7 +824,7 @@
         161,
         170
       ],
-      "missing": "",
+      "missing": "which jwt.decode arguments handle a token carrying an aud claim, the audience value or the verify_aud option",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -2151,7 +842,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:05116",
+          "edge": "e:05145",
           "from": "sec:tutorial/security/oauth2-jwt#update-the-dependencies",
           "to": "concept:jwt_decode",
           "evidence": {
@@ -2183,12 +874,22 @@
       "mentions_count": 0,
       "requires_count": 1,
       "requires_evidence_kind": "code",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": true,
+      "confirming_answer": {
+        "id": "ans:13425",
+        "excerpt": "either specify audience\n    payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM], audience=\"foo\")  # Update with correct value\n\n\nor disable audience verification:\n    payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM], options={\"verify_aud\": False})",
+        "author": "YuriiMotov",
+        "is_maintainer": true,
+        "url": "https://github.com/fastapi/fastapi/discussions/13425#discussioncomment-12341665",
+        "question_id": "q:13425",
+        "question_title": "How to customize HTTPBearer to parse data?"
+      },
+      "validated": true,
+      "validation_note": "jwt.decode appears only in the docs_src sample; oauth2-jwt.md:165 is a step instruction telling the reader to decode and verify the token, not an explanation of the function or its parameters, and the words audience, aud and verify_aud appear nowhere in the corpus, so the thread answer's fix supplies a genuinely absent fact.",
+      "gap_note": "The answer shows the audience argument and the verify_aud option, neither of which appears in the JWT tutorial."
     },
     {
-      "id": "F1-0029",
+      "id": "F1-0011",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:literal",
@@ -2203,7 +904,7 @@
         13,
         20
       ],
-      "missing": "",
+      "missing": "what Enum gives predefined parameter values that typing.Literal does not, and when each one fits",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -2221,7 +922,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04758",
+          "edge": "e:04787",
           "from": "sec:tutorial/query-param-models#query-parameters-with-a-pydantic-model",
           "to": "concept:literal",
           "evidence": {
@@ -2250,81 +951,22 @@
       "mentions_count": 0,
       "requires_count": 1,
       "requires_evidence_kind": "code",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": true,
+      "confirming_answer": {
+        "id": "ans:13254",
+        "excerpt": "For simple type hinting literal works well for more complex scenarios Enum provides more flexibility for example adding metadata to Enum values also, can provide more complex logic around enumeration. Performance differences are negligible.",
+        "author": "Codeslayer27",
+        "is_maintainer": false,
+        "url": "https://github.com/fastapi/fastapi/discussions/13254#discussioncomment-11951895",
+        "question_id": "q:13254",
+        "question_title": "Path parameters predefined values - Enum vs. typing.Literal"
+      },
+      "validated": true,
+      "validation_note": "The string Literal appears nowhere in the 60 docs files, only in two docs_src samples, so no prose teaches what typing.Literal is or how it compares to Enum, while path-params.md:131-137 teaches Enum for predefined values and never names Literal as an alternative, which is exactly the fact the thread answer supplies.",
+      "gap_note": "The answer compares Literal and Enum on metadata and logic, a comparison the tutorial never makes."
     },
     {
-      "id": "F1-0030",
-      "type": "near_miss",
-      "demand": 1,
-      "concept": "concept:pip",
-      "concept_label": "pip",
-      "concept_kind": "term",
-      "section": "sec:tutorial/index#install-fastapi",
-      "section_heading": "Install FastAPI",
-      "doc_title": "Tutorial - User Guide",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/#install-fastapi",
-      "section_path": "docs/en/docs/tutorial/index.md",
-      "section_lines": [
-        61,
-        114
-      ],
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Question ASKS_ABOUT Concept",
-          "edge": "e:01054",
-          "from": "q:14719",
-          "to": "concept:pip",
-          "evidence": {
-            "span": "pip install fastapi",
-            "path": "data/raw/discussions/14719.md",
-            "lines": [
-              25,
-              25
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04612",
-          "from": "sec:tutorial/index#install-fastapi",
-          "to": "concept:pip",
-          "evidence": {
-            "span": "then install FastAPI with `pip install \"fastapi[standard]\"`",
-            "path": "docs/en/docs/tutorial/index.md",
-            "lines": [
-              109,
-              109
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "questions": [
-        "q:14719"
-      ],
-      "question_titles": [
-        "About the changelog for v 0.112.0 - uvicorn is not installed by fastapi==0.110.3?"
-      ],
-      "shared_concepts": [
-        "concept:fastapi_standard"
-      ],
-      "other_requiring_sections": [],
-      "mentions_count": 0,
-      "requires_count": 1,
-      "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
-    },
-    {
-      "id": "F1-0031",
+      "id": "F1-0012",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:tokendata",
@@ -2339,7 +981,7 @@
         161,
         170
       ],
-      "missing": "",
+      "missing": "why the tutorial declares a TokenData model when the decoded username could be passed straight to get_user",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -2357,7 +999,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:05120",
+          "edge": "e:05149",
           "from": "sec:tutorial/security/oauth2-jwt#update-the-dependencies",
           "to": "concept:tokendata",
           "evidence": {
@@ -2388,12 +1030,22 @@
       "mentions_count": 0,
       "requires_count": 1,
       "requires_evidence_kind": "code",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": true,
+      "confirming_answer": {
+        "id": "ans:13186",
+        "excerpt": "On the other hands keep in mind that this is just a simple example, TokenData could be extended and enriched with more properties and methods.",
+        "author": "luzzodev",
+        "is_maintainer": false,
+        "url": "https://github.com/fastapi/fastapi/discussions/13186#discussioncomment-11789922",
+        "question_id": "q:13186",
+        "question_title": "Docs: TokenData class looks redundant to me in Security tutorial"
+      },
+      "validated": false,
+      "validation_note": "TokenData is not an undefined external concept but a two-line Pydantic model that the tutorial's own sample defines in full and uses nowhere else in the corpus, so it falls under the name-local-to-one-code-sample exclusion rather than being a real gap.",
+      "gap_note": "The answer explains TokenData as a simple example meant to be extended, a rationale the tutorial omits."
     },
     {
-      "id": "F1-0032",
+      "id": "F1-0013",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:validationerror",
@@ -2408,7 +1060,7 @@
         142,
         166
       ],
-      "missing": "",
+      "missing": "how to return a validation style error for one request body field from inside a path operation function, and what shape each entry in the detail list must take",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -2426,7 +1078,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:03871",
+          "edge": "e:03900",
           "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
           "to": "concept:validationerror",
           "evidence": {
@@ -2455,12 +1107,22 @@
       "mentions_count": 0,
       "requires_count": 1,
       "requires_evidence_kind": "code",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": true,
+      "confirming_answer": {
+        "id": "ans:15147",
+        "excerpt": "class DataConflictException(HTTPException):\n    def __init__(self, field: str, msg: str, error_type: str = \"data conflict\"):\n        self.detail = [{\n            \"loc\": [\n                \"body\",\n                field\n            ],\n            \"msg\": msg,\n            \"type\": error_type\n        }]",
+        "author": "BlackZork",
+        "is_maintainer": false,
+        "url": "https://github.com/fastapi/fastapi/discussions/15147#discussioncomment-16204267",
+        "question_id": "q:15147",
+        "question_title": "How to mark input field as invalid in route function"
+      },
+      "validated": true,
+      "validation_note": "Pydantic's ValidationError is used unexplained at tutorial007_py310.py:30 in the highlighted span, and the only two docs hits are not it: additional-responses.md:128-162 sits inside a fenced JSON block where ValidationError names an OpenAPI schema component, and handling-errors.md:122-182 has RequestValidationError, a different FastAPI class, as its subject, with no section comparing the two or saying what to raise from a route to flag a field.",
+      "gap_note": "The answer shows the loc, msg, and type detail shape for flagging one body field, which no corpus page supplies."
     },
     {
-      "id": "F1-0033",
+      "id": "F1-0014",
       "type": "near_miss",
       "demand": 1,
       "concept": "concept:virtual_environment",
@@ -2475,7 +1137,7 @@
         61,
         114
       ],
-      "missing": "",
+      "missing": "which Python version a virtual environment for running FastAPI's own test suite must use, given that the pinned anyio 3.7.0 breaks test collection on Python 3.13",
       "proof_path": [
         {
           "hop": "Question ASKS_ABOUT Concept",
@@ -2493,7 +1155,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04614",
+          "edge": "e:04643",
           "from": "sec:tutorial/index#install-fastapi",
           "to": "concept:virtual_environment",
           "evidence": {
@@ -2522,273 +1184,22 @@
       "mentions_count": 0,
       "requires_count": 1,
       "requires_evidence_kind": "prose",
-      "confirming_answer": null,
-      "validated": null,
-      "validation_note": ""
+      "code_samples_only": false,
+      "confirming_answer": {
+        "id": "ans:13057",
+        "excerpt": "All the tests pass for me on python3.12 but in a container with 3.13 I do also get that error.\nMy guess is something in anyio[trio]==3.7.0 doesnt like python 3.13.",
+        "author": "jgould22",
+        "is_maintainer": false,
+        "url": "https://github.com/fastapi/fastapi/discussions/13057#discussioncomment-11528176",
+        "question_id": "q:13057",
+        "question_title": "Trying to run FastAPI’s tests in a virtualenv: TypeError while collecting tests?"
+      },
+      "validated": true,
+      "validation_note": "The corpus instructs the reader to create and activate a virtual environment at tutorial/index.md:109 but never explains what one is or how to make it, and the only other prose mention at line 79 has uv add as its subject rather than the virtual environment, with line 111 deferring the detailed steps to an off-corpus guide that does not count.",
+      "gap_note": "The answer names Python 3.12 and the anyio 3.7.0 pin as the working combination, which the install page never states."
     },
     {
       "id": "F2-0001",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:app_post",
-      "concept_label": "app.post",
-      "concept_kind": "decorator",
-      "section": "sec:tutorial/body#declare-it-as-a-parameter",
-      "section_heading": "Declare it as a parameter",
-      "doc_title": "Request Body",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/body/#declare-it-as-a-parameter",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:02945",
-          "from": "sec:tutorial/body#declare-it-as-a-parameter",
-          "to": "concept:app_post",
-          "evidence": {
-            "span": "@app.post(\"/items/\")",
-            "path": "docs_src/body/tutorial001_py310.py",
-            "lines": [
-              15,
-              15
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:02950",
-          "from": "sec:tutorial/body#import-pydantics-basemodel",
-          "to": "concept:app_post",
-          "evidence": {
-            "span": "@app.post(\"/items/\")",
-            "path": "docs_src/body/tutorial001_py310.py",
-            "lines": [
-              15,
-              15
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:02970",
-          "from": "sec:tutorial/body#use-the-model",
-          "to": "concept:app_post",
-          "evidence": {
-            "span": "@app.post(\"/items/\")",
-            "path": "docs_src/body/tutorial002_py310.py",
-            "lines": [
-              15,
-              15
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03171",
-          "from": "sec:tutorial/first-steps#define-a-path-operation-decorator",
-          "to": "concept:app_post",
-          "evidence": {
-            "span": "* `@app.post()`",
-            "path": "docs/en/docs/tutorial/first-steps.md",
-            "lines": [
-              339,
-              339
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03411",
-          "from": "sec:tutorial/request-files#import-file",
-          "to": "concept:app_post",
-          "evidence": {
-            "span": "@app.post(\"/uploadfile/\")",
-            "path": "docs_src/request_files/tutorial001_an_py310.py",
-            "lines": [
-              13,
-              13
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03482",
-          "from": "sec:tutorial/response-model#response-model-parameter",
-          "to": "concept:app_post",
-          "evidence": {
-            "span": "* `@app.post()`",
-            "path": "docs/en/docs/tutorial/response-model.md",
-            "lines": [
-              36,
-              36
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:advanced/custom-response#json-performance",
-        "sec:advanced/response-cookies#return-a-response-directly",
-        "sec:advanced/response-cookies#use-a-response-parameter",
-        "sec:tutorial/background-tasks#using-backgroundtasks",
-        "sec:tutorial/body#declare-it-as-a-parameter",
-        "sec:tutorial/body#import-pydantics-basemodel",
-        "sec:tutorial/body#use-the-model",
-        "sec:tutorial/body-nested-models#bodies-of-arbitrary-dicts",
-        "sec:tutorial/body-nested-models#bodies-of-pure-lists",
-        "sec:tutorial/body-nested-models#deeply-nested-models",
-        "sec:tutorial/extra-models#multiple-models",
-        "sec:tutorial/first-steps#define-a-path-operation-decorator",
-        "sec:tutorial/request-files#import-file",
-        "sec:tutorial/request-form-models#pydantic-models-for-forms",
-        "sec:tutorial/request-forms#define-form-parameters",
-        "sec:tutorial/request-forms#import-form",
-        "sec:tutorial/request-forms-and-files#import-file-and-form",
-        "sec:tutorial/response-model#response-model-parameter",
-        "sec:tutorial/response-model#response-model-return-type",
-        "sec:tutorial/response-model#return-the-same-input-data",
-        "sec:tutorial/response-status-code#response-status-code",
-        "sec:tutorial/response-status-code#shortcut-to-remember-the-names",
-        "sec:tutorial/security/oauth2-jwt#update-the-token-path-operation",
-        "sec:tutorial/security/simple-oauth2#oauth2passwordrequestform",
-        "sec:tutorial/server-sent-events#sse-with-post",
-        "sec:tutorial/sql-databases#create-a-hero",
-        "sec:tutorial/sql-databases#create-with-herocreate-and-return-a-heropublic",
-        "sec:tutorial/testing#extended-fastapi-app-file"
-      ],
-      "requires_count": 22,
-      "mentions_count": 6,
-      "questions": [],
-      "in_edges_total": 28
-    },
-    {
-      "id": "F2-0002",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:app_put",
-      "concept_label": "app.put",
-      "concept_kind": "decorator",
-      "section": "sec:tutorial/body#request-body-path-parameters",
-      "section_heading": "Request body + path parameters",
-      "doc_title": "Request Body",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/body/#request-body-path-parameters",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:02958",
-          "from": "sec:tutorial/body#request-body-path-parameters",
-          "to": "concept:app_put",
-          "evidence": {
-            "span": "@app.put(\"/items/{item_id}\")",
-            "path": "docs_src/body/tutorial003_py310.py",
-            "lines": [
-              15,
-              15
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:02961",
-          "from": "sec:tutorial/body#request-body-path-query-parameters",
-          "to": "concept:app_put",
-          "evidence": {
-            "span": "@app.put(\"/items/{item_id}\")",
-            "path": "docs_src/body/tutorial004_py310.py",
-            "lines": [
-              15,
-              15
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03172",
-          "from": "sec:tutorial/first-steps#define-a-path-operation-decorator",
-          "to": "concept:app_put",
-          "evidence": {
-            "span": "* `@app.put()`",
-            "path": "docs/en/docs/tutorial/first-steps.md",
-            "lines": [
-              340,
-              340
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03483",
-          "from": "sec:tutorial/response-model#response-model-parameter",
-          "to": "concept:app_put",
-          "evidence": {
-            "span": "* `@app.put()`",
-            "path": "docs/en/docs/tutorial/response-model.md",
-            "lines": [
-              37,
-              37
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03523",
-          "from": "sec:tutorial/schema-extra-example#body-with-examples",
-          "to": "concept:app_put",
-          "evidence": {
-            "span": "@app.put(\"/items/{item_id}\")",
-            "path": "docs_src/schema_extra_example/tutorial003_an_py310.py",
-            "lines": [
-              16,
-              16
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:03791",
-          "from": "sec:advanced/additional-status-codes#additional-status-codes_1",
-          "to": "concept:app_put",
-          "evidence": {
-            "span": "@app.put(\"/items/{item_id}\")",
-            "path": "docs_src/additional_status_codes/tutorial001_an_py310.py",
-            "lines": [
-              11,
-              11
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:advanced/additional-status-codes#additional-status-codes_1",
-        "sec:advanced/response-directly#using-the-jsonable-encoder-in-a-response",
-        "sec:tutorial/body#request-body-path-parameters",
-        "sec:tutorial/body#request-body-path-query-parameters",
-        "sec:tutorial/body-multiple-params#mix-path-query-and-body-parameters",
-        "sec:tutorial/body-nested-models#list-fields",
-        "sec:tutorial/body-updates#update-replacing-with-put",
-        "sec:tutorial/encoder#using-the-jsonable-encoder",
-        "sec:tutorial/extra-data-types#example",
-        "sec:tutorial/first-steps#define-a-path-operation-decorator",
-        "sec:tutorial/response-model#response-model-parameter",
-        "sec:tutorial/schema-extra-example#body-with-examples",
-        "sec:tutorial/schema-extra-example#extra-json-schema-data-in-pydantic-models"
-      ],
-      "requires_count": 8,
-      "mentions_count": 5,
-      "questions": [],
-      "in_edges_total": 13
-    },
-    {
-      "id": "F2-0003",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:userindb",
@@ -2802,7 +1213,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03150",
+          "edge": "e:03179",
           "from": "sec:tutorial/extra-models#multiple-models",
           "to": "concept:userindb",
           "evidence": {
@@ -2816,7 +1227,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03673",
+          "edge": "e:03702",
           "from": "sec:tutorial/security/simple-oauth2#update-the-dependencies",
           "to": "concept:userindb",
           "evidence": {
@@ -2830,7 +1241,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04442",
+          "edge": "e:04471",
           "from": "sec:tutorial/extra-models#a-pydantic-model-from-the-contents-of-another",
           "to": "concept:userindb",
           "evidence": {
@@ -2844,7 +1255,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04461",
+          "edge": "e:04490",
           "from": "sec:tutorial/extra-models#reduce-duplication",
           "to": "concept:userindb",
           "evidence": {
@@ -2858,7 +1269,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04473",
+          "edge": "e:04502",
           "from": "sec:tutorial/extra-models#unpacking-a-dict",
           "to": "concept:userindb",
           "evidence": {
@@ -2872,7 +1283,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04476",
+          "edge": "e:04505",
           "from": "sec:tutorial/extra-models#unpacking-a-dict-and-extra-keywords",
           "to": "concept:userindb",
           "evidence": {
@@ -2905,10 +1316,11 @@
       "requires_count": 8,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 10
+      "in_edges_total": 10,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0004",
+      "id": "F2-0002",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:application_json",
@@ -2922,7 +1334,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02765",
+          "edge": "e:02794",
           "from": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
           "to": "concept:application_json",
           "evidence": {
@@ -2936,7 +1348,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02802",
+          "edge": "e:02831",
           "from": "sec:advanced/custom-response#json-responses",
           "to": "concept:application_json",
           "evidence": {
@@ -2950,7 +1362,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02803",
+          "edge": "e:02832",
           "from": "sec:advanced/custom-response#jsonresponse",
           "to": "concept:application_json",
           "evidence": {
@@ -2964,7 +1376,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02839",
+          "edge": "e:02868",
           "from": "sec:advanced/response-directly#how-a-response-model-works",
           "to": "concept:application_json",
           "evidence": {
@@ -2978,7 +1390,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03432",
+          "edge": "e:03461",
           "from": "sec:tutorial/request-files#what-is-form-data",
           "to": "concept:application_json",
           "evidence": {
@@ -2992,7 +1404,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03443",
+          "edge": "e:03472",
           "from": "sec:tutorial/request-forms#about-form-fields",
           "to": "concept:application_json",
           "evidence": {
@@ -3023,128 +1435,11 @@
       "requires_count": 0,
       "mentions_count": 8,
       "questions": [],
-      "in_edges_total": 8
+      "in_edges_total": 8,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0005",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:float",
-      "concept_label": "float",
-      "concept_kind": "class",
-      "section": "sec:tutorial/body-nested-models#special-types-and-validation",
-      "section_heading": "Special types and validation",
-      "doc_title": "Body - Nested Models",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/body-nested-models/#special-types-and-validation",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03013",
-          "from": "sec:tutorial/body-nested-models#special-types-and-validation",
-          "to": "concept:float",
-          "evidence": {
-            "span": "normal singular types like `str`, `int`, `float`, etc.",
-            "path": "docs/en/docs/tutorial/body-nested-models.md",
-            "lines": [
-              97,
-              97
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03324",
-          "from": "sec:tutorial/path-params#data-validation",
-          "to": "concept:float",
-          "evidence": {
-            "span": "The same error would appear if you provided a `float` instead of an `int`",
-            "path": "docs/en/docs/tutorial/path-params.md",
-            "lines": [
-              67,
-              67
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03336",
-          "from": "sec:tutorial/path-params#pydantic",
-          "to": "concept:float",
-          "evidence": {
-            "span": "the same type declarations with `str`, `float`, `bool`",
-            "path": "docs/en/docs/tutorial/path-params.md",
-            "lines": [
-              107,
-              107
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03456",
-          "from": "sec:tutorial/response-model#data-with-the-same-values-as-the-defaults",
-          "to": "concept:float",
-          "evidence": {
-            "span": "They can be a list (`[]`), a `float` of `10.5`, etc.",
-            "path": "docs/en/docs/tutorial/response-model.md",
-            "lines": [
-              302,
-              302
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04146",
-          "from": "sec:tutorial/body-nested-models#bodies-of-arbitrary-dicts",
-          "to": "concept:float",
-          "evidence": {
-            "span": "you would accept any `dict` as long as it has `int` keys with `float` values",
-            "path": "docs/en/docs/tutorial/body-nested-models.md",
-            "lines": [
-              195,
-              195
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04429",
-          "from": "sec:tutorial/extra-data-types#extra-data-types",
-          "to": "concept:float",
-          "evidence": {
-            "span": "Up to now, you have been using common data types, like:",
-            "path": "docs/en/docs/tutorial/extra-data-types.md",
-            "lines": [
-              3,
-              3
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/body-nested-models#bodies-of-arbitrary-dicts",
-        "sec:tutorial/body-nested-models#special-types-and-validation",
-        "sec:tutorial/extra-data-types#extra-data-types",
-        "sec:tutorial/extra-data-types#other-data-types",
-        "sec:tutorial/path-params#data-validation",
-        "sec:tutorial/path-params#pydantic",
-        "sec:tutorial/path-params-numeric-validations#number-validations-floats-greater-than-and-less-than",
-        "sec:tutorial/response-model#data-with-the-same-values-as-the-defaults"
-      ],
-      "requires_count": 4,
-      "mentions_count": 4,
-      "questions": [],
-      "in_edges_total": 8
-    },
-    {
-      "id": "F2-0006",
+      "id": "F2-0003",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:mypy",
@@ -3158,7 +1453,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03119",
+          "edge": "e:03148",
           "from": "sec:tutorial/dependencies/index#share-annotated-dependencies",
           "to": "concept:mypy",
           "evidence": {
@@ -3172,7 +1467,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03464",
+          "edge": "e:03493",
           "from": "sec:tutorial/response-model#disable-response-model",
           "to": "concept:mypy",
           "evidence": {
@@ -3186,7 +1481,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03471",
+          "edge": "e:03500",
           "from": "sec:tutorial/response-model#other-return-type-annotations",
           "to": "concept:mypy",
           "evidence": {
@@ -3200,7 +1495,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03485",
+          "edge": "e:03514",
           "from": "sec:tutorial/response-model#response-model-parameter",
           "to": "concept:mypy",
           "evidence": {
@@ -3214,7 +1509,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03486",
+          "edge": "e:03515",
           "from": "sec:tutorial/response-model#response-model-priority",
           "to": "concept:mypy",
           "evidence": {
@@ -3228,7 +1523,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03499",
+          "edge": "e:03528",
           "from": "sec:tutorial/response-model#return-type-and-data-filtering",
           "to": "concept:mypy",
           "evidence": {
@@ -3258,127 +1553,11 @@
       "requires_count": 0,
       "mentions_count": 7,
       "questions": [],
-      "in_edges_total": 7
+      "in_edges_total": 7,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0007",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:uv_run",
-      "concept_label": "uv run",
-      "concept_kind": "term",
-      "section": "sec:tutorial/debugging#about-name-main",
-      "section_heading": "About __name__ == \"__main__\"",
-      "doc_title": "Debugging",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/debugging/#about-name-main",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04252",
-          "from": "sec:tutorial/debugging#about-name-main",
-          "to": "concept:uv_run",
-          "evidence": {
-            "span": "$ uv run python myapp.py",
-            "path": "docs/en/docs/tutorial/debugging.md",
-            "lines": [
-              18,
-              18
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04262",
-          "from": "sec:tutorial/debugging#more-details",
-          "to": "concept:uv_run",
-          "evidence": {
-            "span": "$ uv run python myapp.py",
-            "path": "docs/en/docs/tutorial/debugging.md",
-            "lines": [
-              38,
-              38
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04490",
-          "from": "sec:tutorial/first-steps#deploy-your-app-optional",
-          "to": "concept:uv_run",
-          "evidence": {
-            "span": "$ uv run fastapi deploy",
-            "path": "docs/en/docs/tutorial/first-steps.md",
-            "lines": [
-              214,
-              214
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04494",
-          "from": "sec:tutorial/first-steps#fastapi-dev-with-path-or-with-entrypoint-cli-option",
-          "to": "concept:uv_run",
-          "evidence": {
-            "span": "$ uv run fastapi dev main.py",
-            "path": "docs/en/docs/tutorial/first-steps.md",
-            "lines": [
-              194,
-              194
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04615",
-          "from": "sec:tutorial/index#run-the-code",
-          "to": "concept:uv_run",
-          "evidence": {
-            "span": "and start `fastapi dev` with `uv run`",
-            "path": "docs/en/docs/tutorial/index.md",
-            "lines": [
-              13,
-              13
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:05305",
-          "from": "sec:tutorial/sql-databases#run-the-app-again",
-          "to": "concept:uv_run",
-          "evidence": {
-            "span": "$ uv run fastapi dev",
-            "path": "docs/en/docs/tutorial/sql-databases.md",
-            "lines": [
-              340,
-              340
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/debugging#about-name-main",
-        "sec:tutorial/debugging#more-details",
-        "sec:tutorial/first-steps#deploy-your-app-optional",
-        "sec:tutorial/first-steps#fastapi-dev-with-path-or-with-entrypoint-cli-option",
-        "sec:tutorial/index#run-the-code",
-        "sec:tutorial/sql-databases#run-the-app-again",
-        "sec:tutorial/testing#run-it"
-      ],
-      "requires_count": 7,
-      "mentions_count": 0,
-      "questions": [],
-      "in_edges_total": 7
-    },
-    {
-      "id": "F2-0008",
+      "id": "F2-0004",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:rust",
@@ -3392,7 +1571,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02807",
+          "edge": "e:02836",
           "from": "sec:advanced/custom-response#orjson-or-response-model",
           "to": "concept:rust",
           "evidence": {
@@ -3406,7 +1585,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02841",
+          "edge": "e:02870",
           "from": "sec:advanced/response-directly#how-a-response-model-works",
           "to": "concept:rust",
           "evidence": {
@@ -3420,7 +1599,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02850",
+          "edge": "e:02879",
           "from": "sec:advanced/response-directly#return-a-response-directly",
           "to": "concept:rust",
           "evidence": {
@@ -3434,7 +1613,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03494",
+          "edge": "e:03523",
           "from": "sec:tutorial/response-model#response-model-return-type",
           "to": "concept:rust",
           "evidence": {
@@ -3448,7 +1627,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03738",
+          "edge": "e:03767",
           "from": "sec:tutorial/stream-json-lines#stream-json-lines-with-fastapi",
           "to": "concept:rust",
           "evidence": {
@@ -3476,10 +1655,11 @@
       "requires_count": 0,
       "mentions_count": 5,
       "questions": [],
-      "in_edges_total": 5
+      "in_edges_total": 5,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0009",
+      "id": "F2-0005",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:tax",
@@ -3493,7 +1673,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02944",
+          "edge": "e:02973",
           "from": "sec:tutorial/body#create-your-data-model",
           "to": "concept:tax",
           "evidence": {
@@ -3507,7 +1687,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02972",
+          "edge": "e:03001",
           "from": "sec:tutorial/body#use-the-model",
           "to": "concept:tax",
           "evidence": {
@@ -3521,7 +1701,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03031",
+          "edge": "e:03060",
           "from": "sec:tutorial/body-updates#warning-about-replacing",
           "to": "concept:tax",
           "evidence": {
@@ -3535,7 +1715,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03460",
+          "edge": "e:03489",
           "from": "sec:tutorial/response-model#data-with-the-same-values-as-the-defaults",
           "to": "concept:tax",
           "evidence": {
@@ -3549,7 +1729,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03462",
+          "edge": "e:03491",
           "from": "sec:tutorial/response-model#data-with-values-for-fields-with-defaults",
           "to": "concept:tax",
           "evidence": {
@@ -3577,10 +1757,11 @@
       "requires_count": 0,
       "mentions_count": 5,
       "questions": [],
-      "in_edges_total": 5
+      "in_edges_total": 5,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0010",
+      "id": "F2-0006",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:javascript",
@@ -3594,7 +1775,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03033",
+          "edge": "e:03062",
           "from": "sec:tutorial/cookie-param-models#check-the-docs",
           "to": "concept:javascript",
           "evidence": {
@@ -3608,7 +1789,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03044",
+          "edge": "e:03073",
           "from": "sec:tutorial/cookie-params#declare-cookie-parameters",
           "to": "concept:javascript",
           "evidence": {
@@ -3622,7 +1803,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03053",
+          "edge": "e:03082",
           "from": "sec:tutorial/cors#steps",
           "to": "concept:javascript",
           "evidence": {
@@ -3636,7 +1817,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04228",
+          "edge": "e:04257",
           "from": "sec:tutorial/cors#cors-cross-origin-resource-sharing",
           "to": "concept:javascript",
           "evidence": {
@@ -3663,10 +1844,11 @@
       "requires_count": 1,
       "mentions_count": 3,
       "questions": [],
-      "in_edges_total": 4
+      "in_edges_total": 4,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0011",
+      "id": "F2-0007",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:markdown",
@@ -3680,7 +1862,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03304",
+          "edge": "e:03333",
           "from": "sec:tutorial/path-operation-configuration#description-from-docstring",
           "to": "concept:markdown",
           "evidence": {
@@ -3694,7 +1876,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04616",
+          "edge": "e:04645",
           "from": "sec:tutorial/metadata#create-metadata-for-tags",
           "to": "concept:markdown",
           "evidence": {
@@ -3708,7 +1890,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04621",
+          "edge": "e:04650",
           "from": "sec:tutorial/metadata#metadata-for-api",
           "to": "concept:markdown",
           "evidence": {
@@ -3722,7 +1904,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04624",
+          "edge": "e:04653",
           "from": "sec:tutorial/metadata#metadata-for-tags",
           "to": "concept:markdown",
           "evidence": {
@@ -3749,10 +1931,11 @@
       "requires_count": 3,
       "mentions_count": 1,
       "questions": [],
-      "in_edges_total": 4
+      "in_edges_total": 4,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0012",
+      "id": "F2-0008",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:path_operations",
@@ -3766,7 +1949,7 @@
       "proof_path": [
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:03813",
+          "edge": "e:03842",
           "from": "sec:advanced/custom-response#default-response-class",
           "to": "concept:path_operations",
           "evidence": {
@@ -3780,7 +1963,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04217",
+          "edge": "e:04246",
           "from": "sec:tutorial/cookie-params#declare-cookie-parameters",
           "to": "concept:path_operations",
           "evidence": {
@@ -3794,7 +1977,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04690",
+          "edge": "e:04719",
           "from": "sec:tutorial/path-params#order-matters",
           "to": "concept:path_operations",
           "evidence": {
@@ -3808,7 +1991,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:05348",
+          "edge": "e:05377",
           "from": "sec:tutorial/testing#extended-fastapi-app-file",
           "to": "concept:path_operations",
           "evidence": {
@@ -3835,10 +2018,11 @@
       "requires_count": 4,
       "mentions_count": 0,
       "questions": [],
-      "in_edges_total": 4
+      "in_edges_total": 4,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0013",
+      "id": "F2-0009",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:0_115_0",
@@ -3852,7 +2036,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03034",
+          "edge": "e:03063",
           "from": "sec:tutorial/cookie-param-models#cookie-parameter-models",
           "to": "concept:0_115_0",
           "evidence": {
@@ -3866,7 +2050,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03249",
+          "edge": "e:03278",
           "from": "sec:tutorial/header-param-models#header-parameter-models",
           "to": "concept:0_115_0",
           "evidence": {
@@ -3880,7 +2064,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03353",
+          "edge": "e:03382",
           "from": "sec:tutorial/query-param-models#query-parameter-models",
           "to": "concept:0_115_0",
           "evidence": {
@@ -3906,10 +2090,11 @@
       "requires_count": 0,
       "mentions_count": 3,
       "questions": [],
-      "in_edges_total": 3
+      "in_edges_total": 3,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0014",
+      "id": "F2-0010",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:api",
@@ -3923,7 +2108,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03163",
+          "edge": "e:03192",
           "from": "sec:tutorial/first-steps#about-fastapi-cloud",
           "to": "concept:api",
           "evidence": {
@@ -3937,7 +2122,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03230",
+          "edge": "e:03259",
           "from": "sec:tutorial/handling-errors#handling-errors",
           "to": "concept:api",
           "evidence": {
@@ -3951,7 +2136,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03279",
+          "edge": "e:03308",
           "from": "sec:tutorial/index#tutorial-user-guide",
           "to": "concept:api",
           "evidence": {
@@ -3977,152 +2162,11 @@
       "requires_count": 0,
       "mentions_count": 3,
       "questions": [],
-      "in_edges_total": 3
+      "in_edges_total": 3,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0015",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:app_patch",
-      "concept_label": "app.patch",
-      "concept_kind": "decorator",
-      "section": "sec:tutorial/body-updates#using-pydantics-update-parameter",
-      "section_heading": "Using Pydantic's update parameter",
-      "doc_title": "Body - Updates",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/body-updates/#using-pydantics-update-parameter",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03030",
-          "from": "sec:tutorial/body-updates#using-pydantics-update-parameter",
-          "to": "concept:app_patch",
-          "evidence": {
-            "span": "@app.patch(\"/items/{item_id}\")",
-            "path": "docs_src/body_updates/tutorial002_py310.py",
-            "lines": [
-              28,
-              28
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04187",
-          "from": "sec:tutorial/body-updates#using-pydantics-exclude-unset-parameter",
-          "to": "concept:app_patch",
-          "evidence": {
-            "span": "@app.patch(\"/items/{item_id}\")",
-            "path": "docs_src/body_updates/tutorial002_py310.py",
-            "lines": [
-              28,
-              28
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:05306",
-          "from": "sec:tutorial/sql-databases#update-a-hero-with-heroupdate",
-          "to": "concept:app_patch",
-          "evidence": {
-            "span": "@app.patch(\"/heroes/{hero_id}\", response_model=HeroPublic)",
-            "path": "docs_src/sql_databases/tutorial002_an_py310.py",
-            "lines": [
-              83,
-              83
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/body-updates#using-pydantics-exclude-unset-parameter",
-        "sec:tutorial/body-updates#using-pydantics-update-parameter",
-        "sec:tutorial/sql-databases#update-a-hero-with-heroupdate"
-      ],
-      "requires_count": 2,
-      "mentions_count": 1,
-      "questions": [],
-      "in_edges_total": 3
-    },
-    {
-      "id": "F2-0016",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:fake_users_db",
-      "concept_label": "fake_users_db",
-      "concept_kind": "object",
-      "section": "sec:tutorial/security/oauth2-jwt#hash-and-verify-the-passwords",
-      "section_heading": "Hash and verify the passwords",
-      "doc_title": "OAuth2 with Password (and hashing), Bearer with JWT tokens",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/#hash-and-verify-the-passwords",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:05097",
-          "from": "sec:tutorial/security/oauth2-jwt#hash-and-verify-the-passwords",
-          "to": "concept:fake_users_db",
-          "evidence": {
-            "span": "If you check the new (fake) database `fake_users_db`, you will see what the hashed password looks like now",
-            "path": "docs/en/docs/tutorial/security/oauth2-jwt.md",
-            "lines": [
-              127,
-              127
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:05111",
-          "from": "sec:tutorial/security/oauth2-jwt#update-the-dependencies",
-          "to": "concept:fake_users_db",
-          "evidence": {
-            "span": "user = get_user(fake_users_db, username=token_data.username)",
-            "path": "docs_src/security/tutorial004_an_py310.py",
-            "lines": [
-              107,
-              107
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:05164",
-          "from": "sec:tutorial/security/simple-oauth2#use-the-form-data",
-          "to": "concept:fake_users_db",
-          "evidence": {
-            "span": "user_dict = fake_users_db.get(form_data.username)",
-            "path": "docs_src/security/tutorial003_an_py310.py",
-            "lines": [
-              79,
-              79
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/security/oauth2-jwt#hash-and-verify-the-passwords",
-        "sec:tutorial/security/oauth2-jwt#update-the-dependencies",
-        "sec:tutorial/security/simple-oauth2#use-the-form-data"
-      ],
-      "requires_count": 3,
-      "mentions_count": 0,
-      "questions": [],
-      "in_edges_total": 3
-    },
-    {
-      "id": "F2-0017",
+      "id": "F2-0011",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:get_query_token",
@@ -4136,7 +2180,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02909",
+          "edge": "e:02938",
           "from": "sec:tutorial/bigger-applications#dependencies",
           "to": "concept:get_query_token",
           "evidence": {
@@ -4150,7 +2194,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02921",
+          "edge": "e:02950",
           "from": "sec:tutorial/bigger-applications#import-the-apirouter",
           "to": "concept:get_query_token",
           "evidence": {
@@ -4164,7 +2208,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04041",
+          "edge": "e:04070",
           "from": "sec:tutorial/bigger-applications#import-fastapi",
           "to": "concept:get_query_token",
           "evidence": {
@@ -4190,10 +2234,11 @@
       "requires_count": 1,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 3
+      "in_edges_total": 3,
+      "code_samples_only": true
     },
     {
-      "id": "F2-0018",
+      "id": "F2-0012",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:get_username",
@@ -4207,7 +2252,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03084",
+          "edge": "e:03113",
           "from": "sec:tutorial/dependencies/dependencies-with-yield#dependencies-with-yield-and-except",
           "to": "concept:get_username",
           "evidence": {
@@ -4221,7 +2266,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03088",
+          "edge": "e:03117",
           "from": "sec:tutorial/dependencies/dependencies-with-yield#dependencies-with-yield-and-httpexception",
           "to": "concept:get_username",
           "evidence": {
@@ -4235,7 +2280,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03094",
+          "edge": "e:03123",
           "from": "sec:tutorial/dependencies/dependencies-with-yield#early-exit-and-scope",
           "to": "concept:get_username",
           "evidence": {
@@ -4261,10 +2306,11 @@
       "requires_count": 0,
       "mentions_count": 3,
       "questions": [],
-      "in_edges_total": 3
+      "in_edges_total": 3,
+      "code_samples_only": true
     },
     {
-      "id": "F2-0019",
+      "id": "F2-0013",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:plaintext_password",
@@ -4278,7 +2324,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03618",
+          "edge": "e:03647",
           "from": "sec:tutorial/security/oauth2-jwt#check-it",
           "to": "concept:plaintext_password",
           "evidence": {
@@ -4292,7 +2338,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03641",
+          "edge": "e:03670",
           "from": "sec:tutorial/security/oauth2-jwt#why-use-password-hashing",
           "to": "concept:plaintext_password",
           "evidence": {
@@ -4306,7 +2352,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03645",
+          "edge": "e:03674",
           "from": "sec:tutorial/security/simple-oauth2#check-the-password",
           "to": "concept:plaintext_password",
           "evidence": {
@@ -4332,81 +2378,11 @@
       "requires_count": 0,
       "mentions_count": 3,
       "questions": [],
-      "in_edges_total": 3
+      "in_edges_total": 3,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0020",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:return",
-      "concept_label": "return",
-      "concept_kind": "term",
-      "section": "sec:tutorial/dependencies/dependencies-with-yield#sub-dependencies-with-yield",
-      "section_heading": "Sub-dependencies with yield",
-      "doc_title": "Dependencies with yield",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#sub-dependencies-with-yield",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03099",
-          "from": "sec:tutorial/dependencies/dependencies-with-yield#sub-dependencies-with-yield",
-          "to": "concept:return",
-          "evidence": {
-            "span": "The same way, you could have some dependencies with `yield` and some other dependencies with `return`, and have some of those depend on some of the others.",
-            "path": "docs/en/docs/tutorial/dependencies/dependencies-with-yield.md",
-            "lines": [
-              80,
-              80
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03737",
-          "from": "sec:tutorial/stream-json-lines#stream-json-lines-with-fastapi",
-          "to": "concept:return",
-          "evidence": {
-            "span": "instead of using `return` in your *path operation function*",
-            "path": "docs/en/docs/tutorial/stream-json-lines.md",
-            "lines": [
-              77,
-              77
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04319",
-          "from": "sec:tutorial/dependencies/dependencies-with-yield#dependencies-with-yield",
-          "to": "concept:return",
-          "evidence": {
-            "span": "use `yield` instead of `return`, and write the extra steps (code) after",
-            "path": "docs/en/docs/tutorial/dependencies/dependencies-with-yield.md",
-            "lines": [
-              5,
-              5
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/dependencies/dependencies-with-yield#dependencies-with-yield",
-        "sec:tutorial/dependencies/dependencies-with-yield#sub-dependencies-with-yield",
-        "sec:tutorial/stream-json-lines#stream-json-lines-with-fastapi"
-      ],
-      "requires_count": 1,
-      "mentions_count": 2,
-      "questions": [],
-      "in_edges_total": 3
-    },
-    {
-      "id": "F2-0021",
+      "id": "F2-0014",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:root",
@@ -4420,7 +2396,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03193",
+          "edge": "e:03222",
           "from": "sec:tutorial/first-steps#recap",
           "to": "concept:root",
           "evidence": {
@@ -4434,7 +2410,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03196",
+          "edge": "e:03225",
           "from": "sec:tutorial/first-steps#step-1-import-fastapi",
           "to": "concept:root",
           "evidence": {
@@ -4448,7 +2424,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03199",
+          "edge": "e:03228",
           "from": "sec:tutorial/first-steps#step-4-define-the-path-operation-function",
           "to": "concept:root",
           "evidence": {
@@ -4474,10 +2450,11 @@
       "requires_count": 0,
       "mentions_count": 3,
       "questions": [],
-      "in_edges_total": 3
+      "in_edges_total": 3,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0022",
+      "id": "F2-0015",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:verify_key",
@@ -4491,7 +2468,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03071",
+          "edge": "e:03100",
           "from": "sec:tutorial/dependencies/dependencies-in-path-operation-decorators#dependency-requirements",
           "to": "concept:verify_key",
           "evidence": {
@@ -4505,7 +2482,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03075",
+          "edge": "e:03104",
           "from": "sec:tutorial/dependencies/dependencies-in-path-operation-decorators#return-values",
           "to": "concept:verify_key",
           "evidence": {
@@ -4519,7 +2496,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03106",
+          "edge": "e:03135",
           "from": "sec:tutorial/dependencies/global-dependencies#global-dependencies",
           "to": "concept:verify_key",
           "evidence": {
@@ -4545,81 +2522,11 @@
       "requires_count": 0,
       "mentions_count": 3,
       "questions": [],
-      "in_edges_total": 3
+      "in_edges_total": 3,
+      "code_samples_only": true
     },
     {
-      "id": "F2-0023",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:write_notification",
-      "concept_label": "write_notification",
-      "concept_kind": "function",
-      "section": "sec:tutorial/background-tasks#add-the-background-task",
-      "section_heading": "Add the background task",
-      "doc_title": "Background Tasks",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/background-tasks/#add-the-background-task",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:02876",
-          "from": "sec:tutorial/background-tasks#add-the-background-task",
-          "to": "concept:write_notification",
-          "evidence": {
-            "span": "A task function to be run in the background (`write_notification`).",
-            "path": "docs/en/docs/tutorial/background-tasks.md",
-            "lines": [
-              44,
-              44
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:02885",
-          "from": "sec:tutorial/background-tasks#create-a-task-function",
-          "to": "concept:write_notification",
-          "evidence": {
-            "span": "def write_notification(email: str, message=\"\"):",
-            "path": "docs_src/background_tasks/tutorial001_py310.py",
-            "lines": [
-              6,
-              6
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:02892",
-          "from": "sec:tutorial/background-tasks#using-backgroundtasks",
-          "to": "concept:write_notification",
-          "evidence": {
-            "span": "def write_notification(email: str, message=\"\"):",
-            "path": "docs_src/background_tasks/tutorial001_py310.py",
-            "lines": [
-              6,
-              6
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/background-tasks#add-the-background-task",
-        "sec:tutorial/background-tasks#create-a-task-function",
-        "sec:tutorial/background-tasks#using-backgroundtasks"
-      ],
-      "requires_count": 0,
-      "mentions_count": 3,
-      "questions": [],
-      "in_edges_total": 3
-    },
-    {
-      "id": "F2-0024",
+      "id": "F2-0016",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:ai_llm",
@@ -4633,7 +2540,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02871",
+          "edge": "e:02900",
           "from": "sec:advanced/stream-data#use-cases",
           "to": "concept:ai_llm",
           "evidence": {
@@ -4647,7 +2554,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03739",
+          "edge": "e:03768",
           "from": "sec:tutorial/stream-json-lines#use-cases",
           "to": "concept:ai_llm",
           "evidence": {
@@ -4672,66 +2579,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0025",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:argon2",
-      "concept_label": "Argon2",
-      "concept_kind": "term",
-      "section": "sec:tutorial/security/oauth2-jwt#hash-and-verify-the-passwords",
-      "section_heading": "Hash and verify the passwords",
-      "doc_title": "OAuth2 with Password (and hashing), Bearer with JWT tokens",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/#hash-and-verify-the-passwords",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03620",
-          "from": "sec:tutorial/security/oauth2-jwt#hash-and-verify-the-passwords",
-          "to": "concept:argon2",
-          "evidence": {
-            "span": "hash any new passwords with a different algorithm like Argon2 or Bcrypt",
-            "path": "docs/en/docs/tutorial/security/oauth2-jwt.md",
-            "lines": [
-              107,
-              107
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03623",
-          "from": "sec:tutorial/security/oauth2-jwt#install-pwdlib",
-          "to": "concept:argon2",
-          "evidence": {
-            "span": "The recommended algorithm is \"Argon2\".",
-            "path": "docs/en/docs/tutorial/security/oauth2-jwt.md",
-            "lines": [
-              73,
-              73
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/security/oauth2-jwt#hash-and-verify-the-passwords",
-        "sec:tutorial/security/oauth2-jwt#install-pwdlib"
-      ],
-      "requires_count": 0,
-      "mentions_count": 2,
-      "questions": [],
-      "in_edges_total": 2
-    },
-    {
-      "id": "F2-0026",
+      "id": "F2-0017",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:astro",
@@ -4745,7 +2597,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03211",
+          "edge": "e:03240",
           "from": "sec:tutorial/frontend#custom-404-page",
           "to": "concept:astro",
           "evidence": {
@@ -4759,7 +2611,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03218",
+          "edge": "e:03247",
           "from": "sec:tutorial/frontend#frontend",
           "to": "concept:astro",
           "evidence": {
@@ -4784,10 +2636,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0027",
+      "id": "F2-0018",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:backend",
@@ -4801,7 +2654,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03562",
+          "edge": "e:03591",
           "from": "sec:tutorial/security/first-steps#security-first-steps",
           "to": "concept:backend",
           "evidence": {
@@ -4815,7 +2668,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04225",
+          "edge": "e:04254",
           "from": "sec:tutorial/cors#cors-cross-origin-resource-sharing",
           "to": "concept:backend",
           "evidence": {
@@ -4840,10 +2693,11 @@
       "requires_count": 1,
       "mentions_count": 1,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0028",
+      "id": "F2-0019",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:binary_data",
@@ -4857,7 +2711,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02869",
+          "edge": "e:02898",
           "from": "sec:advanced/stream-data#stream-data",
           "to": "concept:binary_data",
           "evidence": {
@@ -4871,7 +2725,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03740",
+          "edge": "e:03769",
           "from": "sec:tutorial/stream-json-lines#use-cases",
           "to": "concept:binary_data",
           "evidence": {
@@ -4896,10 +2750,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0029",
+      "id": "F2-0020",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:browser",
@@ -4913,7 +2768,7 @@
       "proof_path": [
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04226",
+          "edge": "e:04255",
           "from": "sec:tutorial/cors#cors-cross-origin-resource-sharing",
           "to": "concept:browser",
           "evidence": {
@@ -4927,7 +2782,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04241",
+          "edge": "e:04270",
           "from": "sec:tutorial/cors#steps",
           "to": "concept:browser",
           "evidence": {
@@ -4952,10 +2807,11 @@
       "requires_count": 2,
       "mentions_count": 0,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0030",
+      "id": "F2-0021",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:caritem",
@@ -4969,7 +2825,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03156",
+          "edge": "e:03185",
           "from": "sec:tutorial/extra-models#union-in-python-3-10",
           "to": "concept:caritem",
           "evidence": {
@@ -4983,7 +2839,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03159",
+          "edge": "e:03188",
           "from": "sec:tutorial/extra-models#union-or-anyof",
           "to": "concept:caritem",
           "evidence": {
@@ -5008,10 +2864,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0031",
+      "id": "F2-0022",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:commonheaders",
@@ -5025,7 +2882,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03247",
+          "edge": "e:03276",
           "from": "sec:tutorial/header-param-models#forbid-extra-headers",
           "to": "concept:commonheaders",
           "evidence": {
@@ -5039,7 +2896,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03250",
+          "edge": "e:03279",
           "from": "sec:tutorial/header-param-models#header-parameters-with-a-pydantic-model",
           "to": "concept:commonheaders",
           "evidence": {
@@ -5064,10 +2921,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": true
     },
     {
-      "id": "F2-0032",
+      "id": "F2-0023",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:content_length",
@@ -5081,7 +2939,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02795",
+          "edge": "e:02824",
           "from": "sec:advanced/custom-response#fileresponse",
           "to": "concept:content_length",
           "evidence": {
@@ -5095,7 +2953,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02810",
+          "edge": "e:02839",
           "from": "sec:advanced/custom-response#response",
           "to": "concept:content_length",
           "evidence": {
@@ -5120,66 +2978,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0033",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:cors_headers",
-      "concept_label": "CORS headers",
-      "concept_kind": "term",
-      "section": "sec:tutorial/cors#cors-preflight-requests",
-      "section_heading": "CORS preflight requests",
-      "doc_title": "CORS (Cross-Origin Resource Sharing)",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/cors/#cors-preflight-requests",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03048",
-          "from": "sec:tutorial/cors#cors-preflight-requests",
-          "to": "concept:cors_headers",
-          "evidence": {
-            "span": "respond with appropriate CORS headers, and either a `200` or `400` response",
-            "path": "docs/en/docs/tutorial/cors.md",
-            "lines": [
-              73,
-              73
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03052",
-          "from": "sec:tutorial/cors#simple-requests",
-          "to": "concept:cors_headers",
-          "evidence": {
-            "span": "will include appropriate CORS headers on the response",
-            "path": "docs/en/docs/tutorial/cors.md",
-            "lines": [
-              77,
-              77
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/cors#cors-preflight-requests",
-        "sec:tutorial/cors#simple-requests"
-      ],
-      "requires_count": 0,
-      "mentions_count": 2,
-      "questions": [],
-      "in_edges_total": 2
-    },
-    {
-      "id": "F2-0034",
+      "id": "F2-0024",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:dbsession",
@@ -5193,7 +2996,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03077",
+          "edge": "e:03106",
           "from": "sec:tutorial/dependencies/dependencies-with-yield#a-database-dependency-with-yield",
           "to": "concept:dbsession",
           "evidence": {
@@ -5207,7 +3010,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:04345",
+          "edge": "e:04374",
           "from": "sec:tutorial/dependencies/dependencies-with-yield#using-context-managers-in-dependencies-with-yield",
           "to": "concept:dbsession",
           "evidence": {
@@ -5232,122 +3035,11 @@
       "requires_count": 1,
       "mentions_count": 1,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": true
     },
     {
-      "id": "F2-0035",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:fake_password_hasher",
-      "concept_label": "fake_password_hasher",
-      "concept_kind": "function",
-      "section": "sec:tutorial/extra-models#multiple-models",
-      "section_heading": "Multiple models",
-      "doc_title": "Extra Models",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/extra-models/#multiple-models",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03146",
-          "from": "sec:tutorial/extra-models#multiple-models",
-          "to": "concept:fake_password_hasher",
-          "evidence": {
-            "span": "def fake_password_hasher(raw_password: str):",
-            "path": "docs_src/extra_models/tutorial001_py310.py",
-            "lines": [
-              27,
-              27
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03161",
-          "from": "sec:tutorial/extra-models#unpacking-a-dict-and-extra-keywords",
-          "to": "concept:fake_password_hasher",
-          "evidence": {
-            "span": "The supporting additional functions `fake_password_hasher` and `fake_save_user` are just to demo a possible flow of the data",
-            "path": "docs/en/docs/tutorial/extra-models.md",
-            "lines": [
-              137,
-              137
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/extra-models#multiple-models",
-        "sec:tutorial/extra-models#unpacking-a-dict-and-extra-keywords"
-      ],
-      "requires_count": 0,
-      "mentions_count": 2,
-      "questions": [],
-      "in_edges_total": 2
-    },
-    {
-      "id": "F2-0036",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:fake_save_user",
-      "concept_label": "fake_save_user",
-      "concept_kind": "function",
-      "section": "sec:tutorial/extra-models#multiple-models",
-      "section_heading": "Multiple models",
-      "doc_title": "Extra Models",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/extra-models/#multiple-models",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03147",
-          "from": "sec:tutorial/extra-models#multiple-models",
-          "to": "concept:fake_save_user",
-          "evidence": {
-            "span": "def fake_save_user(user_in: UserIn):",
-            "path": "docs_src/extra_models/tutorial001_py310.py",
-            "lines": [
-              31,
-              31
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03162",
-          "from": "sec:tutorial/extra-models#unpacking-a-dict-and-extra-keywords",
-          "to": "concept:fake_save_user",
-          "evidence": {
-            "span": "The supporting additional functions `fake_password_hasher` and `fake_save_user` are just to demo a possible flow of the data",
-            "path": "docs/en/docs/tutorial/extra-models.md",
-            "lines": [
-              137,
-              137
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/extra-models#multiple-models",
-        "sec:tutorial/extra-models#unpacking-a-dict-and-extra-keywords"
-      ],
-      "requires_count": 0,
-      "mentions_count": 2,
-      "questions": [],
-      "in_edges_total": 2
-    },
-    {
-      "id": "F2-0037",
+      "id": "F2-0025",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:fastapi_run",
@@ -5361,7 +3053,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03180",
+          "edge": "e:03209",
           "from": "sec:tutorial/first-steps#first-steps",
           "to": "concept:fastapi_run",
           "evidence": {
@@ -5375,7 +3067,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03275",
+          "edge": "e:03304",
           "from": "sec:tutorial/index#run-the-code",
           "to": "concept:fastapi_run",
           "evidence": {
@@ -5400,10 +3092,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0038",
+      "id": "F2-0026",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:flask",
@@ -5417,7 +3110,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02901",
+          "edge": "e:02930",
           "from": "sec:tutorial/bigger-applications#bigger-applications-multiple-files",
           "to": "concept:flask",
           "evidence": {
@@ -5431,7 +3124,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03625",
+          "edge": "e:03654",
           "from": "sec:tutorial/security/oauth2-jwt#install-pwdlib",
           "to": "concept:flask",
           "evidence": {
@@ -5456,66 +3149,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0039",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:get_db",
-      "concept_label": "get_db",
-      "concept_kind": "function",
-      "section": "sec:tutorial/dependencies/dependencies-with-yield#a-database-dependency-with-yield",
-      "section_heading": "A database dependency with yield",
-      "doc_title": "Dependencies with yield",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/#a-database-dependency-with-yield",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03078",
-          "from": "sec:tutorial/dependencies/dependencies-with-yield#a-database-dependency-with-yield",
-          "to": "concept:get_db",
-          "evidence": {
-            "span": "async def get_db():",
-            "path": "docs_src/dependencies/tutorial007_py310.py",
-            "lines": [
-              1,
-              1
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03101",
-          "from": "sec:tutorial/dependencies/dependencies-with-yield#using-context-managers-in-dependencies-with-yield",
-          "to": "concept:get_db",
-          "evidence": {
-            "span": "async def get_db():",
-            "path": "docs_src/dependencies/tutorial010_py310.py",
-            "lines": [
-              12,
-              12
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/dependencies/dependencies-with-yield#a-database-dependency-with-yield",
-        "sec:tutorial/dependencies/dependencies-with-yield#using-context-managers-in-dependencies-with-yield"
-      ],
-      "requires_count": 0,
-      "mentions_count": 2,
-      "questions": [],
-      "in_edges_total": 2
-    },
-    {
-      "id": "F2-0040",
+      "id": "F2-0027",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:get_user",
@@ -5529,7 +3167,7 @@
       "proof_path": [
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:05098",
+          "edge": "e:05127",
           "from": "sec:tutorial/security/oauth2-jwt#hash-and-verify-the-passwords",
           "to": "concept:get_user",
           "evidence": {
@@ -5543,7 +3181,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:05112",
+          "edge": "e:05141",
           "from": "sec:tutorial/security/oauth2-jwt#update-the-dependencies",
           "to": "concept:get_user",
           "evidence": {
@@ -5568,10 +3206,11 @@
       "requires_count": 2,
       "mentions_count": 0,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": true
     },
     {
-      "id": "F2-0041",
+      "id": "F2-0028",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:hero_id",
@@ -5585,7 +3224,7 @@
       "proof_path": [
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:05284",
+          "edge": "e:05313",
           "from": "sec:tutorial/sql-databases#read-one-hero",
           "to": "concept:hero_id",
           "evidence": {
@@ -5599,7 +3238,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:05289",
+          "edge": "e:05318",
           "from": "sec:tutorial/sql-databases#read-one-hero-with-heropublic",
           "to": "concept:hero_id",
           "evidence": {
@@ -5624,66 +3263,11 @@
       "requires_count": 2,
       "mentions_count": 0,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": true
     },
     {
-      "id": "F2-0042",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:image_png",
-      "concept_label": "image/png",
-      "concept_kind": "term",
-      "section": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
-      "section_heading": "Additional media types for the main response",
-      "doc_title": "Additional Responses in OpenAPI",
-      "doc_url": "https://fastapi.tiangolo.com/advanced/additional-responses/#additional-media-types-for-the-main-response",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:02767",
-          "from": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
-          "to": "concept:image_png",
-          "evidence": {
-            "span": "you can add an additional media type of `image/png`, declaring that your *path operation* can return a JSON object (with media type `application/json`) or a PNG image:",
-            "path": "docs/en/docs/advanced/additional-responses.md",
-            "lines": [
-              176,
-              176
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:02862",
-          "from": "sec:advanced/stream-data#a-custom-pngstreamingresponse",
-          "to": "concept:image_png",
-          "evidence": {
-            "span": "media_type = \"image/png\"",
-            "path": "docs_src/stream_data/tutorial002_py310.py",
-            "lines": [
-              20,
-              20
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
-        "sec:advanced/stream-data#a-custom-pngstreamingresponse"
-      ],
-      "requires_count": 0,
-      "mentions_count": 2,
-      "questions": [],
-      "in_edges_total": 2
-    },
-    {
-      "id": "F2-0043",
+      "id": "F2-0029",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:internalerror",
@@ -5697,7 +3281,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03081",
+          "edge": "e:03110",
           "from": "sec:tutorial/dependencies/dependencies-with-yield#always-raise-in-dependencies-with-yield-and-except",
           "to": "concept:internalerror",
           "evidence": {
@@ -5711,7 +3295,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03086",
+          "edge": "e:03115",
           "from": "sec:tutorial/dependencies/dependencies-with-yield#dependencies-with-yield-and-except",
           "to": "concept:internalerror",
           "evidence": {
@@ -5736,66 +3320,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0044",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:json_schema_2020_12",
-      "concept_label": "JSON Schema 2020-12",
-      "concept_kind": "term",
-      "section": "sec:tutorial/schema-extra-example#json-schemas-examples-field",
-      "section_heading": "JSON Schema's examples field",
-      "doc_title": "Declare Request Example Data",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/schema-extra-example/#json-schemas-examples-field",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03526",
-          "from": "sec:tutorial/schema-extra-example#json-schemas-examples-field",
-          "to": "concept:json_schema_2020_12",
-          "evidence": {
-            "span": "the new OpenAPI 3.1.0 was based on the latest version (JSON Schema 2020-12) that included this new field `examples`.",
-            "path": "docs/en/docs/tutorial/schema-extra-example.md",
-            "lines": [
-              168,
-              168
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03534",
-          "from": "sec:tutorial/schema-extra-example#pydantic-and-fastapi-examples",
-          "to": "concept:json_schema_2020_12",
-          "evidence": {
-            "span": "that uses JSON Schema 2020-12, and Swagger UI 5.0.0 and above",
-            "path": "docs/en/docs/tutorial/schema-extra-example.md",
-            "lines": [
-              190,
-              190
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/schema-extra-example#json-schemas-examples-field",
-        "sec:tutorial/schema-extra-example#pydantic-and-fastapi-examples"
-      ],
-      "requires_count": 0,
-      "mentions_count": 2,
-      "questions": [],
-      "in_edges_total": 2
-    },
-    {
-      "id": "F2-0045",
+      "id": "F2-0030",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:model_validate",
@@ -5809,7 +3338,7 @@
       "proof_path": [
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:03867",
+          "edge": "e:03896",
           "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
           "to": "concept:model_validate",
           "evidence": {
@@ -5823,7 +3352,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:05230",
+          "edge": "e:05259",
           "from": "sec:tutorial/sql-databases#create-with-herocreate-and-return-a-heropublic",
           "to": "concept:model_validate",
           "evidence": {
@@ -5848,10 +3377,11 @@
       "requires_count": 2,
       "mentions_count": 0,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": true
     },
     {
-      "id": "F2-0046",
+      "id": "F2-0031",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:nosql_database",
@@ -5865,7 +3395,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03028",
+          "edge": "e:03057",
           "from": "sec:tutorial/body-updates#update-replacing-with-put",
           "to": "concept:nosql_database",
           "evidence": {
@@ -5879,7 +3409,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03475",
+          "edge": "e:03504",
           "from": "sec:tutorial/response-model#response-model-encoding-parameters",
           "to": "concept:nosql_database",
           "evidence": {
@@ -5904,10 +3434,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0047",
+      "id": "F2-0032",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:planeitem",
@@ -5921,7 +3452,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03157",
+          "edge": "e:03186",
           "from": "sec:tutorial/extra-models#union-in-python-3-10",
           "to": "concept:planeitem",
           "evidence": {
@@ -5935,7 +3466,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03160",
+          "edge": "e:03189",
           "from": "sec:tutorial/extra-models#union-or-anyof",
           "to": "concept:planeitem",
           "evidence": {
@@ -5960,10 +3491,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0048",
+      "id": "F2-0033",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:read_image",
@@ -5977,7 +3509,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02868",
+          "edge": "e:02897",
           "from": "sec:advanced/stream-data#simulate-a-file",
           "to": "concept:read_image",
           "evidence": {
@@ -5991,7 +3523,7 @@
         },
         {
           "hop": "Section REQUIRES Concept",
-          "edge": "e:03976",
+          "edge": "e:04005",
           "from": "sec:advanced/stream-data#yield-from",
           "to": "concept:read_image",
           "evidence": {
@@ -6016,10 +3548,11 @@
       "requires_count": 1,
       "mentions_count": 1,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": true
     },
     {
-      "id": "F2-0049",
+      "id": "F2-0034",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:requestbody",
@@ -6033,7 +3566,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02828",
+          "edge": "e:02857",
           "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-path-operation-schema",
           "to": "concept:requestbody",
           "evidence": {
@@ -6047,7 +3580,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02834",
+          "edge": "e:02863",
           "from": "sec:advanced/path-operation-advanced-configuration#openapi-extra",
           "to": "concept:requestbody",
           "evidence": {
@@ -6072,10 +3605,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0050",
+      "id": "F2-0035",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:requests",
@@ -6089,7 +3623,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03748",
+          "edge": "e:03777",
           "from": "sec:tutorial/testing#extended-testing-file",
           "to": "concept:requests",
           "evidence": {
@@ -6103,7 +3637,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03753",
+          "edge": "e:03782",
           "from": "sec:tutorial/testing#testing",
           "to": "concept:requests",
           "evidence": {
@@ -6128,66 +3662,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0051",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:security_flow",
-      "concept_label": "security flow",
-      "concept_kind": "term",
-      "section": "sec:tutorial/security/simple-oauth2#simple-oauth2-with-password-and-bearer",
-      "section_heading": "Simple OAuth2 with Password and Bearer",
-      "doc_title": "Simple OAuth2 with Password and Bearer",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/security/simple-oauth2/",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03670",
-          "from": "sec:tutorial/security/simple-oauth2#simple-oauth2-with-password-and-bearer",
-          "to": "concept:security_flow",
-          "evidence": {
-            "span": "add the missing parts to have a complete security flow",
-            "path": "docs/en/docs/tutorial/security/simple-oauth2.md",
-            "lines": [
-              3,
-              3
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:05104",
-          "from": "sec:tutorial/security/oauth2-jwt#oauth2-with-password-and-hashing-bearer-with-jwt-tokens",
-          "to": "concept:security_flow",
-          "evidence": {
-            "span": "Now that we have all the security flow",
-            "path": "docs/en/docs/tutorial/security/oauth2-jwt.md",
-            "lines": [
-              3,
-              3
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/security/oauth2-jwt#oauth2-with-password-and-hashing-bearer-with-jwt-tokens",
-        "sec:tutorial/security/simple-oauth2#simple-oauth2-with-password-and-bearer"
-      ],
-      "requires_count": 1,
-      "mentions_count": 1,
-      "questions": [],
-      "in_edges_total": 2
-    },
-    {
-      "id": "F2-0052",
+      "id": "F2-0036",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:sqlalchemy",
@@ -6201,7 +3680,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03694",
+          "edge": "e:03723",
           "from": "sec:tutorial/sql-databases#create-an-engine",
           "to": "concept:sqlalchemy",
           "evidence": {
@@ -6215,7 +3694,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03716",
+          "edge": "e:03745",
           "from": "sec:tutorial/sql-databases#sql-relational-databases",
           "to": "concept:sqlalchemy",
           "evidence": {
@@ -6240,10 +3719,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0053",
+      "id": "F2-0037",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:tanstack_router",
@@ -6257,7 +3737,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03210",
+          "edge": "e:03239",
           "from": "sec:tutorial/frontend#client-side-routing",
           "to": "concept:tanstack_router",
           "evidence": {
@@ -6271,7 +3751,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03224",
+          "edge": "e:03253",
           "from": "sec:tutorial/frontend#frontend",
           "to": "concept:tanstack_router",
           "evidence": {
@@ -6296,10 +3776,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0054",
+      "id": "F2-0038",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:text_html",
@@ -6313,7 +3794,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02800",
+          "edge": "e:02829",
           "from": "sec:advanced/custom-response#html-response",
           "to": "concept:text_html",
           "evidence": {
@@ -6327,7 +3808,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:02820",
+          "edge": "e:02849",
           "from": "sec:advanced/custom-response#return-an-htmlresponse-directly",
           "to": "concept:text_html",
           "evidence": {
@@ -6352,122 +3833,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0055",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:time_perf_counter",
-      "concept_label": "time.perf_counter",
-      "concept_kind": "function",
-      "section": "sec:tutorial/middleware#before-and-after-the-response",
-      "section_heading": "Before and after the response",
-      "doc_title": "Middleware",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/middleware/#before-and-after-the-response",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04634",
-          "from": "sec:tutorial/middleware#before-and-after-the-response",
-          "to": "concept:time_perf_counter",
-          "evidence": {
-            "span": "Here we use [`time.perf_counter()`](https://docs.python.org/3/library/time.html#time.perf_counter) instead of `time.time()` because it can be more precise for these use cases.",
-            "path": "docs/en/docs/tutorial/middleware.md",
-            "lines": [
-              64,
-              64
-            ]
-          }
-        },
-        {
-          "hop": "Section REQUIRES Concept",
-          "edge": "e:04639",
-          "from": "sec:tutorial/middleware#create-a-middleware",
-          "to": "concept:time_perf_counter",
-          "evidence": {
-            "span": "start_time = time.perf_counter()",
-            "path": "docs_src/middleware/tutorial001_py310.py",
-            "lines": [
-              10,
-              10
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/middleware#before-and-after-the-response",
-        "sec:tutorial/middleware#create-a-middleware"
-      ],
-      "requires_count": 2,
-      "mentions_count": 0,
-      "questions": [],
-      "in_edges_total": 2
-    },
-    {
-      "id": "F2-0056",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:user_agent",
-      "concept_label": "user_agent",
-      "concept_kind": "parameter",
-      "section": "sec:tutorial/header-params#declare-header-parameters",
-      "section_heading": "Declare Header parameters",
-      "doc_title": "Header Parameters",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/header-params/#declare-header-parameters",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03259",
-          "from": "sec:tutorial/header-params#declare-header-parameters",
-          "to": "concept:user_agent",
-          "evidence": {
-            "span": "return {\"User-Agent\": user_agent}",
-            "path": "docs_src/header_params/tutorial001_an_py310.py",
-            "lines": [
-              10,
-              10
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03262",
-          "from": "sec:tutorial/header-params#import-header",
-          "to": "concept:user_agent",
-          "evidence": {
-            "span": "async def read_items(user_agent: Annotated[str | None, Header()] = None):",
-            "path": "docs_src/header_params/tutorial001_an_py310.py",
-            "lines": [
-              9,
-              9
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/header-params#declare-header-parameters",
-        "sec:tutorial/header-params#import-header"
-      ],
-      "requires_count": 0,
-      "mentions_count": 2,
-      "questions": [],
-      "in_edges_total": 2
-    },
-    {
-      "id": "F2-0057",
+      "id": "F2-0039",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:user_id",
@@ -6481,7 +3851,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03330",
+          "edge": "e:03359",
           "from": "sec:tutorial/path-params#order-matters",
           "to": "concept:user_id",
           "evidence": {
@@ -6495,7 +3865,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03361",
+          "edge": "e:03390",
           "from": "sec:tutorial/query-params#multiple-path-and-query-parameters",
           "to": "concept:user_id",
           "evidence": {
@@ -6520,66 +3890,11 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": false
     },
     {
-      "id": "F2-0058",
-      "type": "orphan_concept",
-      "demand": 0,
-      "concept": "concept:valueerror",
-      "concept_label": "ValueError",
-      "concept_kind": "class",
-      "section": "sec:tutorial/query-params-str-validations#custom-validation",
-      "section_heading": "Custom Validation",
-      "doc_title": "Query Parameters and String Validations",
-      "doc_url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/#custom-validation",
-      "missing": "",
-      "proof_path": [
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03385",
-          "from": "sec:tutorial/query-params-str-validations#custom-validation",
-          "to": "concept:valueerror",
-          "evidence": {
-            "span": "raise ValueError('Invalid ID format, it must start with",
-            "path": "docs_src/query_params_str_validations/tutorial015_an_py310.py",
-            "lines": [
-              18,
-              18
-            ]
-          }
-        },
-        {
-          "hop": "Section MENTIONS Concept",
-          "edge": "e:03402",
-          "from": "sec:tutorial/query-params-str-validations#string-with-value-startswith",
-          "to": "concept:valueerror",
-          "evidence": {
-            "span": "raise ValueError('Invalid ID format, it must start with",
-            "path": "docs_src/query_params_str_validations/tutorial015_an_py310.py",
-            "lines": [
-              18,
-              18
-            ]
-          }
-        },
-        {
-          "hop": "no Section DEFINES Concept",
-          "sections_checked": 570,
-          "defines_edges_found": 0
-        }
-      ],
-      "sections_referencing": [
-        "sec:tutorial/query-params-str-validations#custom-validation",
-        "sec:tutorial/query-params-str-validations#string-with-value-startswith"
-      ],
-      "requires_count": 0,
-      "mentions_count": 2,
-      "questions": [],
-      "in_edges_total": 2
-    },
-    {
-      "id": "F2-0059",
+      "id": "F2-0040",
       "type": "orphan_concept",
       "demand": 0,
       "concept": "concept:verify_token",
@@ -6593,7 +3908,7 @@
       "proof_path": [
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03072",
+          "edge": "e:03101",
           "from": "sec:tutorial/dependencies/dependencies-in-path-operation-decorators#dependency-requirements",
           "to": "concept:verify_token",
           "evidence": {
@@ -6607,7 +3922,7 @@
         },
         {
           "hop": "Section MENTIONS Concept",
-          "edge": "e:03107",
+          "edge": "e:03136",
           "from": "sec:tutorial/dependencies/global-dependencies#global-dependencies",
           "to": "concept:verify_token",
           "evidence": {
@@ -6632,7 +3947,8 @@
       "requires_count": 0,
       "mentions_count": 2,
       "questions": [],
-      "in_edges_total": 2
+      "in_edges_total": 2,
+      "code_samples_only": true
     },
     {
       "id": "F3-0001",
@@ -11923,6 +9239,86 @@
       "demand": 1,
       "concept": "",
       "concept_label": "",
+      "section": "sec:tutorial/first-steps#recap",
+      "section_heading": "Recap",
+      "doc_title": "First Steps",
+      "doc_url": "https://fastapi.tiangolo.com/tutorial/first-steps/#recap",
+      "missing": "",
+      "answer_holder": {
+        "id": "sec:tutorial/bigger-applications#configure-the-entrypoint-in-pyproject-toml",
+        "heading": "Configure the entrypoint in pyproject.toml",
+        "doc_title": "Bigger Applications - Multiple Files",
+        "url": "https://fastapi.tiangolo.com/tutorial/bigger-applications/#configure-the-entrypoint-in-pyproject-toml",
+        "path": "docs/en/docs/tutorial/bigger-applications.md",
+        "lines": [
+          468,
+          498
+        ]
+      },
+      "rival": {
+        "id": "sec:tutorial/first-steps#recap",
+        "heading": "Recap",
+        "doc_title": "First Steps",
+        "url": "https://fastapi.tiangolo.com/tutorial/first-steps/#recap",
+        "path": "docs/en/docs/tutorial/first-steps.md",
+        "lines": [
+          420,
+          427
+        ]
+      },
+      "proof_path": [
+        {
+          "hop": "Question maps to both Sections",
+          "question": "q:14094",
+          "question_title": "Difference between `fastapi dev` and `fastapi run --reload`",
+          "shared_with_answer_holder": [
+            "concept:fastapi_command",
+            "concept:fastapi_dev"
+          ],
+          "shared_with_rival": [
+            "concept:fastapi_command",
+            "concept:fastapi_dev"
+          ]
+        },
+        {
+          "hop": "concept overlap is comparable",
+          "answer_holder_overlap": 2,
+          "rival_overlap": 2
+        },
+        {
+          "hop": "only one matches the maintainer answer",
+          "answer_holder_similarity": 0.5629,
+          "rival_similarity": 0.5411
+        }
+      ],
+      "questions": [
+        "q:14094"
+      ],
+      "question_titles": [
+        "Difference between `fastapi dev` and `fastapi run --reload`"
+      ],
+      "overlaps": [
+        {
+          "question": "q:14094",
+          "answer_holder_overlap": 2,
+          "rival_overlap": 2,
+          "shared_with_answer_holder": [
+            "concept:fastapi_command",
+            "concept:fastapi_dev"
+          ],
+          "shared_with_rival": [
+            "concept:fastapi_command",
+            "concept:fastapi_dev"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F3-0064",
+      "type": "retrieval_collision",
+      "demand": 1,
+      "concept": "",
+      "concept_label": "",
       "section": "sec:tutorial/frontend#dependencies-and-middleware",
       "section_heading": "Dependencies and Middleware",
       "doc_title": "Frontend",
@@ -11998,7 +9394,7 @@
       ]
     },
     {
-      "id": "F3-0064",
+      "id": "F3-0065",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12082,7 +9478,7 @@
       ]
     },
     {
-      "id": "F3-0065",
+      "id": "F3-0066",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12166,7 +9562,7 @@
       ]
     },
     {
-      "id": "F3-0066",
+      "id": "F3-0067",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12250,7 +9646,7 @@
       ]
     },
     {
-      "id": "F3-0067",
+      "id": "F3-0068",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12330,7 +9726,7 @@
       ]
     },
     {
-      "id": "F3-0068",
+      "id": "F3-0069",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12414,7 +9810,7 @@
       ]
     },
     {
-      "id": "F3-0069",
+      "id": "F3-0070",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12498,7 +9894,7 @@
       ]
     },
     {
-      "id": "F3-0070",
+      "id": "F3-0071",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12582,7 +9978,7 @@
       ]
     },
     {
-      "id": "F3-0071",
+      "id": "F3-0072",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12666,7 +10062,7 @@
       ]
     },
     {
-      "id": "F3-0072",
+      "id": "F3-0073",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12746,7 +10142,7 @@
       ]
     },
     {
-      "id": "F3-0073",
+      "id": "F3-0074",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12826,7 +10222,7 @@
       ]
     },
     {
-      "id": "F3-0074",
+      "id": "F3-0075",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12906,7 +10302,7 @@
       ]
     },
     {
-      "id": "F3-0075",
+      "id": "F3-0076",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -12986,7 +10382,7 @@
       ]
     },
     {
-      "id": "F3-0076",
+      "id": "F3-0077",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13070,7 +10466,7 @@
       ]
     },
     {
-      "id": "F3-0077",
+      "id": "F3-0078",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13150,7 +10546,7 @@
       ]
     },
     {
-      "id": "F3-0078",
+      "id": "F3-0079",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13230,7 +10626,7 @@
       ]
     },
     {
-      "id": "F3-0079",
+      "id": "F3-0080",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13310,7 +10706,7 @@
       ]
     },
     {
-      "id": "F3-0080",
+      "id": "F3-0081",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13394,7 +10790,7 @@
       ]
     },
     {
-      "id": "F3-0081",
+      "id": "F3-0082",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13474,7 +10870,7 @@
       ]
     },
     {
-      "id": "F3-0082",
+      "id": "F3-0083",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13558,7 +10954,7 @@
       ]
     },
     {
-      "id": "F3-0083",
+      "id": "F3-0084",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13638,7 +11034,7 @@
       ]
     },
     {
-      "id": "F3-0084",
+      "id": "F3-0085",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13718,7 +11114,7 @@
       ]
     },
     {
-      "id": "F3-0085",
+      "id": "F3-0086",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13798,7 +11194,7 @@
       ]
     },
     {
-      "id": "F3-0086",
+      "id": "F3-0087",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13882,7 +11278,7 @@
       ]
     },
     {
-      "id": "F3-0087",
+      "id": "F3-0088",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -13962,7 +11358,7 @@
       ]
     },
     {
-      "id": "F3-0088",
+      "id": "F3-0089",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -14042,7 +11438,7 @@
       ]
     },
     {
-      "id": "F3-0089",
+      "id": "F3-0090",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -14122,7 +11518,7 @@
       ]
     },
     {
-      "id": "F3-0090",
+      "id": "F3-0091",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -14202,7 +11598,7 @@
       ]
     },
     {
-      "id": "F3-0091",
+      "id": "F3-0092",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -14282,7 +11678,7 @@
       ]
     },
     {
-      "id": "F3-0092",
+      "id": "F3-0093",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -14362,7 +11758,7 @@
       ]
     },
     {
-      "id": "F3-0093",
+      "id": "F3-0094",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -14442,7 +11838,7 @@
       ]
     },
     {
-      "id": "F3-0094",
+      "id": "F3-0095",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -14522,7 +11918,7 @@
       ]
     },
     {
-      "id": "F3-0095",
+      "id": "F3-0096",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -14602,7 +11998,7 @@
       ]
     },
     {
-      "id": "F3-0096",
+      "id": "F3-0097",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -14682,7 +12078,7 @@
       ]
     },
     {
-      "id": "F3-0097",
+      "id": "F3-0098",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",
@@ -14762,7 +12158,7 @@
       ]
     },
     {
-      "id": "F3-0098",
+      "id": "F3-0099",
       "type": "retrieval_collision",
       "demand": 1,
       "concept": "",

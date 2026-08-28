@@ -273,6 +273,58 @@ class SpanValidatorTest(unittest.TestCase):
         self.assertEqual(found, (102, 102))
 
 
+class ScopeFilterTest(unittest.TestCase):
+    """The out-of-scope rule has to cut language surface without cutting concepts."""
+
+    def test_python_keywords_and_builtins_are_out_of_scope(self) -> None:
+        for label in ("async def", "await", "async for", "str", "int", "float",
+                      "exception", "None", "lambda"):
+            self.assertTrue(find.out_of_scope(label), label)
+
+    def test_documentation_concepts_stay_in_scope(self) -> None:
+        for label in ("async generator", "path operation", "response_model",
+                      "jsonable_encoder", "EmailStr", "event loop",
+                      "virtual environment", "APIRoute", "session.exec"):
+            self.assertFalse(find.out_of_scope(label), label)
+
+    def test_a_multi_word_label_needs_every_word_to_be_language_surface(self) -> None:
+        # "async" alone is a keyword; "async generator" is a thing docs teach.
+        self.assertTrue(find.out_of_scope("async"))
+        self.assertFalse(find.out_of_scope("async generator"))
+
+    def test_an_empty_or_punctuation_only_label_is_out_of_scope(self) -> None:
+        self.assertTrue(find.out_of_scope(""))
+        self.assertTrue(find.out_of_scope("   "))
+
+
+class McNemarTest(unittest.TestCase):
+    """The paired test is what decides whether the retrieval difference is real."""
+
+    def setUp(self) -> None:
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pipeline"))
+
+    def test_no_disagreement_is_no_evidence(self) -> None:
+        import compare
+        self.assertEqual(compare.mcnemar(0, 0), 1.0)
+
+    def test_an_even_split_is_no_evidence(self) -> None:
+        import compare
+        self.assertAlmostEqual(compare.mcnemar(10, 10), 1.0, places=6)
+
+    def test_the_observed_split_is_not_significant(self) -> None:
+        """12 against 15 is what this run produced, and it means nothing."""
+        import compare
+        self.assertGreater(compare.mcnemar(12, 15), 0.05)
+
+    def test_a_lopsided_split_is_significant(self) -> None:
+        import compare
+        self.assertLess(compare.mcnemar(1, 20), 0.001)
+
+    def test_it_is_symmetric(self) -> None:
+        import compare
+        self.assertAlmostEqual(compare.mcnemar(4, 17), compare.mcnemar(17, 4), places=12)
+
+
 class WilsonTest(unittest.TestCase):
     def test_matches_the_published_interval(self) -> None:
         sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pipeline"))
