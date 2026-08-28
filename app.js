@@ -35,6 +35,11 @@
       'where only one carries the answer.'
   };
 
+  /* The four the select offers. Also used to validate a sort read out of the
+     address bar, so an unknown value falls back rather than silently sorting
+     by nothing. */
+  var SORTS = { demand: 1, 'demand-asc': 1, concept: 1, id: 1 };
+
   var state = { type: 'all', sort: 'demand', query: '', shown: PAGE_SIZE };
 
   var els = {};
@@ -328,7 +333,9 @@
     els.count.textContent =
       list.length === 0
         ? 'No findings match.'
-        : 'Showing ' + visible.length + ' of ' + list.length + ' findings' +
+        : (list.length === 1
+            ? 'Showing the 1 finding'
+            : 'Showing ' + visible.length + ' of ' + list.length + ' findings') +
           (state.type === 'all' ? '' : ' of type ' + TYPE_LABEL[state.type].toLowerCase()) +
           (state.query ? ' matching “' + state.query + '”' : '') + '.';
 
@@ -367,6 +374,18 @@
 
   /* A finding id in the address bar opens that one finding, which is how the
      teardown links to a specific example. */
+  /* decodeURIComponent throws on a malformed escape, and "#q=%" is a malformed
+     escape. Thrown from here on first load it would take init() down with it
+     and leave the page reading "Loading findings." for ever, so the whole hash
+     is treated as untrusted input rather than as something we wrote. */
+  function decodeOrRaw(value) {
+    try {
+      return decodeURIComponent(value || '');
+    } catch (err) {
+      return String(value || '');
+    }
+  }
+
   function readHash() {
     var hash = window.location.hash.replace(/^#/, '');
     if (!hash) return false;
@@ -378,8 +397,8 @@
     hash.split('&').forEach(function (pair) {
       var bits = pair.split('=');
       if (bits[0] === 'type' && TYPE_LABEL[bits[1]]) state.type = bits[1];
-      if (bits[0] === 'q') state.query = decodeURIComponent(bits[1] || '');
-      if (bits[0] === 'sort') state.sort = bits[1];
+      if (bits[0] === 'q') state.query = decodeOrRaw(bits[1]);
+      if (bits[0] === 'sort' && SORTS[bits[1]]) state.sort = bits[1];
     });
     return true;
   }
@@ -458,6 +477,22 @@
         state.shown = PAGE_SIZE;
         render();
       }, 120);
+    });
+
+    /* The teardown links to individual findings as tool.html#F1-0004. Landing
+       on one works because readHash runs at startup, but a reader already on
+       this page who follows a second such link, edits the address bar, or uses
+       the back button would otherwise see nothing happen. */
+    window.addEventListener('hashchange', function () {
+      state.type = 'all';
+      state.query = '';
+      state.sort = 'demand';
+      state.shown = PAGE_SIZE;
+      readHash();
+      els.type.value = state.type;
+      els.sort.value = state.sort;
+      els.search.value = state.query;
+      render();
     });
 
     summary();
