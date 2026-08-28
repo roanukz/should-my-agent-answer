@@ -163,7 +163,7 @@ python3 -m unittest discover -s tests -v
 
 `test_find.py` runs the finders over fixture graphs small enough to reason about
 completely, where the right answer is known before the code runs: a near miss
-that should fire and three neighbours that should not, an orphan that should fire
+that should fire and three neighbors that should not, an orphan that should fire
 and two that should not, a collision that should fire and two arrangements that
 should not, the demand ranking, the scope rule, the span validator's rejection
 cases, the exact McNemar test, and the Wilson interval against its published

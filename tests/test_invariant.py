@@ -499,47 +499,130 @@ class SpellingTest(unittest.TestCase):
     not English words.
     """
 
-    # A leading prefix must not hide the stem: "recolour" slipped past a pattern
-    # that anchored on a word boundary immediately before it.
+    # Two rules, because one list rots. The -ise/-isation family is caught
+    # generically and filtered against the words that legitimately end that way
+    # in American English; everything else is an explicit list. A leading prefix
+    # must not hide the stem: "recolour" slipped past a pattern that anchored on
+    # a word boundary immediately before it, so the stem lists carry no leading
+    # boundary. An earlier version of this test named too few words and passed
+    # while the repository still held 18 British spellings.
+    US_ISE = (
+        "advertise advise apprise arise chastise circumcise comprise compromise "
+        "concise cruise bruise demise despise devise disguise enterprise excise "
+        "exercise expertise franchise guise improvise incise merchandise noise "
+        "paradise poise praise appraise braise precise premise prise promise "
+        "raise revise rise sunrise supervise surmise surprise televise treatise "
+        "malaise valise reprise anise turquoise tortoise porpoise fundraise"
+    ).split()
+
+    # Candidates first, then filtered in Python. A regex lookahead cannot do
+    # this filtering: it has to reject "raised" via "raise" and accept
+    # "characterised" despite the "ris" sitting inside it, and an unanchored
+    # alternation gets that backwards.
+    ISE = re.compile(
+        r"\b\w*?is(?:e|es|ed|ing|er|ers|ation|ations|ational|able|ability)\b",
+        re.I)
+
+    # Words the generic rule catches by accident: the "is" it keys on is not a
+    # suffix here. "disable" is "dis" + "able"; "wiser" is "wise" + "r".
+    NOT_A_SUFFIX = ("disable disabled disables disabling disablement advisable "
+                    "database databases miser misers wiser wisest").split()
+
+    @classmethod
+    def us_ise_forms(cls):
+        forms = set(cls.NOT_A_SUFFIX)
+        for word in cls.US_ISE:
+            stem = word[:-1]
+            forms.update({word, word + "s", stem + "ed", stem + "ing",
+                          stem + "er", stem + "ers", stem + "able",
+                          stem + "ation", stem + "ations"})
+        return forms
+
     BRITISH = re.compile(
-        r"\b(?:re|un|dis|mis|over|under|pre|non|de)?"
-        r"(colour\w*|behaviour\w*|organis\w*|prioritis\w*|normalis\w*"
-        r"|recognis\w*|summaris\w*|categoris\w*|minimis\w*|maximis\w*"
-        r"|analyse\w*|licence|defence|centre[sd]?|favour\w*|labelling"
-        r"|labelled|modelling|modelled|cancelled|cancelling|fulfil|whilst"
-        r"|amongst|practise\w*|programme|apologis\w*|utilis\w*|specialis\w*"
-        r"|standardis\w*|serialis\w*|initialis\w*|optimis\w*|characteris\w*"
-        r"|anodis\w*|grey)\b",
+        r"\b\w*?("
+        # -our
+        r"colour\w*|behaviour\w*|favour\w*|honour\w*|labour\w*|neighbour\w*"
+        r"|humour\w*|rumour\w*|flavour\w*|harbour\w*|armour\w*|endeavour\w*"
+        r"|vapour\w*|savour\w*|odour\w*|vigour\w*|rigour\w*|candour|clamour"
+        r"|demeanour|saviour|splendour|parlour|valour|tumour"
+        # doubled l
+        r"|labelled|labelling|unlabelled|modelling|modelled|cancelled|cancelling"
+        r"|totalling|levelled|levelling|travelled|travelling|traveller\w*"
+        r"|marvellous|counsellor\w*|signalled|signalling|fuelled|fuelling"
+        r"|channelled|channelling|jewellery|woollen"
+        # -re
+        r"|centre[sd]?|centring|metre[s]?|litre[s]?|fibre[s]?|theatre[s]?"
+        r"|calibre|sombre|spectre|lustre|manoeuvre[sd]?"
+        # -ce / -se
+        r"|licence[sd]?|defence[s]?|offence[s]?|pretence|practise\w*"
+        # -yse
+        r"|analyse|analysed|analysing|analyser|paralyse\w*|catalyse\w*"
+        # -logue and the rest
+        r"|analogue[s]?|catalogue[sd]?|programme[s]?|judgement[s]?"
+        r"|acknowledgement[s]?|grey|greys|greyed|greyish|greyscale\w*"
+        r"|whilst|amongst|maths|aluminium|ageing|sceptic\w*|artefact[s]?"
+        r"|enquir\w*|speciality|specialities|fulfil|fulfils|instalment[s]?"
+        r"|skilful\w*|wilful\w*|storey[s]?|kerb\w*|cheque[s]?|moustache"
+        r"|mediaeval|encyclopaedia|sulphur\w*|tranquillity|manoeuvre"
+        r"|learnt|burnt|spelt|dreamt"
+        r")\b",
         re.I)
 
     EXEMPT = ("aria-labelledby", "labelledby", "CancelledError")
 
-    SOURCES = ("index.html", "tool.html", "app.js", "style.css", "tokens.css",
-               "README.md", "DESIGN.md", "DECISIONS.md", "CLAUDE.md",
-               "pipeline/fetch.py", "pipeline/sections.py", "pipeline/extract.py",
-               "pipeline/build_graph.py", "pipeline/find.py", "pipeline/describe.py",
-               "pipeline/compare.py", "pipeline/validate.py", "pipeline/manifest.py",
-               "pipeline/site_data.py", "pipeline/llm.py", "pipeline/run.sh",
-               "tests/test_find.py", "tests/test_invariant.py")
+    # Walked, not listed. A hand-kept list silently stops covering new files,
+    # which is half of why the earlier version of this test read clean.
+    SUFFIXES = (".html", ".js", ".css", ".md", ".py", ".sh", ".json", ".txt")
+
+    def sources(self):
+        for path in sorted(ROOT.rglob("*")):
+            if not path.is_file() or path.suffix not in self.SUFFIXES:
+                continue
+            rel = path.relative_to(ROOT)
+            parts = set(rel.parts)
+            # data/ is fetched source and generated artifacts built from it.
+            if "data" in parts or ".git" in parts or "node_modules" in parts:
+                continue
+            yield rel.as_posix(), path
 
     def scrub(self, text: str) -> str:
         for token in self.EXEMPT:
             text = text.replace(token, " ")
         return text
 
+    def offences(self, rel: str, body: str):
+        allowed = self.us_ise_forms()
+        for rx in (self.BRITISH, self.ISE):
+            for match in rx.finditer(body):
+                word = match.group(0).lower()
+                if rx is self.ISE:
+                    # "otherwise", "turquoise" and the -ise verbs American
+                    # English keeps are not misspellings.
+                    if word.endswith(("wise", "oise")):
+                        continue
+                    # Exact match, or a real prefix on one. Not endswith:
+                    # "linearise" ends with "arise" and is still wrong.
+                    if word in allowed or any(
+                            word[len(pre):] in allowed
+                            for pre in ("un", "re", "dis", "mis", "over",
+                                        "under", "pre", "non", "de", "co",
+                                        "inter")
+                            if word.startswith(pre)):
+                        continue
+                line = body[:match.start()].count("\n") + 1
+                yield f"{rel}:{line} {match.group(0)}"
+
     def test_no_british_spelling_in_anything_this_project_writes(self) -> None:
         offenders = []
-        for rel in self.SOURCES:
-            path = ROOT / rel
-            if not path.exists():
+        for rel, path in self.sources():
+            try:
+                body = self.scrub(path.read_text(encoding="utf-8"))
+            except UnicodeDecodeError:
                 continue
-            body = self.scrub(path.read_text(encoding="utf-8"))
             # This test file names the forms it bans, so skip its own pattern.
             if rel == "tests/test_invariant.py":
                 body = body.split("class SpellingTest")[0]
-            for match in self.BRITISH.finditer(body):
-                line = body[:match.start()].count("\n") + 1
-                offenders.append(f"{rel}:{line} {match.group(0)}")
+            offenders.extend(self.offences(rel, body))
         self.assertEqual(offenders, [], f"{len(offenders)} British spellings")
 
     def test_no_british_spelling_in_strings_that_render_to_a_reader(self) -> None:
@@ -548,6 +631,7 @@ class SpellingTest(unittest.TestCase):
         for finding in load("findings.json")["findings"]:
             for field in ("missing", "validation_note", "gap_note", "concept_label"):
                 value = finding.get(field) or ""
-                for match in self.BRITISH.finditer(self.scrub(value)):
-                    offenders.append(f"{finding['id']}.{field}: {match.group(0)}")
+                for hit in self.offences(f"{finding['id']}.{field}",
+                                         self.scrub(value)):
+                    offenders.append(hit)
         self.assertEqual(offenders, [])

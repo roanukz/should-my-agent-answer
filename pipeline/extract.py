@@ -891,7 +891,7 @@ places it was looking in the wrong order.
      and teaches it. Open those files and read them before you search anything.
 
   2. READ THE WHOLE PAGE around each hit, not the matching line. A term is often
-     taught by its parts in neighbouring subsections: "path operation" is
+     taught by its parts in neighboring subsections: "path operation" is
      defined by a subsection called "Path" followed by one called "Operation".
      A term is also often introduced a few sections ABOVE the one that leans on
      it, on the same page.

@@ -20,7 +20,7 @@ Everything is ranked by demand: the number of distinct discussion threads that
 touch the concept. A gap nobody asks about is not worth writing.
 
 `missing` and `confirming_answer` are left empty here and filled by a separate
-model pass (describe.py), because naming the absent fact needs judgement and
+model pass (describe.py), because naming the absent fact needs judgment and
 this file must stay a deterministic function of the graph.
 """
 
@@ -60,7 +60,7 @@ MIN_SECTIONS_FOR_ORPHAN = 2
 #
 # The language part is generated rather than hand-written, from Python's keyword
 # list and its builtins, so it cannot be quietly tuned to make a number look
-# better. The short list underneath it is the part that is a judgement call, so
+# better. The short list underneath it is the part that is a judgment call, so
 # it is kept small, written out in full, and every entry is here because the
 # thing has its own documentation elsewhere.
 # --------------------------------------------------------------------------

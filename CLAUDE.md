@@ -52,7 +52,7 @@ loosening the match. It is still a substring search, it is counted separately in
 
 ## Not in scope, each considered and cut
 No Claude Code plugin, skill packaging, or MCP server. No CI check that runs on
-documentation changes. No generalisation to a second repository. No live model calls
+documentation changes. No generalization to a second repository. No live model calls
 from either page. No hosted service. No downstream impact claim: this measures
 documentation, not a deployed assistant.
 

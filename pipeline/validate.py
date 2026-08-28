@@ -88,7 +88,7 @@ def draw_sample(findings: list[dict]) -> tuple[list[dict], bool]:
 
 
 HEADER = """\
-You are checking whether a reported documentation gap is real. Be sceptical. The
+You are checking whether a reported documentation gap is real. Be skeptical. The
 job is to catch false positives, not to confirm the finding.
 
 Each item claims: a concept that users ask about, whose meaning or usage NO

@@ -1,6 +1,6 @@
 """Assemble the networkx graph and add the edges that need no model.
 
-extract.py produces the edges that need judgement: DEFINES, REQUIRES, MENTIONS
+extract.py produces the edges that need judgment: DEFINES, REQUIRES, MENTIONS
 from the documentation, and ASKS_ABOUT from the questions. Three more edge types
 are pure structure and are built here, because a model would only add noise:
 

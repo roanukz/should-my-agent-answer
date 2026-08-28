@@ -5,7 +5,7 @@ finding that says "concept:engine is undefined" is a graph fact, not something a
 content team can act on. What they need is the sentence: "the documentation
 never says how the engine is configured for a database other than SQLite."
 
-Naming an absent fact needs judgement, so it gets its own model pass, and its
+Naming an absent fact needs judgment, so it gets its own model pass, and its
 own file, kept away from find.py so the deterministic part stays deterministic.
 
 This runs BEFORE validate.py and is deliberately separate from it. This pass

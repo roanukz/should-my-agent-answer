@@ -151,7 +151,7 @@ def run_batches(in_dir, out_dir, pattern: str, suffix: str = ".txt") -> int:
 
     Resumable: a batch whose output already exists and parses is skipped, so a
     run interrupted by a rate limit or a laptop lid picks up where it stopped.
-    This is the same contract the Claude Code path honours, which is why the two
+    This is the same contract the Claude Code path honors, which is why the two
     paths are interchangeable.
     """
     from pathlib import Path
