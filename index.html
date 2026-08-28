@@ -69,22 +69,24 @@
           <div class="fact">
             <span class="fact-value">14</span>
             <span class="fact-label"
-              >Near misses: an article people ask about that depends on something
-              no page in the corpus explains</span
+              >Near misses: an article people ask about that leans on something
+              no page in the documentation set explains</span
             >
           </div>
           <div class="fact">
             <span class="fact-value">11 of 14</span>
             <span class="fact-label"
               >Held up when three independent readers each went back to the
-              corpus, unanimously. Wilson 95 percent 0.52 to 0.92</span
+              pages, unanimously. With only fourteen items the true rate could
+              sit anywhere from about half to about nine in ten</span
             >
           </div>
           <div class="fact">
-            <span class="fact-value">p = 0.70</span>
+            <span class="fact-value">No difference</span>
             <span class="fact-label"
-              >Graph retrieval against a vector baseline over 300 real questions.
-              No measurable difference</span
+              >Graph retrieval against ordinary similarity search, over 300 real
+              questions. The clever version did not win, and that is in the hero
+              rather than buried</span
             >
           </div>
         </div>
@@ -99,9 +101,9 @@
           <li><a href="#outcomes">1. The three outcomes</a></li>
           <li><a href="#invisible">2. Why nobody sees the third one</a></li>
           <li><a href="#built">3. What I built</a></li>
-          <li><a href="#found">4. What it found</a></li>
-          <li><a href="#retrieval">5. Vector against graph retrieval</a></li>
-          <li><a href="#validation">6. Validation</a></li>
+          <li><a href="#found">4. The fourteen it found</a></li>
+          <li><a href="#retrieval">5. Does the graph make a better assistant?</a></li>
+          <li><a href="#validation">6. Checking every finding</a></li>
           <li><a href="#limits">7. What this does not do</a></li>
           <li><a href="#prior">8. Prior work</a></li>
           <li><a href="#try">Try it</a></li>
@@ -126,19 +128,22 @@
             <li>
               <strong>So the finding has to be manufactured, not
                 collected.</strong>
-              I built a knowledge graph over 60 pages of the FastAPI
-              documentation where no edge exists without the verbatim sentence
-              that justifies it, crossed it against 300 answered questions from
-              the project's own GitHub Discussions, and looked for articles that
-              depend on something the documentation never explains
-              (<a href="#built">Part 3</a>). It produced 153 findings, 14 of them
+              I mapped 60 pages of the FastAPI documentation as a knowledge
+              graph, which here means boxes and arrows: a box for each section
+              and each idea, an arrow every time a section either explains an
+              idea or quietly assumes you already know it, and no arrow allowed
+              to exist without the verbatim sentence that justifies it. Then I
+              crossed it against 300 answered questions from the project's own
+              GitHub Discussions and asked those arrows one question: which ideas
+              do the docs lean on and never explain
+              (<a href="#built">Part 3</a>)? It produced 153 findings, 14 of them
               near misses (<a href="#found">Part 4</a>).
             </li>
             <li>
               <strong>Every finding was independently checked, and three of them
                 did not survive it.</strong>
               11 of the 14 near misses held up when three readers each went back
-              to the corpus, and all fourteen verdicts were unanimous
+              to the pages, and all fourteen verdicts were unanimous
               (<a href="#validation">Part 6</a>). Checking against the 95 pages I
               did not index knocked three more out, so measured as a claim about
               FastAPI rather than about my index it is 8 of 14. Both numbers are
@@ -150,10 +155,10 @@
               <strong>Graph retrieval did not beat the vector baseline
                 here.</strong>
               Both paths were run over all 300 questions and both produced
-              exactly 5 confidently wrong answers. Both also declined about 90%
-              of them, which turns out to be roughly the right answer: the
-              questions come from people who had already read the documentation
-              and said so. The graph was alone in answering 15
+              3 confidently wrong answers against the baseline's 5, which is not
+              a difference this sample can resolve. Both declined about 90% of
+              the questions, which turns out to be roughly right: they come from
+              people who had already read the documentation and said so. The graph was alone in answering 15
               correctly and the vector path alone in 12, which an exact paired
               test puts at p = 0.70 (<a href="#retrieval">Part 5</a>). The
               experiment is also underpowered, for a reason worth knowing about
@@ -165,6 +170,121 @@
         <section id="outcomes">
           <p class="section-kicker">Part 1</p>
           <h2>The three outcomes</h2>
+          <h3>First, what actually happens when someone asks</h3>
+          <p>
+            Everything below depends on one mechanism, so it is worth thirty
+            seconds. When a company points an AI assistant at its documentation,
+            the assistant does not read your documentation. It cannot: there is
+            far too much of it to fit in a single question.
+          </p>
+          <p>
+            Instead your pages are chopped into small pieces ahead of time,
+            usually a few paragraphs each. Those pieces are called
+            <strong>chunks</strong>, and where the cuts fall matters more than it
+            sounds. When somebody asks a question,
+            separate software picks the handful of pieces that look closest to
+            the question. That step is called <strong>retrieval</strong>. Only
+            those few pieces are handed to the model, and the model writes its
+            answer from them and nothing else.
+          </p>
+
+          <figure class="figure">
+            <div class="figure-scroll">
+              <svg
+                class="diagram diagram-flow"
+                viewBox="0 0 1000 240"
+                role="img"
+                aria-labelledby="how-title how-desc"
+              >
+                <title id="how-title">
+                  How an AI assistant answers from your documentation
+                </title>
+                <desc id="how-desc">
+                  Four steps. A question arrives. Retrieval picks a handful of
+                  pieces out of the many your documentation was chopped into. The
+                  model writes an answer from only those pieces, never seeing the
+                  rest. The person reads the answer. The failure this project is
+                  about happens between step two and step three, when the pieces
+                  that were picked look right and are missing the one fact the
+                  answer needs.
+                </desc>
+
+                <defs>
+                  <marker
+                    id="arrow-how"
+                    viewBox="0 0 10 10"
+                    refX="9"
+                    refY="5"
+                    markerWidth="7"
+                    markerHeight="7"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--border-strong)" />
+                  </marker>
+                </defs>
+
+                <text x="88" y="30" class="d-step">1</text>
+                <text x="410" y="30" class="d-step">2</text>
+                <text x="700" y="30" class="d-step">3</text>
+                <text x="905" y="30" class="d-step">4</text>
+
+                <rect x="18" y="44" width="140" height="66" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="88" y="72" class="d-flow">Someone asks</text>
+                <text x="88" y="92" class="d-flow-sub">a question</text>
+                <text x="88" y="140" class="d-cap">A real user, in</text>
+                <text x="88" y="156" class="d-cap">your help widget</text>
+
+                <rect x="236" y="44" width="348" height="66" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="410" y="66" class="d-flow">Retrieval picks a few pieces</text>
+                <rect x="243" y="78" width="22" height="18" rx="2" fill="var(--surface)" stroke="var(--border-subtle)" />
+                <rect x="269" y="78" width="22" height="18" rx="2" fill="var(--fill)" stroke="var(--fill-border)" />
+                <rect x="295" y="78" width="22" height="18" rx="2" fill="var(--surface)" stroke="var(--border-subtle)" />
+                <rect x="321" y="78" width="22" height="18" rx="2" fill="var(--fill)" stroke="var(--fill-border)" />
+                <rect x="347" y="78" width="22" height="18" rx="2" fill="var(--surface)" stroke="var(--border-subtle)" />
+                <rect x="373" y="78" width="22" height="18" rx="2" fill="var(--fill)" stroke="var(--fill-border)" />
+                <rect x="399" y="78" width="22" height="18" rx="2" fill="var(--surface)" stroke="var(--border-subtle)" />
+                <rect x="425" y="78" width="22" height="18" rx="2" fill="var(--fill)" stroke="var(--fill-border)" />
+                <rect x="451" y="78" width="22" height="18" rx="2" fill="var(--surface)" stroke="var(--border-subtle)" />
+                <rect x="477" y="78" width="22" height="18" rx="2" fill="var(--fill)" stroke="var(--fill-border)" />
+                <rect x="503" y="78" width="22" height="18" rx="2" fill="var(--surface)" stroke="var(--border-subtle)" />
+                <rect x="529" y="78" width="22" height="18" rx="2" fill="var(--surface)" stroke="var(--border-subtle)" />
+                <rect x="555" y="78" width="22" height="18" rx="2" fill="var(--surface)" stroke="var(--border-subtle)" />
+                <text x="410" y="140" class="d-cap">Your pages, chopped into pieces. The five</text>
+                <text x="410" y="156" class="d-cap">in colour are the ones that looked closest</text>
+
+                <rect x="624" y="44" width="152" height="66" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="700" y="72" class="d-flow">The model writes</text>
+                <text x="700" y="92" class="d-flow-sub">from those five only</text>
+                <text x="700" y="140" class="d-cap">It never sees the</text>
+                <text x="700" y="156" class="d-cap">rest of your docs</text>
+
+                <rect x="836" y="44" width="146" height="66" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="909" y="72" class="d-flow">The person</text>
+                <text x="909" y="92" class="d-flow-sub">reads it</text>
+                <text x="909" y="140" class="d-cap">And believes it,</text>
+                <text x="909" y="156" class="d-cap">which is the point</text>
+
+                <line x1="158" y1="77" x2="230" y2="77" stroke="var(--border-strong)" marker-end="url(#arrow-how)" />
+                <line x1="584" y1="77" x2="618" y2="77" stroke="var(--border-strong)" marker-end="url(#arrow-how)" />
+                <line x1="776" y1="77" x2="830" y2="77" stroke="var(--border-strong)" marker-end="url(#arrow-how)" />
+
+                <rect x="236" y="184" width="540" height="42" rx="6"
+                      fill="var(--error-tint)" stroke="var(--error-line)" />
+                <text x="506" y="210" class="d-fail">This whole project is about one thing going wrong here</text>
+                <line x1="506" y1="164" x2="506" y2="180" stroke="var(--error-text)" stroke-dasharray="4 3" />
+              </svg>
+            </div>
+            <figcaption>
+              Two consequences worth holding on to. The model can only be as good
+              as the pieces it was handed, and nobody in this chain ever checks
+              whether those pieces actually contained the answer.
+            </figcaption>
+          </figure>
+
           <p>
             A company points an AI assistant at its documentation. Three things
             can happen.
@@ -191,9 +311,10 @@
 
           <p>
             That third case is easier to recognise when you watch one happen.
-            This is a real one, produced by the vector baseline in
-            <a href="#retrieval">Part 5</a> and scored against the reply the
-            asker actually got.
+            This is a real one, produced by ordinary similarity search over the
+            same 60 pages, which is what almost every documentation assistant
+            does today (<a href="#retrieval">Part 5</a>), and scored against the
+            reply the asker actually got.
           </p>
 
           <div class="demo">
@@ -263,7 +384,7 @@
               the retrieved context was <em>sufficient</em> to answer the
               question. Given no supporting context at all, models answered
               incorrectly about <strong>10%</strong> of the time, mostly by
-              abstaining instead. Given <em>insufficient</em> context, they
+              abstaining instead, which is the second outcome above. Given <em>insufficient</em> context, they
               answered incorrectly about <strong>66%</strong> of the time.
             </p>
             <p>
@@ -333,24 +454,17 @@
             </table>
           </div>
 
-          <div class="pullquote">
-            <p>
-              The failure mode that does the most damage is the one that makes
-              the dashboard look better.
-            </p>
-          </div>
-
           <p>
-            This is not an oversight in anyone's tooling. It is structural. Every
-            one of those signals is a report of dissatisfaction, and the defining
-            feature of a confident wrong answer is that nobody is dissatisfied at
-            the moment it happens. The person who finds out is a customer, three
-            days later, when the thing they were told does not work.
+            This is structural rather than an oversight in anyone's tooling.
+            Every one of those signals is a report of dissatisfaction, and nobody
+            is dissatisfied at the moment a confident wrong answer happens. The
+            person who finds out is a customer, three days later, when the thing
+            they were told does not work.
           </p>
           <p>
             A signal that does not arrive cannot be collected. It has to be
-            manufactured, before deployment, from the documentation itself.
-            That is what the rest of this is.
+            manufactured, before deployment, out of the documentation itself.
+            That is the rest of this.
           </p>
         </section>
 
@@ -364,6 +478,91 @@
             confidently and wrong, naming the specific missing fact in each case.
           </p>
 
+          <p>
+            Here is the shape it hunts for, before any of the machinery. This is
+            one real finding.
+          </p>
+
+          <figure class="figure">
+            <div class="figure-scroll">
+              <svg
+                class="diagram"
+                viewBox="0 0 1000 270"
+                role="img"
+                aria-labelledby="nearmiss-title nearmiss-desc"
+              >
+                <title id="nearmiss-title">
+                  How a near miss is read off the graph
+                </title>
+                <desc id="nearmiss-desc">
+                  Three checks on one Concept. A Question points at it by
+                  ASKS_ABOUT, present. A Section points at it by REQUIRES,
+                  present. Any Section at all pointing at it by DEFINES, absent
+                  across all 570 sections. The finding is that third, absent
+                  edge, and the first two are what make the absence matter.
+                </desc>
+
+                <defs>
+                  <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5"
+                          markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--fill)" />
+                  </marker>
+                  <marker id="arrowmiss" viewBox="0 0 10 10" refX="9" refY="5"
+                          markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--error-text)" />
+                  </marker>
+                </defs>
+
+                <!-- Question -->
+                <rect x="14" y="30" width="250" height="60" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="30" y="52" class="d-lab">QUESTIONS</text>
+                <text x="30" y="72" class="d-body">6 threads asked about this</text>
+
+                <!-- Section -->
+                <rect x="14" y="180" width="250" height="60" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="30" y="202" class="d-lab">SECTION</text>
+                <text x="30" y="222" class="d-body">Stream Data / Files and Async</text>
+
+                <!-- Concept -->
+                <rect x="418" y="102" width="190" height="66" rx="6"
+                      fill="var(--notice-tint)" stroke="var(--notice-line)" stroke-width="2" />
+                <text x="513" y="128" class="d-lab-c">CONCEPT</text>
+                <text x="513" y="150" class="d-body-c">event loop</text>
+
+                <!-- present edges -->
+                <path d="M 264 60 C 340 60, 350 115, 412 122"
+                      fill="none" stroke="var(--fill)" stroke-width="2" marker-end="url(#arrow2)" />
+                <text x="286" y="88" class="d-edge d-key">ASKS_ABOUT</text>
+
+                <path d="M 264 210 C 340 210, 350 155, 412 148"
+                      fill="none" stroke="var(--fill)" stroke-width="2" marker-end="url(#arrow2)" />
+                <text x="286" y="172" class="d-edge d-key">REQUIRES</text>
+
+                <!-- the absent edge -->
+                <rect x="736" y="102" width="250" height="66" rx="6"
+                      fill="var(--error-tint)" stroke="var(--error-line)" stroke-dasharray="5 4" />
+                <text x="861" y="128" class="d-lab-e">NO SECTION, OUT OF 570</text>
+                <text x="861" y="150" class="d-body-e">nothing DEFINES it</text>
+
+                <line x1="730" y1="135" x2="614" y2="135"
+                      stroke="var(--error-text)" stroke-width="2" stroke-dasharray="6 4"
+                      marker-end="url(#arrowmiss)" />
+                <text x="672" y="118" class="d-edge d-miss">DEFINES</text>
+                <text x="672" y="164" class="d-miss-x">absent</text>
+              </svg>
+            </div>
+            <figcaption>
+              A near miss is one absence, made to matter by two things that are
+              present. Take away the question and it is a gap nobody has hit yet.
+              Take away the dependency and it is a word the documentation simply
+              does not use. Both of the arrows that are present carry the exact
+              sentence they were read off, and the file and line where it lives.
+            </figcaption>
+          </figure>
+
+
           <h3>The corpus, and why this one</h3>
           <p>
             60 pages of the
@@ -373,7 +572,8 @@
             pages, then the first 9 advanced pages, pinned to one commit.
           </p>
           <p>
-            The corpus is not the interesting decision. The demand signal is. The
+            The corpus is not the interesting decision. The demand signal is,
+            meaning the evidence that somebody actually wanted the missing thing. The
             same repository runs a GitHub Discussions board with roughly 3,900
             answered questions, so one source supplies the documentation, the
             questions people actually asked about it, and the correct answers,
@@ -386,8 +586,10 @@
             <p>
               If a question was answered in a discussion and that answer is not
               in the documentation, then the gap is real and the missing content
-              already exists in somebody's reply. Free ground truth, verifiable
-              by anyone, and no annotation budget.
+              already exists in somebody's reply. That is the project's ground
+              truth, meaning the known-correct answer everything else gets
+              scored against. Free, verifiable by anyone, and no annotation
+              budget.
             </p>
             <p>
               The cost is that it only sees gaps somebody bothered to ask about
@@ -594,108 +796,38 @@
             </table>
           </div>
 
-          <h3>What kind of graph this is, precisely</h3>
           <p>
-            The label matters, because "knowledge graph" covers several
-            structures that can do quite different things. This one is a
-            <strong>directed, typed, attributed multigraph</strong>. Taking those
-            one at a time, and each is checked against the committed data by
-            <code>tests/test_invariant.py</code>:
-          </p>
-
-          <div class="table-scroll">
-            <table>
-              <caption>
-                Every property below is derived from
-                <code>data/graph/edges.json</code>, not asserted.
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">Property</th>
-                  <th scope="col">What it means here</th>
-                  <th scope="col">How you can tell</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Directed</th>
-                  <td>
-                    Every edge runs one way. A Section defining a Concept is not
-                    the same claim as a Concept defining a Section
-                  </td>
-                  <td>Zero reciprocated pairs in 5,399 edges</td>
-                </tr>
-                <tr>
-                  <th scope="row">Typed, and strictly</th>
-                  <td>
-                    Five node types, seven edge types, and each edge type joins
-                    exactly one ordered pair of node types with no exceptions
-                  </td>
-                  <td>
-                    REQUIRES only ever runs Section to Concept, ASKS_ABOUT only
-                    ever Question to Concept, and so on for all seven
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">Attributed</th>
-                  <td>
-                    Edges carry data, not just endpoints: the evidence span, its
-                    file, its line range, which batch produced it, and a
-                    confidence
-                  </td>
-                  <td>
-                    5,399 of 5,399 edges carry a span, re-checked against the
-                    source files by the test suite
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">A multigraph</th>
-                  <td>
-                    Two nodes can be joined more than once. A section can both
-                    teach a thing and lean on it elsewhere in the same section
-                  </td>
-                  <td>
-                    48 ordered pairs carry two edges, most often DEFINES
-                    alongside REQUIRES
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">Sparse, and not a tree</th>
-                  <td>
-                    Mean degree 4.9 against a maximum of 116, and it contains
-                    cycles, because a Section links to a Doc that contains it
-                  </td>
-                  <td>
-                    Density 0.0011, 18 disconnected pieces, the largest holding
-                    2,163 of the 2,197 nodes
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p>
-            The multigraph property is not decoration, and it is worth saying
-            what the pipeline does with it. The extraction prompt asks for one
-            relation per concept per section, and 48 times it produced two. Where
-            a Section both DEFINES and REQUIRES a Concept, the finders treat the
-            concept as defined and drop it, which is the cautious direction: it
+            48 times the extractor produced two relations for the same section
+            and concept, usually "explains" alongside "assumes". Where that
+            happens the finders treat the concept as explained and drop it, which
             loses findings rather than inventing them.
           </p>
 
           <h3>Why this shape rather than another</h3>
           <p>
-            The whole design turns on the distinction between DEFINES and
-            REQUIRES. Every other graph over documentation I looked at models
-            "this page is about that thing", which cannot express the finding,
-            because being about a thing and teaching it are different claims.
+            The whole design turns on the difference between explaining a thing
+            and assuming it. Every other graph over documentation I looked at
+            models "this page is about that thing", which cannot express the
+            finding, because being about a thing and teaching it are different
+            claims.
           </p>
           <p>
-            Two other shapes were available for the same job. Here is what each
-            buys and what each costs, and the honest summary is that this graph
-            wins on what it can <em>express</em> and does not win on retrieval,
-            which <a href="#retrieval">Part 5</a> measures and finds no
-            difference on.
+            Two other shapes were available for the same job. This graph wins on
+            what it can <em>express</em> and does not win on retrieval, which
+            <a href="#retrieval">Part 5</a> measures and finds no difference on.
+          </p>
+
+          <p>
+            One of the two is what nearly everyone actually builds, so it is
+            worth four sentences. A vector index takes each of those chunks from
+            <a href="#outcomes">Part 1</a> and turns it into an
+            <strong>embedding</strong>: a few hundred numbers standing for what
+            the chunk is about, arranged so that chunks about similar things end
+            up with similar numbers. Your question is turned into numbers the
+            same way, and retrieval hands back whichever chunks sit closest to
+            it. Nothing in that arrangement knows what a chunk <em>says</em>,
+            only what it resembles, and that one fact is what the first column
+            below is losing on.
           </p>
 
           <div class="table-scroll">
@@ -745,8 +877,8 @@
                 <tr>
                   <th scope="row">Can you audit a result</th>
                   <td class="no">
-                    No. A cosine score is not a reason, and there is no sentence
-                    to point at
+                    No. A similarity score is not a reason, and there is no
+                    sentence to point at
                   </td>
                   <td class="yes">
                     Yes. Every edge carries the sentence, the file and the lines
@@ -785,7 +917,7 @@
                 <tr>
                   <th scope="row">Measured retrieval quality</th>
                   <td>5 confidently wrong answers over 300 questions</td>
-                  <td>5 confidently wrong answers over the same 300, p = 0.70</td>
+                  <td>3 over the same 300, which the sample cannot resolve</td>
                   <td class="unclear">Not measured here</td>
                 </tr>
               </tbody>
@@ -853,89 +985,10 @@
 
           <h3>The three findings</h3>
           <p>
-            Each one is a shape in the graph, and each one carries a proof path
-            made of real edges you can follow to real lines in real files.
+            That shape is the first of three. Each is a shape in the graph, and
+            each carries a proof path of real arrows leading to real lines in
+            real files.
           </p>
-
-          <figure class="figure">
-            <div class="figure-scroll">
-              <svg
-                class="diagram"
-                viewBox="0 0 1000 270"
-                role="img"
-                aria-labelledby="nearmiss-title nearmiss-desc"
-              >
-                <title id="nearmiss-title">
-                  How a near miss is read off the graph
-                </title>
-                <desc id="nearmiss-desc">
-                  Three checks on one Concept. A Question points at it by
-                  ASKS_ABOUT, present. A Section points at it by REQUIRES,
-                  present. Any Section at all pointing at it by DEFINES, absent
-                  across all 570 sections. The finding is that third, absent
-                  edge, and the first two are what make the absence matter.
-                </desc>
-
-                <defs>
-                  <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5"
-                          markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--fill)" />
-                  </marker>
-                  <marker id="arrowmiss" viewBox="0 0 10 10" refX="9" refY="5"
-                          markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--error-text)" />
-                  </marker>
-                </defs>
-
-                <!-- Question -->
-                <rect x="14" y="30" width="250" height="60" rx="6"
-                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
-                <text x="30" y="52" class="d-lab">QUESTION</text>
-                <text x="30" y="72" class="d-body">6 threads asked about this</text>
-
-                <!-- Section -->
-                <rect x="14" y="180" width="250" height="60" rx="6"
-                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
-                <text x="30" y="202" class="d-lab">SECTION</text>
-                <text x="30" y="222" class="d-body">Stream Data / Files and Async</text>
-
-                <!-- Concept -->
-                <rect x="418" y="102" width="190" height="66" rx="6"
-                      fill="var(--notice-tint)" stroke="var(--notice-line)" stroke-width="2" />
-                <text x="513" y="128" class="d-lab-c">CONCEPT</text>
-                <text x="513" y="150" class="d-body-c">event loop</text>
-
-                <!-- present edges -->
-                <path d="M 264 60 C 340 60, 350 115, 412 122"
-                      fill="none" stroke="var(--fill)" stroke-width="2" marker-end="url(#arrow2)" />
-                <text x="286" y="88" class="d-edge d-key">ASKS_ABOUT</text>
-                <text x="286" y="103" class="d-note">present, with the span</text>
-
-                <path d="M 264 210 C 340 210, 350 155, 412 148"
-                      fill="none" stroke="var(--fill)" stroke-width="2" marker-end="url(#arrow2)" />
-                <text x="286" y="172" class="d-edge d-key">REQUIRES</text>
-                <text x="286" y="187" class="d-note">present, with the span</text>
-
-                <!-- the absent edge -->
-                <rect x="736" y="102" width="250" height="66" rx="6"
-                      fill="var(--error-tint)" stroke="var(--error-line)" stroke-dasharray="5 4" />
-                <text x="861" y="128" class="d-lab-e">NO SECTION, OUT OF 570</text>
-                <text x="861" y="150" class="d-body-e">nothing DEFINES it</text>
-
-                <line x1="730" y1="135" x2="614" y2="135"
-                      stroke="var(--error-text)" stroke-width="2" stroke-dasharray="6 4"
-                      marker-end="url(#arrowmiss)" />
-                <text x="672" y="118" class="d-edge d-miss">DEFINES</text>
-                <text x="672" y="164" class="d-miss-x">absent</text>
-              </svg>
-            </div>
-            <figcaption>
-              A near miss is one absence, made to matter by two things that are
-              present. Take away the question and it is a gap nobody has hit yet.
-              Take away the dependency and it is a word the documentation simply
-              does not use.
-            </figcaption>
-          </figure>
 
 
           <div class="table-scroll">
@@ -985,6 +1038,15 @@
           </div>
 
           <p>
+            F3 is what the demonstration in <a href="#outcomes">Part 1</a> was.
+            When two sections cover the same ground and only one carries the
+            fact, retrieval has no way to prefer the right one, so the assistant
+            answers from whichever scored higher and the failure looks like a
+            success. The fix is usually not new writing, it is a pointer from the
+            section that gets retrieved to the section that has the answer. It is
+            also the commonest finding here, 99 of 153, and the least verified.
+          </p>
+          <p>
             Everything is ranked by <strong>demand</strong>, meaning the number
             of distinct discussion threads touching the concept. A gap nobody
             asks about is real and is not worth writing this quarter, and a tool
@@ -995,7 +1057,7 @@
 
         <section id="found">
           <p class="section-kicker">Part 4</p>
-          <h2>What it found</h2>
+          <h2>The fourteen it found</h2>
 
           <div class="table-scroll">
             <table>
@@ -1030,7 +1092,10 @@
                   <td>
                     Zero by construction: any orphan somebody asked about is
                     promoted to F1, so F2 is precisely the tail nobody has asked
-                    about yet
+                    about yet. These are near misses with the question missing.
+                    The dependency and the absence are already in place, so the
+                    only thing standing between an orphan and a confident wrong
+                    answer is somebody finally asking
                   </td>
                 </tr>
                 <tr>
@@ -1237,40 +1302,49 @@
 
         <section id="retrieval">
           <p class="section-kicker">Part 5</p>
-          <h2>Vector against graph retrieval</h2>
+          <h2>Does the graph make a better assistant?</h2>
           <p>
-            Everything up to here builds and analyses a graph. That is knowledge
-            graph work, not GraphRAG. GraphRAG means the graph drives
-            <em>retrieval</em> that feeds <em>generation</em>, so both paths get
-            built, both answer all 300 questions, and both get scored against the
-            maintainer's own reply.
+            Everything so far uses the graph to <em>diagnose</em> documentation,
+            to find the holes. There is a second and completely separate thing
+            you can do with it: use it live, to choose which pieces the assistant
+            reads when somebody asks a question. That is worth testing, because
+            if it works it is a much bigger idea than a report.
+          </p>
+          <p>
+            So both were built and both answered all 300 questions.
           </p>
 
           <div class="table-scroll">
             <table>
+              <caption>
+                Two ways of choosing five pieces of documentation for the same
+                question. Everything after the choosing is identical, so any
+                difference in the answers comes from the choosing.
+              </caption>
               <thead>
                 <tr>
                   <th scope="col">Path</th>
-                  <th scope="col">How it retrieves</th>
+                  <th scope="col">How it picks the five</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">A, vector baseline</th>
+                  <th scope="row">A, ordinary similarity search</th>
                   <td>
-                    Every Section and every Question embedded with
-                    sentence-transformers all-MiniLM-L6-v2, pinned, local, on
-                    CPU. Top five sections by cosine similarity
+                    The method almost every documentation assistant uses today,
+                    and the thing to beat. Every piece is turned into numbers, the
+                    question is turned into numbers the same way, and the five
+                    pieces whose numbers sit closest to the question's come back
                   </td>
                 </tr>
                 <tr>
                   <th scope="row">B, graph retrieval</th>
                   <td>
-                    Seed on the Sections that DEFINE the concepts the question
-                    asks about, or, where nothing defines a concept, on the
-                    Sections that REQUIRE or MENTION it. Then one hop: for each
-                    seed, also retrieve the Sections that DEFINE anything that
-                    seed REQUIRES. At most five, to match
+                    Start from the sections that explain what the question asks
+                    about. Then follow one arrow further: for anything those
+                    sections themselves assume, pull in the section that explains
+                    <em>that</em>. Three slots for the first kind, two reserved
+                    for the second
                   </td>
                 </tr>
               </tbody>
@@ -1278,137 +1352,139 @@
           </div>
 
           <p>
-            The traversal is the point. Path B can pull in the prerequisite a
-            section depends on. Path A cannot, because a prerequisite is not
-            lexically similar to the question that needs it. Across the 300
-            questions the two paths never once returned the same set of sections,
-            and in all but eighteen of them the graph reached at least one
-            section the vector path did not.
-          </p>
-          <p>
-            The two paths were not always given the same budget, which matters
-            for reading the scores. The vector path always returned five
-            sections. The graph returned five on 268 questions, fewer on 15, and
-            nothing at all on 17, where the extractor found no concept on the
-            question, so the traversal had no seed to start from. Those 17 are
-            declines by construction rather than judgements about retrieved
-            material.
+            Path B's reserved slots are the whole experiment. A section that
+            answers your question is easy to find by similarity, because it
+            sounds like your question. The thing that section quietly assumes is
+            not, because a prerequisite never sounds like the question that needs
+            it. Only the graph knows the two are connected, and that connection
+            is what is being tested.
           </p>
 
-          <h3>A question where the traversal did something</h3>
+          <div class="callout callout-warning">
+            <h4>The first version of this experiment did not test anything</h4>
+            <p>
+              It filled all five slots by similarity to the question first and
+              appended the prerequisites afterwards, so the prerequisites were
+              only ever reached when a question produced fewer than five
+              starting sections. That was 70 questions of 300. On the other 213
+              the traversal ran and its results were thrown away before the
+              assistant saw them.
+            </p>
+            <p>
+              Reserving the slots fixes it, and the mechanism now reaches the
+              assistant on 278 questions of 300. The numbers below are from that
+              corrected run.
+            </p>
+          </div>
+
+          <h3>What a prerequisite looks like in practice</h3>
           <p>
-            Discussion 13108 asks how to get a frontend API and a backend API
-            onto separate Swagger pages.
+            Discussion 13828 asks why declaring the same request body on both a
+            dependency and the path operation validates it twice.
           </p>
 
           <div class="table-scroll">
             <table>
               <caption>
-                The question yields only four seed sections, so the fifth slot is
-                the one the hop filled. It reaches Import APIRouter, which is what
-                lets the answer rule an APIRouter out and reach for a mounted
-                second application instead.
+                Similarity search finds five sections that talk about request
+                bodies. The graph finds the page on dependencies, and then, because
+                that page leans on a class it does not itself explain, pulls in the
+                two sections that do explain it. Those two are marked.
               </caption>
               <thead>
                 <tr>
-                  <th scope="col">Path A retrieved</th>
-                  <th scope="col">Path B retrieved</th>
+                  <th scope="col">Path A picked</th>
+                  <th scope="col">Path B picked</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Metadata and Docs URLs / Docs URLs</td>
-                  <td>First Steps / Interactive API docs</td>
+                  <td>Body Multiple Parameters / Multiple body params and query</td>
+                  <td>Request Body</td>
                 </tr>
                 <tr>
-                  <td>Path Parameters / Documentation</td>
-                  <td>Metadata and Docs URLs / Docs URLs</td>
+                  <td>Get Current User / Create a user model</td>
+                  <td>Classes as Dependencies / Shortcut</td>
                 </tr>
                 <tr>
-                  <td>Declare Request Example Data / Pydantic and FastAPI examples</td>
+                  <td>Path Operation Configuration / Response description</td>
+                  <td>Classes as Dependencies / Type annotation vs Depends</td>
+                </tr>
+                <tr>
+                  <td>Body Multiple Parameters / Multiple body parameters</td>
+                  <td><strong>Classes as Dependencies / Classes as dependencies</strong></td>
+                </tr>
+                <tr>
                   <td>Declare Request Example Data / Body with multiple examples</td>
-                </tr>
-                <tr>
-                  <td>Tutorial User Guide</td>
-                  <td>Static Files / What is "Mounting"</td>
-                </tr>
-                <tr>
-                  <td>First Steps / Interactive API docs</td>
-                  <td>Bigger Applications / Import APIRouter</td>
+                  <td><strong>Classes as Dependencies / Use it</strong></td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <p>
-            The step that got it there is recorded on the answer, in the same
-            form as every other claim in this repository. These two lines are
-            copied out of <code>data/answers.json</code> and can be grepped for:
-          </p>
-
           <div class="callout callout-info">
-            <h4>The traversal, as committed</h4>
+            <h4>The step that fetched them, copied out of the results file</h4>
             <p>
               <code
-                >q:13108 ASKS_ABOUT concept:sub_application -&gt; DEFINES -&gt; 1
-                section(s)</code
+                >sec:tutorial/dependencies/classes-as-dependencies#shortcut
+                REQUIRES concept:commonqueryparams -&gt; DEFINES -&gt;
+                sec:tutorial/dependencies/classes-as-dependencies#use-it</code
               >
             </p>
             <p>
-              <code
-                >sec:tutorial/static-files#what-is-mounting REQUIRES
-                concept:apirouter -&gt; DEFINES -&gt;
-                sec:tutorial/bigger-applications#import-apirouter</code
-              >
+              Read it as: the Shortcut section assumes you know what
+              CommonQueryParams is, the Use it section is where that is explained,
+              so fetch it too.
             </p>
           </div>
 
           <p>
-            The vector path declined this one. The graph path was scored correct,
-            and its answer uses the section the hop pulled in: each application
-            gets its own Swagger page, so the way to do this is to mount a second
-            application rather than to add a router.
+            Path A declined this question. Path B answered it correctly, using
+            the section the arrow fetched. That is the mechanism working exactly
+            as intended, and it happened often enough to look promising and not
+            often enough to show up in the totals.
           </p>
 
-          <div class="callout callout-warning">
-            <h4>How often the hop actually reaches the answer</h4>
-            <p>
-              Rarely, and the design is why. Seeds are ranked first and the list
-              is capped at five, so the one hop only reaches the final five when
-              a question yields fewer than five seed sections. Across the 300
-              questions a hopped-in section survives into the context 70 times,
-              and this example is one of only three where that happened
-              <em>and</em> the graph was scored correct while the vector path was
-              not.
-            </p>
-          </div>
-
-          <h3>The scores</h3>
+          <h3>The result</h3>
           <p>
-            Every generated answer was scored into one of three buckets against
-            the maintainer's reply: <strong>correct</strong>,
-            <strong>confidently wrong</strong>, meaning it asserts an answer that
-            contradicts or omits the key fact with no hedge, and
-            <strong>declined</strong>, meaning it said it could not answer from
-            the material. Both answers to a question sat in the same batch, each
-            scored on its own against that reply rather than as a comparison
-            between the two. The scorer was not blind: every block is headed
-            <code>SCORE ID: q:13029::vector</code> or
-            <code>SCORE ID: q:13029::graph</code>, so the prompt named the path
-            that produced the answer, and the vector answer came first in all 300
-            pairs. That is a defect in the setup and it is on the record in
-            <code>data/work/compare/score/in/</code>. If it favoured anything it
-            favoured the graph, whose three-answer lead is already not
-            significant.
+            Every answer was scored against the reply the asker actually got, into
+            one of three buckets.
           </p>
 
           <div class="table-scroll">
             <table>
+              <thead>
+                <tr>
+                  <th scope="col">Bucket</th>
+                  <th scope="col">What it means</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Correct</th>
+                  <td>Matches the maintainer on the substance</td>
+                </tr>
+                <tr>
+                  <th scope="row">Confidently wrong</th>
+                  <td>
+                    Presents an answer that contradicts the maintainer or misses
+                    the fact the answer turns on, with no hedge. This is the
+                    failure the whole project is about
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Declined</th>
+                  <td>Says outright it cannot answer from what it was given</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-scroll">
+            <table>
               <caption>
-                300 questions, both paths, 598 of 600 answers scored. One
-                question came back without a verdict on either path, so both of
-                its answers are counted as unscored rather than assigned to a
-                bucket.
+                300 questions, both paths, 598 of 600 answers scored. One question
+                came back without a verdict on either path.
               </caption>
               <thead>
                 <tr>
@@ -1420,65 +1496,83 @@
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">A, vector</th>
-                  <td class="num">25</td>
+                  <th scope="row">A, similarity search</th>
+                  <td class="num">24</td>
                   <td class="num">5</td>
-                  <td class="num">269</td>
+                  <td class="num">270</td>
                 </tr>
                 <tr>
-                  <th scope="row">B, graph</th>
-                  <td class="num">28</td>
-                  <td class="num">5</td>
-                  <td class="num">266</td>
+                  <th scope="row">B, graph retrieval</th>
+                  <td class="num">23</td>
+                  <td class="num">3</td>
+                  <td class="num">273</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <p>
-            The headline metric this block exists to produce is the confidently
-            wrong rate per path. It is <strong>5 and 5</strong>. Identical.
+            One disclosure before the numbers. The scorer was not blind: every
+            block it was handed is headed
+            <code>SCORE ID: q:13029::vector</code> or
+            <code>SCORE ID: q:13029::graph</code>, so the prompt named the path
+            that produced the answer, and the similarity answer came first in all
+            300 pairs. That is a defect in the setup, it is on the record in
+            <code>data/work/compare/score/in/</code>, and if it favoured anything
+            it favoured the graph.
           </p>
           <p>
-            On correctness the graph path is ahead by three, and because both
-            paths answered the same 300 questions the comparison is paired, so
-            the informative cases are the 27 questions where exactly one path
-            got it right. The
-            graph was alone in being correct on 15 of them and the vector path
-            alone on 12. An exact McNemar test on that split gives
-            <strong>p = 0.70</strong>.
+            <strong>The graph did not make the assistant more right.</strong> 23
+            correct against 24. Both paths answered the same 300 questions, so the
+            informative cases are the 17 where exactly one of them got it right,
+            and that split is 9 to 8. A coin would do that.
+          </p>
+          <p>
+            <strong>It did make the assistant more cautious.</strong> Confidently
+            wrong answers went from 5 to 3, and declines went up. Following the
+            arrows swapped nine correct answers for declines, converted three of
+            the five confident errors into a decline or a correct answer, and
+            picked up three new correct answers along the way.
           </p>
 
           <div class="pullquote">
             <p>
-              On this corpus, graph retrieval did not measurably beat the vector
-              baseline.
+              It did not make the assistant know more. It made it admit ignorance
+              more often.
             </p>
           </div>
 
           <p>
-            The traversal above is real and it does reach prerequisites lexical
-            similarity cannot. It just did not change enough answers to be
-            distinguishable from chance at this sample size, and reporting a
-            three-answer lead as a result would be a worse mistake than reporting
-            the null.
-          </p>
-          <p>
-            It is worth being specific about what "not enough" means here,
-            because "underpowered" on its own tells a reader nothing they can
-            act on. With 27 discordant pairs, the smallest split this test could
-            have called significant at the 5% level is 20 against 7, which is a
-            net edge of 13 questions out of 300. The observed edge was 3. So this
-            design could only ever have detected a difference roughly four times
-            larger than the one that showed up, and the null is much weaker
-            evidence of no difference than the phrase suggests.
+            Which is arguably the trade this whole essay argues for, since a
+            decline is the safe failure and a confident wrong answer is the
+            dangerous one. It is also far too small to claim. Three fewer errors
+            out of 300 is the kind of difference that appears and disappears
+            between runs, and the honest summary of Part 5 is that graph
+            retrieval did not beat ordinary similarity search here on any measure
+            that the sample can resolve.
           </p>
 
-          <h3>Why the experiment is underpowered, which is its own finding</h3>
+          <h3>How small a difference could this have caught</h3>
+          <p>
+            Saying an experiment is "too small" is not useful unless you say how
+            small. Only the 17 questions where the two paths disagreed carry any
+            information, and with 17 of those, the least lopsided split that would
+            have counted as a real difference is 14 to 3. The observed split was 9
+            to 8.
+          </p>
+          <p>
+            So this design could only have detected an effect several times larger
+            than anything that showed up. It has not shown that the two methods
+            are equally good. It has shown that if there is a difference, it is
+            small, and that this corpus cannot resolve it.
+          </p>
+
+          <h3>Why the sample cannot resolve it, which is the interesting part</h3>
           <p>
             Both paths declined about 90% of the questions, so the entire
             comparison rests on the 30 or so each one actually answered. That is
-            not the retrieval, it is the question set.
+            not the retrieval. That is the question set, and the reason is the
+            most interesting thing the project found by accident.
           </p>
 
           <div class="callout callout-warning">
@@ -1486,61 +1580,52 @@
               282 of the 300 askers had already read the documentation and said so
             </h4>
             <p>
-              That is what the template on FastAPI's Questions form asks people to
-              confirm before posting, line by line: "I searched the FastAPI
-              documentation, with the integrated search", and "I already read and
-              followed all the tutorial in the docs and didn't find an answer."
-              282 of the 300 threads carry it.
+              FastAPI's Questions form asks people to confirm it before posting,
+              line by line: "I searched the FastAPI documentation, with the
+              integrated search", and "I already read and followed all the
+              tutorial in the docs and didn't find an answer." 282 of the 300
+              threads carry it.
             </p>
             <p>
-              Which makes the decline rate close to correct behaviour rather than
-              a failure of retrieval. The demand signal is drawn, by construction,
-              from the population for whom the documentation had already failed,
-              and the corpus those questions are being answered from is the
-              tutorial they had just finished reading. An assistant that answered
-              most of them confidently from those 60 pages would be doing the
-              thing this whole project is about.
+              <strong>Excellent for finding gaps.</strong> The demand signal is
+              drawn from exactly the population the documentation failed.
             </p>
             <p>
-              I checked whether my own generation prompt had caused the
-              abstaining, since it told the agent what was being measured, which
-              is a good way to change the behaviour under test. Three batches
-              rerun without that line declined 11 of 15 instead of 12 of 15,
-              which is far too small a probe to detect a modest prompt effect and
-              is reported here as the weak check it is.
+              <strong>Useless for benchmarking answerability.</strong> The sample
+              is selected for being unanswerable from the docs, so it cannot
+              fairly measure how well anything answers from the docs.
+            </p>
+            <p>
+              <strong>Which makes a 90% decline rate close to correct.</strong>
+              An assistant that confidently answered most of these, from the same
+              tutorial the asker had just read, would be doing the exact thing
+              this project exists to find.
             </p>
           </div>
 
           <p>
-            This is a real cost of the decision in <a href="#built">Part 3</a> to
-            use public discussions as the demand signal. It works well for
-            finding gaps, because the fourteen near misses in
-            <a href="#found">Part 4</a> all came from these same threads. It works
-            badly as an answerability benchmark, and for a reason worth stating
-            plainly: the sample is selected for being unanswerable from the
-            documentation, so it cannot fairly measure how well anything answers
-            from the documentation. A real team's search log would carry the
-            answerable questions too, and this is the clearest place where free
-            ground truth turned out to be worth exactly what was paid for it.
+            I did check whether my own instructions caused the abstaining rather
+            than the corpus, by rerunning three batches with the line about what
+            was being measured removed: 11 declines of 15 instead of 12 of 15,
+            which is far too small a probe to settle it and is reported here as
+            the weak check it is.
           </p>
 
-          <div class="callout callout-notice">
-            <h4>Prior work on exactly this comparison</h4>
-            <p>
-              Comparing retrieval strategies on whether a model abstains when it
-              should is a well populated line of work, and the four benchmarks in
-              <a href="#prior">Part 8</a> exist to measure exactly that. I am not
-              citing a specific paper for the vector against graph version of it,
-              because I did not find one I could check, and naming a reference I
-              have not read would be a strange thing to do on this page. Treat
-              the numbers above as one more data point, and a null one.
-            </p>
-          </div>
+          <h3>So where does that leave it</h3>
+          <p>
+            The graph earns its cost as a diagnosis and has not earned it as a
+            retriever. The honest next step is not to keep tuning this until the
+            number moves, which is how people end up believing things that are not
+            true. It is a different question set: real search-log queries, which
+            are not pre-filtered against the documentation, and enough of them
+            that the answered subset is in the hundreds rather than the thirties.
+            Until that runs, the finding stands as a null with a known cause.
+          </p>
         </section>
 
         <section id="validation">
           <p class="section-kicker">Part 6</p>
-          <h2>Validation</h2>
+          <h2>Checking every finding</h2>
           <p>
             Fourteen near misses is a small enough population to check all of
             them, so all of them were checked rather than a sample. Each one went
@@ -1554,6 +1639,10 @@
           <div class="table-scroll">
             <table>
               <caption>
+                Eleven of fourteen is 78.6%, and fourteen is a small number, so
+                the interval sits beside it: the range of true rates that would
+                not be surprising if you saw 11 of 14, here anywhere from about
+                half to about nine in ten.
                 Every near miss was checked, so the rate has no sampling error:
                 it is the rate for this corpus and this run. The interval is
                 reported anyway, as the uncertainty about the method rather than
@@ -1683,12 +1772,10 @@
           <p>
             The top right cell is the one that costs something.
             <code>APIRoute</code> is the second most asked about finding on the
-            page, and FastAPI documents it properly in a how-to guide called
-            Custom Request and APIRoute class, which is not in the 60. So does
-            <code>host</code>, on the FastAPI CLI page, and virtual environments
-            get a page of their own named after the concept. Those three are
-            correct about the index and wrong about FastAPI, and a content team
-            handed them would go and write something that already exists.
+            page, and FastAPI documents it properly in a how-to guide that is not
+            in the 60. So does <code>host</code>, and virtual environments get a
+            page of their own. A content team handed those three would go and
+            write something that already exists.
           </p>
 
           <div class="pullquote">
@@ -1701,8 +1788,9 @@
           <p>
             This is the concrete version of the thing
             <a href="#limits">Part 7</a> states abstractly, and it cuts both
-            ways. Measured as a claim about FastAPI, precision drops from 11 of
-            14 to 8 of 14. Measured as a claim about an assistant that indexes
+            ways. Measured as a claim about FastAPI, precision, meaning how many
+            of the gaps this tool reported are real, drops from 11 of 14 to 8 of
+            14. Measured as a claim about an assistant that indexes
             only the tutorial, all eleven stand, because from that assistant's
             side a page it was never given and a page nobody wrote are the same
             thing. Which number is right depends on which question you came with,
@@ -1711,22 +1799,13 @@
             which is not a better extractor: it is indexing the other 95 pages.
           </p>
 
-          <h3>Why there is no pass or fail gate</h3>
           <p>
-            A threshold at this population size would be decided by two or three
-            items. The interval runs from 0.52 to 0.92, so a gate at 90% and a
-            gate at 60% would disagree about the same fourteen findings.
-            RefusalBench human validated 180 items and scored 93.1%, a rate whose
-            Wilson 95% interval runs from 0.88 to 0.96, so a 90% gate could not
-            separate work done by a funded team with expert annotators from
-            failure.
-          </p>
-          <p>
-            So the number is reported with its interval and no gate is drawn.
-            The build plan set one threshold, a floor at roughly 70% below which
-            the right move is to stop and fix extraction rather than build on top
-            of it. That is an instruction to whoever runs this, not a claim to a
-            reader, and the observed rate clears it.
+            No pass or fail gate is drawn, because at fourteen items a threshold
+            would be decided by two or three of them. RefusalBench human
+            validated 180 items and scored 93.1%, whose own interval runs from
+            0.88 to 0.96, so even a 90% gate could not separate work done by a
+            funded team with expert annotators from failure. The number is
+            reported with its interval instead.
           </p>
 
           <h3>What this does and does not establish</h3>
@@ -1778,8 +1857,9 @@
             </figcaption>
           </figure>
           <p>
-            It says nothing about <em>recall</em>. How many real gaps the pipeline
-            never noticed is not measured here and could not be, because
+            It says nothing about <em>recall</em>, the other half of that pair:
+            of the gaps really out there, how many the pipeline found. How many
+            it never noticed is not measured here and could not be, because
             measuring it would need the hand labelling this design was built to
             avoid. Every guard in the pipeline also pushes the same way: the span
             validator, the scope rule and the definition sweep each drop findings
@@ -1805,8 +1885,9 @@
             <li>
               <strong>The retrieval comparison is underpowered.</strong> Both
               paths declined about 90% of the questions, so the comparison rests
-              on around thirty answers each. A null at p = 0.70 on that base is
-              weak evidence of no difference, not evidence of no difference.
+              on around thirty answers each, and only 17 of those disagree. A
+              null on that base is weak evidence of no difference, not evidence
+              of no difference.
             </li>
             <li>
               <strong>The demand signal is pre-filtered against the
@@ -1917,16 +1998,16 @@
           <h3>So what is the contribution</h3>
           <p>
             Routing, not method. Every piece of prior work above produces a number
-            about a <em>system</em>, and hands it to whoever owns the system.
-            Nobody who can fix a documentation gap can act on "your RAG pipeline
+            about a <em>system</em> and hands it to whoever owns the system.
+            Nobody who can fix a documentation gap can act on "your pipeline
             scores 0.71 on sufficiency".
           </p>
           <p>
-            The output of this pipeline is addressed to the person who owns the
-            content, in their units: this article, this missing fact, this many
-            people asked, and here is the sentence in your own file that shows the
-            article depends on something you never wrote. That is a work item.
-            The benchmark score is not.
+            This one is addressed to the person who owns the content, in their
+            units: this article, this missing fact, this many people asked, and
+            here is the sentence in your own file that shows the article depends
+            on something you never wrote. That is a work item. A benchmark score
+            is not.
           </p>
           <figure class="figure">
             <div class="figure-scroll">

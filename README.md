@@ -195,10 +195,11 @@ claim about the index and 8 of 14 as a claim about FastAPI. Both are published,
 and the cheapest improvement available is not a better extractor, it is indexing
 the other 95 pages.
 
-Answering all 300 questions from both retrieval paths produced 5 confidently
-wrong answers each. The graph path was alone in answering 15 correctly and the
-vector path alone in 12, which an exact paired McNemar test puts at p = 0.70. On
-this corpus graph retrieval did not measurably beat the vector baseline, and the
+Answering all 300 questions both ways: ordinary similarity search produced 24
+correct answers and 5 confidently wrong, graph retrieval 23 correct and 3
+confidently wrong. Only 17 questions had exactly one path right, split 9 to 8, so
+graph retrieval did not make the assistant more right on this corpus. It made it
+more cautious, and the difference is too small to claim either way. The
 comparison is underpowered, and for a reason worth knowing: 282 of the 300
 threads carry FastAPI's Questions template, in which the asker confirms they
 already read the tutorial and did not find the answer. The sample is selected

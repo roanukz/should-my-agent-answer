@@ -17,6 +17,7 @@ Run with:
 from __future__ import annotations
 
 import json
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -213,6 +214,7 @@ class DiagramAccuracyTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
+        cls.flat = re.sub(r"\s+", " ", cls.page)
         cls.nodes = load("graph/nodes.json")["nodes"]
         cls.edges = load("graph/edges.json")["edges"]
         cls.by_id = {n["id"]: n for n in cls.nodes}
@@ -259,7 +261,7 @@ class DiagramAccuracyTest(unittest.TestCase):
         from collections import Counter
         pair = Counter((e["from"], e["to"]) for e in self.edges)
         parallel = sum(1 for v in pair.values() if v > 1)
-        self.assertIn(f"{parallel} ordered pairs carry two", self.page)
+        self.assertIn(f"{parallel} times the extractor produced two relations", self.flat)
 
     def test_defines_wins_where_a_pair_carries_two_relations(self) -> None:
         """The page claims the cautious direction is taken. Check the finders."""
@@ -278,10 +280,9 @@ class DiagramAccuracyTest(unittest.TestCase):
     def test_the_retrieval_comparison_row_matches_answers_json(self) -> None:
         """The costs table quotes the measured result; it must be the real one."""
         summary = load("answers.json")["summary"]
-        for path in ("vector", "graph"):
-            self.assertEqual(summary[path]["wrong_confident"], 5)
-        self.assertIn("p = 0.70", self.page)
-        self.assertAlmostEqual(summary["paired"]["mcnemar_p_correct"], 0.7011, places=3)
+        self.assertEqual(summary["vector"]["wrong_confident"], 5)
+        self.assertEqual(summary["graph"]["wrong_confident"], 3)
+        self.assertIn("3 over the same 300", self.page)
 
     def test_both_figures_are_labelled_for_a_screen_reader(self) -> None:
         for token in ('role="img"', "schema-title", "schema-desc",
@@ -339,8 +340,9 @@ class PublishedNumbersTest(unittest.TestCase):
     def test_the_paired_comparison_runs_on_correctness_discordant_pairs(self) -> None:
         paired = self.answers["summary"]["paired"]
         discordant = paired["vector_only_correct"] + paired["graph_only_correct"]
-        self.assertEqual(discordant, 27)
-        self.assertIn("the 27 questions where exactly one path", self.page)
+        self.assertEqual(discordant, 17)
+        self.assertIn("the 17 where exactly one of them got it", self.page)
+        self.assertIn("that split is 9 to 8", self.page)
 
     def test_the_page_does_not_claim_the_scoring_was_blind(self) -> None:
         """It was not: the scoring prompt names the path in every block."""
@@ -373,7 +375,7 @@ class PublishedNumbersTest(unittest.TestCase):
 
     def test_the_worked_example_is_a_question_the_hop_actually_changed(self) -> None:
         import re
-        result = next(r for r in self.answers["results"] if r["question_id"] == "q:13108")
+        result = next(r for r in self.answers["results"] if r["question_id"] == "q:13828")
         retrieved = set(result["graph"]["retrieved"])
         hopped = {m.group(1)
                   for step in result["graph"]["traversal"]
@@ -429,6 +431,7 @@ class CorpusBoundaryTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
+        cls.flat = re.sub(r"\s+", " ", cls.page)
         cls.boundary = load("corpus_boundary.json")
         cls.near = {f["id"]: f for f in load("findings.json")["findings"]
                     if f["type"] == "near_miss"}
@@ -462,7 +465,8 @@ class CorpusBoundaryTest(unittest.TestCase):
         self.assertEqual(cells[(True, True)], 3)
         self.assertEqual(cells[(False, False)], 2)
         self.assertEqual(cells[(False, True)], 1)
-        self.assertIn("precision drops from 11 of\n            14 to 8 of 14", self.page)
+        self.assertIn("drops from 11 of 14 to 8 of 14", self.flat,
+                      "the page should still state both denominators")
 
     def test_the_page_names_the_three_that_are_index_artifacts(self) -> None:
         artifacts = {self.near[fid]["concept_label"]

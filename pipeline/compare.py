@@ -42,6 +42,10 @@ DATA = ROOT / "data"
 WORK = DATA / "work" / "compare"
 
 TOP_K = 5
+# Of the five slots Path B returns, how many are reserved for sections that
+# DEFINE what the question asks about. The rest go to the one hop. See
+# graph_retrieval for why this is a reservation and not a ranking.
+SEED_SLOTS = 3
 MAX_SECTION_CHARS = 3000
 QUESTIONS_PER_GEN_BATCH = 5
 QUESTIONS_PER_SCORE_BATCH = 10
@@ -173,21 +177,45 @@ def graph_retrieval(gi: GraphIndex, qid: str) -> tuple[list[str], list[str]]:
             steps.append(f"{qid} ASKS_ABOUT {cid} -> no DEFINES anywhere, "
                          f"fell back to {len(set(fallback))} section(s) that depend on it")
 
-    seeds = sorted(seed_score, key=lambda s: (-seed_score[s], s))[:TOP_K]
+    ranked_seeds = sorted(seed_score, key=lambda s: (-seed_score[s], s))
 
     # One hop: whatever the seed sections themselves assume, pull in its
     # definition. This is the move a lexical search cannot make.
+    #
+    # The hop is expanded from the top SEED_SLOTS seeds rather than from the
+    # whole cap, so that the sections it finds have somewhere to go.
     expansion_score: dict[str, int] = defaultdict(int)
-    for sid in seeds:
+    for sid in ranked_seeds[:SEED_SLOTS]:
         for cid in gi.requires_of_section.get(sid, []):
             for definer in gi.defines_by_concept.get(cid, []):
-                if definer in seeds:
+                if definer in ranked_seeds[:SEED_SLOTS]:
                     continue
                 expansion_score[definer] += 1
                 steps.append(f"{sid} REQUIRES {cid} -> DEFINES -> {definer}")
 
-    expansion = sorted(expansion_score, key=lambda s: (-expansion_score[s], s))
-    retrieved = seeds + [s for s in expansion if s not in seeds]
+    expansion = [s for s in sorted(expansion_score, key=lambda s: (-expansion_score[s], s))
+                 if s not in ranked_seeds[:SEED_SLOTS]]
+
+    # Reserve slots rather than ranking seeds first and truncating.
+    #
+    # The first version of this filled all five slots with seeds and appended
+    # the expansion afterwards, so the hop only ever reached the context when a
+    # question produced fewer than five seed sections. Measured on the committed
+    # run, that was 70 questions of 300: on the other 213 the traversal ran and
+    # then had its results thrown away, which means the comparison was not
+    # testing the mechanism it was built to test. Whichever way the numbers land,
+    # an experiment has to actually exercise the thing under test.
+    #
+    # Either side gives up its unused slots, so a question with two seeds and
+    # four prerequisites still returns five sections.
+    seeds = ranked_seeds[:SEED_SLOTS]
+    hops = expansion[:TOP_K - SEED_SLOTS]
+    if len(hops) < TOP_K - SEED_SLOTS:
+        seeds = ranked_seeds[:TOP_K - len(hops)]
+    elif len(seeds) < SEED_SLOTS:
+        hops = expansion[:TOP_K - len(seeds)]
+
+    retrieved = seeds + [s for s in hops if s not in seeds]
     return retrieved[:TOP_K], steps
 
 
