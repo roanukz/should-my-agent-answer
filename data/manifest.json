@@ -39,6 +39,7 @@
     "dropped_span_not_found": 0,
     "dropped_short_span": 0,
     "dropped_heading_only_span": 0,
+    "dropped_bad_type": 2,
     "dropped_duplicate": 89
   },
   "question_mapping": {
@@ -97,5 +98,5 @@
       "mcnemar_p_wrong_confident": 1.0
     }
   },
-  "pipeline_commit": "c6d192f4b31b2eaaec420b63d6a3485bba528568"
+  "pipeline_commit": "16331fa4e206a4d8f32be9aefbb8bd0217203021"
 }

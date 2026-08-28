@@ -462,3 +462,15 @@ class CorpusBoundaryTest(unittest.TestCase):
         self.assertEqual(artifacts, {"APIRoute", "host", "virtual environment"})
         for label in artifacts:
             self.assertIn(label, self.page)
+
+
+class ManifestLedgerTest(unittest.TestCase):
+    """The extraction ledger has to account for every edge that did not survive."""
+
+    def test_the_drops_sum_to_the_gap(self) -> None:
+        e = load("manifest.json")["extraction"]
+        gap = e["edges_proposed"] - e["edges_kept"]
+        drops = sum(v for k, v in e.items() if k.startswith("dropped"))
+        self.assertEqual(
+            gap, drops,
+            "the manifest lost an edge between proposed and kept without saying why")
