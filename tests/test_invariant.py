@@ -635,3 +635,72 @@ class SpellingTest(unittest.TestCase):
                                          self.scrub(value)):
                     offenders.append(hit)
         self.assertEqual(offenders, [])
+
+
+class ShareCardTest(unittest.TestCase):
+    """Every page that gets linked needs a share card that actually resolves.
+
+    A posted link with no preview, next to sibling links that have one, reads as
+    the unfinished project. The card is part of the build, so it is tested like
+    the rest of it.
+    """
+
+    PAGES = {"index.html": "og-image", "tool.html": "og-tool"}
+    BASE = "https://roanukz.github.io/should-my-agent-answer/"
+
+    def png_size(self, path: Path) -> tuple:
+        """Width and height straight out of the PNG header, no dependency."""
+        import struct
+        blob = path.read_bytes()
+        self.assertEqual(blob[:8], b"\x89PNG\r\n\x1a\n", f"{path.name} is not a PNG")
+        width, height = struct.unpack(">II", blob[16:24])
+        return width, height
+
+    def test_both_cards_exist_as_svg_source_and_rendered_png(self) -> None:
+        for stem in self.PAGES.values():
+            self.assertTrue((ROOT / f"{stem}.svg").exists(), f"{stem}.svg missing")
+            self.assertTrue((ROOT / f"{stem}.png").exists(), f"{stem}.png missing")
+
+    def test_the_pngs_are_rendered_at_two_times(self) -> None:
+        """1200x627 coordinate space, rendered at 2x so it stays sharp."""
+        for stem in self.PAGES.values():
+            self.assertEqual(self.png_size(ROOT / f"{stem}.png"), (2400, 1254), stem)
+
+    def test_the_svg_declares_the_open_graph_coordinate_space(self) -> None:
+        for stem in self.PAGES.values():
+            svg = (ROOT / f"{stem}.svg").read_text(encoding="utf-8")
+            self.assertIn('viewBox="0 0 1200 627"', svg, stem)
+
+    def test_every_element_survives_the_square_crop(self) -> None:
+        """LinkedIn's Featured section center crops, so nothing may sit outside
+        the 540px center column at x 330 to 870."""
+        import re
+        for stem in self.PAGES.values():
+            svg = (ROOT / f"{stem}.svg").read_text(encoding="utf-8")
+            body = re.sub(r"<!--.*?-->", "", svg, flags=re.S)
+            for match in re.finditer(r'<rect[^>]*?x="([\d.]+)"[^>]*?width="([\d.]+)"', body):
+                x, w = float(match.group(1)), float(match.group(2))
+                if w >= 1200:
+                    continue  # the full-bleed background
+                self.assertGreaterEqual(x, 330, f"{stem}: a rect starts left of the column")
+                self.assertLessEqual(x + w, 870, f"{stem}: a rect ends right of the column")
+            for match in re.finditer(r'<line[^>]*?x1="([\d.]+)"[^>]*?x2="([\d.]+)"', body):
+                for value in (float(match.group(1)), float(match.group(2))):
+                    self.assertGreaterEqual(value, 330, f"{stem}: a line leaves the column")
+                    self.assertLessEqual(value, 870, f"{stem}: a line leaves the column")
+
+    def test_the_cards_fetch_nothing(self) -> None:
+        for stem in self.PAGES.values():
+            svg = (ROOT / f"{stem}.svg").read_text(encoding="utf-8")
+            for banned in ("<image", "xlink:href", "@import", "url(http", ".woff", "<use"):
+                self.assertNotIn(banned, svg, f"{stem} reaches outside itself")
+
+    def test_each_page_points_at_its_own_card_with_dimensions_and_alt(self) -> None:
+        for page, stem in self.PAGES.items():
+            html = (ROOT / page).read_text(encoding="utf-8")
+            self.assertIn(f'content="{self.BASE}{stem}.png"', html, page)
+            self.assertIn('property="og:image:width" content="2400"', html, page)
+            self.assertIn('property="og:image:height" content="1254"', html, page)
+            self.assertIn('property="og:image:alt"', html, page)
+            self.assertIn('name="twitter:card" content="summary_large_image"', html, page)
+            self.assertIn('property="og:url"', html, page)

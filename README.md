@@ -214,6 +214,21 @@ maps a whole documentation set and finds which articles will make an agent
 answer wrongly. That one is a linter for the page in front of you; this one is a
 map of everything you own.
 
+## Share cards
+
+`og-image.svg` is the source for the teardown's card and `og-tool.svg` for the
+explorer's. The PNGs are what the meta tags point at. Edit the SVG, never the
+PNG, and re-render:
+
+```bash
+node -e 'const s=require("sharp"),f=require("fs");for(const[a,b]of[["og-image.svg","og-image.png"],["og-tool.svg","og-tool.png"]])s(f.readFileSync(a),{density:288}).resize(2400,1254).png({compressionLevel:9}).toFile(b)'
+```
+
+The coordinate space is 1200x627 and the render is 2x, because a 1x asset gets
+scaled up on high-DPI screens and softens. Every element sits inside a 540px
+wide center column, because LinkedIn's Featured section ignores the 1.91:1
+ratio and center crops to roughly a square.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
