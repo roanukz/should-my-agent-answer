@@ -30,14 +30,16 @@
         <h1>Should My Agent Answer This?</h1>
         <p class="lede">
           Every finding below names an article an AI assistant would retrieve for
-          a real question and answer wrongly from, and the specific fact the
-          documentation never supplies. Open "How this was computed" on any card
-          to see the graph path and the verbatim sentence behind each hop.
+          a real question, and a gap in it. The 14 near misses also name the
+          specific fact the documentation never supplies and quote the answer
+          that supplies it. Open "How this was computed" on any card to see the
+          graph path and the verbatim sentence behind each hop.
         </p>
         <p class="byline">
           FastAPI documentation, 60 pages, crossed against 300 answered GitHub
-          Discussions. Results are committed, and this page makes no network
-          calls.
+          Discussions. 14 of these findings were checked by three independent
+          readers and 139 were not, which every card says on its face. Results
+          are committed, and this page makes no network calls.
         </p>
         <div class="facts" id="summary-strip"></div>
       </div>
@@ -62,6 +64,15 @@
               <option value="near_miss">Near miss</option>
               <option value="orphan_concept">Orphan concept</option>
               <option value="retrieval_collision">Retrieval collision</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filter-status">Checked</label>
+            <select id="filter-status">
+              <option value="all">Any status</option>
+              <option value="held">Checked, holds up</option>
+              <option value="failed">Checked, did not hold up</option>
+              <option value="unchecked">Not independently checked</option>
             </select>
           </div>
           <div class="field">
@@ -106,7 +117,7 @@
           Findings are a sample, not a full audit: 60 of the 155 English
           documentation pages and 300 of the roughly 3,900 answered threads.
           Extraction quality bounds every number here, and the teardown reports
-          what an independent check of a random sample found.
+          what an independent check of every near miss found.
           <a href="index.html">Read the teardown</a> for the method, the
           numbers, and the limits.
         </p>

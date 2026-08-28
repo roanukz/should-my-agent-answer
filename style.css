@@ -561,6 +561,100 @@ caption {
   min-width: 2px;
 }
 
+/* ---------- the worked failure ----------
+   One real confidently wrong answer, set as a three column comparison so a
+   reader can see the failure rather than read a description of it. On a narrow
+   screen the columns stack, because reading three of these side by side at
+   375px is worse than reading them in sequence. */
+
+.demo {
+  margin: var(--space-32) 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.demo-head {
+  padding: var(--space-16) var(--space-24);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-sunken);
+}
+
+.demo-head h4 {
+  margin: 0 0 var(--space-4);
+}
+
+.demo-head p {
+  margin: 0;
+  font-size: var(--size-13);
+  line-height: var(--lh-16);
+  color: var(--text-muted);
+  max-width: none;
+}
+
+.demo-grid {
+  display: grid;
+  gap: 1px;
+  background: var(--border-subtle);
+}
+
+@media (min-width: 860px) {
+  .demo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.demo-cell {
+  background: var(--surface);
+  padding: var(--space-16) var(--space-24);
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.demo-cell .label {
+  display: block;
+  font-size: var(--size-13);
+  line-height: var(--lh-13);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: var(--space-8);
+  color: var(--text-muted);
+}
+
+.demo-cell p {
+  margin: 0 0 var(--space-8);
+  font-size: var(--size-13);
+  line-height: var(--lh-16);
+  max-width: none;
+}
+
+.demo-cell p:last-child {
+  margin-bottom: 0;
+}
+
+.demo-wrong .label {
+  color: var(--error-text);
+}
+
+.demo-right .label {
+  color: var(--success-text);
+}
+
+.demo-verdict {
+  padding: var(--space-16) var(--space-24);
+  border-top: 1px solid var(--border-subtle);
+  background: var(--error-tint);
+  color: var(--error-deep);
+  font-size: var(--size-13);
+  line-height: var(--lh-16);
+}
+
+.demo-verdict strong {
+  color: var(--error-deep);
+}
+
 /* ---------- diagrams ----------
    Inline SVG, because the zero-network rule applies to pictures too and a
    diagram that is really an image cannot recolour itself for dark mode. Every
@@ -590,6 +684,11 @@ caption {
      its own box rather than shrinking. The page never scrolls sideways. */
   min-width: 660px;
   height: auto;
+}
+
+/* A single bar needs far less horizontal room before it stops being legible. */
+.diagram-short {
+  min-width: 420px;
 }
 
 .figure figcaption {
@@ -695,6 +794,39 @@ caption {
   font-size: 12px;
   font-style: italic;
   fill: var(--error-text);
+  text-anchor: middle;
+}
+
+.diagram .d-wf-val {
+  font-size: 17px;
+  font-weight: 600;
+  fill: var(--text-heading);
+  text-anchor: middle;
+}
+
+.diagram .d-wf-delta {
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--warning-text);
+  text-anchor: middle;
+}
+
+.diagram .d-wf-drop {
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--error-text);
+  text-anchor: middle;
+}
+
+.diagram .d-wf-lab {
+  font-size: 12px;
+  fill: var(--text-body);
+  text-anchor: middle;
+}
+
+.diagram .d-wf-sub {
+  font-size: 11px;
+  fill: var(--text-muted);
   text-anchor: middle;
 }
 
@@ -884,6 +1016,14 @@ caption {
   background: var(--success-tint);
   color: var(--success-text);
   border-color: var(--success-line);
+}
+
+/* The commonest status by a distance: 139 of 153. Neutral rather than a
+   warning colour, because "nobody has checked this" is not a defect claim. */
+.tag-unchecked {
+  background: var(--surface-sunken);
+  color: var(--text-muted);
+  border-color: var(--border-default);
 }
 
 .tag-invalidated {

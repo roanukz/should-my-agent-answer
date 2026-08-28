@@ -40,7 +40,9 @@
      by nothing. */
   var SORTS = { demand: 1, 'demand-asc': 1, concept: 1, id: 1 };
 
-  var state = { type: 'all', sort: 'demand', query: '', shown: PAGE_SIZE };
+  var STATUSES = { held: 1, failed: 1, unchecked: 1 };
+
+  var state = { type: 'all', status: 'all', sort: 'demand', query: '', shown: PAGE_SIZE };
 
   var els = {};
 
@@ -99,10 +101,20 @@
 
   /* ---------- filtering ---------- */
 
+  /* Only the near misses were ever put in front of a checker. Everything else
+     carries validated: null, which the cards now say out loud rather than
+     leaving as a missing badge. */
+  function statusOf(f) {
+    if (f.validated === true) return 'held';
+    if (f.validated === false) return 'failed';
+    return 'unchecked';
+  }
+
   function selected() {
     var query = state.query.trim().toLowerCase();
     var out = DATA.findings.filter(function (f) {
       if (state.type !== 'all' && f.type !== state.type) return false;
+      if (state.status !== 'all' && statusOf(f) !== state.status) return false;
       if (query && f._hay.indexOf(query) === -1) return false;
       return true;
     });
@@ -201,6 +213,10 @@
     } else if (f.validated === false) {
       left.appendChild(document.createTextNode(' '));
       left.appendChild(el('span', 'tag tag-invalidated', 'Checked, did not hold up'));
+    } else {
+      left.appendChild(document.createTextNode(' '));
+      left.appendChild(
+        el('span', 'tag tag-unchecked', 'Not independently checked'));
     }
     head.appendChild(left);
 
@@ -364,6 +380,7 @@
   function syncHash() {
     var params = [];
     if (state.type !== 'all') params.push('type=' + state.type);
+    if (state.status !== 'all') params.push('status=' + state.status);
     if (state.query) params.push('q=' + encodeURIComponent(state.query));
     if (state.sort !== 'demand') params.push('sort=' + state.sort);
     var hash = params.length ? '#' + params.join('&') : '';
@@ -397,6 +414,7 @@
     hash.split('&').forEach(function (pair) {
       var bits = pair.split('=');
       if (bits[0] === 'type' && TYPE_LABEL[bits[1]]) state.type = bits[1];
+      if (bits[0] === 'status' && STATUSES[bits[1]]) state.status = bits[1];
       if (bits[0] === 'q') state.query = decodeOrRaw(bits[1]);
       if (bits[0] === 'sort' && SORTS[bits[1]]) state.sort = bits[1];
     });
@@ -443,6 +461,7 @@
     els.blurb = document.getElementById('type-blurb');
     els.pager = document.getElementById('pager');
     els.type = document.getElementById('filter-type');
+    els.status = document.getElementById('filter-status');
     els.sort = document.getElementById('sort-by');
     els.search = document.getElementById('search');
 
@@ -456,6 +475,7 @@
 
     readHash();
     els.type.value = state.type;
+    if (els.status) els.status.value = state.status;
     els.sort.value = state.sort;
     els.search.value = state.query;
 
@@ -464,6 +484,13 @@
       state.shown = PAGE_SIZE;
       render();
     });
+    if (els.status) {
+      els.status.addEventListener('change', function () {
+        state.status = els.status.value;
+        state.shown = PAGE_SIZE;
+        render();
+      });
+    }
     els.sort.addEventListener('change', function () {
       state.sort = els.sort.value;
       state.shown = PAGE_SIZE;
@@ -485,11 +512,13 @@
        the back button would otherwise see nothing happen. */
     window.addEventListener('hashchange', function () {
       state.type = 'all';
+      state.status = 'all';
       state.query = '';
       state.sort = 'demand';
       state.shown = PAGE_SIZE;
       readHash();
       els.type.value = state.type;
+      if (els.status) els.status.value = state.status;
       els.sort.value = state.sort;
       els.search.value = state.query;
       render();

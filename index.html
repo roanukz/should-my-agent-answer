@@ -149,7 +149,10 @@
               <strong>Graph retrieval did not beat the vector baseline
                 here.</strong>
               Both paths were run over all 300 questions and both produced
-              exactly 5 confidently wrong answers. The graph was alone in answering 15
+              exactly 5 confidently wrong answers. Both also declined about 90%
+              of them, which turns out to be roughly the right answer: the
+              questions come from people who had already read the documentation
+              and said so. The graph was alone in answering 15
               correctly and the vector path alone in 12, which an exact paired
               test puts at p = 0.70 (<a href="#retrieval">Part 5</a>). The
               experiment is also underpowered, for a reason worth knowing about
@@ -183,6 +186,69 @@
             it, because the assistant resolved the request and the deflection
             metric counted it as a success. The article looks healthy forever.
           </p>
+
+
+          <p>
+            That third case is easier to recognise when you watch one happen.
+            This is a real one, produced by the vector baseline in
+            <a href="#retrieval">Part 5</a> and scored against the reply the
+            asker actually got.
+          </p>
+
+          <div class="demo">
+            <div class="demo-head">
+              <h4>Discussion 13455: "Fetching a lot of time series data"</h4>
+              <p>
+                Someone reports that a large JSON response takes about half a
+                second to build, and asks how to speed it up.
+              </p>
+            </div>
+            <div class="demo-grid">
+              <div class="demo-cell">
+                <span class="label">What retrieval returned</span>
+                <p>Extra Data Types / Example</p>
+                <p>Server-Sent Events / Raw Data</p>
+                <p>Additional Responses / Combining information</p>
+                <p>Stream Data / No Annotation</p>
+                <p>Server-Sent Events / Stream SSE with FastAPI</p>
+                <p>
+                  Five sections, all plausibly about returning data. None of them
+                  is about where the half second is going.
+                </p>
+              </div>
+              <div class="demo-cell demo-wrong">
+                <span class="label">What the assistant said</span>
+                <p>
+                  "Let Pydantic serialize. Declare the return type (or
+                  response_model) instead of building the payload yourself. The
+                  docs state Pydantic serializes on the Rust side and you get
+                  much higher performance."
+                </p>
+                <p>
+                  Fluent, specific, sourced to the retrieved text, and offered
+                  without a hedge.
+                </p>
+              </div>
+              <div class="demo-cell demo-right">
+                <span class="label">What the maintainer said</span>
+                <p>
+                  That the timing figure the asker quoted is measured before the
+                  first byte arrives, so it already includes the round trip, and
+                  the server is spending that time computing the response rather
+                  than serialising it.
+                </p>
+                <p>Different problem. Different fix.</p>
+              </div>
+            </div>
+            <div class="demo-verdict">
+              <strong>This is the failure.</strong> Nobody filed a complaint,
+              because the asker got an answer. Retrieval succeeded, in the sense
+              that it returned five relevant looking sections. The assistant was
+              not hallucinating, in the sense that everything it said is in those
+              sections. The deflection metric recorded a success. And the advice
+              points away from the actual cause.
+            </div>
+          </div>
 
           <p>
             The third case is not a rarer version of the second. It is
@@ -1404,6 +1470,16 @@
             three-answer lead as a result would be a worse mistake than reporting
             the null.
           </p>
+          <p>
+            It is worth being specific about what "not enough" means here,
+            because "underpowered" on its own tells a reader nothing they can
+            act on. With 27 discordant pairs, the smallest split this test could
+            have called significant at the 5% level is 20 against 7, which is a
+            net edge of 13 questions out of 300. The observed edge was 3. So this
+            design could only ever have detected a difference roughly four times
+            larger than the one that showed up, and the null is much weaker
+            evidence of no difference than the phrase suggests.
+          </p>
 
           <h3>Why the experiment is underpowered, which is its own finding</h3>
           <p>
@@ -1413,20 +1489,32 @@
           </p>
 
           <div class="callout callout-warning">
-            <h4>282 of the 300 threads carry FastAPI's bug-report template</h4>
+            <h4>
+              282 of the 300 askers had already read the documentation and said so
+            </h4>
             <p>
-              The Questions category on that repository is used mostly for bug
-              reports, version-specific breakage and feature discussion, not for
-              "how do I". A documentation assistant genuinely cannot answer
-              "background tasks run asynchronously only on Windows", and
-              declining is the correct behaviour, not a failure of retrieval.
+              That is what the template on FastAPI's Questions form asks people to
+              confirm before posting, line by line: "I searched the FastAPI
+              documentation, with the integrated search", and "I already read and
+              followed all the tutorial in the docs and didn't find an answer."
+              282 of the 300 threads carry it.
+            </p>
+            <p>
+              Which makes the decline rate close to correct behaviour rather than
+              a failure of retrieval. The demand signal is drawn, by construction,
+              from the population for whom the documentation had already failed,
+              and the corpus those questions are being answered from is the
+              tutorial they had just finished reading. An assistant that answered
+              most of them confidently from those 60 pages would be doing the
+              thing this whole project is about.
             </p>
             <p>
               I checked whether my own generation prompt had caused the
               abstaining, since it told the agent what was being measured, which
               is a good way to change the behaviour under test. Three batches
-              rerun without that line declined 11 of 15 instead of 12 of 15. The
-              prompt was not the cause. The corpus is.
+              rerun without that line declined 11 of 15 instead of 12 of 15,
+              which is far too small a probe to detect a modest prompt effect and
+              is reported here as the weak check it is.
             </p>
           </div>
 
@@ -1435,11 +1523,12 @@
             use public discussions as the demand signal. It works well for
             finding gaps, because the fourteen near misses in
             <a href="#found">Part 4</a> all came from these same threads. It works
-            badly as an answerability benchmark, because most of these questions
-            were never answerable from documentation by anyone. A real team's
-            search log would not have that problem, and this is the clearest
-            place where free ground truth turned out to be worth exactly what was
-            paid for it.
+            badly as an answerability benchmark, and for a reason worth stating
+            plainly: the sample is selected for being unanswerable from the
+            documentation, so it cannot fairly measure how well anything answers
+            from the documentation. A real team's search log would carry the
+            answerable questions too, and this is the clearest place where free
+            ground truth turned out to be worth exactly what was paid for it.
           </p>
 
           <div class="callout callout-notice">
@@ -1469,8 +1558,9 @@
           <p>
             Round one did not see 57 near misses. A first definition sweep had
             already taken them to 33, by finding real definitions for 74 of the
-            164 concepts nothing appeared to define, and 33 is the population
-            round one checked.
+            164 concepts nothing appeared to define, of which 72 survived span
+            validation and became edges, and 33 is the population round one
+            checked.
           </p>
 
           <div class="table-scroll">
@@ -1511,6 +1601,90 @@
               </tbody>
             </table>
           </div>
+
+          <p>
+            That looks like a large improvement and most of it is not one. Round
+            two's fourteen findings are a strict subset of round one's
+            thirty-three: no new finding entered, so the rate moved for three
+            different reasons and only one of them is extraction getting better.
+          </p>
+
+          <figure class="figure">
+            <div class="figure-scroll">
+              <svg
+                class="diagram"
+                viewBox="0 0 1000 300"
+                role="img"
+                aria-labelledby="waterfall-title waterfall-desc"
+              >
+                <title id="waterfall-title">
+                  Where the jump from 27% to 79% actually came from
+                </title>
+                <desc id="waterfall-desc">
+                  Round one scored 9 valid of 33, which is 27.3%. Removing 18
+                  findings already known to be invalid raises the rate to 60%
+                  without improving anything. Removing async, a finding round one
+                  had confirmed, lowers it to 57.1%. Three findings whose verdict
+                  genuinely changed on re-examination raise it to 78.6%. Only
+                  that last step is new information.
+                </desc>
+
+                <line x1="70" y1="250" x2="960" y2="250" stroke="var(--border-default)" />
+
+                <rect x="80" y="182" width="120" height="68" rx="3"
+                      fill="var(--neutral-fill-pressed)" stroke="var(--border-strong)" />
+                <text x="140" y="172" class="d-wf-val">27.3%</text>
+                <text x="140" y="270" class="d-wf-lab">Round one</text>
+                <text x="140" y="285" class="d-wf-sub">9 of 33</text>
+
+                <rect x="270" y="100" width="120" height="82" rx="3"
+                      fill="var(--warning-tint)" stroke="var(--warning-line)" />
+                <text x="330" y="90" class="d-wf-delta">+32.7</text>
+                <text x="330" y="270" class="d-wf-lab">Drop 18 already</text>
+                <text x="330" y="285" class="d-wf-sub">known invalid</text>
+
+                <rect x="460" y="100" width="120" height="150" rx="3"
+                      fill="var(--neutral-fill-pressed)" stroke="var(--border-strong)" />
+                <text x="520" y="90" class="d-wf-val">60.0%</text>
+                <text x="520" y="270" class="d-wf-lab">Nothing improved</text>
+                <text x="520" y="285" class="d-wf-sub">9 of 15</text>
+
+                <rect x="650" y="100" width="120" height="16" rx="3"
+                      fill="var(--error-tint)" stroke="var(--error-line)" />
+                <text x="710" y="90" class="d-wf-drop">2.9</text>
+                <text x="710" y="270" class="d-wf-lab">Drop async, which</text>
+                <text x="710" y="285" class="d-wf-sub">round one confirmed</text>
+
+                <rect x="840" y="54" width="120" height="196" rx="3"
+                      fill="var(--success-tint)" stroke="var(--success-line)" stroke-width="2" />
+                <text x="900" y="44" class="d-wf-val">78.6%</text>
+                <text x="900" y="270" class="d-wf-lab">Three verdicts</text>
+                <text x="900" y="285" class="d-wf-sub">actually changed</text>
+
+                <line x1="200" y1="182" x2="270" y2="182" stroke="var(--border-strong)" stroke-dasharray="3 3" />
+                <line x1="390" y1="100" x2="460" y2="100" stroke="var(--border-strong)" stroke-dasharray="3 3" />
+                <line x1="580" y1="100" x2="650" y2="100" stroke="var(--border-strong)" stroke-dasharray="3 3" />
+                <line x1="770" y1="116" x2="840" y2="116" stroke="var(--border-strong)" stroke-dasharray="3 3" />
+              </svg>
+            </div>
+            <figcaption>
+              Two of the four steps are definitional. Dropping findings you have
+              already been told are wrong raises a precision figure without
+              telling you anything, and it is most of the movement here. The one
+              step that is evidence is the last: three findings that round one
+              rejected and three independent readers later confirmed. Computed
+              from <code>data/validation-round-1.json</code> and
+              <code>data/validation.json</code>.
+            </figcaption>
+          </figure>
+
+          <p>
+            So the defensible reading of round two is narrower than the headline.
+            It says that after removing the findings round one had already
+            condemned, what is left holds up at 11 of 14. It does not say that
+            extraction improved by 51 points, and a reader who took the two rates
+            as a before and after of the same thing would be reading it wrong.
+          </p>
 
           <h3>What round one caught</h3>
           <p>
@@ -1590,8 +1764,9 @@
           <p>
             On the two where the readers agreed a definition existed, the
             proposed spans went through the same validator as every other edge
-            and both were rejected, because each one straddles a section
-            boundary. No edge was added on a span that could not be checked, and
+            and both were rejected, three for a span that could not be found and
+            one for a file that maps to no section. No edge was added on a span
+            that could not be checked, and
             the invariant held under pressure from me rather than from a model.
           </p>
 
@@ -1637,6 +1812,48 @@
             one of the fourteen.
           </p>
           <p>
+            It establishes nothing about the other 139 findings. The explorer
+            ships 153, and the 78.6% covers only the 14 near misses. Every orphan
+            concept and every retrieval collision carries
+            <code>validated: null</code> in
+            <code>data/findings.json</code>, and the explorer says so on each
+            card by showing no verdict chip, which is a quieter signal than it
+            should be.
+          </p>
+
+          <figure class="figure">
+            <div class="figure-scroll">
+              <svg
+                class="diagram diagram-short"
+                viewBox="0 0 1000 96"
+                role="img"
+                aria-labelledby="coverage-title coverage-desc"
+              >
+                <title id="coverage-title">How much of the output was checked</title>
+                <desc id="coverage-desc">
+                  Of 153 findings, 11 were checked and held up, 3 were checked and
+                  did not, and 139 were never checked. The unchecked portion is
+                  every orphan concept and every retrieval collision.
+                </desc>
+                <rect x="10" y="20" width="71" height="34" rx="3"
+                      fill="var(--success-tint)" stroke="var(--success-line)" />
+                <rect x="81" y="20" width="20" height="34"
+                      fill="var(--error-tint)" stroke="var(--error-line)" />
+                <rect x="101" y="20" width="889" height="34" rx="3"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)"
+                      stroke-dasharray="5 4" />
+                <text x="45" y="78" class="d-wf-sub">11 held up</text>
+                <text x="120" y="78" class="d-wf-sub" text-anchor="start">3 did not</text>
+                <text x="545" y="42" class="d-wf-lab">139 never checked: every orphan concept and every retrieval collision</text>
+              </svg>
+            </div>
+            <figcaption>
+              The validated fraction of what the explorer ships. Checking the
+              other two types needs a different test from the one in this part,
+              because an orphan concept has no thread answer to check against.
+            </figcaption>
+          </figure>
+          <p>
             It says nothing about <em>recall</em>. How many real gaps the pipeline
             never noticed is not measured here and could not be, because
             measuring it would need the hand labelling this design was built to
@@ -1667,11 +1884,15 @@
               weak evidence of no difference, not evidence of no difference.
             </li>
             <li>
-              <strong>The demand signal is a bug tracker.</strong> 282 of the 300
-              threads carry FastAPI's bug-report template. That is fine for
-              finding gaps and poor for benchmarking answerability, and it is the
-              price of the free ground truth in <a href="#built">Part 3</a>. A
-              real team's search log would be a different and better input.
+              <strong>The demand signal is pre-filtered against the
+                documentation.</strong>
+              282 of the 300 threads carry FastAPI's Questions template, in which
+              the asker confirms they already read the tutorial and did not find
+              the answer. That is excellent for finding gaps and useless for
+              benchmarking answerability, because the sample is selected for
+              being unanswerable from the docs. It is the price of the free
+              ground truth in <a href="#built">Part 3</a>. A real team's search
+              log would contain the answerable questions too.
             </li>
             <li>
               <strong>Extraction quality bounds everything downstream.</strong>

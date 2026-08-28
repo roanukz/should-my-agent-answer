@@ -194,8 +194,11 @@ Answering all 300 questions from both retrieval paths produced 5 confidently
 wrong answers each. The graph path was alone in answering 15 correctly and the
 vector path alone in 12, which an exact paired McNemar test puts at p = 0.70. On
 this corpus graph retrieval did not measurably beat the vector baseline, and the
-comparison is underpowered because 282 of the 300 threads are bug reports that no
-documentation set could answer.
+comparison is underpowered, and for a reason worth knowing: 282 of the 300
+threads carry FastAPI's Questions template, in which the asker confirms they
+already read the tutorial and did not find the answer. The sample is selected
+for being unanswerable from the documentation, so both paths declining about 90%
+of it is close to correct behaviour rather than a retrieval failure.
 
 ## Related
 
