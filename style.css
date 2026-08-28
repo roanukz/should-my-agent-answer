@@ -134,6 +134,17 @@ strong {
   top: var(--space-16);
 }
 
+/* The skip link needs a target that can actually take focus, so main carries
+   tabindex="-1". That makes it focusable by script only, and Safari would
+   otherwise draw a focus ring around the entire page when the link is used. */
+main:focus {
+  outline: none;
+}
+
+main:focus-visible {
+  outline: none;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

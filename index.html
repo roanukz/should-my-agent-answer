@@ -108,7 +108,7 @@
         </ol>
       </nav>
 
-      <main id="main">
+      <main id="main" tabindex="-1">
         <section id="tldr" class="tldr">
           <p class="section-kicker">The short version</p>
           <h2>Summary</h2>
@@ -148,8 +148,8 @@
             <li>
               <strong>Graph retrieval did not beat the vector baseline
                 here.</strong>
-              Both paths answered all 300 questions and both produced exactly 5
-              confidently wrong answers. The graph was alone in answering 15
+              Both paths were run over all 300 questions and both produced
+              exactly 5 confidently wrong answers. The graph was alone in answering 15
               correctly and the vector path alone in 12, which an exact paired
               test puts at p = 0.70 (<a href="#retrieval">Part 5</a>). The
               experiment is also underpowered, for a reason worth knowing about
@@ -1009,8 +1009,8 @@
               </thead>
               <tbody>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0001">6</a></td>
-                  <td>event loop</td>
+                  <td class="num">6</td>
+                  <td><a href="tool.html#F1-0001">event loop</a></td>
                   <td>
                     how to run a coroutine on the main thread's event loop from a
                     sync path operation function, which FastAPI runs on a
@@ -1019,8 +1019,8 @@
                   <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0002">3</a></td>
-                  <td><code>APIRoute</code></td>
+                  <td class="num">3</td>
+                  <td><a href="tool.html#F1-0002"><code>APIRoute</code></a></td>
                   <td>
                     which parts of APIRoute are safe to subclass, given that
                     overriding its constructor is not a supported extension point
@@ -1028,8 +1028,8 @@
                   <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0004">1</a></td>
-                  <td><code>EmailStr</code></td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0004"><code>EmailStr</code></a></td>
                   <td>
                     how to declare an optional EmailStr form field that accepts an
                     empty submission, which browsers send as an empty string
@@ -1037,8 +1037,8 @@
                   <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0005">1</a></td>
-                  <td><code>exc.errors()</code></td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0005"><code>exc.errors()</code></a></td>
                   <td>
                     when WebSocketRequestValidationError applies, which is only
                     during the connection stage before accept
@@ -1046,8 +1046,8 @@
                   <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0007">1</a></td>
-                  <td>port</td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0007">port</a></td>
                   <td>
                     which layer returns a 502 with an empty body while uvicorn is
                     already listening on the port
@@ -1055,8 +1055,8 @@
                   <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0008">1</a></td>
-                  <td><code>session.exec</code></td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0008"><code>session.exec</code></a></td>
                   <td>
                     which select session.exec requires, the one from sqlmodel
                     rather than the one from sqlalchemy
@@ -1064,8 +1064,8 @@
                   <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0009">1</a></td>
-                  <td>host</td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0009">host</a></td>
                   <td>
                     how to check whether a server bound to 0.0.0.0 is actually
                     reachable from a client
@@ -1073,8 +1073,8 @@
                   <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0010">1</a></td>
-                  <td><code>jwt.decode</code></td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0010"><code>jwt.decode</code></a></td>
                   <td>
                     which jwt.decode arguments handle a token carrying an aud
                     claim, the audience value or the verify_aud option
@@ -1082,8 +1082,8 @@
                   <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0011">1</a></td>
-                  <td><code>Literal</code></td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0011"><code>Literal</code></a></td>
                   <td>
                     what Enum gives predefined parameter values that
                     typing.Literal does not, and when each one fits
@@ -1091,8 +1091,8 @@
                   <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0013">1</a></td>
-                  <td><code>ValidationError</code></td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0013"><code>ValidationError</code></a></td>
                   <td>
                     how to return a validation style error for one body field from
                     inside a path operation function, and what shape each entry in
@@ -1101,8 +1101,8 @@
                   <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0014">1</a></td>
-                  <td>virtual environment</td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0014">virtual environment</a></td>
                   <td>
                     which Python version a virtual environment for running
                     FastAPI's own test suite must use
@@ -1110,8 +1110,8 @@
                   <td class="yes">Yes</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0003">1</a></td>
-                  <td>path operation</td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0003">path operation</a></td>
                   <td>
                     how to attach several named OpenAPI examples to a response
                     declared on an APIRouter
@@ -1119,8 +1119,8 @@
                   <td class="no">No</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0006">1</a></td>
-                  <td><code>fastapi.encoders</code></td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0006"><code>fastapi.encoders</code></a></td>
                   <td>
                     how to give jsonable_encoder a rule for a type it does not
                     recognise
@@ -1128,8 +1128,8 @@
                   <td class="no">No</td>
                 </tr>
                 <tr>
-                  <td class="num"><a href="tool.html#F1-0012">1</a></td>
-                  <td><code>TokenData</code></td>
+                  <td class="num">1</td>
+                  <td><a href="tool.html#F1-0012"><code>TokenData</code></a></td>
                   <td>
                     why the tutorial declares a TokenData model rather than passing
                     the decoded username straight through
@@ -1223,8 +1223,8 @@
             section depends on. Path A cannot, because a prerequisite is not
             lexically similar to the question that needs it. Across the 300
             questions the two paths never once returned the same set of sections,
-            and in 282 of them the graph reached at least one section the vector
-            path did not.
+            and in all but eighteen of them the graph reached at least one
+            section the vector path did not.
           </p>
           <p>
             The two paths were not always given the same budget, which matters
@@ -1445,10 +1445,13 @@
           <div class="callout callout-notice">
             <h4>Prior work on exactly this comparison</h4>
             <p>
-              A vector against graph retrieval comparison on abstention behaviour
-              has been published before. This reproduces the comparison on a new
-              corpus and does not claim the idea. Treat the numbers above as one
-              more data point, and a null one.
+              Comparing retrieval strategies on whether a model abstains when it
+              should is a well populated line of work, and the four benchmarks in
+              <a href="#prior">Part 8</a> exist to measure exactly that. I am not
+              citing a specific paper for the vector against graph version of it,
+              because I did not find one I could check, and naming a reference I
+              have not read would be a strange thing to do on this page. Treat
+              the numbers above as one more data point, and a null one.
             </p>
           </div>
         </section>
@@ -1697,8 +1700,11 @@
             </li>
             <li>
               <strong>A sample, not an audit.</strong> 60 of 155 English pages and
-              300 of roughly 3,900 answered threads. The counts are counts within
-              that slice.
+              300 of roughly 3,900 answered threads, and those 300 are not simply
+              the most recent: a thread was skipped unless its accepted answer ran
+              to 120 characters, because an answer of "+1" carries no fact that
+              could be missing from the documentation. 67 were skipped to reach
+              300. The counts are counts within that slice.
             </li>
             <li>
               <strong>No claim about a deployed assistant.</strong> This measures
