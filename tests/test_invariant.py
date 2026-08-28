@@ -499,8 +499,11 @@ class SpellingTest(unittest.TestCase):
     not English words.
     """
 
+    # A leading prefix must not hide the stem: "recolour" slipped past a pattern
+    # that anchored on a word boundary immediately before it.
     BRITISH = re.compile(
-        r"\b(colour\w*|behaviour\w*|organis\w*|prioritis\w*|normalis\w*"
+        r"\b(?:re|un|dis|mis|over|under|pre|non|de)?"
+        r"(colour\w*|behaviour\w*|organis\w*|prioritis\w*|normalis\w*"
         r"|recognis\w*|summaris\w*|categoris\w*|minimis\w*|maximis\w*"
         r"|analyse\w*|licence|defence|centre[sd]?|favour\w*|labelling"
         r"|labelled|modelling|modelled|cancelled|cancelling|fulfil|whilst"

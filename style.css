@@ -657,7 +657,7 @@ caption {
 
 /* ---------- diagrams ----------
    Inline SVG, because the zero-network rule applies to pictures too and a
-   diagram that is really an image cannot recolour itself for dark mode. Every
+   diagram that is really an image cannot recolor itself for dark mode. Every
    fill and stroke is a role token, so these follow the reader's system theme
    with the rest of the page.
 
