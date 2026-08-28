@@ -406,3 +406,59 @@ class PublishedNumbersTest(unittest.TestCase):
         self.assertEqual(dropped, {"async"},
                          "the page explains exactly one confirmed finding being cut")
         self.assertIn("round two checks fourteen and not fifteen", self.page)
+
+
+class CorpusBoundaryTest(unittest.TestCase):
+    """The measurement that separates a gap in FastAPI from a gap in the index.
+
+    Added after a review pointed out that everything else on the page measures
+    the findings against the 60 pages that were indexed, which is not the
+    question a reader thinks is being answered.
+    """
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
+        cls.boundary = load("corpus_boundary.json")
+        cls.near = {f["id"]: f for f in load("findings.json")["findings"]
+                    if f["type"] == "near_miss"}
+
+    def test_every_near_miss_was_checked_outside_the_corpus(self) -> None:
+        self.assertEqual(set(self.boundary), set(self.near))
+
+    def test_each_verdict_carries_a_majority_of_its_readers(self) -> None:
+        for fid, rec in self.boundary.items():
+            self.assertGreaterEqual(rec["readers"], 3, fid)
+            outside = rec["verdict"] == "documented_outside"
+            self.assertEqual(outside, rec["votes_outside"] * 2 > rec["readers"], fid)
+
+    def test_a_definition_found_outside_names_a_real_file(self) -> None:
+        for fid, rec in self.boundary.items():
+            if rec["verdict"] != "documented_outside":
+                continue
+            self.assertTrue(rec["path"], fid)
+            self.assertTrue((ROOT / rec["path"]).exists(),
+                            f"{fid} cites {rec['path']}, which is not there")
+            self.assertNotIn("data/raw/docs/", rec["path"],
+                             f"{fid} cites a page that IS in the corpus")
+
+    def test_the_two_by_two_on_the_page_matches_the_data(self) -> None:
+        cells = {}
+        for fid, rec in self.boundary.items():
+            key = (self.near[fid].get("validated") is True,
+                   rec["verdict"] == "documented_outside")
+            cells[key] = cells.get(key, 0) + 1
+        self.assertEqual(cells[(True, False)], 8)
+        self.assertEqual(cells[(True, True)], 3)
+        self.assertEqual(cells[(False, False)], 2)
+        self.assertEqual(cells[(False, True)], 1)
+        self.assertIn("precision drops from 11 of\n            14 to 8 of 14", self.page)
+
+    def test_the_page_names_the_three_that_are_index_artifacts(self) -> None:
+        artifacts = {self.near[fid]["concept_label"]
+                     for fid, rec in self.boundary.items()
+                     if rec["verdict"] == "documented_outside"
+                     and self.near[fid].get("validated") is True}
+        self.assertEqual(artifacts, {"APIRoute", "host", "virtual environment"})
+        for label in artifacts:
+            self.assertIn(label, self.page)

@@ -830,6 +830,71 @@ caption {
   text-anchor: middle;
 }
 
+.diagram-flow {
+  min-width: 720px;
+}
+
+/* On the filled boxes, so the pair is a role pair and inverts with the theme
+   rather than glowing in dark mode. */
+.diagram .d-flow-on {
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--on-fill);
+  text-anchor: middle;
+}
+
+.diagram .d-flow-sub-on {
+  font-size: 11px;
+  fill: var(--on-fill);
+  opacity: 0.82;
+  text-anchor: middle;
+}
+
+.diagram .d-flow {
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--text-heading);
+  text-anchor: middle;
+}
+
+.diagram .d-flow-sub {
+  font-size: 11px;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+.diagram .d-flow-off {
+  font-size: 14px;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+.diagram .d-bd-axis {
+  font-size: 12px;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+.diagram .d-bd-n {
+  font-size: 30px;
+  font-weight: 650;
+  fill: var(--text-heading);
+  text-anchor: middle;
+}
+
+.diagram .d-bd-n-sm {
+  font-size: 20px;
+  font-weight: 650;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+.diagram .d-bd-sub {
+  font-size: 12px;
+  fill: var(--text-body);
+  text-anchor: middle;
+}
+
 .diagram .d-note {
   font-size: 11px;
   font-style: italic;

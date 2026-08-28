@@ -140,7 +140,9 @@
               9 of 33 near misses survived it, well under the 70% floor the
               build plan had set as a stop condition, so the work stopped before
               any of it was published (<a href="#validation">Part 6</a>). Three
-              of my own mistakes caused that rate. After fixing them, 11 of 14 survived, unanimously across three
+              of my own mistakes caused that rate. A later check against the 95
+              pages I had not indexed knocked three more out: measured as a claim
+              about FastAPI rather than about my index, it is 8 of 14. After fixing them, 11 of 14 survived, unanimously across three
               readers each. Both rounds are on this page, because a gap-finding
               tool is judged on its false positives and reporting only the second
               number would be the same failure this project is about.
@@ -1639,7 +1641,7 @@
 
                 <rect x="270" y="100" width="120" height="82" rx="3"
                       fill="var(--warning-tint)" stroke="var(--warning-line)" />
-                <text x="330" y="90" class="d-wf-delta">+32.7</text>
+                <text x="330" y="90" class="d-wf-delta">up 32.7</text>
                 <text x="330" y="270" class="d-wf-lab">Drop 18 already</text>
                 <text x="330" y="285" class="d-wf-sub">known invalid</text>
 
@@ -1651,7 +1653,7 @@
 
                 <rect x="650" y="100" width="120" height="16" rx="3"
                       fill="var(--error-tint)" stroke="var(--error-line)" />
-                <text x="710" y="90" class="d-wf-drop">2.9</text>
+                <text x="710" y="90" class="d-wf-drop">down 2.9</text>
                 <text x="710" y="270" class="d-wf-lab">Drop async, which</text>
                 <text x="710" y="285" class="d-wf-sub">round one confirmed</text>
 
@@ -1788,6 +1790,109 @@
             </p>
           </div>
 
+          <h3>The check the study was missing</h3>
+          <p>
+            Everything above measures the findings against the 60 indexed pages.
+            That was the honest scope, and it is also the wrong question for a
+            reader who wants to know whether FastAPI has a documentation problem.
+            "These 60 pages never explain it" and "FastAPI never explains it" are
+            different claims, and until now this page only supported the first
+            while sounding like the second.
+          </p>
+          <p>
+            So I fetched the other 95 English documentation pages and put all
+            fourteen near misses in front of three more readers, who were told to
+            search only outside the corpus and to report either a definition with
+            its file and line, or nothing.
+          </p>
+
+          <figure class="figure">
+            <div class="figure-scroll">
+              <svg
+                class="diagram diagram-short"
+                viewBox="0 0 1000 230"
+                role="img"
+                aria-labelledby="boundary-title boundary-desc"
+              >
+                <title id="boundary-title">
+                  The fourteen near misses against both questions
+                </title>
+                <desc id="boundary-desc">
+                  Of the eleven that held up against the 60 indexed pages, eight
+                  are absent from all 155 English pages and are real gaps in
+                  FastAPI's documentation. Three are documented on a page outside
+                  the index: APIRoute, host and virtual environment. Of the three
+                  that did not hold up, one is also documented outside.
+                </desc>
+
+                <text x="300" y="26" class="d-wf-lab">Absent from all 155 pages</text>
+                <text x="700" y="26" class="d-wf-lab">Documented outside the 60</text>
+                <text x="96" y="86" class="d-bd-axis">Held up</text>
+                <text x="96" y="103" class="d-bd-axis">against the 60</text>
+                <text x="96" y="170" class="d-bd-axis">Did not</text>
+                <text x="96" y="187" class="d-bd-axis">hold up</text>
+
+                <rect x="140" y="40" width="420" height="90" rx="6"
+                      fill="var(--success-tint)" stroke="var(--success-line)" stroke-width="2" />
+                <text x="350" y="82" class="d-bd-n">8</text>
+                <text x="350" y="106" class="d-bd-sub">real gaps in FastAPI's documentation</text>
+
+                <rect x="580" y="40" width="300" height="90" rx="6"
+                      fill="var(--warning-tint)" stroke="var(--warning-line)" />
+                <text x="730" y="76" class="d-bd-n">3</text>
+                <text x="730" y="98" class="d-bd-sub">APIRoute, host,</text>
+                <text x="730" y="114" class="d-bd-sub">virtual environment</text>
+
+                <rect x="140" y="142" width="420" height="62" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="350" y="172" class="d-bd-n-sm">2</text>
+                <text x="350" y="192" class="d-bd-sub">path operation, fastapi.encoders</text>
+
+                <rect x="580" y="142" width="300" height="62" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="730" y="172" class="d-bd-n-sm">1</text>
+                <text x="730" y="192" class="d-bd-sub">TokenData</text>
+              </svg>
+            </div>
+            <figcaption>
+              Three independent readers over the 95 pages outside the index,
+              majority verdict, recorded in <code>data/corpus_boundary.json</code>.
+              Only the top left cell is a documentation gap in the sense a reader
+              would assume.
+            </figcaption>
+          </figure>
+
+          <p>
+            The top right cell is the one that costs something.
+            <code>APIRoute</code> is the second most asked about finding on the
+            page, and FastAPI documents it properly in a how-to guide called
+            Custom Request and APIRoute class, which is not in the 60. So does
+            <code>host</code>, on the FastAPI CLI page, and virtual environments
+            get a page of their own named after the concept. Those three are
+            correct about the index and wrong about FastAPI, and a content team
+            handed them would go and write something that already exists.
+          </p>
+
+          <div class="pullquote">
+            <p>
+              Eight of the fourteen are gaps. Three are my index pretending to be
+              a gap.
+            </p>
+          </div>
+
+          <p>
+            This is the concrete version of the thing
+            <a href="#limits">Part 7</a> states abstractly, and it cuts both
+            ways. Measured as a claim about FastAPI, precision drops from 11 of
+            14 to 8 of 14. Measured as a claim about an assistant that indexes
+            only the tutorial, all eleven stand, because from that assistant's
+            side a page it was never given and a page nobody wrote are the same
+            thing. Which number is right depends on which question you came with,
+            and the honest thing is to publish both rather than pick the flattering
+            one. It also names the cheapest improvement available to this project,
+            which is not a better extractor: it is indexing the other 95 pages.
+          </p>
+
           <h3>Why there is no pass or fail gate</h3>
           <p>
             A threshold at this population size would be decided by two or three
@@ -1905,13 +2010,14 @@
             <li>
               <strong>A corpus boundary looks exactly like a documentation
                 gap.</strong>
-              Several early findings were concepts FastAPI documents on pages
-              outside the 60. The scope rule now removes the ones that are
-              Python's job, and the general problem does not go away: from a
-              retriever's side, a page you did not index and a page nobody wrote
-              are the same thing. That is a genuine property of the problem
-              rather than a flaw in the tool, and it means the output has to be
-              read against the index a real assistant would be given.
+              This one is now measured rather than argued. Three of the eleven
+              near misses that held up are documented on a FastAPI page outside
+              the 60, including the second most asked about finding on the page
+              (<a href="#validation">Part 6</a>). From a retriever's side a page
+              you did not index and a page nobody wrote are the same thing, which
+              is a real property of the problem, but it is not an excuse: the
+              cheapest improvement available here is indexing the other 95 pages,
+              and I have not done it.
             </li>
             <li>
               <strong>One corpus, and a developer one.</strong> Everything here is
@@ -2002,6 +2108,96 @@
             article depends on something you never wrote. That is a work item.
             The benchmark score is not.
           </p>
+          <figure class="figure">
+            <div class="figure-scroll">
+              <svg
+                class="diagram diagram-flow"
+                viewBox="0 0 1000 150"
+                role="img"
+                aria-labelledby="flow-title flow-desc"
+              >
+                <title id="flow-title">
+                  How much of the work this actually covers
+                </title>
+                <desc id="flow-desc">
+                  Seven steps from noticing a documentation problem to shipping a
+                  fix: notice, locate, prioritise, assign, write, review, ship.
+                  This project covers the first two and part of the third. The
+                  remaining four and a half are done by a person somewhere else.
+                </desc>
+                <rect x="8" y="26" width="404" height="86" rx="8"
+                      fill="none" stroke="var(--fill)" stroke-dasharray="4 4" />
+                <text x="14" y="20" class="d-group" fill="var(--link)">THIS PROJECT</text>
+
+                <rect x="22" y="44" width="118" height="50" rx="5"
+                      fill="var(--fill)" stroke="var(--fill-border)" stroke-width="2" />
+                <text x="81" y="66" class="d-flow-on">Notice</text>
+                <text x="81" y="83" class="d-flow-sub-on">manufactured</text>
+
+                <rect x="158" y="44" width="118" height="50" rx="5"
+                      fill="var(--fill)" stroke="var(--fill-border)" stroke-width="2" />
+                <text x="217" y="66" class="d-flow-on">Locate</text>
+                <text x="217" y="83" class="d-flow-sub-on">article and fact</text>
+
+                <rect x="294" y="44" width="104" height="50" rx="5"
+                      fill="var(--surface-sunken)" stroke="var(--fill-border)"
+                      stroke-width="2" stroke-dasharray="5 3" />
+                <text x="346" y="66" class="d-flow">Prioritise</text>
+                <text x="346" y="83" class="d-flow-sub">demand only</text>
+
+                <rect x="440" y="44" width="104" height="50" rx="5"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="492" y="72" class="d-flow-off">Assign</text>
+
+                <rect x="562" y="44" width="104" height="50" rx="5"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="614" y="72" class="d-flow-off">Write</text>
+
+                <rect x="684" y="44" width="104" height="50" rx="5"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="736" y="72" class="d-flow-off">Review</text>
+
+                <rect x="806" y="44" width="104" height="50" rx="5"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="858" y="72" class="d-flow-off">Ship</text>
+
+                <text x="622" y="20" class="d-group">SOMEBODY ELSE, IN ANOTHER TOOL</text>
+                <line x1="430" y1="26" x2="992" y2="26" stroke="var(--border-subtle)"
+                      stroke-dasharray="4 4" />
+                <line x1="430" y1="26" x2="430" y2="112" stroke="var(--border-subtle)"
+                      stroke-dasharray="4 4" />
+                <line x1="992" y1="26" x2="992" y2="112" stroke="var(--border-subtle)"
+                      stroke-dasharray="4 4" />
+                <line x1="430" y1="112" x2="992" y2="112" stroke="var(--border-subtle)"
+                      stroke-dasharray="4 4" />
+              </svg>
+            </div>
+            <figcaption>
+              Two and a half boxes of seven. Worth drawing because the claim just
+              made is a claim about routing, and this is how far the routing
+              actually goes.
+            </figcaption>
+          </figure>
+
+          <p>
+            So the honest scope of this thing is a report, not a workflow. It
+            manufactures a signal that did not exist, points at an article and
+            names a missing fact, and orders the list by how many people asked.
+            Then it stops. There is no export, no ticket, no owner and no done
+            state, and a content lead who acted on it would be retyping findings
+            into whatever system they actually work in.
+          </p>
+          <p>
+            That is the right place to have stopped for a demonstration, and it
+            is the wrong place to stop for a product. If I were taking this
+            further the next thing I would build is not more finding types. It is
+            the export, because a finding that has to be retyped is a finding
+            that competes with everything else in an inbox, and
+            <a href="#found">Part 4</a> already shows the yield is two urgent
+            items per 60 pages. At that volume the tool has to cost almost
+            nothing to act on, or the arithmetic never works.
+          </p>
+
           <p>
             Whether that repackaging is worth anything is a fair question, and
             this repository does not try to answer it with adoption numbers,

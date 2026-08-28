@@ -1,0 +1,114 @@
+{
+  "F1-0001": {
+    "verdict": "absent_everywhere",
+    "votes_outside": 0,
+    "readers": 3,
+    "path": null,
+    "span": null,
+    "page_is": null
+  },
+  "F1-0002": {
+    "verdict": "documented_outside",
+    "votes_outside": 3,
+    "readers": 3,
+    "path": "data/work/outside-corpus/how-to/custom-request-and-route.md",
+    "span": "This time, it will overwrite the method `APIRoute.get_route_handler()`.",
+    "page_is": "a how-to guide on subclassing Request and APIRoute, titled 'Custom Request and APIRoute class'"
+  },
+  "F1-0003": {
+    "verdict": "absent_everywhere",
+    "votes_outside": 1,
+    "readers": 3,
+    "path": "data/work/outside-corpus/features.md",
+    "span": "* [**OpenAPI**](https://github.com/OAI/OpenAPI-Specification) for API creation, including declarations of <dfn title=\"also known as: endpoints, routes\">path</dfn> <dfn title=\"also known as HTTP methods, as POST, GET, PUT, DELETE\">operations</dfn>, parameters, request bodies, security, etc.",
+    "page_is": "the Features overview page, which glosses the term inline with two HTML dfn elements, path as 'endpoints, routes' and operations as 'HTTP methods, as POST, GET, PUT, DELETE'; editor-support.md:17 carries the same gloss. Caveat: the gloss lives in a title attribute, so a human reader sees it only on hover, and neither page covers the finding's actual missing fact about attaching several named OpenAPI examples to a response in the responses parameter. openapi_examples does not appear anywhere in the 95."
+  },
+  "F1-0004": {
+    "verdict": "absent_everywhere",
+    "votes_outside": 0,
+    "readers": 3,
+    "path": null,
+    "span": null,
+    "page_is": null
+  },
+  "F1-0005": {
+    "verdict": "absent_everywhere",
+    "votes_outside": 0,
+    "readers": 3,
+    "path": null,
+    "span": null,
+    "page_is": null
+  },
+  "F1-0006": {
+    "verdict": "absent_everywhere",
+    "votes_outside": 0,
+    "readers": 3,
+    "path": null,
+    "span": null,
+    "page_is": null
+  },
+  "F1-0007": {
+    "verdict": "absent_everywhere",
+    "votes_outside": 1,
+    "readers": 3,
+    "path": "data/work/outside-corpus/deployment/https.md",
+    "span": "**Only one process** in the server can be listening on a specific **port** in a specific **IP address**. There could be other processes listening on other ports in the same IP address, but only one for each combination of IP address and port.",
+    "page_is": "the conceptual 'About HTTPS' deployment page, which walks the browser to TLS-terminating-proxy to app chain"
+  },
+  "F1-0008": {
+    "verdict": "absent_everywhere",
+    "votes_outside": 0,
+    "readers": 3,
+    "path": null,
+    "span": null,
+    "page_is": null
+  },
+  "F1-0009": {
+    "verdict": "documented_outside",
+    "votes_outside": 3,
+    "readers": 3,
+    "path": "data/work/outside-corpus/fastapi-cli.md",
+    "span": "It also listens on the IP address `0.0.0.0`, which means all the available IP addresses, this way it will be publicly accessible to anyone that can communicate with the machine.",
+    "page_is": "the FastAPI CLI page, in the section contrasting what `fastapi run` binds to against what `fastapi dev` binds to"
+  },
+  "F1-0010": {
+    "verdict": "absent_everywhere",
+    "votes_outside": 0,
+    "readers": 3,
+    "path": null,
+    "span": null,
+    "page_is": null
+  },
+  "F1-0011": {
+    "verdict": "absent_everywhere",
+    "votes_outside": 0,
+    "readers": 3,
+    "path": null,
+    "span": null,
+    "page_is": null
+  },
+  "F1-0012": {
+    "verdict": "documented_outside",
+    "votes_outside": 3,
+    "readers": 3,
+    "path": "data/work/outside-corpus/advanced/security/oauth2-scopes.md",
+    "span": "By validating the data with Pydantic we can make sure that we have, for example, exactly a `list` of `str` with the scopes and a `str` with the `username`.",
+    "page_is": "the advanced security page on OAuth2 scopes, in the section 'Verify the `username` and data shape', which extends the same TokenData model the tutorial introduces"
+  },
+  "F1-0013": {
+    "verdict": "absent_everywhere",
+    "votes_outside": 0,
+    "readers": 3,
+    "path": null,
+    "span": null,
+    "page_is": null
+  },
+  "F1-0014": {
+    "verdict": "documented_outside",
+    "votes_outside": 3,
+    "readers": 3,
+    "path": "data/work/outside-corpus/virtual-environments.md",
+    "span": "When you work with Python projects, you should use a **virtual environment** to isolate the packages installed for each project.",
+    "page_is": "a Learn-section page named after the concept, which defines a virtual environment and walks through creating a project with uv"
+  }
+}
