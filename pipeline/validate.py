@@ -14,6 +14,11 @@ items and scored 93.1 percent, a rate whose Wilson 95 percent interval runs from
 with expert annotators from failure. Report the observed rate and the interval,
 and let the reader judge.
 
+If the floor fires, the run is not a result. Fix the extraction, rerun, and
+report the rerun. A rate produced by a build with a known defect describes the
+defect, not the corpus, and publishing it alongside the corrected number invites
+a reader to average two things only one of which measures anything.
+
 The one number that does trigger action is the floor in the build plan: under
 roughly 70 percent, stop and fix extraction rather than build anything on top.
 

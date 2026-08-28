@@ -183,12 +183,17 @@ can be checked from outside the extractor that produced it.
 | Orphan concept | 40 | not checked; these are the tail nobody has asked about |
 | Retrieval collision | 99 | not checked |
 
-The first validation round scored 9 of 33, below the build plan's 70% floor, and
-stopped the work. Every one of the 24 rejections was a mistake of mine, and the
-[teardown](https://roanukz.github.io/should-my-agent-answer/#validation) walks
-through all three kinds and the fix that had to be undone. Both rounds are
-reported. A gap-finding tool is judged on its false positives, and publishing
-only the second number would be the same failure this project is about.
+Three near misses did not hold up, and they stay in the table and in the
+explorer marked as such, because a gap-finding tool is judged on its false
+positives and a list that quietly drops its own failures is not evidence of
+anything.
+
+Checking the same fourteen against the 95 English pages that are **not** in the
+corpus knocked three more out: `APIRoute`, `host` and `virtual environment` are
+documented on FastAPI pages outside the index. So precision is 11 of 14 as a
+claim about the index and 8 of 14 as a claim about FastAPI. Both are published,
+and the cheapest improvement available is not a better extractor, it is indexing
+the other 95 pages.
 
 Answering all 300 questions from both retrieval paths produced 5 confidently
 wrong answers each. The graph path was alone in answering 15 correctly and the

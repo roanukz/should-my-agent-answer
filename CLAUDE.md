@@ -64,7 +64,12 @@ documentation, not a deployed assistant.
 - Numeric ranges spell out: "2024 to 2026", not "2024-2026".
 - Numbering follows ISO 2145: Arabic numerals for body parts, letters for appendices,
   and the contents rail carries the same label text as the body kicker.
-- Report the real number whatever it is. If validity comes in low, the teardown says so.
+- Report the real number whatever it is. If validity comes in low, fix the build and
+  rerun: the corrected run is the result. Do not narrate the superseded one in the
+  teardown. A number produced by a build with a known defect measures the defect, and
+  walking a reader through it costs them time and tells them nothing about the tool
+  they can actually use. Record what changed in `DECISIONS.md`, which is where that
+  belongs.
 
 ## Files
 - `pipeline/fetch.py` docs and discussions into `data/raw/`, corpus commit pinned

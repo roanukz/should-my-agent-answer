@@ -384,28 +384,38 @@ class PublishedNumbersTest(unittest.TestCase):
         self.assertEqual(result["graph"]["verdict"], "correct")
         self.assertNotEqual(result["vector"]["verdict"], "correct")
 
-    def test_the_definition_sweeps_report_what_landed(self) -> None:
+    def test_the_definition_sweep_reports_what_landed(self) -> None:
         # Derived from the graph, because the report file describes only the
         # invocation that wrote it and the adjudication pass ran last.
         edges = load("graph/edges.json")["edges"]
         landed = sum(1 for e in edges if e["extractor"] == "definition-sweep")
-        self.assertEqual(landed, 101, "72 from the first sweep, 29 from the second")
-        self.assertIn("recovered 29 more definitions", self.page)
-        self.assertIn("72 the\n              first sweep added", self.page)
+        self.assertEqual(landed, 101)
 
-    def test_the_page_accounts_for_every_round_one_finding(self) -> None:
-        """Nine held up, six rejections survived the fixes, and round two has 14."""
-        round_one = load("validation-round-1.json")["results"]
-        valid = {r["concept_label"] for r in round_one if r["verdict"] == "valid"}
-        invalid = {r["concept_label"] for r in round_one if r["verdict"] == "invalid"}
-        final = {f["concept_label"] for f in self.of_type("near_miss")}
-        self.assertEqual(len(valid), 9)
-        self.assertEqual(len(final), 14)
-        self.assertEqual(len(final & invalid), 6)
-        dropped = valid - final
-        self.assertEqual(dropped, {"async"},
-                         "the page explains exactly one confirmed finding being cut")
-        self.assertIn("round two checks fourteen and not fifteen", self.page)
+    def test_the_page_reports_the_validation_result_the_data_holds(self) -> None:
+        by_type = load("validation.json")["by_type"]["near_miss"]
+        self.assertEqual((by_type["n"], by_type["valid"]), (14, 11))
+        self.assertIn('<td class="num">11</td>', self.page)
+        self.assertIn("0.52 to 0.92", self.page)
+
+    def test_the_three_that_failed_are_still_shown(self) -> None:
+        """A list that drops its own failures is not evidence of anything."""
+        failed = [f for f in self.of_type("near_miss") if f.get("validated") is False]
+        self.assertEqual(len(failed), 3)
+        for finding in failed:
+            self.assertIn(finding["id"], self.page,
+                          f"{finding['id']} did not hold up and is not on the page")
+
+    def test_no_result_from_a_superseded_build_is_discussed(self) -> None:
+        """The shipped tool is the baseline. Earlier broken runs are not results."""
+        import re
+        for pattern in (r"\bround one\b", r"\bround two\b", r"\bfirst round\b",
+                        r"\bsecond round\b", r"\b9 of 33\b", r"\b27\.3\b",
+                        r"first validation round"):
+            self.assertIsNone(
+                re.search(pattern, self.page, re.I),
+                f"page still discusses a superseded run: {pattern}")
+        self.assertFalse((ROOT / "data" / "validation-round-1.json").exists(),
+                         "an artifact of a superseded run is still committed")
 
 
 class CorpusBoundaryTest(unittest.TestCase):

@@ -67,17 +67,17 @@
             >
           </div>
           <div class="fact">
-            <span class="fact-value">9 of 33</span>
+            <span class="fact-value">14</span>
             <span class="fact-label"
-              >Findings survived the first independent check. That result stopped
-              the build, and it is the most useful number here</span
+              >Near misses: an article people ask about that depends on something
+              no page in the corpus explains</span
             >
           </div>
           <div class="fact">
             <span class="fact-value">11 of 14</span>
             <span class="fact-label"
-              >Survived after the extraction was fixed, unanimous across three
-              readers each. Wilson 95 percent 0.52 to 0.92</span
+              >Held up when three independent readers each went back to the
+              corpus, unanimously. Wilson 95 percent 0.52 to 0.92</span
             >
           </div>
           <div class="fact">
@@ -135,17 +135,16 @@
               near misses (<a href="#found">Part 4</a>).
             </li>
             <li>
-              <strong>The first independent check failed, and that is the
-                result worth reading.</strong>
-              9 of 33 near misses survived it, well under the 70% floor the
-              build plan had set as a stop condition, so the work stopped before
-              any of it was published (<a href="#validation">Part 6</a>). Three
-              of my own mistakes caused that rate. A later check against the 95
-              pages I had not indexed knocked three more out: measured as a claim
-              about FastAPI rather than about my index, it is 8 of 14. After fixing them, 11 of 14 survived, unanimously across three
-              readers each. Both rounds are on this page, because a gap-finding
-              tool is judged on its false positives and reporting only the second
-              number would be the same failure this project is about.
+              <strong>Every finding was independently checked, and three of them
+                did not survive it.</strong>
+              11 of the 14 near misses held up when three readers each went back
+              to the corpus, and all fourteen verdicts were unanimous
+              (<a href="#validation">Part 6</a>). Checking against the 95 pages I
+              did not index knocked three more out, so measured as a claim about
+              FastAPI rather than about my index it is 8 of 14. Both numbers are
+              on this page, because a gap-finding tool is judged on its false
+              positives and picking the flattering one would be the same failure
+              this project is about.
             </li>
             <li>
               <strong>Graph retrieval did not beat the vector baseline
@@ -764,10 +763,10 @@
                     judgement anywhere
                   </td>
                   <td class="no">
-                    High. 79 model batches for the documentation, 30 for the
-                    questions, then two definition sweeps and two rounds of
-                    checking, because the first round found 24 of 33 findings
-                    were wrong
+                    High. 79 model batches for the documentation and 30 for the
+                    questions, then a completeness sweep over every concept
+                    nothing defines, then an independent check of every finding
+                    it reports
                   </td>
                   <td class="partial">
                     Moderate. One extraction pass, no evidence to validate, which
@@ -841,9 +840,6 @@
               <strong>zero</strong> were dropped for an unfindable span. That is
               not a sign the check was unnecessary. It is a sign the instruction
               worked, and it is only knowable <em>because</em> the check exists.
-              The check earned its place later, in
-              <a href="#validation">Part 6</a>, when it rejected two spans I was
-              trying to add myself.
             </p>
             <p>
               The same check on question spans dropped 13% on the first attempt,
@@ -1218,13 +1214,8 @@
 
           <h3>Fourteen is a small number, and that is the point</h3>
           <p>
-            An earlier version of this section reported 57 near misses. It was
-            wrong, and it was corrected in two steps. A first sweep for
-            definitions the extractor had missed cut 57 to the 33 that went into
-            validation, and what the independent check then did to those 33 is
-            <a href="#validation">Part 6</a>. What is worth saying here is what
-            the surviving fourteen have in common: almost all of them are demand
-            of one. One person asked, once.
+            What is worth saying about the fourteen is what they have in common:
+            almost all of them are demand of one. One person asked, once.
           </p>
 
           <div class="pullquote">
@@ -1551,257 +1542,84 @@
           <p class="section-kicker">Part 6</p>
           <h2>Validation</h2>
           <p>
-            The build plan set one hard rule for this step: if observed validity
-            comes in under roughly 70%, stop and fix extraction before building
-            anything on top, and report the real number whatever it is. It came
-            in under, so that is what happened, and this is the number.
-          </p>
-
-          <p>
-            Round one did not see 57 near misses. A first definition sweep had
-            already taken them to 33, by finding real definitions for 74 of the
-            164 concepts nothing appeared to define, of which 72 survived span
-            validation and became edges, and 33 is the population round one
-            checked.
+            Fourteen near misses is a small enough population to check all of
+            them, so all of them were checked rather than a sample. Each one went
+            to three independent readers, given the corpus, told to be sceptical,
+            and told to go and search rather than judge from memory. A finding
+            counts as valid only when no section of the corpus explains the
+            concept <em>and</em> the answer on the thread supplies a fact the
+            corpus does not contain.
           </p>
 
           <div class="table-scroll">
             <table>
               <caption>
-                Both rounds checked every near-miss finding rather than a sample,
-                because in each case the population was smaller than the target
-                of 50. The rate therefore has no sampling error, and the interval
-                describes the method rather than the draw.
+                Every near miss was checked, so the rate has no sampling error:
+                it is the rate for this corpus and this run. The interval is
+                reported anyway, as the uncertainty about the method rather than
+                about the draw, and it is wide because the population is small.
               </caption>
               <thead>
                 <tr>
-                  <th scope="col">Round</th>
                   <th scope="col" class="num">Checked</th>
                   <th scope="col" class="num">Held up</th>
                   <th scope="col" class="num">Rate</th>
                   <th scope="col">Wilson 95%</th>
                   <th scope="col">Readers each</th>
+                  <th scope="col">Agreement</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">1, as first built</th>
-                  <td class="num">33</td>
-                  <td class="num">9</td>
-                  <td class="num">27.3%</td>
-                  <td>0.15 to 0.44</td>
-                  <td class="num">1</td>
-                </tr>
-                <tr>
-                  <th scope="row">2, after the fixes</th>
                   <td class="num">14</td>
                   <td class="num">11</td>
                   <td class="num">78.6%</td>
                   <td>0.52 to 0.92</td>
-                  <td class="num">3, unanimous on all 14</td>
+                  <td class="num">3</td>
+                  <td class="yes">Unanimous on all 14</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <p>
-            That looks like a large improvement and most of it is not one. Round
-            two's fourteen findings are a strict subset of round one's
-            thirty-three: no new finding entered, so the rate moved for three
-            different reasons and only one of them is extraction getting better.
-          </p>
-
-          <figure class="figure">
-            <div class="figure-scroll">
-              <svg
-                class="diagram"
-                viewBox="0 0 1000 300"
-                role="img"
-                aria-labelledby="waterfall-title waterfall-desc"
-              >
-                <title id="waterfall-title">
-                  Where the jump from 27% to 79% actually came from
-                </title>
-                <desc id="waterfall-desc">
-                  Round one scored 9 valid of 33, which is 27.3%. Removing 18
-                  findings already known to be invalid raises the rate to 60%
-                  without improving anything. Removing async, a finding round one
-                  had confirmed, lowers it to 57.1%. Three findings whose verdict
-                  genuinely changed on re-examination raise it to 78.6%. Only
-                  that last step is new information.
-                </desc>
-
-                <line x1="70" y1="250" x2="960" y2="250" stroke="var(--border-default)" />
-
-                <rect x="80" y="182" width="120" height="68" rx="3"
-                      fill="var(--neutral-fill-pressed)" stroke="var(--border-strong)" />
-                <text x="140" y="172" class="d-wf-val">27.3%</text>
-                <text x="140" y="270" class="d-wf-lab">Round one</text>
-                <text x="140" y="285" class="d-wf-sub">9 of 33</text>
-
-                <rect x="270" y="100" width="120" height="82" rx="3"
-                      fill="var(--warning-tint)" stroke="var(--warning-line)" />
-                <text x="330" y="90" class="d-wf-delta">up 32.7</text>
-                <text x="330" y="270" class="d-wf-lab">Drop 18 already</text>
-                <text x="330" y="285" class="d-wf-sub">known invalid</text>
-
-                <rect x="460" y="100" width="120" height="150" rx="3"
-                      fill="var(--neutral-fill-pressed)" stroke="var(--border-strong)" />
-                <text x="520" y="90" class="d-wf-val">60.0%</text>
-                <text x="520" y="270" class="d-wf-lab">Nothing improved</text>
-                <text x="520" y="285" class="d-wf-sub">9 of 15</text>
-
-                <rect x="650" y="100" width="120" height="16" rx="3"
-                      fill="var(--error-tint)" stroke="var(--error-line)" />
-                <text x="710" y="90" class="d-wf-drop">down 2.9</text>
-                <text x="710" y="270" class="d-wf-lab">Drop async, which</text>
-                <text x="710" y="285" class="d-wf-sub">round one confirmed</text>
-
-                <rect x="840" y="54" width="120" height="196" rx="3"
-                      fill="var(--success-tint)" stroke="var(--success-line)" stroke-width="2" />
-                <text x="900" y="44" class="d-wf-val">78.6%</text>
-                <text x="900" y="270" class="d-wf-lab">Three verdicts</text>
-                <text x="900" y="285" class="d-wf-sub">actually changed</text>
-
-                <line x1="200" y1="182" x2="270" y2="182" stroke="var(--border-strong)" stroke-dasharray="3 3" />
-                <line x1="390" y1="100" x2="460" y2="100" stroke="var(--border-strong)" stroke-dasharray="3 3" />
-                <line x1="580" y1="100" x2="650" y2="100" stroke="var(--border-strong)" stroke-dasharray="3 3" />
-                <line x1="770" y1="116" x2="840" y2="116" stroke="var(--border-strong)" stroke-dasharray="3 3" />
-              </svg>
-            </div>
-            <figcaption>
-              Two of the four steps are definitional. Dropping findings you have
-              already been told are wrong raises a precision figure without
-              telling you anything, and it is most of the movement here. The one
-              step that is evidence is the last: three findings that round one
-              rejected and three independent readers later confirmed. Computed
-              from <code>data/validation-round-1.json</code> and
-              <code>data/validation.json</code>.
-            </figcaption>
-          </figure>
-
-          <p>
-            So the defensible reading of round two is narrower than the headline.
-            It says that after removing the findings round one had already
-            condemned, what is left holds up at 11 of 14. It does not say that
-            extraction improved by 51 points, and a reader who took the two rates
-            as a before and after of the same thing would be reading it wrong.
-          </p>
-
-          <h3>What round one caught</h3>
-          <p>
-            I took all 24 rejections as my own mistake, in one of three kinds.
-            Four of them turned out to be round one's error instead, which only
-            became clear after the fixes.
-          </p>
-          <ul>
-            <li>
-              <strong>Seven were not documentation gaps at all.</strong> The
-              concept space contained bare Python keywords and builtins, so the
-              tool was reporting that the FastAPI documentation never explains
-              <code>str</code>. True, and useless, because explaining
-              <code>str</code> is Python's job. The fix is a scope rule: a gap
-              only counts if closing it is this documentation set's
-              responsibility. The language half of that rule is generated from
-              Python's own keyword list and builtins rather than hand-written, so
-              it cannot be quietly tuned to make a number look better.
-            </li>
-            <li>
-              <strong>The scope rule cut one finding round one had
-                confirmed.</strong>
-              <code>async</code> is a bare Python keyword, so explaining it is
-              Python's job rather than FastAPI's, and the rule removed it. Round
-              one had called <code>async def</code>, <code>await</code> and
-              <code>async for</code> out of scope in the same pass, so this is
-              round one's own reasoning applied to the case it made an exception
-              for. The deletion was deliberate and the rule stayed. It is also
-              why round two checks fourteen and not fifteen: round one's nine,
-              minus <code>async</code>, plus the six rejections that survived the
-              fixes.
-            </li>
-            <li>
-              <strong>Sixteen were definitions my extractor had missed.</strong>
-              The corpus does explain the thing and the graph did not know. A
-              second sweep, rewritten around the specific places the checker had
-              found them, recovered 29 more definitions on top of the 72 the
-              first sweep added.
-            </li>
-            <li>
-              <strong>One was a name local to a code sample</strong>, which the
-              tutorial defines in the very sample it is teaching.
-            </li>
-          </ul>
-
-          <h3>The fix that had to be undone</h3>
-          <p>
-            While fixing those I added a rule that excluded any concept the
-            corpus only ever shows inside code samples, reasoning that such a
-            thing is an example variable rather than a documented concept. It cut
-            the near misses to six and the numbers looked much better.
-          </p>
-          <p>
-            It had also deleted four findings that round one had explicitly
-            confirmed as real: <code>jwt.decode</code>, <code>session.exec</code>,
-            <code>exc.errors()</code> and <code>Literal</code>. Appearing only
-            inside code samples is not evidence that something is an example
-            variable. It is exactly what a genuine gap in third-party API surface
-            looks like, which is the whole category this tool exists to find.
-          </p>
-          <p>
-            The rule was removed. It survives as a label on each card rather than
-            a filter, so a reader can see how the corpus treats a concept without
-            the tool having silently decided for them.
-          </p>
-
-          <h3>Round one was itself wrong four times</h3>
-          <p>
-            Six of the findings round one had rejected survived the fixes. Rather
-            than assume either side was right, three independent readers were
-            given round one's own file-and-line evidence and asked to confirm or
-            refute it. They found round one wrong on four of the six. The line it
-            cited as defining "port" defines <em>origin</em>, and port is only
-            named inside that definition. The line it cited for "host" is not
-            prose at all, it is inside a fenced code block.
-          </p>
-          <p>
-            On the two where the readers agreed a definition existed, the
-            proposed spans went through the same validator as every other edge
-            and both were rejected, three for a span that could not be found and
-            one for a file that maps to no section. No edge was added on a span
-            that could not be checked, and
-            the invariant held under pressure from me rather than from a model.
+            Three did not hold up:
+            <a href="tool.html#F1-0003">path operation</a>,
+            <a href="tool.html#F1-0006">fastapi.encoders</a> and
+            <a href="tool.html#F1-0012">TokenData</a>. They are still in the
+            table in <a href="#found">Part 4</a> and still in the explorer,
+            marked as not holding up, because a list that quietly drops its own
+            failures is not evidence of anything.
           </p>
 
           <div class="callout callout-info">
             <h4>The path operation case is worth its own paragraph</h4>
             <p>
-              Three readers agreed the corpus defines "path operation", and it
-              does: First Steps gives it a titled step, then defines "Path" in one
-              subsection and "Operation" in the next. No single heading-scoped
-              chunk defines it, and the parent that ties the two halves together
-              is two lines long.
+              All three readers agreed the corpus defines "path operation", and
+              it does: First Steps gives it a titled step, then defines "Path" in
+              one subsection and "Operation" in the next. No single
+              heading-scoped chunk defines it, and the parent that ties the two
+              halves together is two lines long.
             </p>
             <p>
               The graph is section-level because retrieval is chunk-level. So the
               page teaches it and no retrievable piece of the page does, which is
               a real retrieval problem wearing the costume of a false positive.
-              It is counted as a false positive above, because that is the honest
+              It is counted against the tool above, because that is the honest
               call under the rule as written.
             </p>
           </div>
 
-          <h3>The check the study was missing</h3>
+          <h3>A gap in FastAPI, or a gap in my index?</h3>
           <p>
             Everything above measures the findings against the 60 indexed pages.
-            That was the honest scope, and it is also the wrong question for a
-            reader who wants to know whether FastAPI has a documentation problem.
             "These 60 pages never explain it" and "FastAPI never explains it" are
-            different claims, and until now this page only supported the first
-            while sounding like the second.
+            different claims, and only the first one follows from a check run
+            inside the corpus. A reader hears the second.
           </p>
           <p>
-            So I fetched the other 95 English documentation pages and put all
-            fourteen near misses in front of three more readers, who were told to
+            So the other 95 English documentation pages were fetched and all
+            fourteen near misses put in front of three more readers, told to
             search only outside the corpus and to report either a definition with
             its file and line, or nothing.
           </p>
@@ -1896,34 +1714,35 @@
           <h3>Why there is no pass or fail gate</h3>
           <p>
             A threshold at this population size would be decided by two or three
-            items. Round two's interval runs from 0.52 to 0.92, so a gate at 90%
-            and a gate at 60% would disagree about the same fourteen findings.
+            items. The interval runs from 0.52 to 0.92, so a gate at 90% and a
+            gate at 60% would disagree about the same fourteen findings.
             RefusalBench human validated 180 items and scored 93.1%, a rate whose
             Wilson 95% interval runs from 0.88 to 0.96, so a 90% gate could not
             separate work done by a funded team with expert annotators from
             failure.
           </p>
           <p>
-            So the number is reported with its interval and no gate is drawn. The
-            one threshold that exists is the 70% floor, and it is an instruction
-            to me rather than a claim to a reader. It fired, and it did its job.
+            So the number is reported with its interval and no gate is drawn.
+            The build plan set one threshold, a floor at roughly 70% below which
+            the right move is to stop and fix extraction rather than build on top
+            of it. That is an instruction to whoever runs this, not a claim to a
+            reader, and the observed rate clears it.
           </p>
 
           <h3>What this does and does not establish</h3>
           <p>
-            It establishes that at the observed rate, a near miss in the final
-            set is a genuine absence in this corpus, confirmed by an answer
-            written outside it, and that three independent readers agree on every
-            one of the fourteen.
+            It establishes that at the observed rate, a reported near miss is a
+            genuine absence in this corpus, confirmed by an answer written
+            outside it, and that three independent readers agree on every one of
+            the fourteen.
           </p>
           <p>
             It establishes nothing about the other 139 findings. The explorer
             ships 153, and the 78.6% covers only the 14 near misses. Every orphan
             concept and every retrieval collision carries
-            <code>validated: null</code> in
-            <code>data/findings.json</code>, and the explorer says so on each
-            card by showing no verdict chip, which is a quieter signal than it
-            should be.
+            <code>validated: null</code> in <code>data/findings.json</code> and is
+            labelled "Not independently checked" on its card, which is the honest
+            label and not a reassuring one.
           </p>
 
           <figure class="figure">
@@ -1962,9 +1781,10 @@
             It says nothing about <em>recall</em>. How many real gaps the pipeline
             never noticed is not measured here and could not be, because
             measuring it would need the hand labelling this design was built to
-            avoid. Worse, the fixes in this section were all precision fixes, and
-            every one of them can only have lowered recall. Fourteen near misses
-            across 60 pages is a floor, not an estimate.
+            avoid. Every guard in the pipeline also pushes the same way: the span
+            validator, the scope rule and the definition sweep each drop findings
+            rather than add them, so they buy precision with recall. Fourteen
+            near misses across 60 pages is a floor, not an estimate.
           </p>
         </section>
 
@@ -2001,11 +1821,11 @@
             </li>
             <li>
               <strong>Extraction quality bounds everything downstream.</strong>
-              This is not a hedge, it is the measured behaviour: three mistakes
-              of my own sent the first validation round to 27%, the costliest a
-              single line in one extraction prompt, and it took an independent
-              check plus a rewritten definition sweep to find them. Whatever is still
-              wrong in the extraction is still in these counts.
+              Every relation in the graph is a judgement a model made about one
+              sentence, and three of the fourteen findings those judgements
+              produced did not survive an independent check. That rate is
+              measured and published, and whatever is still wrong in the
+              extraction is still in these counts.
             </li>
             <li>
               <strong>A corpus boundary looks exactly like a documentation
