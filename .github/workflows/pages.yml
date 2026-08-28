@@ -1,0 +1,35 @@
+# Deploy the repository root to GitHub Pages, unchanged.
+#
+# There is no build step on purpose. Both pages are plain HTML that read
+# committed JSON out of data/, so what gets uploaded is exactly what is in the
+# repository, and what runs in a browser is exactly what you can read here.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4

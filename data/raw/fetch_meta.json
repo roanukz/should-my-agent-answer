@@ -1,0 +1,2895 @@
+{
+  "schema_version": 1,
+  "corpus": "fastapi/fastapi",
+  "corpus_commit": "49033471594ea5d99a80abdf1043231b7791ee49",
+  "corpus_commit_date": "2026-08-26T17:53:57Z",
+  "docs_root": "docs/en/docs",
+  "doc_cap": 60,
+  "thread_cap": 300,
+  "min_answer_chars": 120,
+  "min_question_chars": 80,
+  "docs": [
+    {
+      "rel_path": "tutorial/index.md",
+      "source_path": "docs/en/docs/tutorial/index.md",
+      "raw_path": "data/raw/docs/tutorial/index.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/",
+      "bytes": 7464,
+      "lines": 142
+    },
+    {
+      "rel_path": "tutorial/first-steps.md",
+      "source_path": "docs/en/docs/tutorial/first-steps.md",
+      "raw_path": "data/raw/docs/tutorial/first-steps.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+      "bytes": 14155,
+      "lines": 428
+    },
+    {
+      "rel_path": "tutorial/path-params.md",
+      "source_path": "docs/en/docs/tutorial/path-params.md",
+      "raw_path": "data/raw/docs/tutorial/path-params.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+      "bytes": 9041,
+      "lines": 252
+    },
+    {
+      "rel_path": "tutorial/query-params.md",
+      "source_path": "docs/en/docs/tutorial/query-params.md",
+      "raw_path": "data/raw/docs/tutorial/query-params.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+      "bytes": 4596,
+      "lines": 189
+    },
+    {
+      "rel_path": "tutorial/body.md",
+      "source_path": "docs/en/docs/tutorial/body.md",
+      "raw_path": "data/raw/docs/tutorial/body.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/body/",
+      "bytes": 6611,
+      "lines": 167
+    },
+    {
+      "rel_path": "tutorial/query-params-str-validations.md",
+      "source_path": "docs/en/docs/tutorial/query-params-str-validations.md",
+      "raw_path": "data/raw/docs/tutorial/query-params-str-validations.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+      "bytes": 16662,
+      "lines": 451
+    },
+    {
+      "rel_path": "tutorial/path-params-numeric-validations.md",
+      "source_path": "docs/en/docs/tutorial/path-params-numeric-validations.md",
+      "raw_path": "data/raw/docs/tutorial/path-params-numeric-validations.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/path-params-numeric-validations/",
+      "bytes": 6208,
+      "lines": 155
+    },
+    {
+      "rel_path": "tutorial/query-param-models.md",
+      "source_path": "docs/en/docs/tutorial/query-param-models.md",
+      "raw_path": "data/raw/docs/tutorial/query-param-models.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/query-param-models/",
+      "bytes": 2224,
+      "lines": 69
+    },
+    {
+      "rel_path": "tutorial/body-multiple-params.md",
+      "source_path": "docs/en/docs/tutorial/body-multiple-params.md",
+      "raw_path": "data/raw/docs/tutorial/body-multiple-params.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/body-multiple-params/",
+      "bytes": 4932,
+      "lines": 170
+    },
+    {
+      "rel_path": "tutorial/body-fields.md",
+      "source_path": "docs/en/docs/tutorial/body-fields.md",
+      "raw_path": "data/raw/docs/tutorial/body-fields.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/body-fields/",
+      "bytes": 2388,
+      "lines": 62
+    },
+    {
+      "rel_path": "tutorial/body-nested-models.md",
+      "source_path": "docs/en/docs/tutorial/body-nested-models.md",
+      "raw_path": "data/raw/docs/tutorial/body-nested-models.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/body-nested-models/",
+      "bytes": 6818,
+      "lines": 222
+    },
+    {
+      "rel_path": "tutorial/schema-extra-example.md",
+      "source_path": "docs/en/docs/tutorial/schema-extra-example.md",
+      "raw_path": "data/raw/docs/tutorial/schema-extra-example.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/schema-extra-example/",
+      "bytes": 8970,
+      "lines": 203
+    },
+    {
+      "rel_path": "tutorial/extra-data-types.md",
+      "source_path": "docs/en/docs/tutorial/extra-data-types.md",
+      "raw_path": "data/raw/docs/tutorial/extra-data-types.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/extra-data-types/",
+      "bytes": 2693,
+      "lines": 63
+    },
+    {
+      "rel_path": "tutorial/cookie-params.md",
+      "source_path": "docs/en/docs/tutorial/cookie-params.md",
+      "raw_path": "data/raw/docs/tutorial/cookie-params.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/cookie-params/",
+      "bytes": 1602,
+      "lines": 46
+    },
+    {
+      "rel_path": "tutorial/header-params.md",
+      "source_path": "docs/en/docs/tutorial/header-params.md",
+      "raw_path": "data/raw/docs/tutorial/header-params.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/header-params/",
+      "bytes": 3032,
+      "lines": 92
+    },
+    {
+      "rel_path": "tutorial/cookie-param-models.md",
+      "source_path": "docs/en/docs/tutorial/cookie-param-models.md",
+      "raw_path": "data/raw/docs/tutorial/cookie-param-models.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/cookie-param-models/",
+      "bytes": 3141,
+      "lines": 77
+    },
+    {
+      "rel_path": "tutorial/header-param-models.md",
+      "source_path": "docs/en/docs/tutorial/header-param-models.md",
+      "raw_path": "data/raw/docs/tutorial/header-param-models.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/header-param-models/",
+      "bytes": 2679,
+      "lines": 73
+    },
+    {
+      "rel_path": "tutorial/response-model.md",
+      "source_path": "docs/en/docs/tutorial/response-model.md",
+      "raw_path": "data/raw/docs/tutorial/response-model.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+      "bytes": 15824,
+      "lines": 345
+    },
+    {
+      "rel_path": "tutorial/extra-models.md",
+      "source_path": "docs/en/docs/tutorial/extra-models.md",
+      "raw_path": "data/raw/docs/tutorial/extra-models.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/extra-models/",
+      "bytes": 6886,
+      "lines": 212
+    },
+    {
+      "rel_path": "tutorial/response-status-code.md",
+      "source_path": "docs/en/docs/tutorial/response-status-code.md",
+      "raw_path": "data/raw/docs/tutorial/response-status-code.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/response-status-code/",
+      "bytes": 3994,
+      "lines": 102
+    },
+    {
+      "rel_path": "tutorial/request-forms.md",
+      "source_path": "docs/en/docs/tutorial/request-forms.md",
+      "raw_path": "data/raw/docs/tutorial/request-forms.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/request-forms/",
+      "bytes": 2524,
+      "lines": 74
+    },
+    {
+      "rel_path": "tutorial/request-form-models.md",
+      "source_path": "docs/en/docs/tutorial/request-form-models.md",
+      "raw_path": "data/raw/docs/tutorial/request-form-models.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/request-form-models/",
+      "bytes": 2055,
+      "lines": 79
+    },
+    {
+      "rel_path": "tutorial/request-files.md",
+      "source_path": "docs/en/docs/tutorial/request-files.md",
+      "raw_path": "data/raw/docs/tutorial/request-files.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/request-files/",
+      "bytes": 7080,
+      "lines": 177
+    },
+    {
+      "rel_path": "tutorial/request-forms-and-files.md",
+      "source_path": "docs/en/docs/tutorial/request-forms-and-files.md",
+      "raw_path": "data/raw/docs/tutorial/request-forms-and-files.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/request-forms-and-files/",
+      "bytes": 1352,
+      "lines": 42
+    },
+    {
+      "rel_path": "tutorial/handling-errors.md",
+      "source_path": "docs/en/docs/tutorial/handling-errors.md",
+      "raw_path": "data/raw/docs/tutorial/handling-errors.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+      "bytes": 9156,
+      "lines": 245
+    },
+    {
+      "rel_path": "tutorial/path-operation-configuration.md",
+      "source_path": "docs/en/docs/tutorial/path-operation-configuration.md",
+      "raw_path": "data/raw/docs/tutorial/path-operation-configuration.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/path-operation-configuration/",
+      "bytes": 4121,
+      "lines": 108
+    },
+    {
+      "rel_path": "tutorial/encoder.md",
+      "source_path": "docs/en/docs/tutorial/encoder.md",
+      "raw_path": "data/raw/docs/tutorial/encoder.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/encoder/",
+      "bytes": 1608,
+      "lines": 36
+    },
+    {
+      "rel_path": "tutorial/body-updates.md",
+      "source_path": "docs/en/docs/tutorial/body-updates.md",
+      "raw_path": "data/raw/docs/tutorial/body-updates.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/body-updates/",
+      "bytes": 4091,
+      "lines": 101
+    },
+    {
+      "rel_path": "tutorial/dependencies/index.md",
+      "source_path": "docs/en/docs/tutorial/dependencies/index.md",
+      "raw_path": "data/raw/docs/tutorial/dependencies/index.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/",
+      "bytes": 9771,
+      "lines": 251
+    },
+    {
+      "rel_path": "tutorial/dependencies/classes-as-dependencies.md",
+      "source_path": "docs/en/docs/tutorial/dependencies/classes-as-dependencies.md",
+      "raw_path": "data/raw/docs/tutorial/dependencies/classes-as-dependencies.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/",
+      "bytes": 6915,
+      "lines": 289
+    },
+    {
+      "rel_path": "tutorial/dependencies/sub-dependencies.md",
+      "source_path": "docs/en/docs/tutorial/dependencies/sub-dependencies.md",
+      "raw_path": "data/raw/docs/tutorial/dependencies/sub-dependencies.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/sub-dependencies/",
+      "bytes": 3820,
+      "lines": 106
+    },
+    {
+      "rel_path": "tutorial/dependencies/dependencies-in-path-operation-decorators.md",
+      "source_path": "docs/en/docs/tutorial/dependencies/dependencies-in-path-operation-decorators.md",
+      "raw_path": "data/raw/docs/tutorial/dependencies/dependencies-in-path-operation-decorators.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-in-path-operation-decorators/",
+      "bytes": 2954,
+      "lines": 70
+    },
+    {
+      "rel_path": "tutorial/dependencies/global-dependencies.md",
+      "source_path": "docs/en/docs/tutorial/dependencies/global-dependencies.md",
+      "raw_path": "data/raw/docs/tutorial/dependencies/global-dependencies.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/global-dependencies/",
+      "bytes": 1060,
+      "lines": 17
+    },
+    {
+      "rel_path": "tutorial/dependencies/dependencies-with-yield.md",
+      "source_path": "docs/en/docs/tutorial/dependencies/dependencies-with-yield.md",
+      "raw_path": "data/raw/docs/tutorial/dependencies/dependencies-with-yield.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/",
+      "bytes": 12857,
+      "lines": 291
+    },
+    {
+      "rel_path": "tutorial/security/index.md",
+      "source_path": "docs/en/docs/tutorial/security/index.md",
+      "raw_path": "data/raw/docs/tutorial/security/index.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/security/",
+      "bytes": 4548,
+      "lines": 107
+    },
+    {
+      "rel_path": "tutorial/security/first-steps.md",
+      "source_path": "docs/en/docs/tutorial/security/first-steps.md",
+      "raw_path": "data/raw/docs/tutorial/security/first-steps.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/security/first-steps/",
+      "bytes": 8357,
+      "lines": 204
+    },
+    {
+      "rel_path": "tutorial/security/get-current-user.md",
+      "source_path": "docs/en/docs/tutorial/security/get-current-user.md",
+      "raw_path": "data/raw/docs/tutorial/security/get-current-user.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/security/get-current-user/",
+      "bytes": 4117,
+      "lines": 106
+    },
+    {
+      "rel_path": "tutorial/security/simple-oauth2.md",
+      "source_path": "docs/en/docs/tutorial/security/simple-oauth2.md",
+      "raw_path": "data/raw/docs/tutorial/security/simple-oauth2.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/security/simple-oauth2/",
+      "bytes": 9589,
+      "lines": 290
+    },
+    {
+      "rel_path": "tutorial/security/oauth2-jwt.md",
+      "source_path": "docs/en/docs/tutorial/security/oauth2-jwt.md",
+      "raw_path": "data/raw/docs/tutorial/security/oauth2-jwt.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/",
+      "bytes": 10762,
+      "lines": 278
+    },
+    {
+      "rel_path": "tutorial/middleware.md",
+      "source_path": "docs/en/docs/tutorial/middleware.md",
+      "raw_path": "data/raw/docs/tutorial/middleware.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/middleware/",
+      "bytes": 3951,
+      "lines": 96
+    },
+    {
+      "rel_path": "tutorial/cors.md",
+      "source_path": "docs/en/docs/tutorial/cors.md",
+      "raw_path": "data/raw/docs/tutorial/cors.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/cors/",
+      "bytes": 5370,
+      "lines": 90
+    },
+    {
+      "rel_path": "tutorial/sql-databases.md",
+      "source_path": "docs/en/docs/tutorial/sql-databases.md",
+      "raw_path": "data/raw/docs/tutorial/sql-databases.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/sql-databases/",
+      "bytes": 15620,
+      "lines": 358
+    },
+    {
+      "rel_path": "tutorial/bigger-applications.md",
+      "source_path": "docs/en/docs/tutorial/bigger-applications.md",
+      "raw_path": "data/raw/docs/tutorial/bigger-applications.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/bigger-applications/",
+      "bytes": 20398,
+      "lines": 548
+    },
+    {
+      "rel_path": "tutorial/stream-json-lines.md",
+      "source_path": "docs/en/docs/tutorial/stream-json-lines.md",
+      "raw_path": "data/raw/docs/tutorial/stream-json-lines.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/stream-json-lines/",
+      "bytes": 4452,
+      "lines": 112
+    },
+    {
+      "rel_path": "tutorial/server-sent-events.md",
+      "source_path": "docs/en/docs/tutorial/server-sent-events.md",
+      "raw_path": "data/raw/docs/tutorial/server-sent-events.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/server-sent-events/",
+      "bytes": 4704,
+      "lines": 121
+    },
+    {
+      "rel_path": "tutorial/background-tasks.md",
+      "source_path": "docs/en/docs/tutorial/background-tasks.md",
+      "raw_path": "data/raw/docs/tutorial/background-tasks.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/background-tasks/",
+      "bytes": 4786,
+      "lines": 87
+    },
+    {
+      "rel_path": "tutorial/metadata.md",
+      "source_path": "docs/en/docs/tutorial/metadata.md",
+      "raw_path": "data/raw/docs/tutorial/metadata.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/metadata/",
+      "bytes": 5974,
+      "lines": 121
+    },
+    {
+      "rel_path": "tutorial/frontend.md",
+      "source_path": "docs/en/docs/tutorial/frontend.md",
+      "raw_path": "data/raw/docs/tutorial/frontend.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/frontend/",
+      "bytes": 6418,
+      "lines": 146
+    },
+    {
+      "rel_path": "tutorial/static-files.md",
+      "source_path": "docs/en/docs/tutorial/static-files.md",
+      "raw_path": "data/raw/docs/tutorial/static-files.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/static-files/",
+      "bytes": 1921,
+      "lines": 49
+    },
+    {
+      "rel_path": "tutorial/testing.md",
+      "source_path": "docs/en/docs/tutorial/testing.md",
+      "raw_path": "data/raw/docs/tutorial/testing.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/testing/",
+      "bytes": 5624,
+      "lines": 194
+    },
+    {
+      "rel_path": "tutorial/debugging.md",
+      "source_path": "docs/en/docs/tutorial/debugging.md",
+      "raw_path": "data/raw/docs/tutorial/debugging.md",
+      "url": "https://fastapi.tiangolo.com/tutorial/debugging/",
+      "bytes": 2470,
+      "lines": 114
+    },
+    {
+      "rel_path": "advanced/index.md",
+      "source_path": "docs/en/docs/advanced/index.md",
+      "raw_path": "data/raw/docs/advanced/index.md",
+      "url": "https://fastapi.tiangolo.com/advanced/",
+      "bytes": 757,
+      "lines": 22
+    },
+    {
+      "rel_path": "advanced/stream-data.md",
+      "source_path": "docs/en/docs/advanced/stream-data.md",
+      "raw_path": "data/raw/docs/advanced/stream-data.md",
+      "url": "https://fastapi.tiangolo.com/advanced/stream-data/",
+      "bytes": 5500,
+      "lines": 118
+    },
+    {
+      "rel_path": "advanced/path-operation-advanced-configuration.md",
+      "source_path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+      "raw_path": "data/raw/docs/advanced/path-operation-advanced-configuration.md",
+      "url": "https://fastapi.tiangolo.com/advanced/path-operation-advanced-configuration/",
+      "bytes": 7120,
+      "lines": 167
+    },
+    {
+      "rel_path": "advanced/additional-status-codes.md",
+      "source_path": "docs/en/docs/advanced/additional-status-codes.md",
+      "raw_path": "data/raw/docs/advanced/additional-status-codes.md",
+      "url": "https://fastapi.tiangolo.com/advanced/additional-status-codes/",
+      "bytes": 2002,
+      "lines": 42
+    },
+    {
+      "rel_path": "advanced/response-directly.md",
+      "source_path": "docs/en/docs/advanced/response-directly.md",
+      "raw_path": "data/raw/docs/advanced/response-directly.md",
+      "url": "https://fastapi.tiangolo.com/advanced/response-directly/",
+      "bytes": 4137,
+      "lines": 84
+    },
+    {
+      "rel_path": "advanced/custom-response.md",
+      "source_path": "docs/en/docs/advanced/custom-response.md",
+      "raw_path": "data/raw/docs/advanced/custom-response.md",
+      "url": "https://fastapi.tiangolo.com/advanced/custom-response/",
+      "bytes": 11291,
+      "lines": 274
+    },
+    {
+      "rel_path": "advanced/additional-responses.md",
+      "source_path": "docs/en/docs/advanced/additional-responses.md",
+      "raw_path": "data/raw/docs/advanced/additional-responses.md",
+      "url": "https://fastapi.tiangolo.com/advanced/additional-responses/",
+      "bytes": 9051,
+      "lines": 248
+    },
+    {
+      "rel_path": "advanced/response-cookies.md",
+      "source_path": "docs/en/docs/advanced/response-cookies.md",
+      "raw_path": "data/raw/docs/advanced/response-cookies.md",
+      "url": "https://fastapi.tiangolo.com/advanced/response-cookies/",
+      "bytes": 2228,
+      "lines": 52
+    },
+    {
+      "rel_path": "advanced/response-headers.md",
+      "source_path": "docs/en/docs/advanced/response-headers.md",
+      "raw_path": "data/raw/docs/advanced/response-headers.md",
+      "url": "https://fastapi.tiangolo.com/advanced/response-headers/",
+      "bytes": 2200,
+      "lines": 42
+    }
+  ],
+  "threads": [
+    {
+      "number": 16194,
+      "title": "Wheel contains unnecessary `.agents/**/*.md` files",
+      "url": "https://github.com/fastapi/fastapi/discussions/16194",
+      "created_at": "2026-08-14T12:02:04Z",
+      "answer_chars": 383,
+      "is_maintainer": true
+    },
+    {
+      "number": 16169,
+      "title": "Clarify Union documentation for response_model in python 3.10+",
+      "url": "https://github.com/fastapi/fastapi/discussions/16169",
+      "created_at": "2026-08-09T02:55:17Z",
+      "answer_chars": 782,
+      "is_maintainer": false
+    },
+    {
+      "number": 16140,
+      "title": "Docs: Coverage badge broken",
+      "url": "https://github.com/fastapi/fastapi/discussions/16140",
+      "created_at": "2026-08-04T13:26:09Z",
+      "answer_chars": 182,
+      "is_maintainer": true
+    },
+    {
+      "number": 16139,
+      "title": "Support specifying default values inside Annotated for parameter functions like Query()",
+      "url": "https://github.com/fastapi/fastapi/discussions/16139",
+      "created_at": "2026-08-04T12:26:32Z",
+      "answer_chars": 1853,
+      "is_maintainer": false
+    },
+    {
+      "number": 16124,
+      "title": "ValidationError on query param model with list-field and AliasChoices",
+      "url": "https://github.com/fastapi/fastapi/discussions/16124",
+      "created_at": "2026-08-01T19:43:01Z",
+      "answer_chars": 213,
+      "is_maintainer": true
+    },
+    {
+      "number": 16085,
+      "title": "Return type vs ORJSONResponse: does generic return type as dict[str, Any] use the Pydantic serializer efficently?",
+      "url": "https://github.com/fastapi/fastapi/discussions/16085",
+      "created_at": "2026-07-28T08:39:29Z",
+      "answer_chars": 3600,
+      "is_maintainer": false
+    },
+    {
+      "number": 16034,
+      "title": "Regression (0.137.0): route params built at request time break under @freeze_time",
+      "url": "https://github.com/fastapi/fastapi/discussions/16034",
+      "created_at": "2026-07-22T12:32:33Z",
+      "answer_chars": 293,
+      "is_maintainer": true
+    },
+    {
+      "number": 16028,
+      "title": "How to add Custom Error that are properly converted in the OpenAPI schema? (missing `detail` prop in `response`)",
+      "url": "https://github.com/fastapi/fastapi/discussions/16028",
+      "created_at": "2026-07-20T17:18:10Z",
+      "answer_chars": 2340,
+      "is_maintainer": true
+    },
+    {
+      "number": 15989,
+      "title": "Invalid `contact`/`license_info` URL fails lazily at first /openapi.json request, not at app construction — confusing traceback",
+      "url": "https://github.com/fastapi/fastapi/discussions/15989",
+      "created_at": "2026-07-14T01:07:11Z",
+      "answer_chars": 497,
+      "is_maintainer": false
+    },
+    {
+      "number": 15979,
+      "title": "app.frontend() with fallback=\"index.html\" returns 404 for client side routes that have a dot in the last path segment (like /users/john.doe or /v/1.2.3)",
+      "url": "https://github.com/fastapi/fastapi/discussions/15979",
+      "created_at": "2026-07-12T17:44:09Z",
+      "answer_chars": 147,
+      "is_maintainer": true
+    },
+    {
+      "number": 15973,
+      "title": "Behavioral difference between standard `with`  and `contextmanager_in_threadpool`",
+      "url": "https://github.com/fastapi/fastapi/discussions/15973",
+      "created_at": "2026-07-11T10:21:04Z",
+      "answer_chars": 7309,
+      "is_maintainer": false
+    },
+    {
+      "number": 15936,
+      "title": "Feat: HTMLResponse should support `__html__` conversion of content",
+      "url": "https://github.com/fastapi/fastapi/discussions/15936",
+      "created_at": "2026-07-05T04:36:39Z",
+      "answer_chars": 1396,
+      "is_maintainer": false
+    },
+    {
+      "number": 15914,
+      "title": "Router-tree lazy rebuild (0.137.0+) is not thread-safe: valid routes can 404 under concurrent first requests",
+      "url": "https://github.com/fastapi/fastapi/discussions/15914",
+      "created_at": "2026-07-02T14:15:44Z",
+      "answer_chars": 383,
+      "is_maintainer": true
+    },
+    {
+      "number": 15843,
+      "title": "Why does pip install fastapi include a SKILL.md under .agents/skills/?",
+      "url": "https://github.com/fastapi/fastapi/discussions/15843",
+      "created_at": "2026-06-25T17:40:22Z",
+      "answer_chars": 215,
+      "is_maintainer": true
+    },
+    {
+      "number": 15819,
+      "title": "FastAPI segfaults with Python 3.14.0 on MacOS",
+      "url": "https://github.com/fastapi/fastapi/discussions/15819",
+      "created_at": "2026-06-21T12:52:54Z",
+      "answer_chars": 1727,
+      "is_maintainer": false
+    },
+    {
+      "number": 15782,
+      "title": "0.137.0: how to get all paths of a router?",
+      "url": "https://github.com/fastapi/fastapi/discussions/15782",
+      "created_at": "2026-06-16T12:34:06Z",
+      "answer_chars": 368,
+      "is_maintainer": true
+    },
+    {
+      "number": 15768,
+      "title": "Having trouble parsing form data sent with content type text/html",
+      "url": "https://github.com/fastapi/fastapi/discussions/15768",
+      "created_at": "2026-06-15T13:35:45Z",
+      "answer_chars": 819,
+      "is_maintainer": true
+    },
+    {
+      "number": 15743,
+      "title": "Form with optional Email fails, what is the best practise here?",
+      "url": "https://github.com/fastapi/fastapi/discussions/15743",
+      "created_at": "2026-06-12T22:34:57Z",
+      "answer_chars": 2898,
+      "is_maintainer": false
+    },
+    {
+      "number": 15707,
+      "title": "Let a \"form\" pydantic model use `exclude=True` to not display that field in the docs",
+      "url": "https://github.com/fastapi/fastapi/discussions/15707",
+      "created_at": "2026-06-08T12:18:05Z",
+      "answer_chars": 1633,
+      "is_maintainer": false
+    },
+    {
+      "number": 15701,
+      "title": "Named Pydantic TypeAliasType request body is inlined in OpenAPI unless wrapped with Body()",
+      "url": "https://github.com/fastapi/fastapi/discussions/15701",
+      "created_at": "2026-06-07T00:14:25Z",
+      "answer_chars": 326,
+      "is_maintainer": true
+    },
+    {
+      "number": 15648,
+      "title": "format_sse_event() does not validate event/id fields, allowing SSE protocol injection",
+      "url": "https://github.com/fastapi/fastapi/discussions/15648",
+      "created_at": "2026-05-30T15:56:00Z",
+      "answer_chars": 2138,
+      "is_maintainer": true
+    },
+    {
+      "number": 15639,
+      "title": "Duplicated endpoints in docs with nested routers",
+      "url": "https://github.com/fastapi/fastapi/discussions/15639",
+      "created_at": "2026-05-29T07:02:26Z",
+      "answer_chars": 1376,
+      "is_maintainer": false
+    },
+    {
+      "number": 15611,
+      "title": "Should commercial deploy tooling ship by default in the `[standard]` extra?",
+      "url": "https://github.com/fastapi/fastapi/discussions/15611",
+      "created_at": "2026-05-26T09:08:51Z",
+      "answer_chars": 3783,
+      "is_maintainer": true
+    },
+    {
+      "number": 15593,
+      "title": "Does Starlette GHSA-86qp-5c8j-p5mr affect FastAPI installations using Starlette <= 1.0.0?",
+      "url": "https://github.com/fastapi/fastapi/discussions/15593",
+      "created_at": "2026-05-24T07:42:12Z",
+      "answer_chars": 1768,
+      "is_maintainer": false
+    },
+    {
+      "number": 15547,
+      "title": "Custom APIRoute classes with explicit constructors fail after strict_content_type was added",
+      "url": "https://github.com/fastapi/fastapi/discussions/15547",
+      "created_at": "2026-05-11T22:48:49Z",
+      "answer_chars": 647,
+      "is_maintainer": true
+    },
+    {
+      "number": 15498,
+      "title": "Enable Pydantic polymorphic_serialization flag on response serialization",
+      "url": "https://github.com/fastapi/fastapi/discussions/15498",
+      "created_at": "2026-05-09T16:43:50Z",
+      "answer_chars": 267,
+      "is_maintainer": true
+    },
+    {
+      "number": 15494,
+      "title": "Would a PR adding tests for SSE (EventSourceResponse) with yield dependencies be welcome?",
+      "url": "https://github.com/fastapi/fastapi/discussions/15494",
+      "created_at": "2026-05-08T20:06:59Z",
+      "answer_chars": 499,
+      "is_maintainer": false
+    },
+    {
+      "number": 15361,
+      "title": "feat: add class-based view and route support, consistent with official FastAPI style",
+      "url": "https://github.com/fastapi/fastapi/discussions/15361",
+      "created_at": "2026-04-16T09:27:21Z",
+      "answer_chars": 2419,
+      "is_maintainer": false
+    },
+    {
+      "number": 15330,
+      "title": "Deployment Failure using fastapi deploy with uv binaries",
+      "url": "https://github.com/fastapi/fastapi/discussions/15330",
+      "created_at": "2026-04-13T07:43:24Z",
+      "answer_chars": 12710,
+      "is_maintainer": false
+    },
+    {
+      "number": 15328,
+      "title": "MediaType.itemSchema is invalid in OpenAPI 3.1",
+      "url": "https://github.com/fastapi/fastapi/discussions/15328",
+      "created_at": "2026-04-13T07:38:20Z",
+      "answer_chars": 405,
+      "is_maintainer": true
+    },
+    {
+      "number": 15302,
+      "title": "Strengthening validation in jsonable_encoder and response_model config",
+      "url": "https://github.com/fastapi/fastapi/discussions/15302",
+      "created_at": "2026-04-05T04:22:46Z",
+      "answer_chars": 143,
+      "is_maintainer": true
+    },
+    {
+      "number": 15289,
+      "title": "Optional Query Parameters with a Pydantic Model",
+      "url": "https://github.com/fastapi/fastapi/discussions/15289",
+      "created_at": "2026-04-02T08:54:29Z",
+      "answer_chars": 756,
+      "is_maintainer": false
+    },
+    {
+      "number": 15278,
+      "title": "Deployment problem",
+      "url": "https://github.com/fastapi/fastapi/discussions/15278",
+      "created_at": "2026-04-01T14:17:32Z",
+      "answer_chars": 543,
+      "is_maintainer": true
+    },
+    {
+      "number": 15266,
+      "title": "Unit testing - creating service classes with Depends",
+      "url": "https://github.com/fastapi/fastapi/discussions/15266",
+      "created_at": "2026-03-31T07:37:30Z",
+      "answer_chars": 229,
+      "is_maintainer": true
+    },
+    {
+      "number": 15264,
+      "title": "Lazy initialization of dependencies using Depends",
+      "url": "https://github.com/fastapi/fastapi/discussions/15264",
+      "created_at": "2026-03-30T20:32:09Z",
+      "answer_chars": 691,
+      "is_maintainer": true
+    },
+    {
+      "number": 15211,
+      "title": "Deploy problem using command line",
+      "url": "https://github.com/fastapi/fastapi/discussions/15211",
+      "created_at": "2026-03-24T13:49:34Z",
+      "answer_chars": 147,
+      "is_maintainer": true
+    },
+    {
+      "number": 15204,
+      "title": "Dependant object has no attribute 'security_requirements'",
+      "url": "https://github.com/fastapi/fastapi/discussions/15204",
+      "created_at": "2026-03-23T14:42:05Z",
+      "answer_chars": 290,
+      "is_maintainer": true
+    },
+    {
+      "number": 15147,
+      "title": "How to mark input field as invalid in route function",
+      "url": "https://github.com/fastapi/fastapi/discussions/15147",
+      "created_at": "2026-03-18T09:32:40Z",
+      "answer_chars": 1053,
+      "is_maintainer": false
+    },
+    {
+      "number": 15133,
+      "title": "Using default_factory=list for multi-valued parameter in Query model leads to memory leak",
+      "url": "https://github.com/fastapi/fastapi/discussions/15133",
+      "created_at": "2026-03-17T05:29:19Z",
+      "answer_chars": 188,
+      "is_maintainer": true
+    },
+    {
+      "number": 15132,
+      "title": "Different sub-application behaviour when using FastAPI(root_path=...) vs --root-path CLI option",
+      "url": "https://github.com/fastapi/fastapi/discussions/15132",
+      "created_at": "2026-03-17T03:32:02Z",
+      "answer_chars": 420,
+      "is_maintainer": true
+    },
+    {
+      "number": 15098,
+      "title": "`bytes` field inside Pydantic model with `Form()` fails — UploadFile not read",
+      "url": "https://github.com/fastapi/fastapi/discussions/15098",
+      "created_at": "2026-03-12T12:36:55Z",
+      "answer_chars": 613,
+      "is_maintainer": true
+    },
+    {
+      "number": 15092,
+      "title": "Decorator response_model param for the maximum serialization performance",
+      "url": "https://github.com/fastapi/fastapi/discussions/15092",
+      "created_at": "2026-03-11T08:30:36Z",
+      "answer_chars": 182,
+      "is_maintainer": true
+    },
+    {
+      "number": 15084,
+      "title": "swagger not display",
+      "url": "https://github.com/fastapi/fastapi/discussions/15084",
+      "created_at": "2026-03-10T04:05:41Z",
+      "answer_chars": 363,
+      "is_maintainer": true
+    },
+    {
+      "number": 15066,
+      "title": "Attach event data schema for sse endpoints",
+      "url": "https://github.com/fastapi/fastapi/discussions/15066",
+      "created_at": "2026-03-06T08:47:11Z",
+      "answer_chars": 1770,
+      "is_maintainer": false
+    },
+    {
+      "number": 15059,
+      "title": "Usage of ContextVar's in FastAPI",
+      "url": "https://github.com/fastapi/fastapi/discussions/15059",
+      "created_at": "2026-03-05T12:43:25Z",
+      "answer_chars": 2540,
+      "is_maintainer": true
+    },
+    {
+      "number": 15042,
+      "title": "Class Based MiddleWare API?",
+      "url": "https://github.com/fastapi/fastapi/discussions/15042",
+      "created_at": "2026-03-02T18:58:40Z",
+      "answer_chars": 1365,
+      "is_maintainer": false
+    },
+    {
+      "number": 14990,
+      "title": "Dependency keeps going after response returns when there exists any backgroud tasks.",
+      "url": "https://github.com/fastapi/fastapi/discussions/14990",
+      "created_at": "2026-02-24T12:31:01Z",
+      "answer_chars": 339,
+      "is_maintainer": true
+    },
+    {
+      "number": 14980,
+      "title": "Consider Pydantic serialization for exception handlers before deprecating ORJSONResponse",
+      "url": "https://github.com/fastapi/fastapi/discussions/14980",
+      "created_at": "2026-02-23T21:10:09Z",
+      "answer_chars": 315,
+      "is_maintainer": true
+    },
+    {
+      "number": 14975,
+      "title": "UploadFile file picker broken in Swagger UI since 0.129.1 (contentMediaType change)",
+      "url": "https://github.com/fastapi/fastapi/discussions/14975",
+      "created_at": "2026-02-23T16:33:31Z",
+      "answer_chars": 383,
+      "is_maintainer": false
+    },
+    {
+      "number": 14967,
+      "title": "Ability to register a callback on \"After-Startup\" event",
+      "url": "https://github.com/fastapi/fastapi/discussions/14967",
+      "created_at": "2026-02-23T02:23:15Z",
+      "answer_chars": 1849,
+      "is_maintainer": false
+    },
+    {
+      "number": 14955,
+      "title": "Ability to mark a single item in a union type as deprecated in openapi spec.",
+      "url": "https://github.com/fastapi/fastapi/discussions/14955",
+      "created_at": "2026-02-21T13:01:54Z",
+      "answer_chars": 483,
+      "is_maintainer": false
+    },
+    {
+      "number": 14936,
+      "title": "Rename status import to HttpStatus (or similar) to avoid naming conflicts",
+      "url": "https://github.com/fastapi/fastapi/discussions/14936",
+      "created_at": "2026-02-18T07:05:02Z",
+      "answer_chars": 163,
+      "is_maintainer": true
+    },
+    {
+      "number": 14907,
+      "title": "FastAPI app with uvicorn workers and logging file",
+      "url": "https://github.com/fastapi/fastapi/discussions/14907",
+      "created_at": "2026-02-12T13:55:17Z",
+      "answer_chars": 1166,
+      "is_maintainer": false
+    },
+    {
+      "number": 14889,
+      "title": "Bug with complex fields (`list[str]`) inside `BaseModel`",
+      "url": "https://github.com/fastapi/fastapi/discussions/14889",
+      "created_at": "2026-02-10T14:47:36Z",
+      "answer_chars": 238,
+      "is_maintainer": true
+    },
+    {
+      "number": 14861,
+      "title": "Access to UID of client when using Unix domain sockets",
+      "url": "https://github.com/fastapi/fastapi/discussions/14861",
+      "created_at": "2026-02-07T08:08:32Z",
+      "answer_chars": 457,
+      "is_maintainer": true
+    },
+    {
+      "number": 14852,
+      "title": "Optional Annotated type for query parameter results in unsupported type",
+      "url": "https://github.com/fastapi/fastapi/discussions/14852",
+      "created_at": "2026-02-06T15:16:18Z",
+      "answer_chars": 254,
+      "is_maintainer": true
+    },
+    {
+      "number": 14812,
+      "title": "AttributeError while using HTTP_422_UPROCESSABLE_CONTENT from fastapi.status",
+      "url": "https://github.com/fastapi/fastapi/discussions/14812",
+      "created_at": "2026-02-04T08:13:57Z",
+      "answer_chars": 287,
+      "is_maintainer": true
+    },
+    {
+      "number": 14807,
+      "title": "Recommended Scaleable Web-sockets Libraries in 2026",
+      "url": "https://github.com/fastapi/fastapi/discussions/14807",
+      "created_at": "2026-02-02T20:25:29Z",
+      "answer_chars": 1767,
+      "is_maintainer": false
+    },
+    {
+      "number": 14775,
+      "title": "Regression: Mounted sub-app OpenAPI paths do not include the root path",
+      "url": "https://github.com/fastapi/fastapi/discussions/14775",
+      "created_at": "2026-01-26T10:40:52Z",
+      "answer_chars": 293,
+      "is_maintainer": true
+    },
+    {
+      "number": 14768,
+      "title": "Specify log level to the fastapi command",
+      "url": "https://github.com/fastapi/fastapi/discussions/14768",
+      "created_at": "2026-01-24T17:10:41Z",
+      "answer_chars": 1063,
+      "is_maintainer": false
+    },
+    {
+      "number": 14765,
+      "title": "[SOLVED] fastapi run not responding to ctrl+c if workers >= 3",
+      "url": "https://github.com/fastapi/fastapi/discussions/14765",
+      "created_at": "2026-01-23T16:27:44Z",
+      "answer_chars": 201,
+      "is_maintainer": true
+    },
+    {
+      "number": 14742,
+      "title": "High increase of memory usage from 0.121.x (and onwards)",
+      "url": "https://github.com/fastapi/fastapi/discussions/14742",
+      "created_at": "2026-01-20T15:56:29Z",
+      "answer_chars": 291,
+      "is_maintainer": true
+    },
+    {
+      "number": 14741,
+      "title": "Custom Query Parameter BeforeValidator Broken from 0.118.2",
+      "url": "https://github.com/fastapi/fastapi/discussions/14741",
+      "created_at": "2026-01-20T13:45:36Z",
+      "answer_chars": 1083,
+      "is_maintainer": true
+    },
+    {
+      "number": 14719,
+      "title": "About the changelog for v 0.112.0 - uvicorn is not installed by fastapi==0.110.3?",
+      "url": "https://github.com/fastapi/fastapi/discussions/14719",
+      "created_at": "2026-01-14T12:05:44Z",
+      "answer_chars": 548,
+      "is_maintainer": false
+    },
+    {
+      "number": 14698,
+      "title": "Bug: WebSocket validation exception crashes server due to invalid close reason type",
+      "url": "https://github.com/fastapi/fastapi/discussions/14698",
+      "created_at": "2026-01-11T10:22:31Z",
+      "answer_chars": 574,
+      "is_maintainer": true
+    },
+    {
+      "number": 14642,
+      "title": "a strange situation  about parallel requests",
+      "url": "https://github.com/fastapi/fastapi/discussions/14642",
+      "created_at": "2026-01-02T14:32:12Z",
+      "answer_chars": 837,
+      "is_maintainer": false
+    },
+    {
+      "number": 14601,
+      "title": "Query Params doesn't seem to work with pydantic: @field_validator(mode=\"before\")",
+      "url": "https://github.com/fastapi/fastapi/discussions/14601",
+      "created_at": "2025-12-25T12:03:21Z",
+      "answer_chars": 1234,
+      "is_maintainer": true
+    },
+    {
+      "number": 14596,
+      "title": "Korean language option disappeared from the docs language selector",
+      "url": "https://github.com/fastapi/fastapi/discussions/14596",
+      "created_at": "2025-12-24T00:19:34Z",
+      "answer_chars": 193,
+      "is_maintainer": true
+    },
+    {
+      "number": 14566,
+      "title": "Broken link (404) in Japanese documentation: Body - Multiple Parameters",
+      "url": "https://github.com/fastapi/fastapi/discussions/14566",
+      "created_at": "2025-12-18T15:00:14Z",
+      "answer_chars": 388,
+      "is_maintainer": true
+    },
+    {
+      "number": 14513,
+      "title": "Support for propertyNames in OpenAPI schema when using dict[Enum, ...] with Pydantic v2",
+      "url": "https://github.com/fastapi/fastapi/discussions/14513",
+      "created_at": "2025-07-10T11:59:00Z",
+      "answer_chars": 3323,
+      "is_maintainer": true
+    },
+    {
+      "number": 14495,
+      "title": "Discriminated Unions Break When Wrapped in Annotated[Union, Body(...)] in FastAPI 0.124.1+",
+      "url": "https://github.com/fastapi/fastapi/discussions/14495",
+      "created_at": "2025-12-11T10:01:14Z",
+      "answer_chars": 145,
+      "is_maintainer": true
+    },
+    {
+      "number": 14481,
+      "title": "newline characters have been added to the endpoint’s body since version 0.124.0",
+      "url": "https://github.com/fastapi/fastapi/discussions/14481",
+      "created_at": "2025-12-10T07:55:28Z",
+      "answer_chars": 687,
+      "is_maintainer": true
+    },
+    {
+      "number": 14478,
+      "title": "FastAPI with Pydantic v2 lib but with v1 code throws error if response type hint is provided",
+      "url": "https://github.com/fastapi/fastapi/discussions/14478",
+      "created_at": "2025-12-09T12:42:32Z",
+      "answer_chars": 910,
+      "is_maintainer": true
+    },
+    {
+      "number": 14464,
+      "title": "Breaking change in dependency type inspection in FastAPI 0.123.7",
+      "url": "https://github.com/fastapi/fastapi/discussions/14464",
+      "created_at": "2025-12-05T19:20:39Z",
+      "answer_chars": 221,
+      "is_maintainer": true
+    },
+    {
+      "number": 14462,
+      "title": "Annotated[Model, Query()] fails when used alongside single query parameters",
+      "url": "https://github.com/fastapi/fastapi/discussions/14462",
+      "created_at": "2025-12-05T07:36:27Z",
+      "answer_chars": 153,
+      "is_maintainer": true
+    },
+    {
+      "number": 14428,
+      "title": "Please don't deprecate fastapi.Path(... example=)",
+      "url": "https://github.com/fastapi/fastapi/discussions/14428",
+      "created_at": "2025-12-01T18:38:31Z",
+      "answer_chars": 602,
+      "is_maintainer": true
+    },
+    {
+      "number": 14424,
+      "title": "starlette dependnecy seems to have been found with a CVE-2025-62727. Why does fastapi still allow the vulnerable version?",
+      "url": "https://github.com/fastapi/fastapi/discussions/14424",
+      "created_at": "2025-12-01T08:57:10Z",
+      "answer_chars": 801,
+      "is_maintainer": false
+    },
+    {
+      "number": 14380,
+      "title": "Response model validations don't work",
+      "url": "https://github.com/fastapi/fastapi/discussions/14380",
+      "created_at": "2025-11-21T10:29:13Z",
+      "answer_chars": 1127,
+      "is_maintainer": true
+    },
+    {
+      "number": 14376,
+      "title": "Non-deterministic Open API Spec Generation",
+      "url": "https://github.com/fastapi/fastapi/discussions/14376",
+      "created_at": "2025-11-20T11:15:02Z",
+      "answer_chars": 1673,
+      "is_maintainer": false
+    },
+    {
+      "number": 14374,
+      "title": "Possible memory leak when using UploadFile",
+      "url": "https://github.com/fastapi/fastapi/discussions/14374",
+      "created_at": "2025-11-20T09:55:20Z",
+      "answer_chars": 2422,
+      "is_maintainer": false
+    },
+    {
+      "number": 14363,
+      "title": "default redoc doesn't render due to error from https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js",
+      "url": "https://github.com/fastapi/fastapi/discussions/14363",
+      "created_at": "2025-11-18T00:24:56Z",
+      "answer_chars": 538,
+      "is_maintainer": false
+    },
+    {
+      "number": 14350,
+      "title": "Add tests with Cassandra/ScyllaDB containers for NoSQL tutorial",
+      "url": "https://github.com/fastapi/fastapi/discussions/14350",
+      "created_at": "2025-11-13T22:35:14Z",
+      "answer_chars": 192,
+      "is_maintainer": true
+    },
+    {
+      "number": 14339,
+      "title": "Differences in how synchronous and asynchronous requests are handled",
+      "url": "https://github.com/fastapi/fastapi/discussions/14339",
+      "created_at": "2025-11-12T00:10:39Z",
+      "answer_chars": 624,
+      "is_maintainer": true
+    },
+    {
+      "number": 14336,
+      "title": "`await` stalls inside finally block when using StreamingResponse",
+      "url": "https://github.com/fastapi/fastapi/discussions/14336",
+      "created_at": "2025-11-11T09:56:42Z",
+      "answer_chars": 940,
+      "is_maintainer": true
+    },
+    {
+      "number": 14334,
+      "title": "jsonable_encoder not respecting exclude and exclude_if Annotated on Field",
+      "url": "https://github.com/fastapi/fastapi/discussions/14334",
+      "created_at": "2025-11-11T08:52:22Z",
+      "answer_chars": 1633,
+      "is_maintainer": false
+    },
+    {
+      "number": 14324,
+      "title": "Caching dependency result in APIRouter (avoid double validation on nested routers deps)",
+      "url": "https://github.com/fastapi/fastapi/discussions/14324",
+      "created_at": "2025-11-10T15:05:02Z",
+      "answer_chars": 1051,
+      "is_maintainer": true
+    },
+    {
+      "number": 14323,
+      "title": "`get_openapi` throws an `unhashable type` error if a Depends-annotated type is made optional",
+      "url": "https://github.com/fastapi/fastapi/discussions/14323",
+      "created_at": "2025-11-10T12:32:14Z",
+      "answer_chars": 512,
+      "is_maintainer": false
+    },
+    {
+      "number": 14321,
+      "title": "isinstance(file, UploadFile) returns False",
+      "url": "https://github.com/fastapi/fastapi/discussions/14321",
+      "created_at": "2025-11-09T09:27:56Z",
+      "answer_chars": 130,
+      "is_maintainer": true
+    },
+    {
+      "number": 14311,
+      "title": "AssertionError: getattr(field, \"shape\", 1) == 1 when using dataclass",
+      "url": "https://github.com/fastapi/fastapi/discussions/14311",
+      "created_at": "2025-11-08T10:36:03Z",
+      "answer_chars": 477,
+      "is_maintainer": true
+    },
+    {
+      "number": 14300,
+      "title": "FastAPI Issue: Query() Parameter Schema Inconsistency with Pydantic Models + json/map schema",
+      "url": "https://github.com/fastapi/fastapi/discussions/14300",
+      "created_at": "2025-11-05T23:02:02Z",
+      "answer_chars": 616,
+      "is_maintainer": true
+    },
+    {
+      "number": 14296,
+      "title": "Function scope yield dependency exits late when requested in APIRouter",
+      "url": "https://github.com/fastapi/fastapi/discussions/14296",
+      "created_at": "2025-11-05T12:15:26Z",
+      "answer_chars": 314,
+      "is_maintainer": false
+    },
+    {
+      "number": 14292,
+      "title": "Is there any command for creating fastapi app?",
+      "url": "https://github.com/fastapi/fastapi/discussions/14292",
+      "created_at": "2025-11-04T13:14:25Z",
+      "answer_chars": 212,
+      "is_maintainer": true
+    },
+    {
+      "number": 14265,
+      "title": "KeyError: '$ref' in fastapi.openapi.utils.get_openapi",
+      "url": "https://github.com/fastapi/fastapi/discussions/14265",
+      "created_at": "2025-10-31T06:27:12Z",
+      "answer_chars": 170,
+      "is_maintainer": true
+    },
+    {
+      "number": 14263,
+      "title": "0.120.3 breaks `SecurityBase` based dependencies in Swagger",
+      "url": "https://github.com/fastapi/fastapi/discussions/14263",
+      "created_at": "2025-10-31T00:29:34Z",
+      "answer_chars": 183,
+      "is_maintainer": true
+    },
+    {
+      "number": 14251,
+      "title": "APIRouter.include_router method should catch when its own object is passed",
+      "url": "https://github.com/fastapi/fastapi/discussions/14251",
+      "created_at": "2025-10-29T19:43:07Z",
+      "answer_chars": 150,
+      "is_maintainer": false
+    },
+    {
+      "number": 14226,
+      "title": "docs: Fix typo in tutorial documentation",
+      "url": "https://github.com/fastapi/fastapi/discussions/14226",
+      "created_at": "2025-10-24T09:55:25Z",
+      "answer_chars": 144,
+      "is_maintainer": true
+    },
+    {
+      "number": 14218,
+      "title": "Support optional case-insensitive and trailing-slash-insensitive routing via compile_path() or APIRoute configuration",
+      "url": "https://github.com/fastapi/fastapi/discussions/14218",
+      "created_at": "2025-10-22T13:53:33Z",
+      "answer_chars": 257,
+      "is_maintainer": false
+    },
+    {
+      "number": 14207,
+      "title": "No such option: --forwarded-allow-ips",
+      "url": "https://github.com/fastapi/fastapi/discussions/14207",
+      "created_at": "2025-10-20T10:57:19Z",
+      "answer_chars": 147,
+      "is_maintainer": true
+    },
+    {
+      "number": 14202,
+      "title": "Regression in 0.118.2: BeforeValidator not called for query parameters with Annotated types",
+      "url": "https://github.com/fastapi/fastapi/discussions/14202",
+      "created_at": "2025-10-18T10:02:59Z",
+      "answer_chars": 850,
+      "is_maintainer": true
+    },
+    {
+      "number": 14198,
+      "title": "Pytest on route fails with 404, when others tests on same route pass",
+      "url": "https://github.com/fastapi/fastapi/discussions/14198",
+      "created_at": "2025-10-17T16:38:15Z",
+      "answer_chars": 2471,
+      "is_maintainer": false
+    },
+    {
+      "number": 14197,
+      "title": "RecursionError when endpoint returns State stored in dataclass",
+      "url": "https://github.com/fastapi/fastapi/discussions/14197",
+      "created_at": "2025-10-17T04:07:17Z",
+      "answer_chars": 348,
+      "is_maintainer": true
+    },
+    {
+      "number": 14187,
+      "title": "lib/python3.14/site-packages/fastapi/_compat/v1.py:72: UserWarning: Core Pydantic V1 functionaible with Python 3.14 or greater.",
+      "url": "https://github.com/fastapi/fastapi/discussions/14187",
+      "created_at": "2025-10-14T12:24:54Z",
+      "answer_chars": 201,
+      "is_maintainer": true
+    },
+    {
+      "number": 14185,
+      "title": "Controlling output schema of SQLAlchemy async models with Pydantic response_model",
+      "url": "https://github.com/fastapi/fastapi/discussions/14185",
+      "created_at": "2025-10-14T08:34:41Z",
+      "answer_chars": 867,
+      "is_maintainer": false
+    },
+    {
+      "number": 14184,
+      "title": "In 0.119.0, `arbitrary_types_allowed=True` is ignored. (could not gen openapi schema)",
+      "url": "https://github.com/fastapi/fastapi/discussions/14184",
+      "created_at": "2025-10-14T07:24:10Z",
+      "answer_chars": 168,
+      "is_maintainer": true
+    },
+    {
+      "number": 14180,
+      "title": "Support for union of models (non scalars) in query string",
+      "url": "https://github.com/fastapi/fastapi/discussions/14180",
+      "created_at": "2025-10-13T07:54:59Z",
+      "answer_chars": 294,
+      "is_maintainer": false
+    },
+    {
+      "number": 14177,
+      "title": "Component name regression in OpenAPI spec for v0.119.0",
+      "url": "https://github.com/fastapi/fastapi/discussions/14177",
+      "created_at": "2025-10-12T16:42:47Z",
+      "answer_chars": 256,
+      "is_maintainer": true
+    },
+    {
+      "number": 14169,
+      "title": "ContextVar value lost  in the Exception handler, when using a middleware and default 500 handler is triggered",
+      "url": "https://github.com/fastapi/fastapi/discussions/14169",
+      "created_at": "2025-10-08T19:52:18Z",
+      "answer_chars": 5635,
+      "is_maintainer": false
+    },
+    {
+      "number": 14158,
+      "title": "Use `return` instead of `continue`  in fastapi/_compat/shared.py at L150-200?",
+      "url": "https://github.com/fastapi/fastapi/discussions/14158",
+      "created_at": "2025-10-05T18:55:46Z",
+      "answer_chars": 2542,
+      "is_maintainer": false
+    },
+    {
+      "number": 14151,
+      "title": "[0.118.0] Use case for early closing in yield dependencies (session commit before response)",
+      "url": "https://github.com/fastapi/fastapi/discussions/14151",
+      "created_at": "2025-10-01T14:19:46Z",
+      "answer_chars": 234,
+      "is_maintainer": true
+    },
+    {
+      "number": 14137,
+      "title": "[0.118 Regression] Background tasks not executed if added after a `yield`",
+      "url": "https://github.com/fastapi/fastapi/discussions/14137",
+      "created_at": "2025-10-01T03:07:42Z",
+      "answer_chars": 3537,
+      "is_maintainer": true
+    },
+    {
+      "number": 14116,
+      "title": "Middleware receive callback behavior not acting as expected",
+      "url": "https://github.com/fastapi/fastapi/discussions/14116",
+      "created_at": "2025-09-25T23:39:56Z",
+      "answer_chars": 353,
+      "is_maintainer": false
+    },
+    {
+      "number": 14094,
+      "title": "Difference between `fastapi dev` and `fastapi run --reload`",
+      "url": "https://github.com/fastapi/fastapi/discussions/14094",
+      "created_at": "2025-09-20T13:21:40Z",
+      "answer_chars": 473,
+      "is_maintainer": false
+    },
+    {
+      "number": 14085,
+      "title": "consistently returning 200 OK with a null response body",
+      "url": "https://github.com/fastapi/fastapi/discussions/14085",
+      "created_at": "2025-09-17T20:15:07Z",
+      "answer_chars": 286,
+      "is_maintainer": true
+    },
+    {
+      "number": 14082,
+      "title": "[ FastAPI Docs ] Should the `Previous Steps before Starting` include `LifeSpan`?",
+      "url": "https://github.com/fastapi/fastapi/discussions/14082",
+      "created_at": "2025-09-16T14:11:04Z",
+      "answer_chars": 327,
+      "is_maintainer": true
+    },
+    {
+      "number": 14071,
+      "title": "Duplicate and verbose exception stacktrace if middleware exits",
+      "url": "https://github.com/fastapi/fastapi/discussions/14071",
+      "created_at": "2025-09-11T17:47:42Z",
+      "answer_chars": 2637,
+      "is_maintainer": false
+    },
+    {
+      "number": 14047,
+      "title": "Annotations with generic type not recognized as Query without explicit Query(...) as default arguement",
+      "url": "https://github.com/fastapi/fastapi/discussions/14047",
+      "created_at": "2025-09-05T13:05:43Z",
+      "answer_chars": 1387,
+      "is_maintainer": false
+    },
+    {
+      "number": 14038,
+      "title": "Ambiguous root-path handling",
+      "url": "https://github.com/fastapi/fastapi/discussions/14038",
+      "created_at": "2025-09-03T14:23:38Z",
+      "answer_chars": 408,
+      "is_maintainer": true
+    },
+    {
+      "number": 14037,
+      "title": "Form field alias is not respected in Swagger UI",
+      "url": "https://github.com/fastapi/fastapi/discussions/14037",
+      "created_at": "2025-09-03T07:45:10Z",
+      "answer_chars": 407,
+      "is_maintainer": true
+    },
+    {
+      "number": 14012,
+      "title": "Pydantic model validation when used as query parameter",
+      "url": "https://github.com/fastapi/fastapi/discussions/14012",
+      "created_at": "2025-08-25T11:42:11Z",
+      "answer_chars": 542,
+      "is_maintainer": false
+    },
+    {
+      "number": 14002,
+      "title": "Can't copy commands from termynal code blocks",
+      "url": "https://github.com/fastapi/fastapi/discussions/14002",
+      "created_at": "2025-08-19T08:41:09Z",
+      "answer_chars": 163,
+      "is_maintainer": false
+    },
+    {
+      "number": 14001,
+      "title": "Lifespan shutdown not triggered when SSE (StreamingResponse) is still connected",
+      "url": "https://github.com/fastapi/fastapi/discussions/14001",
+      "created_at": "2025-08-19T08:34:04Z",
+      "answer_chars": 647,
+      "is_maintainer": false
+    },
+    {
+      "number": 13992,
+      "title": "Middlewares in subapps fail to return the correct status code",
+      "url": "https://github.com/fastapi/fastapi/discussions/13992",
+      "created_at": "2025-08-15T15:48:00Z",
+      "answer_chars": 931,
+      "is_maintainer": false
+    },
+    {
+      "number": 13991,
+      "title": "How to use nested models in query parameters correctly",
+      "url": "https://github.com/fastapi/fastapi/discussions/13991",
+      "created_at": "2025-08-15T07:44:00Z",
+      "answer_chars": 1136,
+      "is_maintainer": true
+    },
+    {
+      "number": 13990,
+      "title": "Background tasks run asynchronous only on Windows and in dev mode",
+      "url": "https://github.com/fastapi/fastapi/discussions/13990",
+      "created_at": "2025-08-14T17:06:09Z",
+      "answer_chars": 593,
+      "is_maintainer": true
+    },
+    {
+      "number": 13989,
+      "title": "FastAPI docs: Deta deployment instructions may be outdated",
+      "url": "https://github.com/fastapi/fastapi/discussions/13989",
+      "created_at": "2025-08-13T12:46:33Z",
+      "answer_chars": 430,
+      "is_maintainer": true
+    },
+    {
+      "number": 13985,
+      "title": "Trying multiple OAuth2 schemes in a single token decoding function",
+      "url": "https://github.com/fastapi/fastapi/discussions/13985",
+      "created_at": "2025-08-12T12:17:14Z",
+      "answer_chars": 1899,
+      "is_maintainer": false
+    },
+    {
+      "number": 13979,
+      "title": "FastAPI Binary File Upload Corruption Issue in AWS Lambda",
+      "url": "https://github.com/fastapi/fastapi/discussions/13979",
+      "created_at": "2025-08-08T07:00:25Z",
+      "answer_chars": 895,
+      "is_maintainer": true
+    },
+    {
+      "number": 13973,
+      "title": "Async or sync dependencies",
+      "url": "https://github.com/fastapi/fastapi/discussions/13973",
+      "created_at": "2025-08-05T10:41:03Z",
+      "answer_chars": 543,
+      "is_maintainer": true
+    },
+    {
+      "number": 13972,
+      "title": "Unable to get request body inside an exception handler, got RuntimeError: Receive channel has not been made available",
+      "url": "https://github.com/fastapi/fastapi/discussions/13972",
+      "created_at": "2025-08-05T07:45:20Z",
+      "answer_chars": 1791,
+      "is_maintainer": false
+    },
+    {
+      "number": 13964,
+      "title": "Using query parameter models with dependency injection",
+      "url": "https://github.com/fastapi/fastapi/discussions/13964",
+      "created_at": "2025-08-01T15:47:59Z",
+      "answer_chars": 1310,
+      "is_maintainer": true
+    },
+    {
+      "number": 13945,
+      "title": "Query parameter accept list of objects",
+      "url": "https://github.com/fastapi/fastapi/discussions/13945",
+      "created_at": "2025-07-28T20:46:59Z",
+      "answer_chars": 535,
+      "is_maintainer": true
+    },
+    {
+      "number": 13926,
+      "title": "Inconsistency with exclude=True on a field in docs between display and form",
+      "url": "https://github.com/fastapi/fastapi/discussions/13926",
+      "created_at": "2025-07-25T09:27:25Z",
+      "answer_chars": 1275,
+      "is_maintainer": true
+    },
+    {
+      "number": 13924,
+      "title": "Why can't I see the response type in the Middleware?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13924",
+      "created_at": "2025-07-25T01:21:40Z",
+      "answer_chars": 1563,
+      "is_maintainer": false
+    },
+    {
+      "number": 13911,
+      "title": "Problem with multiple Query in view of an endpoint",
+      "url": "https://github.com/fastapi/fastapi/discussions/13911",
+      "created_at": "2025-07-21T13:34:13Z",
+      "answer_chars": 382,
+      "is_maintainer": true
+    },
+    {
+      "number": 13908,
+      "title": "Access to main app state from mounted subapp",
+      "url": "https://github.com/fastapi/fastapi/discussions/13908",
+      "created_at": "2025-07-21T09:10:24Z",
+      "answer_chars": 901,
+      "is_maintainer": false
+    },
+    {
+      "number": 13899,
+      "title": "How to handle multiple authorization classes dynamically?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13899",
+      "created_at": "2025-07-16T15:18:45Z",
+      "answer_chars": 1268,
+      "is_maintainer": false
+    },
+    {
+      "number": 13893,
+      "title": "BUG: Authorization Header is ignored",
+      "url": "https://github.com/fastapi/fastapi/discussions/13893",
+      "created_at": "2025-07-14T14:31:19Z",
+      "answer_chars": 136,
+      "is_maintainer": false
+    },
+    {
+      "number": 13885,
+      "title": "FastAPI standard now bundles fastapi-cloud-cli on releases >=0.1.0",
+      "url": "https://github.com/fastapi/fastapi/discussions/13885",
+      "created_at": "2025-07-11T08:16:53Z",
+      "answer_chars": 2400,
+      "is_maintainer": true
+    },
+    {
+      "number": 13877,
+      "title": "Usage of BeforeValidator in FastAPI",
+      "url": "https://github.com/fastapi/fastapi/discussions/13877",
+      "created_at": "2025-07-08T20:38:34Z",
+      "answer_chars": 1548,
+      "is_maintainer": true
+    },
+    {
+      "number": 13873,
+      "title": "Bug with Pydantic Alias Validation",
+      "url": "https://github.com/fastapi/fastapi/discussions/13873",
+      "created_at": "2025-07-07T23:30:59Z",
+      "answer_chars": 1226,
+      "is_maintainer": true
+    },
+    {
+      "number": 13872,
+      "title": "Dependency updates",
+      "url": "https://github.com/fastapi/fastapi/discussions/13872",
+      "created_at": "2025-07-07T19:26:33Z",
+      "answer_chars": 621,
+      "is_maintainer": true
+    },
+    {
+      "number": 13869,
+      "title": "Use of LRU cache on a route generate a httpx.RemoteProtocolError",
+      "url": "https://github.com/fastapi/fastapi/discussions/13869",
+      "created_at": "2025-07-07T09:47:14Z",
+      "answer_chars": 1128,
+      "is_maintainer": false
+    },
+    {
+      "number": 13868,
+      "title": "OpenApi, all model fields required for request statement",
+      "url": "https://github.com/fastapi/fastapi/discussions/13868",
+      "created_at": "2025-07-06T13:37:36Z",
+      "answer_chars": 195,
+      "is_maintainer": false
+    },
+    {
+      "number": 13860,
+      "title": "How to parse this permission setting on JWt.io?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13860",
+      "created_at": "2025-07-02T15:25:58Z",
+      "answer_chars": 469,
+      "is_maintainer": false
+    },
+    {
+      "number": 13859,
+      "title": "response_model_exclude_none=True omitted when response_model=None is set",
+      "url": "https://github.com/fastapi/fastapi/discussions/13859",
+      "created_at": "2025-07-02T09:58:24Z",
+      "answer_chars": 1919,
+      "is_maintainer": false
+    },
+    {
+      "number": 13855,
+      "title": "Proposal: Extract fastapi.status into a standalone package",
+      "url": "https://github.com/fastapi/fastapi/discussions/13855",
+      "created_at": "2025-07-01T19:54:03Z",
+      "answer_chars": 469,
+      "is_maintainer": false
+    },
+    {
+      "number": 13844,
+      "title": "Websocket doesn't seem to work with React ?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13844",
+      "created_at": "2025-06-30T21:31:01Z",
+      "answer_chars": 238,
+      "is_maintainer": false
+    },
+    {
+      "number": 13842,
+      "title": "404 not found on endpoints and nothing displayed on docs",
+      "url": "https://github.com/fastapi/fastapi/discussions/13842",
+      "created_at": "2025-06-30T12:13:56Z",
+      "answer_chars": 453,
+      "is_maintainer": false
+    },
+    {
+      "number": 13836,
+      "title": "Default value for path Parameter -- `PUT /users/opetional_user_id`",
+      "url": "https://github.com/fastapi/fastapi/discussions/13836",
+      "created_at": "2025-06-29T19:50:00Z",
+      "answer_chars": 1093,
+      "is_maintainer": false
+    },
+    {
+      "number": 13828,
+      "title": "Multiple body validations",
+      "url": "https://github.com/fastapi/fastapi/discussions/13828",
+      "created_at": "2025-06-26T00:44:12Z",
+      "answer_chars": 491,
+      "is_maintainer": true
+    },
+    {
+      "number": 13812,
+      "title": "Some JSON formats are not supported",
+      "url": "https://github.com/fastapi/fastapi/discussions/13812",
+      "created_at": "2025-06-20T10:59:02Z",
+      "answer_chars": 208,
+      "is_maintainer": true
+    },
+    {
+      "number": 13811,
+      "title": "Using type alias with Annotated + Depends breaks when returning a Pydantic model — is this expected?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13811",
+      "created_at": "2025-06-20T08:08:23Z",
+      "answer_chars": 164,
+      "is_maintainer": false
+    },
+    {
+      "number": 13810,
+      "title": "How to execute a Flask endpoint mounted on a FastAPI app in WSGIMiddleware",
+      "url": "https://github.com/fastapi/fastapi/discussions/13810",
+      "created_at": "2025-06-19T18:33:24Z",
+      "answer_chars": 1019,
+      "is_maintainer": false
+    },
+    {
+      "number": 13808,
+      "title": "in depends, cannot request.body() when using UploadFile",
+      "url": "https://github.com/fastapi/fastapi/discussions/13808",
+      "created_at": "2025-06-19T14:13:25Z",
+      "answer_chars": 1381,
+      "is_maintainer": true
+    },
+    {
+      "number": 13798,
+      "title": "How to specify multiple \"named\" OpenAPI examples with additional responses on the router?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13798",
+      "created_at": "2025-06-18T09:13:30Z",
+      "answer_chars": 1931,
+      "is_maintainer": true
+    },
+    {
+      "number": 13796,
+      "title": "FastAPI needs more core maintainers",
+      "url": "https://github.com/fastapi/fastapi/discussions/13796",
+      "created_at": "2025-06-17T03:12:17Z",
+      "answer_chars": 861,
+      "is_maintainer": true
+    },
+    {
+      "number": 13795,
+      "title": "Bug: 422 error when using Annotated[list[str], MinLen(1)] with repeated query params in Query() Pydantic model",
+      "url": "https://github.com/fastapi/fastapi/discussions/13795",
+      "created_at": "2025-06-16T14:30:34Z",
+      "answer_chars": 401,
+      "is_maintainer": false
+    },
+    {
+      "number": 13789,
+      "title": "Support for File and Form Models parameters in a path operation signature",
+      "url": "https://github.com/fastapi/fastapi/discussions/13789",
+      "created_at": "2025-06-12T19:58:28Z",
+      "answer_chars": 1052,
+      "is_maintainer": true
+    },
+    {
+      "number": 13784,
+      "title": "Is the fastapi run command production-ready?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13784",
+      "created_at": "2025-06-11T06:36:57Z",
+      "answer_chars": 473,
+      "is_maintainer": false
+    },
+    {
+      "number": 13779,
+      "title": "Please delete Websocket.receive, it is outdated",
+      "url": "https://github.com/fastapi/fastapi/discussions/13779",
+      "created_at": "2025-06-09T07:41:06Z",
+      "answer_chars": 161,
+      "is_maintainer": true
+    },
+    {
+      "number": 13744,
+      "title": "Field validators not working the same in pure pydantic vs FastAPI Query model",
+      "url": "https://github.com/fastapi/fastapi/discussions/13744",
+      "created_at": "2025-05-30T14:10:37Z",
+      "answer_chars": 1329,
+      "is_maintainer": false
+    },
+    {
+      "number": 13741,
+      "title": "Empty response on 500 status code in Angular response",
+      "url": "https://github.com/fastapi/fastapi/discussions/13741",
+      "created_at": "2025-05-28T14:19:38Z",
+      "answer_chars": 1626,
+      "is_maintainer": false
+    },
+    {
+      "number": 13740,
+      "title": "Undocumented explicit URL decoding for query params.",
+      "url": "https://github.com/fastapi/fastapi/discussions/13740",
+      "created_at": "2025-05-28T12:59:09Z",
+      "answer_chars": 301,
+      "is_maintainer": true
+    },
+    {
+      "number": 13739,
+      "title": "request.form() lost values",
+      "url": "https://github.com/fastapi/fastapi/discussions/13739",
+      "created_at": "2025-05-27T19:31:12Z",
+      "answer_chars": 1101,
+      "is_maintainer": false
+    },
+    {
+      "number": 13738,
+      "title": "Different received payloads for annotated Body and request.body",
+      "url": "https://github.com/fastapi/fastapi/discussions/13738",
+      "created_at": "2025-05-27T17:32:58Z",
+      "answer_chars": 489,
+      "is_maintainer": false
+    },
+    {
+      "number": 13732,
+      "title": "Understanding benchmarking and setting up Async (Postgres+asyncpg vs Postgres+psycopg2) in FastAPI",
+      "url": "https://github.com/fastapi/fastapi/discussions/13732",
+      "created_at": "2025-05-24T13:09:17Z",
+      "answer_chars": 4469,
+      "is_maintainer": false
+    },
+    {
+      "number": 13724,
+      "title": "how to make backgroud tasks that are added in one path operation call to run concurrently?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13724",
+      "created_at": "2025-05-21T10:02:18Z",
+      "answer_chars": 674,
+      "is_maintainer": true
+    },
+    {
+      "number": 13723,
+      "title": "`Depends` does not work with `asynccontextmanager` anymore",
+      "url": "https://github.com/fastapi/fastapi/discussions/13723",
+      "created_at": "2025-05-18T15:02:33Z",
+      "answer_chars": 509,
+      "is_maintainer": true
+    },
+    {
+      "number": 13722,
+      "title": "[BUG] Type variable type D = dict in parameter is query parameter but not body",
+      "url": "https://github.com/fastapi/fastapi/discussions/13722",
+      "created_at": "2025-05-16T17:42:21Z",
+      "answer_chars": 399,
+      "is_maintainer": true
+    },
+    {
+      "number": 13721,
+      "title": "[BUG] How to Set a Default in the JSON Schema of a Body Parameter Using json_schema_extra?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13721",
+      "created_at": "2025-05-16T14:15:08Z",
+      "answer_chars": 1211,
+      "is_maintainer": true
+    },
+    {
+      "number": 13720,
+      "title": "Strange unstable behavior",
+      "url": "https://github.com/fastapi/fastapi/discussions/13720",
+      "created_at": "2025-05-15T14:28:54Z",
+      "answer_chars": 2427,
+      "is_maintainer": false
+    },
+    {
+      "number": 13719,
+      "title": "UploadFile sets default filename = \"upload\" when posted without filename",
+      "url": "https://github.com/fastapi/fastapi/discussions/13719",
+      "created_at": "2025-05-15T14:14:02Z",
+      "answer_chars": 591,
+      "is_maintainer": true
+    },
+    {
+      "number": 13717,
+      "title": "Exception exception has not been processed by CORSMiddleware, but custom EdgException processed。",
+      "url": "https://github.com/fastapi/fastapi/discussions/13717",
+      "created_at": "2025-05-15T09:55:23Z",
+      "answer_chars": 1453,
+      "is_maintainer": true
+    },
+    {
+      "number": 13712,
+      "title": "Mocking of a function within an api call doesn't work in FastAPI",
+      "url": "https://github.com/fastapi/fastapi/discussions/13712",
+      "created_at": "2025-05-12T18:17:25Z",
+      "answer_chars": 221,
+      "is_maintainer": true
+    },
+    {
+      "number": 13710,
+      "title": "Dependency Caching For External HTTP calls",
+      "url": "https://github.com/fastapi/fastapi/discussions/13710",
+      "created_at": "2025-05-12T16:27:59Z",
+      "answer_chars": 651,
+      "is_maintainer": true
+    },
+    {
+      "number": 13709,
+      "title": "OpenAPI docs for mounted Starlette apps (marimo)?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13709",
+      "created_at": "2025-05-12T14:07:06Z",
+      "answer_chars": 1473,
+      "is_maintainer": true
+    },
+    {
+      "number": 13708,
+      "title": "Multiple arguments annotated with Query()",
+      "url": "https://github.com/fastapi/fastapi/discussions/13708",
+      "created_at": "2025-05-12T12:49:41Z",
+      "answer_chars": 169,
+      "is_maintainer": true
+    },
+    {
+      "number": 13707,
+      "title": "Tracking interruption point during large language model output streaming using FastAPI StreamingResponse",
+      "url": "https://github.com/fastapi/fastapi/discussions/13707",
+      "created_at": "2025-05-12T05:12:42Z",
+      "answer_chars": 1602,
+      "is_maintainer": true
+    },
+    {
+      "number": 13705,
+      "title": "Incorrect \"missing data\" error when using pydantic defer_build feature",
+      "url": "https://github.com/fastapi/fastapi/discussions/13705",
+      "created_at": "2025-05-10T04:01:10Z",
+      "answer_chars": 656,
+      "is_maintainer": false
+    },
+    {
+      "number": 13681,
+      "title": "Pydantic BeforeValidator function not receiving the raw value in Header Parameter model",
+      "url": "https://github.com/fastapi/fastapi/discussions/13681",
+      "created_at": "2025-05-03T22:01:37Z",
+      "answer_chars": 900,
+      "is_maintainer": false
+    },
+    {
+      "number": 13679,
+      "title": "@app.middleware(\"http\") wrong execution order",
+      "url": "https://github.com/fastapi/fastapi/discussions/13679",
+      "created_at": "2025-05-03T15:48:41Z",
+      "answer_chars": 817,
+      "is_maintainer": true
+    },
+    {
+      "number": 13675,
+      "title": "set_cookie straight up broken",
+      "url": "https://github.com/fastapi/fastapi/discussions/13675",
+      "created_at": "2025-05-02T19:35:48Z",
+      "answer_chars": 481,
+      "is_maintainer": false
+    },
+    {
+      "number": 13673,
+      "title": "static mounts do not work with app.url_path_for()",
+      "url": "https://github.com/fastapi/fastapi/discussions/13673",
+      "created_at": "2025-05-01T21:00:31Z",
+      "answer_chars": 449,
+      "is_maintainer": false
+    },
+    {
+      "number": 13660,
+      "title": "How does StreamingResponse work?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13660",
+      "created_at": "2025-04-30T11:32:35Z",
+      "answer_chars": 617,
+      "is_maintainer": true
+    },
+    {
+      "number": 13658,
+      "title": "Performance of FastAPI with dependencies",
+      "url": "https://github.com/fastapi/fastapi/discussions/13658",
+      "created_at": "2025-04-29T03:46:32Z",
+      "answer_chars": 2226,
+      "is_maintainer": true
+    },
+    {
+      "number": 13654,
+      "title": "Support for \"query\" HTTP method",
+      "url": "https://github.com/fastapi/fastapi/discussions/13654",
+      "created_at": "2025-04-28T05:20:44Z",
+      "answer_chars": 237,
+      "is_maintainer": true
+    },
+    {
+      "number": 13652,
+      "title": "Just getting started",
+      "url": "https://github.com/fastapi/fastapi/discussions/13652",
+      "created_at": "2025-04-28T04:28:11Z",
+      "answer_chars": 1062,
+      "is_maintainer": false
+    },
+    {
+      "number": 13651,
+      "title": "How to throw custom exceptions in middleware",
+      "url": "https://github.com/fastapi/fastapi/discussions/13651",
+      "created_at": "2025-04-27T13:47:10Z",
+      "answer_chars": 2545,
+      "is_maintainer": false
+    },
+    {
+      "number": 13646,
+      "title": "FastAPI.exception_handlers typing inconsistency",
+      "url": "https://github.com/fastapi/fastapi/discussions/13646",
+      "created_at": "2025-04-25T00:32:01Z",
+      "answer_chars": 374,
+      "is_maintainer": true
+    },
+    {
+      "number": 13640,
+      "title": "Not receiving data from ESP32 in dev mode",
+      "url": "https://github.com/fastapi/fastapi/discussions/13640",
+      "created_at": "2025-04-23T12:19:46Z",
+      "answer_chars": 306,
+      "is_maintainer": true
+    },
+    {
+      "number": 13638,
+      "title": "Execute code after sending response including on failure?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13638",
+      "created_at": "2025-04-22T16:46:04Z",
+      "answer_chars": 513,
+      "is_maintainer": true
+    },
+    {
+      "number": 13637,
+      "title": "Post on a route with a get that has a variable in path results in method not allowed instead of 404",
+      "url": "https://github.com/fastapi/fastapi/discussions/13637",
+      "created_at": "2025-04-22T12:59:59Z",
+      "answer_chars": 698,
+      "is_maintainer": true
+    },
+    {
+      "number": 13624,
+      "title": "Persistent AttributeError: 'NoneType' has no attribute 'name' (beanie) in FastAPI on Google Cloud Run (Concurrency Issue with Lifespan Initialization)",
+      "url": "https://github.com/fastapi/fastapi/discussions/13624",
+      "created_at": "2025-04-18T09:25:33Z",
+      "answer_chars": 346,
+      "is_maintainer": true
+    },
+    {
+      "number": 13621,
+      "title": "What is the best way to ensure async event loops are initialized in non-async fastapi endpoints?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13621",
+      "created_at": "2025-04-15T21:35:43Z",
+      "answer_chars": 1056,
+      "is_maintainer": true
+    },
+    {
+      "number": 13620,
+      "title": "Passing a callable with dependencies to a dependency",
+      "url": "https://github.com/fastapi/fastapi/discussions/13620",
+      "created_at": "2025-04-14T21:54:16Z",
+      "answer_chars": 1146,
+      "is_maintainer": true
+    },
+    {
+      "number": 13612,
+      "title": "how to add a captcha input for authentication in Swagger",
+      "url": "https://github.com/fastapi/fastapi/discussions/13612",
+      "created_at": "2025-04-13T17:04:16Z",
+      "answer_chars": 147,
+      "is_maintainer": true
+    },
+    {
+      "number": 13609,
+      "title": "FastAPI Tensor flow and tensor flow lite issue with Pyhon v3.14.x when making a pip installtion",
+      "url": "https://github.com/fastapi/fastapi/discussions/13609",
+      "created_at": "2025-04-12T14:42:43Z",
+      "answer_chars": 265,
+      "is_maintainer": false
+    },
+    {
+      "number": 13608,
+      "title": "Access Token Route Works with Postman but Returns \"undefined\" in Swagger",
+      "url": "https://github.com/fastapi/fastapi/discussions/13608",
+      "created_at": "2025-04-12T14:35:10Z",
+      "answer_chars": 269,
+      "is_maintainer": false
+    },
+    {
+      "number": 13603,
+      "title": "Databases export feature to direct download files through Swagger.",
+      "url": "https://github.com/fastapi/fastapi/discussions/13603",
+      "created_at": "2025-04-05T14:57:02Z",
+      "answer_chars": 780,
+      "is_maintainer": true
+    },
+    {
+      "number": 13602,
+      "title": "[Feature Request] Add CLI Tool for creating models, routes, middlewares etc",
+      "url": "https://github.com/fastapi/fastapi/discussions/13602",
+      "created_at": "2025-04-10T06:55:27Z",
+      "answer_chars": 336,
+      "is_maintainer": true
+    },
+    {
+      "number": 13601,
+      "title": "do something after closing websocket",
+      "url": "https://github.com/fastapi/fastapi/discussions/13601",
+      "created_at": "2025-04-10T00:55:27Z",
+      "answer_chars": 674,
+      "is_maintainer": false
+    },
+    {
+      "number": 13596,
+      "title": "Request Body Is Always 33 Bytes Larger Than Expected Size",
+      "url": "https://github.com/fastapi/fastapi/discussions/13596",
+      "created_at": "2025-04-08T06:39:36Z",
+      "answer_chars": 787,
+      "is_maintainer": false
+    },
+    {
+      "number": 13591,
+      "title": "Pydantic's UUID generate wrong JSON schema",
+      "url": "https://github.com/fastapi/fastapi/discussions/13591",
+      "created_at": "2025-04-06T17:39:54Z",
+      "answer_chars": 874,
+      "is_maintainer": true
+    },
+    {
+      "number": 13588,
+      "title": "In a FastAPI application, can Tortoise ORM instances automatically match Pydantic model classes?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13588",
+      "created_at": "2025-04-05T16:46:39Z",
+      "answer_chars": 136,
+      "is_maintainer": false
+    },
+    {
+      "number": 13586,
+      "title": "`pattern` for query parameters of type `list[str]`",
+      "url": "https://github.com/fastapi/fastapi/discussions/13586",
+      "created_at": "2025-04-04T16:13:29Z",
+      "answer_chars": 352,
+      "is_maintainer": true
+    },
+    {
+      "number": 13582,
+      "title": "Regeneration OpenAPI schema without restarting FastAPI",
+      "url": "https://github.com/fastapi/fastapi/discussions/13582",
+      "created_at": "2025-04-03T13:39:25Z",
+      "answer_chars": 2360,
+      "is_maintainer": false
+    },
+    {
+      "number": 13566,
+      "title": "Can I use more than 1 Query Parameter Model",
+      "url": "https://github.com/fastapi/fastapi/discussions/13566",
+      "created_at": "2025-04-01T12:48:49Z",
+      "answer_chars": 506,
+      "is_maintainer": false
+    },
+    {
+      "number": 13556,
+      "title": "Pydantic v2.11 break the query params validations",
+      "url": "https://github.com/fastapi/fastapi/discussions/13556",
+      "created_at": "2025-03-31T02:42:55Z",
+      "answer_chars": 977,
+      "is_maintainer": false
+    },
+    {
+      "number": 13553,
+      "title": "Cannot access to my service!",
+      "url": "https://github.com/fastapi/fastapi/discussions/13553",
+      "created_at": "2025-03-29T19:03:21Z",
+      "answer_chars": 229,
+      "is_maintainer": false
+    },
+    {
+      "number": 13551,
+      "title": "`jsonable_encoder` type handler for `packaging.version.Version`",
+      "url": "https://github.com/fastapi/fastapi/discussions/13551",
+      "created_at": "2025-03-28T14:43:15Z",
+      "answer_chars": 311,
+      "is_maintainer": false
+    },
+    {
+      "number": 13550,
+      "title": "_merge_lifespan_context error when start up my fastapi server using poetry.",
+      "url": "https://github.com/fastapi/fastapi/discussions/13550",
+      "created_at": "2025-03-28T14:29:47Z",
+      "answer_chars": 311,
+      "is_maintainer": false
+    },
+    {
+      "number": 13549,
+      "title": "My fastapi app can't reload with my uvicorn ProactorServer",
+      "url": "https://github.com/fastapi/fastapi/discussions/13549",
+      "created_at": "2025-03-28T03:16:34Z",
+      "answer_chars": 488,
+      "is_maintainer": false
+    },
+    {
+      "number": 13547,
+      "title": "Is it possible to serve different routes with different ASGI server?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13547",
+      "created_at": "2025-03-27T15:10:53Z",
+      "answer_chars": 781,
+      "is_maintainer": false
+    },
+    {
+      "number": 13545,
+      "title": "Make HTTPBase __call__ sync",
+      "url": "https://github.com/fastapi/fastapi/discussions/13545",
+      "created_at": "2025-03-26T17:35:08Z",
+      "answer_chars": 584,
+      "is_maintainer": false
+    },
+    {
+      "number": 13540,
+      "title": "How to delete the file after returning FileResponse?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13540",
+      "created_at": "2025-03-26T07:41:01Z",
+      "answer_chars": 1544,
+      "is_maintainer": false
+    },
+    {
+      "number": 13538,
+      "title": "how to add a non-blocking endpoint that calls an awaitable function but can't await it",
+      "url": "https://github.com/fastapi/fastapi/discussions/13538",
+      "created_at": "2025-03-25T17:19:00Z",
+      "answer_chars": 333,
+      "is_maintainer": false
+    },
+    {
+      "number": 13523,
+      "title": "Can we have a feature to disable logging for certain endpoints?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13523",
+      "created_at": "2025-03-21T10:22:50Z",
+      "answer_chars": 781,
+      "is_maintainer": false
+    },
+    {
+      "number": 13516,
+      "title": "Modify WSGI PATH_INFO to pop a tenant ID from the path?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13516",
+      "created_at": "2025-03-20T14:36:49Z",
+      "answer_chars": 1235,
+      "is_maintainer": false
+    },
+    {
+      "number": 13513,
+      "title": "How get access to route original func and set openapi_extra param?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13513",
+      "created_at": "2025-03-20T12:04:22Z",
+      "answer_chars": 252,
+      "is_maintainer": false
+    },
+    {
+      "number": 13501,
+      "title": "websocket receive timeout field missing",
+      "url": "https://github.com/fastapi/fastapi/discussions/13501",
+      "created_at": "2025-03-19T08:15:39Z",
+      "answer_chars": 806,
+      "is_maintainer": false
+    },
+    {
+      "number": 13490,
+      "title": "Update the documentation Part of \"Query Parameter Models\"",
+      "url": "https://github.com/fastapi/fastapi/discussions/13490",
+      "created_at": "2025-03-15T11:39:35Z",
+      "answer_chars": 168,
+      "is_maintainer": false
+    },
+    {
+      "number": 13485,
+      "title": "`Depends` does not work with callable class when `from __future__ import annotations` is enabled",
+      "url": "https://github.com/fastapi/fastapi/discussions/13485",
+      "created_at": "2025-03-13T01:53:26Z",
+      "answer_chars": 307,
+      "is_maintainer": false
+    },
+    {
+      "number": 13484,
+      "title": "Is there a way to test if a startup event has been registered?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13484",
+      "created_at": "2025-03-12T20:11:37Z",
+      "answer_chars": 2833,
+      "is_maintainer": false
+    },
+    {
+      "number": 13482,
+      "title": "Unable to use exec when querying data in FastAPI",
+      "url": "https://github.com/fastapi/fastapi/discussions/13482",
+      "created_at": "2025-03-12T18:29:21Z",
+      "answer_chars": 130,
+      "is_maintainer": false
+    },
+    {
+      "number": 13474,
+      "title": "Create a model using a view in the database that FastAPI cannot locate",
+      "url": "https://github.com/fastapi/fastapi/discussions/13474",
+      "created_at": "2025-03-10T16:12:45Z",
+      "answer_chars": 2059,
+      "is_maintainer": false
+    },
+    {
+      "number": 13467,
+      "title": "Cannot use Body (pydantic schemas)  and file upload together in an API",
+      "url": "https://github.com/fastapi/fastapi/discussions/13467",
+      "created_at": "2025-03-07T10:55:56Z",
+      "answer_chars": 471,
+      "is_maintainer": false
+    },
+    {
+      "number": 13455,
+      "title": "Fetching a lot of time series data",
+      "url": "https://github.com/fastapi/fastapi/discussions/13455",
+      "created_at": "2025-03-05T11:15:11Z",
+      "answer_chars": 921,
+      "is_maintainer": false
+    },
+    {
+      "number": 13449,
+      "title": "Unit Testing: mocking request.state",
+      "url": "https://github.com/fastapi/fastapi/discussions/13449",
+      "created_at": "2025-03-04T02:47:16Z",
+      "answer_chars": 648,
+      "is_maintainer": true
+    },
+    {
+      "number": 13447,
+      "title": "`examples`, `example`, `openapi_examples` and `json_schema_extra` are not working with Query Parameter Models - only model fields do.",
+      "url": "https://github.com/fastapi/fastapi/discussions/13447",
+      "created_at": "2025-03-03T14:58:52Z",
+      "answer_chars": 2662,
+      "is_maintainer": true
+    },
+    {
+      "number": 13445,
+      "title": "Best practices - Pedantic model on router vs argments?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13445",
+      "created_at": "2025-03-02T10:49:42Z",
+      "answer_chars": 366,
+      "is_maintainer": false
+    },
+    {
+      "number": 13431,
+      "title": "Change in behavior in Annotated validations in 0.115.10",
+      "url": "https://github.com/fastapi/fastapi/discussions/13431",
+      "created_at": "2025-02-28T19:17:28Z",
+      "answer_chars": 265,
+      "is_maintainer": true
+    },
+    {
+      "number": 13430,
+      "title": "Admin Panel for FastAPI (Similar to Django Admin)",
+      "url": "https://github.com/fastapi/fastapi/discussions/13430",
+      "created_at": "2025-02-28T18:32:42Z",
+      "answer_chars": 244,
+      "is_maintainer": false
+    },
+    {
+      "number": 13425,
+      "title": "How to customize HTTPBearer to parse data?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13425",
+      "created_at": "2025-02-27T15:37:03Z",
+      "answer_chars": 320,
+      "is_maintainer": true
+    },
+    {
+      "number": 13421,
+      "title": "Regression for mounting sub-applications (.mount) where root path is supplied (from version >=109.0)",
+      "url": "https://github.com/fastapi/fastapi/discussions/13421",
+      "created_at": "2025-02-25T14:24:50Z",
+      "answer_chars": 442,
+      "is_maintainer": false
+    },
+    {
+      "number": 13392,
+      "title": "Thread-Based CPU-Bound Tasks Cause High Latency",
+      "url": "https://github.com/fastapi/fastapi/discussions/13392",
+      "created_at": "2025-02-18T23:39:26Z",
+      "answer_chars": 410,
+      "is_maintainer": false
+    },
+    {
+      "number": 13382,
+      "title": "ContextVars in sync vs async dependencies",
+      "url": "https://github.com/fastapi/fastapi/discussions/13382",
+      "created_at": "2025-02-16T22:17:38Z",
+      "answer_chars": 582,
+      "is_maintainer": false
+    },
+    {
+      "number": 13380,
+      "title": "[bug] Impossible to have checkbox in form with default `True` value",
+      "url": "https://github.com/fastapi/fastapi/discussions/13380",
+      "created_at": "2025-02-16T08:08:24Z",
+      "answer_chars": 1098,
+      "is_maintainer": false
+    },
+    {
+      "number": 13372,
+      "title": "fastapi-cli major issue",
+      "url": "https://github.com/fastapi/fastapi/discussions/13372",
+      "created_at": "2025-02-14T09:43:59Z",
+      "answer_chars": 1124,
+      "is_maintainer": false
+    },
+    {
+      "number": 13368,
+      "title": "Giving string to Security `scopes` creates each character as a different scope",
+      "url": "https://github.com/fastapi/fastapi/discussions/13368",
+      "created_at": "2025-02-13T19:59:49Z",
+      "answer_chars": 438,
+      "is_maintainer": false
+    },
+    {
+      "number": 13363,
+      "title": "FastAPI does not raise an error when accessing a non-existent route, leading to missing errors in Honeycomb",
+      "url": "https://github.com/fastapi/fastapi/discussions/13363",
+      "created_at": "2025-02-13T03:17:09Z",
+      "answer_chars": 348,
+      "is_maintainer": false
+    },
+    {
+      "number": 13358,
+      "title": "Getting `Intermittent 503 Errors (upstream_reset_before_response_started{connection_termination})`",
+      "url": "https://github.com/fastapi/fastapi/discussions/13358",
+      "created_at": "2025-02-12T14:44:09Z",
+      "answer_chars": 385,
+      "is_maintainer": false
+    },
+    {
+      "number": 13356,
+      "title": "FastAPI gunicorn with unicorn worker kill or restart issue",
+      "url": "https://github.com/fastapi/fastapi/discussions/13356",
+      "created_at": "2025-02-12T13:46:41Z",
+      "answer_chars": 518,
+      "is_maintainer": false
+    },
+    {
+      "number": 13353,
+      "title": "Deadlock when concurrent requests > threadpool (40)",
+      "url": "https://github.com/fastapi/fastapi/discussions/13353",
+      "created_at": "2025-02-11T21:35:55Z",
+      "answer_chars": 1419,
+      "is_maintainer": false
+    },
+    {
+      "number": 13349,
+      "title": "Continue a StreamingResponse function after client disconnect",
+      "url": "https://github.com/fastapi/fastapi/discussions/13349",
+      "created_at": "2025-02-10T20:29:07Z",
+      "answer_chars": 2220,
+      "is_maintainer": true
+    },
+    {
+      "number": 13344,
+      "title": "Exception in StreamingResponse will cause SQLAlchemy session not closed",
+      "url": "https://github.com/fastapi/fastapi/discussions/13344",
+      "created_at": "2025-02-10T05:30:31Z",
+      "answer_chars": 2994,
+      "is_maintainer": true
+    },
+    {
+      "number": 13338,
+      "title": "Unable to mock Dependency in unit test",
+      "url": "https://github.com/fastapi/fastapi/discussions/13338",
+      "created_at": "2025-02-09T02:11:45Z",
+      "answer_chars": 2206,
+      "is_maintainer": true
+    },
+    {
+      "number": 13337,
+      "title": "Error to generate openapi json for nested discriminated unions model",
+      "url": "https://github.com/fastapi/fastapi/discussions/13337",
+      "created_at": "2025-02-08T09:50:58Z",
+      "answer_chars": 122,
+      "is_maintainer": true
+    },
+    {
+      "number": 13336,
+      "title": "How does async __call__ work in HTTPBearer and where is it invoked?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13336",
+      "created_at": "2025-02-08T08:44:20Z",
+      "answer_chars": 2306,
+      "is_maintainer": true
+    },
+    {
+      "number": 13334,
+      "title": "Doubts about \"async def\" in the document",
+      "url": "https://github.com/fastapi/fastapi/discussions/13334",
+      "created_at": "2025-02-08T06:03:02Z",
+      "answer_chars": 641,
+      "is_maintainer": false
+    },
+    {
+      "number": 13332,
+      "title": "Why are the logs not shown?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13332",
+      "created_at": "2025-02-07T22:11:11Z",
+      "answer_chars": 331,
+      "is_maintainer": false
+    },
+    {
+      "number": 13283,
+      "title": "Unit Tests for WebSockets: Why to use pytest.raises(WebsocketDisconnect) ?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13283",
+      "created_at": "2025-01-31T00:48:56Z",
+      "answer_chars": 3009,
+      "is_maintainer": true
+    },
+    {
+      "number": 13280,
+      "title": "fastapi outh2 in swagger not authenticated",
+      "url": "https://github.com/fastapi/fastapi/discussions/13280",
+      "created_at": "2025-01-30T07:50:21Z",
+      "answer_chars": 1060,
+      "is_maintainer": false
+    },
+    {
+      "number": 13278,
+      "title": "Plain text validation error tutorial in docs not producing plain text",
+      "url": "https://github.com/fastapi/fastapi/discussions/13278",
+      "created_at": "2025-01-29T16:38:22Z",
+      "answer_chars": 933,
+      "is_maintainer": false
+    },
+    {
+      "number": 13277,
+      "title": "Db Retry mechanism in case of failure while connecting with db.",
+      "url": "https://github.com/fastapi/fastapi/discussions/13277",
+      "created_at": "2025-01-29T16:25:26Z",
+      "answer_chars": 237,
+      "is_maintainer": false
+    },
+    {
+      "number": 13276,
+      "title": "PydanticOmit Error When Generating OpenAPI Schema with SkipJsonSchema",
+      "url": "https://github.com/fastapi/fastapi/discussions/13276",
+      "created_at": "2025-01-29T16:17:11Z",
+      "answer_chars": 1722,
+      "is_maintainer": true
+    },
+    {
+      "number": 13263,
+      "title": "Keys in the swagger schema are ordered alphabetically",
+      "url": "https://github.com/fastapi/fastapi/discussions/13263",
+      "created_at": "2025-01-27T08:41:28Z",
+      "answer_chars": 489,
+      "is_maintainer": false
+    },
+    {
+      "number": 13261,
+      "title": "Can I validate response with response_model while directly returning a response?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13261",
+      "created_at": "2025-01-26T14:25:47Z",
+      "answer_chars": 238,
+      "is_maintainer": true
+    },
+    {
+      "number": 13255,
+      "title": "[break] 0.112.4 parses Body params differently if File param is the first param",
+      "url": "https://github.com/fastapi/fastapi/discussions/13255",
+      "created_at": "2025-01-24T22:18:49Z",
+      "answer_chars": 618,
+      "is_maintainer": false
+    },
+    {
+      "number": 13254,
+      "title": "Path parameters predefined values - Enum vs. typing.Literal",
+      "url": "https://github.com/fastapi/fastapi/discussions/13254",
+      "created_at": "2025-01-24T17:46:34Z",
+      "answer_chars": 240,
+      "is_maintainer": false
+    },
+    {
+      "number": 13249,
+      "title": "Enabling/Disabling `docs_url` behaves unexpected",
+      "url": "https://github.com/fastapi/fastapi/discussions/13249",
+      "created_at": "2025-01-23T12:38:08Z",
+      "answer_chars": 367,
+      "is_maintainer": true
+    },
+    {
+      "number": 13247,
+      "title": "Obtaining a refresh token from HTTPAuthorizationCredentials when using entraID",
+      "url": "https://github.com/fastapi/fastapi/discussions/13247",
+      "created_at": "2025-01-23T02:21:20Z",
+      "answer_chars": 314,
+      "is_maintainer": true
+    },
+    {
+      "number": 13245,
+      "title": "Dependency Injection (SyncContextManager or AsyncContextManager)",
+      "url": "https://github.com/fastapi/fastapi/discussions/13245",
+      "created_at": "2025-01-22T14:46:56Z",
+      "answer_chars": 264,
+      "is_maintainer": false
+    },
+    {
+      "number": 13243,
+      "title": "Is \"Annotated\" preferred for Body Fields over default parameters?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13243",
+      "created_at": "2025-01-21T21:13:35Z",
+      "answer_chars": 637,
+      "is_maintainer": false
+    },
+    {
+      "number": 13242,
+      "title": "[Feature] Add support for several exception types in exception handlers.",
+      "url": "https://github.com/fastapi/fastapi/discussions/13242",
+      "created_at": "2025-01-21T20:34:25Z",
+      "answer_chars": 348,
+      "is_maintainer": true
+    },
+    {
+      "number": 13239,
+      "title": "Return annotation None in endpoint is displayed as any",
+      "url": "https://github.com/fastapi/fastapi/discussions/13239",
+      "created_at": "2025-01-21T07:28:53Z",
+      "answer_chars": 340,
+      "is_maintainer": true
+    },
+    {
+      "number": 13238,
+      "title": "solve_dependencies occasionally raises RuntimeError: generator didn't yield",
+      "url": "https://github.com/fastapi/fastapi/discussions/13238",
+      "created_at": "2025-01-21T05:40:49Z",
+      "answer_chars": 289,
+      "is_maintainer": false
+    },
+    {
+      "number": 13206,
+      "title": "Depends() adds fields at the end instead of in the order it appears in function",
+      "url": "https://github.com/fastapi/fastapi/discussions/13206",
+      "created_at": "2025-01-14T15:53:58Z",
+      "answer_chars": 1326,
+      "is_maintainer": true
+    },
+    {
+      "number": 13204,
+      "title": "[bug] query param models alias is invalid",
+      "url": "https://github.com/fastapi/fastapi/discussions/13204",
+      "created_at": "2025-01-13T01:37:14Z",
+      "answer_chars": 124,
+      "is_maintainer": true
+    },
+    {
+      "number": 13198,
+      "title": "my Alembic migration DOES Not Sync WITH my  local directory",
+      "url": "https://github.com/fastapi/fastapi/discussions/13198",
+      "created_at": "2025-01-12T01:05:55Z",
+      "answer_chars": 588,
+      "is_maintainer": false
+    },
+    {
+      "number": 13190,
+      "title": "FastAPI middlewares seem to lose request context (for example for OpenTelemetry)",
+      "url": "https://github.com/fastapi/fastapi/discussions/13190",
+      "created_at": "2025-01-10T03:00:38Z",
+      "answer_chars": 188,
+      "is_maintainer": true
+    },
+    {
+      "number": 13186,
+      "title": "Docs: TokenData class looks redundant to me in Security tutorial",
+      "url": "https://github.com/fastapi/fastapi/discussions/13186",
+      "created_at": "2025-01-09T05:11:14Z",
+      "answer_chars": 594,
+      "is_maintainer": false
+    },
+    {
+      "number": 13165,
+      "title": "Passing `selectinload(...)` from SQLAlchemy into dependency as an attribute raises `AttributeError: 'Load' object has no attribute 'read'`",
+      "url": "https://github.com/fastapi/fastapi/discussions/13165",
+      "created_at": "2025-01-07T16:11:20Z",
+      "answer_chars": 1181,
+      "is_maintainer": true
+    },
+    {
+      "number": 13153,
+      "title": "RecursionError thrown when Request is included in POST route but not when removed",
+      "url": "https://github.com/fastapi/fastapi/discussions/13153",
+      "created_at": "2025-01-04T07:30:58Z",
+      "answer_chars": 545,
+      "is_maintainer": false
+    },
+    {
+      "number": 13138,
+      "title": "Is Refactoring a Large Synchronous FastAPI Application to Asynchronous Worth the Effort?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13138",
+      "created_at": "2025-01-02T16:00:03Z",
+      "answer_chars": 1315,
+      "is_maintainer": false
+    },
+    {
+      "number": 13126,
+      "title": "Streaming response while streaming request (full-duplex)",
+      "url": "https://github.com/fastapi/fastapi/discussions/13126",
+      "created_at": "2024-12-31T09:23:13Z",
+      "answer_chars": 161,
+      "is_maintainer": true
+    },
+    {
+      "number": 13125,
+      "title": "Lazy loading of SQLAlchemy AsyncAttrs in response causes MissingGreenlet exception",
+      "url": "https://github.com/fastapi/fastapi/discussions/13125",
+      "created_at": "2024-12-30T21:31:16Z",
+      "answer_chars": 346,
+      "is_maintainer": false
+    },
+    {
+      "number": 13120,
+      "title": "When I use contextvars, I unexpectedly found that FastAPI clears the content I set somewhere. Is this result normal?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13120",
+      "created_at": "2024-12-30T06:53:51Z",
+      "answer_chars": 2724,
+      "is_maintainer": false
+    },
+    {
+      "number": 13112,
+      "title": "`response_model_exclude_unset` with `default_factory` is ignored?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13112",
+      "created_at": "2024-12-27T19:28:16Z",
+      "answer_chars": 241,
+      "is_maintainer": false
+    },
+    {
+      "number": 13108,
+      "title": "How to set different api in different swagger page? e.g. the fronted api and backend api in the different page,  details shows in below image.",
+      "url": "https://github.com/fastapi/fastapi/discussions/13108",
+      "created_at": "2024-12-25T11:17:10Z",
+      "answer_chars": 272,
+      "is_maintainer": true
+    },
+    {
+      "number": 13104,
+      "title": "Accessing Request directly from a parametrized dependency's __call__ function.",
+      "url": "https://github.com/fastapi/fastapi/discussions/13104",
+      "created_at": "2024-12-23T18:29:44Z",
+      "answer_chars": 1288,
+      "is_maintainer": false
+    },
+    {
+      "number": 13101,
+      "title": "How to handle sync endpoints with multithreading most appropriately",
+      "url": "https://github.com/fastapi/fastapi/discussions/13101",
+      "created_at": "2024-12-22T13:32:12Z",
+      "answer_chars": 821,
+      "is_maintainer": true
+    },
+    {
+      "number": 13097,
+      "title": "Dependency injection seems to waste memory",
+      "url": "https://github.com/fastapi/fastapi/discussions/13097",
+      "created_at": "2024-12-20T12:36:36Z",
+      "answer_chars": 2379,
+      "is_maintainer": false
+    },
+    {
+      "number": 13094,
+      "title": "Waiting for workers to finish before app shutdown after SIGINT/SIGTERM",
+      "url": "https://github.com/fastapi/fastapi/discussions/13094",
+      "created_at": "2024-12-18T11:01:49Z",
+      "answer_chars": 1119,
+      "is_maintainer": false
+    },
+    {
+      "number": 13088,
+      "title": "Bug with openapi schema generation",
+      "url": "https://github.com/fastapi/fastapi/discussions/13088",
+      "created_at": "2024-12-17T12:48:46Z",
+      "answer_chars": 589,
+      "is_maintainer": true
+    },
+    {
+      "number": 13087,
+      "title": "FastAPI Not Returning 200 OK Response",
+      "url": "https://github.com/fastapi/fastapi/discussions/13087",
+      "created_at": "2024-12-17T08:40:45Z",
+      "answer_chars": 329,
+      "is_maintainer": false
+    },
+    {
+      "number": 13080,
+      "title": "RuntimeError : Expected ASGI message 'websocket.accept' or 'websocket.close', but got 'http.response.start'",
+      "url": "https://github.com/fastapi/fastapi/discussions/13080",
+      "created_at": "2024-12-16T09:28:36Z",
+      "answer_chars": 227,
+      "is_maintainer": false
+    },
+    {
+      "number": 13077,
+      "title": "Optional fields in FormModel not working",
+      "url": "https://github.com/fastapi/fastapi/discussions/13077",
+      "created_at": "2024-12-15T11:15:23Z",
+      "answer_chars": 678,
+      "is_maintainer": false
+    },
+    {
+      "number": 13076,
+      "title": "StreamingResponse causes crash with default uvicorn.run(app) configuration",
+      "url": "https://github.com/fastapi/fastapi/discussions/13076",
+      "created_at": "2024-12-15T11:05:43Z",
+      "answer_chars": 276,
+      "is_maintainer": false
+    },
+    {
+      "number": 13071,
+      "title": "farsi(persian) does not verified in the get method",
+      "url": "https://github.com/fastapi/fastapi/discussions/13071",
+      "created_at": "2024-12-13T19:12:04Z",
+      "answer_chars": 384,
+      "is_maintainer": false
+    },
+    {
+      "number": 13068,
+      "title": "Fastapi. The 'reload' hangs and the application does not restart",
+      "url": "https://github.com/fastapi/fastapi/discussions/13068",
+      "created_at": "2024-12-13T11:48:20Z",
+      "answer_chars": 168,
+      "is_maintainer": false
+    },
+    {
+      "number": 13064,
+      "title": "Classes as Dependencies: New instance runs in thread?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13064",
+      "created_at": "2024-12-12T15:02:26Z",
+      "answer_chars": 135,
+      "is_maintainer": true
+    },
+    {
+      "number": 13062,
+      "title": "Unexpected Behavior with Aliased Query Parameters in FastAPI",
+      "url": "https://github.com/fastapi/fastapi/discussions/13062",
+      "created_at": "2024-12-12T02:37:53Z",
+      "answer_chars": 979,
+      "is_maintainer": false
+    },
+    {
+      "number": 13058,
+      "title": "Can't use Request parameter with eg Form or other objects built from Request.",
+      "url": "https://github.com/fastapi/fastapi/discussions/13058",
+      "created_at": "2024-12-10T17:14:37Z",
+      "answer_chars": 484,
+      "is_maintainer": false
+    },
+    {
+      "number": 13057,
+      "title": "Trying to run FastAPI’s tests in a virtualenv: TypeError while collecting tests?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13057",
+      "created_at": "2024-12-10T13:02:55Z",
+      "answer_chars": 713,
+      "is_maintainer": false
+    },
+    {
+      "number": 13054,
+      "title": "Uvicorn Reload Getting Stuck : WARNING StarReload detected Changes in report_parser.py. Reloading....",
+      "url": "https://github.com/fastapi/fastapi/discussions/13054",
+      "created_at": "2024-12-10T07:35:02Z",
+      "answer_chars": 311,
+      "is_maintainer": false
+    },
+    {
+      "number": 13053,
+      "title": "Feature Request: Allow route return types to be FileResponse | JSONResponse",
+      "url": "https://github.com/fastapi/fastapi/discussions/13053",
+      "created_at": "2024-12-10T02:25:10Z",
+      "answer_chars": 395,
+      "is_maintainer": false
+    },
+    {
+      "number": 13046,
+      "title": "[FEAT] Fast API Middleware in Routers",
+      "url": "https://github.com/fastapi/fastapi/discussions/13046",
+      "created_at": "2024-12-07T15:13:44Z",
+      "answer_chars": 163,
+      "is_maintainer": false
+    },
+    {
+      "number": 13039,
+      "title": "openapi/docs get_swagger_ui_html not uses swagger_js_url/swagger_css_url/swagger_favicon_url",
+      "url": "https://github.com/fastapi/fastapi/discussions/13039",
+      "created_at": "2024-12-05T08:44:50Z",
+      "answer_chars": 221,
+      "is_maintainer": false
+    },
+    {
+      "number": 13036,
+      "title": "Commas in long str query param cause truncation and other weird behavior",
+      "url": "https://github.com/fastapi/fastapi/discussions/13036",
+      "created_at": "2024-12-04T19:41:24Z",
+      "answer_chars": 253,
+      "is_maintainer": false
+    },
+    {
+      "number": 13029,
+      "title": "How appropriate is it to store database client in lifespan (request) state?",
+      "url": "https://github.com/fastapi/fastapi/discussions/13029",
+      "created_at": "2024-12-03T15:41:03Z",
+      "answer_chars": 307,
+      "is_maintainer": true
+    }
+  ]
+}

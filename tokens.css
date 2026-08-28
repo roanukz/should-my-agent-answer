@@ -1,0 +1,347 @@
+/* ===========================================================================
+   TOKENS - the design system's raw values.
+   Direction A: cool grey neutrals, anodised teal primary, 6px radius,
+   1.25 type ratio, system fonts only.
+
+   Nothing in here is specific to Takeout Fixer. This file is the portable
+   "core" and is meant to be dropped into another project unchanged.
+
+   IF YOU CHANGE A HEX IN HERE, change the matching value in the TOKENS
+   object at the top of contrast-check.html too. That page recomputes every
+   contrast ratio in the system and it reads its own copy of these numbers.
+   =========================================================================== */
+
+:root {
+
+  /* --- The eight ramps -------------------------------------------------
+     Eleven steps each, except accent which only needs five. These are raw
+     values: nothing in the app should use them directly. Use the role
+     tokens further down, so dark mode keeps working. */
+
+  /* Neutral - hue 218, cool. Never passes through pure grey. */
+  --neutral-50:  #f7f8f9;
+  --neutral-100: #eef0f3;
+  --neutral-200: #dfe3e8;
+  --neutral-300: #c8ced7;
+  --neutral-400: #9aa3b0;
+  --neutral-500: #6f7887;
+  --neutral-600: #545c6b;
+  --neutral-700: #3f4653;
+  --neutral-800: #2b313b;
+  --neutral-900: #1b2028;
+  --neutral-950: #10141a;
+
+  /* White sits outside the neutral ramp and is its own token. */
+  --white: #ffffff;
+
+  /* Primary - anodised teal, hue 197. Teal not blue, so blue stays free
+     for info and notice. */
+  --primary-50:  #eef6f8;
+  --primary-100: #d7ebf0;
+  --primary-200: #b0d8e2;
+  --primary-300: #7fbdcd;
+  --primary-400: #4c9bb0;
+  --primary-500: #2b7d94;
+  --primary-600: #1f6379;
+  --primary-700: #1a4f60;
+  --primary-800: #163f4c;
+  --primary-900: #13333d;
+  --primary-950: #0b2129;
+
+  /* Success - hue 152 */
+  --success-50:  #eef7f1;
+  --success-100: #d6ecdd;
+  --success-200: #aedbbe;
+  --success-300: #7cc39a;
+  --success-400: #4aa576;
+  --success-500: #2d885c;
+  --success-600: #1f6d49;
+  --success-700: #1a583c;
+  --success-800: #164631;
+  --success-900: #123829;
+  --success-950: #0a2319;
+
+  /* Warning - hue 76 */
+  --warning-50:  #fdf6e8;
+  --warning-100: #fae9c6;
+  --warning-200: #f3d38c;
+  --warning-300: #e6b54d;
+  --warning-400: #cf9722;
+  --warning-500: #ab7a13;
+  --warning-600: #8a610f;
+  --warning-700: #6f4e0e;
+  --warning-800: #573e0d;
+  --warning-900: #46320c;
+  --warning-950: #2b1e06;
+
+  /* Error - hue 26 */
+  --error-50:  #fdf2f0;
+  --error-100: #fbdfda;
+  --error-200: #f5bcb2;
+  --error-300: #ea9384;
+  --error-400: #d96450;
+  --error-500: #c04430;
+  --error-600: #a13425;
+  --error-700: #832b1f;
+  --error-800: #68231a;
+  --error-900: #551d16;
+  --error-950: #33110c;
+
+  /* Info - hue 262 */
+  --info-50:  #eff4fe;
+  --info-100: #dbe6fd;
+  --info-200: #b9cdfa;
+  --info-300: #8eabf3;
+  --info-400: #6285e6;
+  --info-500: #4162cf;
+  --info-600: #304ca8;
+  --info-700: #293e86;
+  --info-800: #22336b;
+  --info-900: #1d2a56;
+  --info-950: #111935;
+
+  /* Notice - hue 258, chroma capped. The fifth semantic, and the least
+     saturated on purpose: info's hue at about a third of the chroma, so it
+     lands NEAR the neutral ramp without touching it. Visibly a message,
+     visibly not a status. Used for facts that are neither problems nor
+     confirmations. Its text step is 700, not 600 - at 600 it reads as
+     ordinary body text. */
+  --notice-50:  #f1f3f7;
+  --notice-100: #e2e7ef;
+  --notice-200: #c8d2e0;
+  --notice-300: #a7b4c9;
+  --notice-400: #8290ab;
+  --notice-500: #66748f;
+  --notice-600: #4f5c74;
+  --notice-700: #3f4a5e;
+  --notice-800: #333b4b;
+  --notice-900: #2a303d;
+  --notice-950: #191d26;
+
+  /* Accent - champagne brass, hue 84, five steps only.
+     MEASUREMENT ONLY. The proportional bars in the summary tiles, and the
+     signature moment. Never status, never interaction - at 84 degrees it
+     sits inside warning's neighbourhood and would be read as a caution. */
+  --accent-100: #faf7ee;
+  --accent-200: #e6d9b3;
+  --accent-400: #c2a862;
+  --accent-600: #8f7833;
+  --accent-800: #5f5027;
+
+
+  /* --- Step mapping, LIGHT ---------------------------------------------
+     Which step of which ramp plays which role. Everything in the app
+     should reach for these, never the raw ramp above. */
+
+  --page-bg:        var(--neutral-50);
+  --surface:        var(--white);
+  --surface-sunken: var(--neutral-100);
+
+  --border-subtle:  var(--neutral-200);   /* dividers */
+  --border-default: var(--neutral-300);   /* controls */
+  --border-strong:  var(--neutral-400);   /* hover */
+
+  --text-muted:   var(--neutral-500);
+  --text-body:    var(--neutral-700);
+  --text-heading: var(--neutral-900);
+
+  --link:       var(--primary-700);
+  --link-hover: var(--primary-800);
+
+  --fill:         var(--primary-600);
+  --fill-hover:   var(--primary-700);
+  --fill-pressed: var(--primary-800);
+  --fill-border:  var(--primary-700);     /* always one step darker than the fill */
+  --on-fill:      var(--white);
+
+  --focus-ring: var(--primary-400);
+
+  --disabled-fill:   var(--neutral-200);
+  --disabled-border: var(--neutral-200);
+  --disabled-text:   var(--neutral-400);
+
+  --neutral-fill-hover:   var(--neutral-100);
+  --neutral-fill-pressed: var(--neutral-200);
+
+  /* Each semantic gets the same five roles, so a component can be switched
+     from one status to another by changing a single class. */
+  --success-tint: var(--success-50);
+  --success-line: var(--success-200);
+  --success-text: var(--success-600);
+  --success-deep: var(--success-800);
+  --success-bar:  var(--success-600);
+
+  --warning-tint: var(--warning-50);
+  --warning-line: var(--warning-200);
+  --warning-text: var(--warning-600);
+  --warning-deep: var(--warning-800);
+  --warning-bar:  var(--warning-600);
+
+  --error-tint: var(--error-50);
+  --error-line: var(--error-200);
+  --error-text: var(--error-600);
+  --error-deep: var(--error-800);
+  --error-bar:  var(--error-600);
+
+  --info-tint: var(--info-50);
+  --info-line: var(--info-200);
+  --info-text: var(--info-600);
+  --info-deep: var(--info-800);
+  --info-bar:  var(--info-600);
+
+  /* Notice is the exception: text step 700, not 600. */
+  --notice-tint: var(--notice-50);
+  --notice-line: var(--notice-200);
+  --notice-text: var(--notice-700);
+  --notice-deep: var(--notice-800);
+  --notice-bar:  var(--notice-600);
+
+  --on-semantic-fill: var(--white);
+
+
+  /* --- Type ------------------------------------------------------------
+     Two families, no external request of any kind. Mono is used ONLY for
+     filenames and hex values, where l/1/I and 0/O have to be unambiguous. */
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI Variable Text', 'Segoe UI',
+               system-ui, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Six sizes, ratio 1.25. Letter-spacing is per size, tightening as size
+     grows - one global tracking value is why generated scales feel bunched
+     at display sizes. */
+  --size-39: 39px;  --lh-39: 44px;  --ls-39: -0.024em;  --w-39: 650;
+  --size-31: 31px;  --lh-31: 37px;  --ls-31: -0.020em;  --w-31: 650;
+  --size-25: 25px;  --lh-25: 31px;  --ls-25: -0.016em;  --w-25: 650;
+  --size-20: 20px;  --lh-20: 27px;  --ls-20: -0.011em;  --w-20: 600;
+  --size-16: 16px;  --lh-16: 25px;  --ls-16: 0;         --w-16: 400;
+  --size-13: 13px;  --lh-13: 19px;  --ls-13: 0.006em;   --w-13: 400;
+
+  /* Measures - the line length each size wants. 16px at 66ch is the floor. */
+  --measure-39: 20ch;
+  --measure-31: 28ch;
+  --measure-25: 40ch;
+  --measure-20: 52ch;
+  --measure-16: 66ch;
+  --measure-13: 40ch;
+
+
+  /* --- Spacing - 4px base ---------------------------------------------
+     4px rather than 8px because 12px is the most-used inset in this
+     product and an 8px scale cannot express it without half-steps. */
+  --space-2:  2px;
+  --space-4:  4px;
+  --space-8:  8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-96: 96px;
+
+
+  /* --- Shape -----------------------------------------------------------
+     Banned: 999px pills (reads as marketing) and 0px (reads unfinished
+     against a 1px cool border). */
+  --radius:    6px;    /* every control and small surface */
+  --radius-lg: 10px;   /* only containers wider than about 480px */
+
+
+  /* --- Elevation - two levels only ------------------------------------
+     Shadow colour is neutral-950 at low alpha, never pure black. */
+  --elev-1: 0 1px 2px rgba(16, 20, 26, 0.06), 0 1px 1px rgba(16, 20, 26, 0.04);
+  --elev-2: 0 4px 12px rgba(16, 20, 26, 0.10), 0 1px 2px rgba(16, 20, 26, 0.06);
+}
+
+
+/* ===========================================================================
+   Step mapping, DARK.
+
+   This is NOT an inversion. Five things diverge on purpose:
+     1. Hover goes LIGHTER here, the opposite of light mode.
+     2. Semantic tints use step 900, never 950 - at 950 every one of these
+        ramps is indistinguishable from the page background.
+     3. Notice inverts its own exception: darker than the other semantics in
+        light mode (700), LIGHTER here (200), because low-chroma slate loses
+        legibility on dark faster than saturated hues do.
+     4. Elevation is surface lightness, not shadow. Shadows are invisible
+        on a 950 background.
+     5. Text on a semantic solid fill flips from white to neutral-950.
+
+   prefers-color-scheme only. No toggle, no stored preference - there is
+   nothing worth persisting for someone who visits once.
+   =========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg:        var(--neutral-950);
+    --surface:        var(--neutral-900);
+    --surface-sunken: var(--neutral-950);
+    --surface-raised: var(--neutral-800);   /* elevation 2, as lightness */
+
+    --border-subtle:  var(--neutral-800);
+    --border-default: var(--neutral-700);
+    --border-strong:  var(--neutral-600);
+
+    --text-muted:   var(--neutral-400);
+    --text-body:    var(--neutral-200);
+    --text-heading: var(--neutral-50);
+
+    --link:       var(--primary-300);
+    --link-hover: var(--primary-200);
+
+    --fill:         var(--primary-500);
+    --fill-hover:   var(--primary-400);     /* lighter on hover, not darker */
+    --fill-pressed: var(--primary-300);
+    --fill-border:  var(--primary-400);
+    --on-fill:      var(--white);
+
+    --focus-ring: var(--primary-300);
+
+    --disabled-fill:   var(--neutral-800);
+    --disabled-border: var(--neutral-800);
+    --disabled-text:   var(--neutral-600);
+
+    --neutral-fill-hover:   var(--neutral-800);
+    --neutral-fill-pressed: var(--neutral-700);
+
+    --success-tint: var(--success-900);
+    --success-line: var(--success-700);
+    --success-text: var(--success-300);
+    --success-deep: var(--success-200);
+    --success-bar:  var(--success-400);
+
+    --warning-tint: var(--warning-900);
+    --warning-line: var(--warning-700);
+    --warning-text: var(--warning-300);
+    --warning-deep: var(--warning-200);
+    --warning-bar:  var(--warning-400);
+
+    --error-tint: var(--error-900);
+    --error-line: var(--error-700);
+    --error-text: var(--error-300);
+    --error-deep: var(--error-200);
+    --error-bar:  var(--error-400);
+
+    --info-tint: var(--info-900);
+    --info-line: var(--info-700);
+    --info-text: var(--info-300);
+    --info-deep: var(--info-200);
+    --info-bar:  var(--info-400);
+
+    /* Notice goes LIGHTER here - step 200, not 700. */
+    --notice-tint: var(--notice-900);
+    --notice-line: var(--notice-700);
+    --notice-text: var(--notice-200);
+    --notice-deep: var(--notice-100);
+    --notice-bar:  var(--notice-400);
+
+    --on-semantic-fill: var(--neutral-950);
+
+    /* Shadows do nothing on a near-black page. Keep them declared but
+       effectively off, and use surface lightness for elevation instead. */
+    --elev-1: none;
+    --elev-2: none;
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "number": 15843,
+  "title": "Why does pip install fastapi include a SKILL.md under .agents/skills/?",
+  "body": "The `SKILL.md` file is installed within the `site_packages` directory (specifically, under `fastapi/.agents/skills/fastapi`) when the `fastapi` package is installed using pip.\n\nWhat is the purpose of this file? How is it consumed by users of the package? What is its intended use?",
+  "body_text": "The SKILL.md file is installed within the site_packages directory (specifically, under fastapi/.agents/skills/fastapi) when the fastapi package is installed using pip.\nWhat is the purpose of this file? How is it consumed by users of the package? What is its intended use?",
+  "created_at": "2026-06-25T17:40:22Z",
+  "url": "https://github.com/fastapi/fastapi/discussions/15843",
+  "answered": true,
+  "answer": {
+    "body": "Open project that uses FastAPI as dependency, and run `uvx library-skills`. It will suggest installing this skill. And it will be always up to date with the version of FastAPI installed. \r\n\r\nSee https://library-skills.io/",
+    "body_text": "Open project that uses FastAPI as dependency, and run uvx library-skills. It will suggest installing this skill. And it will be always up to date with the version of FastAPI installed.\nSee https://library-skills.io/",
+    "url": "https://github.com/fastapi/fastapi/discussions/15843#discussioncomment-17438440",
+    "created_at": "2026-06-25T20:33:47Z",
+    "upvotes": 1,
+    "author": "YuriiMotov",
+    "author_association": "MEMBER",
+    "is_maintainer": true
+  }
+}

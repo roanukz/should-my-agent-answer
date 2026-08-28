@@ -1,0 +1,19 @@
+{
+  "number": 13108,
+  "title": "How to set different api in different swagger page? e.g. the fronted api and backend api in the different page,  details shows in below image.",
+  "body": "### First Check\n\n- [X] I added a very descriptive title here.\n- [X] I used the GitHub search to find a similar question and didn't find it.\n- [X] I searched the FastAPI documentation, with the integrated search.\n- [X] I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n- [X] I already read and followed all the tutorial in the docs and didn't find an answer.\n- [X] I already checked if it is not related to FastAPI but to [Pydantic](https://github.com/pydantic/pydantic).\n- [X] I already checked if it is not related to FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui).\n- [X] I already checked if it is not related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc).\n\n### Commit to Help\n\n- [X] I commit to help with one of those options 👆\n\n### Example Code\n\n```python\nno code here, it's about swagger ui\n```\n\n\n### Description\n\nthe fronted api and backend api in the different page,  details shows in below image.\n\n### Operating System\n\nWindows\n\n### Operating System Details\n\n_No response_\n\n### FastAPI Version\n\n0.115.6\n\n### Pydantic Version\n\n2.10.3\n\n### Python Version\n\n3.9\n\n### Additional Context\n\n![image](https://github.com/user-attachments/assets/b8c81b0f-b59e-4880-aca9-9f155d62f482)\r\n",
+  "body_text": "First Check\n\n I added a very descriptive title here.\n I used the GitHub search to find a similar question and didn't find it.\n I searched the FastAPI documentation, with the integrated search.\n I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n I already read and followed all the tutorial in the docs and didn't find an answer.\n I already checked if it is not related to FastAPI but to Pydantic.\n I already checked if it is not related to FastAPI but to Swagger UI.\n I already checked if it is not related to FastAPI but to ReDoc.\n\nCommit to Help\n\n I commit to help with one of those options 👆\n\nExample Code\nno code here, it's about swagger ui\nDescription\nthe fronted api and backend api in the different page,  details shows in below image.\nOperating System\nWindows\nOperating System Details\nNo response\nFastAPI Version\n0.115.6\nPydantic Version\n2.10.3\nPython Version\n3.9\nAdditional Context",
+  "created_at": "2024-12-25T11:17:10Z",
+  "url": "https://github.com/fastapi/fastapi/discussions/13108",
+  "answered": true,
+  "answer": {
+    "body": "You can [mount](https://fastapi.tiangolo.com/advanced/sub-applications/) frontend as a sub-app. This way docs will be separated and you will be able to access frontend docs via '/front/docs':\r\n```\r\nfrom fastapi import FastAPI\r\n\r\napp = FastAPI(title=\"Back-end app\")\r\n\r\nfront_app = FastAPI(title=\"Front-end app\")\r\napp.mount(\"/front\", front_app)\r\n\r\n```",
+    "body_text": "You can mount frontend as a sub-app. This way docs will be separated and you will be able to access frontend docs via '/front/docs':\nfrom fastapi import FastAPI\n\napp = FastAPI(title=\"Back-end app\")\n\nfront_app = FastAPI(title=\"Front-end app\")\napp.mount(\"/front\", front_app)",
+    "url": "https://github.com/fastapi/fastapi/discussions/13108#discussioncomment-11667434",
+    "created_at": "2024-12-26T08:26:15Z",
+    "upvotes": 1,
+    "author": "YuriiMotov",
+    "author_association": "MEMBER",
+    "is_maintainer": true
+  }
+}

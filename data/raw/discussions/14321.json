@@ -1,0 +1,19 @@
+{
+  "number": 14321,
+  "title": "isinstance(file, UploadFile) returns False",
+  "body": "### First Check\n\n- [X] I added a very descriptive title here.\n- [X] I used the GitHub search to find a similar question and didn't find it.\n- [X] I searched the FastAPI documentation, with the integrated search.\n- [X] I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n- [X] I already read and followed all the tutorial in the docs and didn't find an answer.\n- [X] I already checked if it is not related to FastAPI but to [Pydantic](https://github.com/pydantic/pydantic).\n- [X] I already checked if it is not related to FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui).\n- [X] I already checked if it is not related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc).\n\n### Commit to Help\n\n- [X] I commit to help with one of those options 👆\n\n### Example Code\n\n```python\n@app.post(\"/users/{id}/files\", status_code=204)\r\ndef upload_file(file: UploadFile):\r\n    print(isinstance(file, UploadFile))\r\n```\n```\n\n\n### Description\n\nif you run the code example, you will obtain `False`. Is this intended behaviour?\r\n\r\nThe workaround is to use starlette: `isinstance(file, StarletteUploadFile)`\r\n\n\n### Operating System\n\nLinux\n\n### Operating System Details\n\n_No response_\n\n### FastAPI Version\n\n0.120.4\n\n### Pydantic Version\n\n2.12.3\n\n### Python Version\n\nPython 3.12.3\n\n### Additional Context\n\n_No response_",
+  "body_text": "First Check\n\n I added a very descriptive title here.\n I used the GitHub search to find a similar question and didn't find it.\n I searched the FastAPI documentation, with the integrated search.\n I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n I already read and followed all the tutorial in the docs and didn't find an answer.\n I already checked if it is not related to FastAPI but to Pydantic.\n I already checked if it is not related to FastAPI but to Swagger UI.\n I already checked if it is not related to FastAPI but to ReDoc.\n\nCommit to Help\n\n I commit to help with one of those options 👆\n\nExample Code\n@app.post(\"/users/{id}/files\", status_code=204)\ndef upload_file(file: UploadFile):\n    print(isinstance(file, UploadFile))\n\n\n### Description\n\nif you run the code example, you will obtain `False`. Is this intended behaviour?\n\nThe workaround is to use starlette: `isinstance(file, StarletteUploadFile)`\n\n\n### Operating System\n\nLinux\n\n### Operating System Details\n\n_No response_\n\n### FastAPI Version\n\n0.120.4\n\n### Pydantic Version\n\n2.12.3\n\n### Python Version\n\nPython 3.12.3\n\n### Additional Context\n\n_No response_",
+  "created_at": "2025-11-09T09:27:56Z",
+  "url": "https://github.com/fastapi/fastapi/discussions/14321",
+  "answered": true,
+  "answer": {
+    "body": "Yes, it's known issue.\r\nWe already have a PR, but it's incomplete: https://github.com/fastapi/fastapi/pull/13605\r\nIf somebody is ready to work on this - feel free to do so",
+    "body_text": "Yes, it's known issue.\nWe already have a PR, but it's incomplete: #13605\nIf somebody is ready to work on this - feel free to do so",
+    "url": "https://github.com/fastapi/fastapi/discussions/14321#discussioncomment-14914669",
+    "created_at": "2025-11-09T10:18:08Z",
+    "upvotes": 1,
+    "author": "YuriiMotov",
+    "author_association": "MEMBER",
+    "is_maintainer": true
+  }
+}

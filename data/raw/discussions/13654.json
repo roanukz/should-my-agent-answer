@@ -1,0 +1,19 @@
+{
+  "number": 13654,
+  "title": "Support for \"query\" HTTP method",
+  "body": "### First Check\n\n- [X] I added a very descriptive title here.\n- [X] I used the GitHub search to find a similar question and didn't find it.\n- [X] I searched the FastAPI documentation, with the integrated search.\n- [X] I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n- [X] I already read and followed all the tutorial in the docs and didn't find an answer.\n- [X] I already checked if it is not related to FastAPI but to [Pydantic](https://github.com/pydantic/pydantic).\n- [X] I already checked if it is not related to FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui).\n- [X] I already checked if it is not related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc).\n\n### Commit to Help\n\n- [X] I commit to help with one of those options 👆\n\n### Example Code\n\n```python\n#\n```\n\n\n### Description\n\nHi @Kludex,\r\n\r\nFollowing up on [this issue](https://github.com/fastapi/fastapi/issues/12965), OpenAPI now officially supports the query method, as per [this commit](https://github.com/OAI/OpenAPI-Specification/pull/4514/files).\r\n\r\nI would like to work on implementing it in FastAPI. Could you please assign the issue to me?\n\n### Operating System\n\nmacOS\n\n### Operating System Details\n\n_No response_\n\n### FastAPI Version\n\n0.103.1\n\n### Pydantic Version\n\n2.4.1\n\n### Python Version\n\n3.10.10\n\n### Additional Context\n\n_No response_",
+  "body_text": "First Check\n\n I added a very descriptive title here.\n I used the GitHub search to find a similar question and didn't find it.\n I searched the FastAPI documentation, with the integrated search.\n I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n I already read and followed all the tutorial in the docs and didn't find an answer.\n I already checked if it is not related to FastAPI but to Pydantic.\n I already checked if it is not related to FastAPI but to Swagger UI.\n I already checked if it is not related to FastAPI but to ReDoc.\n\nCommit to Help\n\n I commit to help with one of those options 👆\n\nExample Code\n#\nDescription\nHi @Kludex,\nFollowing up on this issue, OpenAPI now officially supports the query method, as per this commit.\nI would like to work on implementing it in FastAPI. Could you please assign the issue to me?\nOperating System\nmacOS\nOperating System Details\nNo response\nFastAPI Version\n0.103.1\nPydantic Version\n2.4.1\nPython Version\n3.10.10\nAdditional Context\nNo response",
+  "created_at": "2025-04-28T05:20:44Z",
+  "url": "https://github.com/fastapi/fastapi/discussions/13654",
+  "answered": true,
+  "answer": {
+    "body": "It will only be supported in OAS v 3.2.\r\nOAS 3.2 hasn't published yet (Due by August 1, 2025). And even after it's published we will need to wait until instruments like Swagger UI add the support of this new version.\r\n\r\nSo, let's wait for it",
+    "body_text": "It will only be supported in OAS v 3.2.\nOAS 3.2 hasn't published yet (Due by August 1, 2025). And even after it's published we will need to wait until instruments like Swagger UI add the support of this new version.\nSo, let's wait for it",
+    "url": "https://github.com/fastapi/fastapi/discussions/13654#discussioncomment-13247844",
+    "created_at": "2025-05-23T14:40:22Z",
+    "upvotes": 1,
+    "author": "YuriiMotov",
+    "author_association": "MEMBER",
+    "is_maintainer": true
+  }
+}

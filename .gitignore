@@ -1,0 +1,14 @@
+# Local Python environment. The pipeline pins its dependencies in
+# pipeline/requirements.txt; the venv itself is never committed.
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+.DS_Store
+
+# Intermediate payloads for the model steps. Prompts are regenerated from
+# data/raw/ by run.sh, and the answers are folded into the committed JSON under
+# data/graph/ and data/. Committing hundreds of prompt files would bury the
+# artifacts that matter.
+data/work/

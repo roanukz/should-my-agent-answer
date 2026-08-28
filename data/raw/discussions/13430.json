@@ -1,0 +1,19 @@
+{
+  "number": 13430,
+  "title": "Admin Panel for FastAPI (Similar to Django Admin)",
+  "body": "Hello everyone,\r\n\r\nI’m looking for a robust and stable admin panel solution for FastAPI, similar to Django Admin for Django. Ideally, it should be well-maintained, production-ready, and capable of handling complex applications.\r\n\r\nI'm open to both free and paid options, as long as they are reliable. If you have experience with any such tools, I’d really appreciate your insights and recommendations.\r\n\r\nThanks in advance!",
+  "body_text": "Hello everyone,\nI’m looking for a robust and stable admin panel solution for FastAPI, similar to Django Admin for Django. Ideally, it should be well-maintained, production-ready, and capable of handling complex applications.\nI'm open to both free and paid options, as long as they are reliable. If you have experience with any such tools, I’d really appreciate your insights and recommendations.\nThanks in advance!",
+  "created_at": "2025-02-28T18:32:42Z",
+  "url": "https://github.com/fastapi/fastapi/discussions/13430",
+  "answered": true,
+  "answer": {
+    "body": "@apiguy123 You have several options based on the ORM you are using. If you use SqlAlchemy, SQLModel, Tortoise ORM, etc. you can try \r\n[Fastadmin](https://github.com/vsdudakov/fastadmin), [Starlette-admin](https://github.com/jowilf/starlette-admin) or [SQLAdmin](https://github.com/aminalaee/sqladmin). If you are using Piccolo ORM you can try [Piccolo Admin](https://github.com/piccolo-orm/piccolo_admin). Hope that helps.",
+    "body_text": "@apiguy123 You have several options based on the ORM you are using. If you use SqlAlchemy, SQLModel, Tortoise ORM, etc. you can try\nFastadmin, Starlette-admin or SQLAdmin. If you are using Piccolo ORM you can try Piccolo Admin. Hope that helps.",
+    "url": "https://github.com/fastapi/fastapi/discussions/13430#discussioncomment-12359018",
+    "created_at": "2025-03-01T08:15:13Z",
+    "upvotes": 1,
+    "author": "sinisaos",
+    "author_association": "NONE",
+    "is_maintainer": false
+  }
+}

@@ -1,0 +1,3762 @@
+{
+  "schema_version": 1,
+  "edges": [
+    {
+      "id": "e:00000",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
+      "to": "concept:application_json",
+      "evidence": {
+        "span": "FastAPI will assume the response has the same media type as the main response class (default `application/json`).",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          188,
+          188
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00001",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
+      "to": "concept:content",
+      "evidence": {
+        "span": "\"content\": {\"image/png\": {}},",
+        "path": "docs_src/additional_responses/tutorial002_py310.py",
+        "lines": [
+          19,
+          19
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00002",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
+      "to": "concept:description",
+      "evidence": {
+        "span": "\"description\": \"Return the JSON item or an image.\",",
+        "path": "docs_src/additional_responses/tutorial002_py310.py",
+        "lines": [
+          20,
+          20
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00003",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
+      "to": "concept:fileresponse",
+      "evidence": {
+        "span": "Notice that you have to return the image using a `FileResponse` directly.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          182,
+          182
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00004",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
+      "to": "concept:image_png",
+      "evidence": {
+        "span": "you can add an additional media type of `image/png`, declaring that your *path operation* can return a JSON object (with media type `application/json`) or a PNG image:",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          176,
+          176
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00005",
+      "type": "DEFINES",
+      "from": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
+      "to": "concept:media_type",
+      "evidence": {
+        "span": "Unless you specify a different media type explicitly in your `responses` parameter, FastAPI will assume the response has the same media type as the main response class (default `application/json`).",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          188,
+          188
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00006",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
+      "to": "concept:response_class",
+      "evidence": {
+        "span": "But if you have specified a custom response class with `None` as its media type, FastAPI will use `application/json` for any additional response that has an associated model.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          190,
+          190
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00007",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
+      "to": "concept:response_model",
+      "evidence": {
+        "span": "response_model=Item,",
+        "path": "docs_src/additional_responses/tutorial002_py310.py",
+        "lines": [
+          16,
+          16
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00008",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-media-types-for-the-main-response",
+      "to": "concept:responses",
+      "evidence": {
+        "span": "You can use this same `responses` parameter to add different media types for the same main response.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          174,
+          174
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00009",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:basemodel",
+      "evidence": {
+        "span": "class Message(BaseModel):",
+        "path": "docs_src/additional_responses/tutorial001_py310.py",
+        "lines": [
+          11,
+          11
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00010",
+      "type": "DEFINES",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:content",
+      "evidence": {
+        "span": "In the key `content`, that has as value another JSON object (`dict`) that contains:",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          45,
+          45
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00011",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:dict",
+      "evidence": {
+        "span": "It receives a `dict`: the keys are status codes for each response (like `200`), and the values are other `dict`s with the information for each of them.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          21,
+          21
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00012",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:json_schema",
+      "evidence": {
+        "span": "**FastAPI** will take that model, generate its JSON Schema and include it in the correct place in OpenAPI.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          25,
+          25
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00013",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:jsonresponse",
+      "evidence": {
+        "span": "Keep in mind that you have to return the `JSONResponse` directly.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          33,
+          33
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00014",
+      "type": "DEFINES",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:message",
+      "evidence": {
+        "span": "to declare another response with a status code `404` and a Pydantic model `Message`, you can write:",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          27,
+          27
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00015",
+      "type": "DEFINES",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:model",
+      "evidence": {
+        "span": "Each of those response `dict`s can have a key `model`, containing a Pydantic model, just like `response_model`.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          23,
+          23
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00016",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:path_operation_decorator",
+      "evidence": {
+        "span": "You can pass to your *path operation decorators* a parameter `responses`.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          19,
+          19
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00017",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:ref",
+      "evidence": {
+        "span": "\"$ref\": \"#/components/schemas/Message\"",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          62,
+          62
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00018",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:response_model",
+      "evidence": {
+        "span": "containing a Pydantic model, just like `response_model`.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          23,
+          23
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00019",
+      "type": "DEFINES",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:responses",
+      "evidence": {
+        "span": "You can pass to your *path operation decorators* a parameter `responses`.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          19,
+          19
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00020",
+      "type": "DEFINES",
+      "from": "sec:advanced/additional-responses#additional-response-with-model",
+      "to": "concept:schema",
+      "evidence": {
+        "span": "A key `schema`, that has as the value the JSON Schema from the model, here's the correct place.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          47,
+          47
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00021",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#additional-responses-in-openapi",
+      "to": "concept:api_docs",
+      "evidence": {
+        "span": "Those additional responses will be included in the OpenAPI schema, so they will also appear in the API docs.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          13,
+          13
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00022",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-responses-in-openapi",
+      "to": "concept:jsonresponse",
+      "evidence": {
+        "span": "you have to make sure you return a `Response` like `JSONResponse` directly, with your status code and content.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          15,
+          15
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00023",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#additional-responses-in-openapi",
+      "to": "concept:media_type",
+      "evidence": {
+        "span": "You can declare additional responses, with additional status codes, media types, descriptions, etc.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          11,
+          11
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00024",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-responses-in-openapi",
+      "to": "concept:openapi",
+      "evidence": {
+        "span": "Those additional responses will be included in the OpenAPI schema, so they will also appear in the API docs.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          13,
+          13
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00025",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#additional-responses-in-openapi",
+      "to": "concept:response",
+      "evidence": {
+        "span": "you have to make sure you return a `Response` like `JSONResponse` directly, with your status code and content.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          15,
+          15
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00026",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#additional-responses-in-openapi",
+      "to": "concept:status_code",
+      "evidence": {
+        "span": "You can declare additional responses, with additional status codes, media types, descriptions, etc.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          11,
+          11
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00027",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#combine-predefined-responses-and-custom-ones",
+      "to": "concept:content",
+      "evidence": {
+        "span": "responses={**responses, 200: {\"content\": {\"image/png\": {}}}},",
+        "path": "docs_src/additional_responses/tutorial004_py310.py",
+        "lines": [
+          24,
+          24
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00028",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#combine-predefined-responses-and-custom-ones",
+      "to": "concept:description",
+      "evidence": {
+        "span": "404: {\"description\": \"Item not found\"},",
+        "path": "docs_src/additional_responses/tutorial004_py310.py",
+        "lines": [
+          12,
+          12
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00029",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combine-predefined-responses-and-custom-ones",
+      "to": "concept:dict",
+      "evidence": {
+        "span": "you can use the Python technique of \"unpacking\" a `dict` with `**dict_to_unpack`:",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          216,
+          216
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00030",
+      "type": "DEFINES",
+      "from": "sec:advanced/additional-responses#combine-predefined-responses-and-custom-ones",
+      "to": "concept:dict_unpacking",
+      "evidence": {
+        "span": "Here, `new_dict` will contain all the key-value pairs from `old_dict` plus the new key-value pair:",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          226,
+          226
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00031",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combine-predefined-responses-and-custom-ones",
+      "to": "concept:fileresponse",
+      "evidence": {
+        "span": "return FileResponse(\"image.png\", media_type=\"image/png\")",
+        "path": "docs_src/additional_responses/tutorial004_py310.py",
+        "lines": [
+          28,
+          28
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00032",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combine-predefined-responses-and-custom-ones",
+      "to": "concept:path_operation",
+      "evidence": {
+        "span": "you want to combine them with custom responses needed by each *path operation*.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          214,
+          214
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00033",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combine-predefined-responses-and-custom-ones",
+      "to": "concept:response_model",
+      "evidence": {
+        "span": "response_model=Item,",
+        "path": "docs_src/additional_responses/tutorial004_py310.py",
+        "lines": [
+          23,
+          23
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00034",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combine-predefined-responses-and-custom-ones",
+      "to": "concept:responses",
+      "evidence": {
+        "span": "responses={**responses, 200: {\"content\": {\"image/png\": {}}}},",
+        "path": "docs_src/additional_responses/tutorial004_py310.py",
+        "lines": [
+          24,
+          24
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00035",
+      "type": "DEFINES",
+      "from": "sec:advanced/additional-responses#combining-information",
+      "to": "concept:description",
+      "evidence": {
+        "span": "you can declare a response with a status code `404` that uses a Pydantic model and has a custom `description`.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          202,
+          202
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00036",
+      "type": "DEFINES",
+      "from": "sec:advanced/additional-responses#combining-information",
+      "to": "concept:example",
+      "evidence": {
+        "span": "And a response with a status code `200` that uses your `response_model`, but includes a custom `example`:",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          204,
+          204
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00037",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combining-information",
+      "to": "concept:json_schema",
+      "evidence": {
+        "span": "**FastAPI** will keep the additional information from `responses`, and combine it with the JSON Schema from your model.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          200,
+          200
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00038",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combining-information",
+      "to": "concept:jsonresponse",
+      "evidence": {
+        "span": "return JSONResponse(status_code=404, content={\"message\": \"Item not found\"})",
+        "path": "docs_src/additional_responses/tutorial003_py310.py",
+        "lines": [
+          37,
+          37
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00039",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#combining-information",
+      "to": "concept:message",
+      "evidence": {
+        "span": "404: {\"model\": Message, \"description\": \"The item was not found\"},",
+        "path": "docs_src/additional_responses/tutorial003_py310.py",
+        "lines": [
+          22,
+          22
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00040",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combining-information",
+      "to": "concept:model",
+      "evidence": {
+        "span": "404: {\"model\": Message, \"description\": \"The item was not found\"},",
+        "path": "docs_src/additional_responses/tutorial003_py310.py",
+        "lines": [
+          22,
+          22
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00041",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combining-information",
+      "to": "concept:openapi",
+      "evidence": {
+        "span": "declare additional information for that same response in `responses`, directly in the OpenAPI schema.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          198,
+          198
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00042",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combining-information",
+      "to": "concept:response_model",
+      "evidence": {
+        "span": "You can declare a `response_model`, using the default status code `200` (or a custom one if you need), and then declare additional information for that same response in `responses`, directly in the OpenAPI schema.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          198,
+          198
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00043",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combining-information",
+      "to": "concept:responses",
+      "evidence": {
+        "span": "You can also combine response information from multiple places, including the `response_model`, `status_code`, and `responses` parameters.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          196,
+          196
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00044",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#combining-information",
+      "to": "concept:status_code",
+      "evidence": {
+        "span": "You can also combine response information from multiple places, including the `response_model`, `status_code`, and `responses` parameters.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          196,
+          196
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00045",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#more-information-about-openapi-responses",
+      "to": "concept:content",
+      "evidence": {
+        "span": "Including `description`, `headers`, `content` (inside of this is that you declare different media types and JSON Schemas), and `links`.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          247,
+          247
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00046",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#more-information-about-openapi-responses",
+      "to": "concept:description",
+      "evidence": {
+        "span": "Including `description`, `headers`, `content` (inside of this is that you declare different media types and JSON Schemas), and `links`.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          247,
+          247
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00047",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#more-information-about-openapi-responses",
+      "to": "concept:headers",
+      "evidence": {
+        "span": "Including `description`, `headers`, `content` (inside of this is that you declare different media types and JSON Schemas), and `links`.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          247,
+          247
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00048",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#more-information-about-openapi-responses",
+      "to": "concept:json_schema",
+      "evidence": {
+        "span": "Including `description`, `headers`, `content` (inside of this is that you declare different media types and JSON Schemas), and `links`.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          247,
+          247
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00049",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#more-information-about-openapi-responses",
+      "to": "concept:links",
+      "evidence": {
+        "span": "Including `description`, `headers`, `content` (inside of this is that you declare different media types and JSON Schemas), and `links`.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          247,
+          247
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00050",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#more-information-about-openapi-responses",
+      "to": "concept:openapi_specification",
+      "evidence": {
+        "span": "To see what exactly you can include in the responses, you can check these sections in the OpenAPI specification:",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          244,
+          244
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00051",
+      "type": "MENTIONS",
+      "from": "sec:advanced/additional-responses#more-information-about-openapi-responses",
+      "to": "concept:response_object",
+      "evidence": {
+        "span": "it includes the `Response Object`.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          246,
+          246
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00052",
+      "type": "REQUIRES",
+      "from": "sec:advanced/additional-responses#more-information-about-openapi-responses",
+      "to": "concept:responses",
+      "evidence": {
+        "span": "you can include anything from this directly in each response inside your `responses` parameter.",
+        "path": "docs/en/docs/advanced/additional-responses.md",
+        "lines": [
+          247,
+          247
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-000",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00053",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#available-responses",
+      "to": "concept:fastapi_responses",
+      "evidence": {
+        "span": "provides the same `starlette.responses` as `fastapi.responses` just as a convenience for you, the developer",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          104,
+          104
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00054",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#available-responses",
+      "to": "concept:htmlresponse",
+      "evidence": {
+        "span": "You could also use `from starlette.responses import HTMLResponse`.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          102,
+          102
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00055",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#available-responses",
+      "to": "concept:response",
+      "evidence": {
+        "span": "Keep in mind that you can use `Response` to return anything else, or even create a custom sub-class.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          98,
+          98
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00056",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#available-responses",
+      "to": "concept:starlette",
+      "evidence": {
+        "span": "But most of the available responses come directly from Starlette.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          104,
+          104
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00057",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#available-responses",
+      "to": "concept:starlette_responses",
+      "evidence": {
+        "span": "**FastAPI** provides the same `starlette.responses` as `fastapi.responses` just as a convenience for you, the developer.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          104,
+          104
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00058",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#custom-response-html-stream-file-others",
+      "to": "concept:content_type",
+      "evidence": {
+        "span": "in the HTTP header `Content-Type` as part of the generated OpenAPI",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          7,
+          7
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00059",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#custom-response-html-stream-file-others",
+      "to": "concept:jsonresponse",
+      "evidence": {
+        "span": "But if you return a `Response` directly (or any subclass, like `JSONResponse`)",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          7,
+          7
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00060",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#custom-response-html-stream-file-others",
+      "to": "concept:media_type",
+      "evidence": {
+        "span": "If you use a response class with no media type, FastAPI will expect your response to have no content",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          15,
+          15
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00061",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#custom-response-html-stream-file-others",
+      "to": "concept:openapi",
+      "evidence": {
+        "span": "in the HTTP header `Content-Type` as part of the generated OpenAPI",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          7,
+          7
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00062",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#custom-response-html-stream-file-others",
+      "to": "concept:path_operation_decorator",
+      "evidence": {
+        "span": "in the *path operation decorator* using the `response_class` parameter",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          9,
+          9
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00063",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#custom-response-html-stream-file-others",
+      "to": "concept:path_operation_function",
+      "evidence": {
+        "span": "The contents that you return from your *path operation function* will be put inside of that `Response`.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          11,
+          11
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00064",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#custom-response-html-stream-file-others",
+      "to": "concept:response",
+      "evidence": {
+        "span": "You can override it by returning a `Response` directly as seen in [Return a Response directly](response-directly.md).",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          5,
+          5
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00065",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#custom-response-html-stream-file-others",
+      "to": "concept:response_class",
+      "evidence": {
+        "span": "you can also declare the `Response` that you want to be used (e.g. any `Response` subclass), in the *path operation decorator* using the `response_class` parameter",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          9,
+          9
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00066",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#custom-response-html-stream-file-others",
+      "to": "concept:response_model",
+      "evidence": {
+        "span": "the data won't be automatically converted (even if you declare a `response_model`)",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          7,
+          7
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00067",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#document-in-openapi-and-override-response",
+      "to": "concept:media_type",
+      "evidence": {
+        "span": "If you want to override the response from inside of the function but at the same time document the \"media type\" in OpenAPI",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          76,
+          76
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00068",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#document-in-openapi-and-override-response",
+      "to": "concept:openapi",
+      "evidence": {
+        "span": "used only to document the OpenAPI *path operation*",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          78,
+          78
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00069",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#document-in-openapi-and-override-response",
+      "to": "concept:path_operation",
+      "evidence": {
+        "span": "used only to document the OpenAPI *path operation*",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          78,
+          78
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00070",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#document-in-openapi-and-override-response",
+      "to": "concept:response",
+      "evidence": {
+        "span": "you can use the `response_class` parameter AND return a `Response` object",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          76,
+          76
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00071",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#document-in-openapi-and-override-response",
+      "to": "concept:response_class",
+      "evidence": {
+        "span": "The `response_class` will then be used only to document the OpenAPI *path operation*, but your `Response` will be used as is.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          78,
+          78
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00072",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#html-response",
+      "to": "concept:app_get",
+      "evidence": {
+        "span": "@app.get(\"/items/\", response_class=HTMLResponse)",
+        "path": "docs_src/custom_response/tutorial002_py310.py",
+        "lines": [
+          7,
+          7
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00073",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#html-response",
+      "to": "concept:content_type",
+      "evidence": {
+        "span": "In this case, the HTTP header `Content-Type` will be set to `text/html`.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          48,
+          48
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00074",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#html-response",
+      "to": "concept:fastapi_responses",
+      "evidence": {
+        "span": "from fastapi.responses import HTMLResponse",
+        "path": "docs_src/custom_response/tutorial002_py310.py",
+        "lines": [
+          2,
+          2
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00075",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#html-response",
+      "to": "concept:htmlresponse",
+      "evidence": {
+        "span": "To return a response with HTML directly from **FastAPI**, use `HTMLResponse`.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          37,
+          37
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00076",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#html-response",
+      "to": "concept:openapi",
+      "evidence": {
+        "span": "And it will be documented as such in OpenAPI.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          50,
+          50
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00077",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#html-response",
+      "to": "concept:path_operation_decorator",
+      "evidence": {
+        "span": "Pass `HTMLResponse` as the parameter `response_class` of your *path operation decorator*.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          40,
+          40
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00078",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#html-response",
+      "to": "concept:response_class",
+      "evidence": {
+        "span": "The parameter `response_class` will also be used to define the \"media type\" of the response.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          46,
+          46
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00079",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#html-response",
+      "to": "concept:text_html",
+      "evidence": {
+        "span": "the HTTP header `Content-Type` will be set to `text/html`",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          48,
+          48
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00080",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#json-performance",
+      "to": "concept:app_post",
+      "evidence": {
+        "span": "@app.post(\"/items/\")",
+        "path": "docs_src/response_model/tutorial001_01_py310.py",
+        "lines": [
+          15,
+          15
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00081",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#json-performance",
+      "to": "concept:item",
+      "evidence": {
+        "span": "async def create_item(item: Item) -> Item:",
+        "path": "docs_src/response_model/tutorial001_01_py310.py",
+        "lines": [
+          16,
+          16
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00082",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#json-performance",
+      "to": "concept:path_operation_decorator",
+      "evidence": {
+        "span": "don't declare a `response_class` in the *path operation decorator*",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          31,
+          31
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00083",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#json-performance",
+      "to": "concept:response_class",
+      "evidence": {
+        "span": "don't declare a `response_class` in the *path operation decorator*",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          31,
+          31
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00084",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#json-performance",
+      "to": "concept:response_model",
+      "evidence": {
+        "span": "if you want the maximum performance, use a [Response Model](../tutorial/response-model.md) and don't declare a `response_class` in the *path operation decorator*",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          31,
+          31
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00085",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#json-responses",
+      "to": "concept:application_json",
+      "evidence": {
+        "span": "If you declare a `response_class` with a JSON media type (`application/json`)",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          27,
+          27
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00086",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#json-responses",
+      "to": "concept:jsonable_encoder",
+      "evidence": {
+        "span": "FastAPI will use the `jsonable_encoder` explained in [JSON Compatible Encoder](../tutorial/encoder.md) and put it in a `JSONResponse`",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          25,
+          25
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00087",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#json-responses",
+      "to": "concept:jsonresponse",
+      "evidence": {
+        "span": "it will be converted with the `jsonable_encoder` and then passed to the `JSONResponse` class, which will serialize it to bytes using the standard JSON library in Python",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          27,
+          27
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00088",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#json-responses",
+      "to": "concept:path_operation_decorator",
+      "evidence": {
+        "span": "any Pydantic `response_model` that you declared in the *path operation decorator*",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          27,
+          27
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00089",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#json-responses",
+      "to": "concept:pydantic",
+      "evidence": {
+        "span": "FastAPI will use it to serialize the data to JSON, using Pydantic",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          23,
+          23
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00090",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#json-responses",
+      "to": "concept:response_class",
+      "evidence": {
+        "span": "If you declare a `response_class` with a JSON media type (`application/json`), like is the case with the `JSONResponse`, the data you return will be automatically converted (and filtered) with any Pydantic `response_model` that you declared in the *path operation decorator*.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          27,
+          27
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00091",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#json-responses",
+      "to": "concept:response_model",
+      "evidence": {
+        "span": "If you declare a [Response Model](../tutorial/response-model.md) FastAPI will use it to serialize the data to JSON, using Pydantic.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          23,
+          23
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00092",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#jsonresponse",
+      "to": "concept:application_json",
+      "evidence": {
+        "span": "returns an `application/json` encoded response",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          137,
+          137
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00093",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#jsonresponse",
+      "to": "concept:response_model",
+      "evidence": {
+        "span": "But if you declare a response model or return type, that will be used directly to serialize the data to JSON",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          143,
+          143
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00094",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#jsonresponse",
+      "to": "concept:return_type",
+      "evidence": {
+        "span": "if you declare a response model or return type, that will be used directly to serialize the data to JSON",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          143,
+          143
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00095",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#plaintextresponse",
+      "to": "concept:app_get",
+      "evidence": {
+        "span": "@app.get(\"/\", response_class=PlainTextResponse)",
+        "path": "docs_src/custom_response/tutorial005_py310.py",
+        "lines": [
+          7,
+          7
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00096",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#plaintextresponse",
+      "to": "concept:fastapi_responses",
+      "evidence": {
+        "span": "from fastapi.responses import PlainTextResponse",
+        "path": "docs_src/custom_response/tutorial005_py310.py",
+        "lines": [
+          2,
+          2
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00097",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#plaintextresponse",
+      "to": "concept:response_class",
+      "evidence": {
+        "span": "@app.get(\"/\", response_class=PlainTextResponse)",
+        "path": "docs_src/custom_response/tutorial005_py310.py",
+        "lines": [
+          7,
+          7
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00098",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#response",
+      "to": "concept:app_get",
+      "evidence": {
+        "span": "@app.get(\"/legacy/\")",
+        "path": "docs_src/response_directly/tutorial002_py310.py",
+        "lines": [
+          6,
+          6
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00099",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#response",
+      "to": "concept:application_xml",
+      "evidence": {
+        "span": "return Response(content=data, media_type=\"application/xml\")",
+        "path": "docs_src/response_directly/tutorial002_py310.py",
+        "lines": [
+          18,
+          18
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00100",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#response",
+      "to": "concept:content",
+      "evidence": {
+        "span": "* `content` - A `str` or `bytes`.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          116,
+          116
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00101",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#response",
+      "to": "concept:content_length",
+      "evidence": {
+        "span": "will automatically include a Content-Length header",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          121,
+          121
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00102",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#response",
+      "to": "concept:content_type",
+      "evidence": {
+        "span": "It will also include a Content-Type header, based on the `media_type` and appending a charset for text types.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          121,
+          121
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00103",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#response",
+      "to": "concept:headers",
+      "evidence": {
+        "span": "* `headers` - A `dict` of strings.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          118,
+          118
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00104",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#response",
+      "to": "concept:media_type",
+      "evidence": {
+        "span": "* `media_type` - A `str` giving the media type.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          119,
+          119
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00105",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#response",
+      "to": "concept:starlette",
+      "evidence": {
+        "span": "FastAPI (actually Starlette) will automatically include a Content-Length header",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          121,
+          121
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00106",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#response",
+      "to": "concept:status_code",
+      "evidence": {
+        "span": "* `status_code` - An `int` HTTP status code.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          117,
+          117
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00107",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#return-a-response",
+      "to": "concept:content",
+      "evidence": {
+        "span": "return HTMLResponse(content=html_content, status_code=200)",
+        "path": "docs_src/custom_response/tutorial003_py310.py",
+        "lines": [
+          19,
+          19
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00108",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#return-a-response",
+      "to": "concept:content_type",
+      "evidence": {
+        "span": "the actual `Content-Type` header, status code, etc, will come from the `Response` object you returned",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          70,
+          70
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00109",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#return-a-response",
+      "to": "concept:htmlresponse",
+      "evidence": {
+        "span": "The same example from above, returning an `HTMLResponse`, could look like:",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          58,
+          58
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00110",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#return-a-response",
+      "to": "concept:interactive_docs",
+      "evidence": {
+        "span": "won't be visible in the automatic interactive docs",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          64,
+          64
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00111",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#return-a-response",
+      "to": "concept:openapi",
+      "evidence": {
+        "span": "won't be documented in OpenAPI (for example, the `Content-Type` won't be documented)",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          64,
+          64
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00112",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#return-a-response",
+      "to": "concept:path_operation",
+      "evidence": {
+        "span": "you can also override the response directly in your *path operation*, by returning it",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          56,
+          56
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00113",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#return-a-response",
+      "to": "concept:path_operation_function",
+      "evidence": {
+        "span": "A `Response` returned directly by your *path operation function* won't be documented in OpenAPI",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          64,
+          64
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00114",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#return-a-response",
+      "to": "concept:response",
+      "evidence": {
+        "span": "A `Response` returned directly by your *path operation function* won't be documented in OpenAPI",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          64,
+          64
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00115",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#return-a-response",
+      "to": "concept:status_code",
+      "evidence": {
+        "span": "return HTMLResponse(content=html_content, status_code=200)",
+        "path": "docs_src/custom_response/tutorial003_py310.py",
+        "lines": [
+          19,
+          19
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00116",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#return-an-htmlresponse-directly",
+      "to": "concept:app_get",
+      "evidence": {
+        "span": "@app.get(\"/items/\", response_class=HTMLResponse)",
+        "path": "docs_src/custom_response/tutorial004_py310.py",
+        "lines": [
+          21,
+          21
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00117",
+      "type": "DEFINES",
+      "from": "sec:advanced/custom-response#return-an-htmlresponse-directly",
+      "to": "concept:generate_html_response",
+      "evidence": {
+        "span": "In this example, the function `generate_html_response()` already generates and returns a `Response` instead of returning the HTML in a `str`.",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          86,
+          86
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00118",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#return-an-htmlresponse-directly",
+      "to": "concept:htmlresponse",
+      "evidence": {
+        "span": "But as you passed the `HTMLResponse` in the `response_class` too, **FastAPI** will know how to document it in OpenAPI",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          90,
+          90
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00119",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#return-an-htmlresponse-directly",
+      "to": "concept:interactive_docs",
+      "evidence": {
+        "span": "document it in OpenAPI and the interactive docs as HTML",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          90,
+          90
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00120",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#return-an-htmlresponse-directly",
+      "to": "concept:openapi",
+      "evidence": {
+        "span": "will know how to document it in OpenAPI and the interactive docs as HTML with `text/html`",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          90,
+          90
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00121",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#return-an-htmlresponse-directly",
+      "to": "concept:response",
+      "evidence": {
+        "span": "you are already returning a `Response` that will override the default **FastAPI** behavior",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          88,
+          88
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00122",
+      "type": "REQUIRES",
+      "from": "sec:advanced/custom-response#return-an-htmlresponse-directly",
+      "to": "concept:response_class",
+      "evidence": {
+        "span": "as you passed the `HTMLResponse` in the `response_class` too",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          90,
+          90
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00123",
+      "type": "MENTIONS",
+      "from": "sec:advanced/custom-response#return-an-htmlresponse-directly",
+      "to": "concept:text_html",
+      "evidence": {
+        "span": "the interactive docs as HTML with `text/html`",
+        "path": "docs/en/docs/advanced/custom-response.md",
+        "lines": [
+          90,
+          90
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-002",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00124",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#additional-responses",
+      "to": "concept:path_operation",
+      "evidence": {
+        "span": "That defines the metadata about the main response of a *path operation*.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          53,
+          53
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00125",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#additional-responses",
+      "to": "concept:response_model",
+      "evidence": {
+        "span": "You probably have seen how to declare the `response_model` and `status_code` for a *path operation*.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          51,
+          51
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00126",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#additional-responses",
+      "to": "concept:status_code",
+      "evidence": {
+        "span": "how to declare the `response_model` and `status_code` for a *path operation*",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          51,
+          51
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00127",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#advanced-description-from-docstring",
+      "to": "concept:basemodel",
+      "evidence": {
+        "span": "class Item(BaseModel):",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial004_py310.py",
+        "lines": [
+          7,
+          7
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00128",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#advanced-description-from-docstring",
+      "to": "concept:docstring",
+      "evidence": {
+        "span": "You can limit the lines used from the docstring of a *path operation function* for OpenAPI.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          41,
+          41
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00129",
+      "type": "DEFINES",
+      "from": "sec:advanced/path-operation-advanced-configuration#advanced-description-from-docstring",
+      "to": "concept:f",
+      "evidence": {
+        "span": "Adding an `\\f` (an escaped \"form feed\" character) causes **FastAPI** to truncate the output used for OpenAPI at this point.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          43,
+          43
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00130",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#advanced-description-from-docstring",
+      "to": "concept:openapi",
+      "evidence": {
+        "span": "causes **FastAPI** to truncate the output used for OpenAPI at this point",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          43,
+          43
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00131",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#advanced-description-from-docstring",
+      "to": "concept:path_operation_function",
+      "evidence": {
+        "span": "the docstring of a *path operation function* for OpenAPI",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          41,
+          41
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00132",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#advanced-description-from-docstring",
+      "to": "concept:pydantic",
+      "evidence": {
+        "span": "from pydantic import BaseModel",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial004_py310.py",
+        "lines": [
+          2,
+          2
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00133",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#advanced-description-from-docstring",
+      "to": "concept:sphinx",
+      "evidence": {
+        "span": "but other tools (such as Sphinx) will be able to use the rest",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          45,
+          45
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00134",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#advanced-description-from-docstring",
+      "to": "concept:summary",
+      "evidence": {
+        "span": "@app.post(\"/items/\", summary=\"Create an item\")",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial004_py310.py",
+        "lines": [
+          15,
+          15
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00135",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
+      "to": "concept:application_x_yaml",
+      "evidence": {
+        "span": "{\"application/x-yaml\": {\"schema\": Item.model_json_schema()}}",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial007_py310.py",
+        "lines": [
+          17,
+          17
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00136",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
+      "to": "concept:httpexception",
+      "evidence": {
+        "span": "raise HTTPException(status_code=422, detail=\"Invalid YAML\")",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial007_py310.py",
+        "lines": [
+          27,
+          27
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00137",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
+      "to": "concept:json_schema",
+      "evidence": {
+        "span": "we are still using a Pydantic model to manually generate the JSON Schema for the data that we want to receive in YAML",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          152,
+          152
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00138",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
+      "to": "concept:model_json_schema",
+      "evidence": {
+        "span": "Item.model_json_schema()",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial007_py310.py",
+        "lines": [
+          17,
+          17
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00139",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
+      "to": "concept:model_validate",
+      "evidence": {
+        "span": "item = Item.model_validate(data)",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial007_py310.py",
+        "lines": [
+          29,
+          29
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00140",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
+      "to": "concept:openapi_extra",
+      "evidence": {
+        "span": "openapi_extra={",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial007_py310.py",
+        "lines": [
+          15,
+          15
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00141",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
+      "to": "concept:pydantic",
+      "evidence": {
+        "span": "you could use a Pydantic model to define the JSON Schema that is then included in the custom OpenAPI schema section for the *path operation*",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          144,
+          144
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00142",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
+      "to": "concept:request_body",
+      "evidence": {
+        "span": "Then we use the request directly, and extract the body as `bytes`.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          154,
+          154
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00143",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
+      "to": "concept:validationerror",
+      "evidence": {
+        "span": "except ValidationError as e:",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial007_py310.py",
+        "lines": [
+          30,
+          30
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00144",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
+      "to": "concept:yaml",
+      "evidence": {
+        "span": "we are declaring the request content type as YAML, not JSON",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          148,
+          148
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00145",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-content-type",
+      "to": "concept:yaml_safe_load",
+      "evidence": {
+        "span": "data = yaml.safe_load(raw_body)",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial007_py310.py",
+        "lines": [
+          25,
+          25
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00146",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-path-operation-schema",
+      "to": "concept:bytes",
+      "evidence": {
+        "span": "it is read directly as `bytes`",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          138,
+          138
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00147",
+      "type": "DEFINES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-path-operation-schema",
+      "to": "concept:magic_data_reader",
+      "evidence": {
+        "span": "the function `magic_data_reader()` would be in charge of parsing it in some way",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          138,
+          138
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00148",
+      "type": "DEFINES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-path-operation-schema",
+      "to": "concept:openapi_extra",
+      "evidence": {
+        "span": "The dictionary in `openapi_extra` will be deeply merged with the automatically generated OpenAPI schema for the *path operation*.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          128,
+          128
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00149",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-path-operation-schema",
+      "to": "concept:openapi_schema",
+      "evidence": {
+        "span": "you could still want to define the request in the OpenAPI schema",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          132,
+          132
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00150",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-path-operation-schema",
+      "to": "concept:pydantic",
+      "evidence": {
+        "span": "In this example, we didn't declare any Pydantic model.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          138,
+          138
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00151",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-path-operation-schema",
+      "to": "concept:request",
+      "evidence": {
+        "span": "async def create_item(request: Request):",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial006_py310.py",
+        "lines": [
+          38,
+          38
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00152",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-path-operation-schema",
+      "to": "concept:request_body",
+      "evidence": {
+        "span": "raw_body = await request.body()",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial006_py310.py",
+        "lines": [
+          39,
+          39
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00153",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#custom-openapi-path-operation-schema",
+      "to": "concept:requestbody",
+      "evidence": {
+        "span": "\"requestBody\": {",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial006_py310.py",
+        "lines": [
+          20,
+          20
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00154",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#exclude-from-openapi",
+      "to": "concept:app_get",
+      "evidence": {
+        "span": "@app.get(\"/items/\", include_in_schema=False)",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial003_py310.py",
+        "lines": [
+          6,
+          6
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00155",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#exclude-from-openapi",
+      "to": "concept:automatic_documentation",
+      "evidence": {
+        "span": "and thus, from the automatic documentation systems",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          35,
+          35
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00156",
+      "type": "DEFINES",
+      "from": "sec:advanced/path-operation-advanced-configuration#exclude-from-openapi",
+      "to": "concept:include_in_schema",
+      "evidence": {
+        "span": "To exclude a *path operation* from the generated OpenAPI schema (and thus, from the automatic documentation systems), use the parameter `include_in_schema` and set it to `False`:",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          35,
+          35
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00157",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#exclude-from-openapi",
+      "to": "concept:openapi_schema",
+      "evidence": {
+        "span": "To exclude a *path operation* from the generated OpenAPI schema",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          35,
+          35
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00158",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#exclude-from-openapi",
+      "to": "concept:path_operation",
+      "evidence": {
+        "span": "To exclude a *path operation* from the generated OpenAPI schema (and thus, from the automatic documentation systems)",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          35,
+          35
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00159",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extensions",
+      "to": "concept:automatic_api_docs",
+      "evidence": {
+        "span": "If you open the automatic API docs, your extension will show up",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          91,
+          91
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00160",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extensions",
+      "to": "concept:openapi_extra",
+      "evidence": {
+        "span": "This `openapi_extra` can be helpful, for example, to declare",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          87,
+          87
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00161",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extensions",
+      "to": "concept:openapi_json",
+      "evidence": {
+        "span": "And if you see the resulting OpenAPI (at `/openapi.json` in your API)",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          95,
+          95
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00162",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extensions",
+      "to": "concept:operationid",
+      "evidence": {
+        "span": "\"operationId\": \"read_items_items__get\",",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          108,
+          108
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00163",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extensions",
+      "to": "concept:path_operation",
+      "evidence": {
+        "span": "your extension will show up at the bottom of the specific *path operation*",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          91,
+          91
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00164",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extensions",
+      "to": "concept:x_aperture_labs_portal",
+      "evidence": {
+        "span": "openapi_extra={\"x-aperture-labs-portal\": \"blue\"}",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial005_py310.py",
+        "lines": [
+          6,
+          6
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00165",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extra",
+      "to": "concept:additional_responses",
+      "evidence": {
+        "span": "a more convenient way to do it is with [Additional Responses in OpenAPI](additional-responses.md)",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          79,
+          79
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00166",
+      "type": "DEFINES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extra",
+      "to": "concept:openapi_extra",
+      "evidence": {
+        "span": "You can extend the OpenAPI schema for a *path operation* using the parameter `openapi_extra`.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          83,
+          83
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00167",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extra",
+      "to": "concept:openapi_schema",
+      "evidence": {
+        "span": "automatically generates the relevant metadata about that *path operation* to be included in the OpenAPI schema",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          61,
+          61
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00168",
+      "type": "DEFINES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extra",
+      "to": "concept:operation_object",
+      "evidence": {
+        "span": "In the OpenAPI specification it is called the [Operation Object]",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          65,
+          65
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00169",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extra",
+      "to": "concept:path_operation",
+      "evidence": {
+        "span": "When you declare a *path operation* in your application",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          61,
+          61
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00170",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extra",
+      "to": "concept:requestbody",
+      "evidence": {
+        "span": "It includes the `tags`, `parameters`, `requestBody`, `responses`, etc.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          71,
+          71
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00171",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extra",
+      "to": "concept:responses",
+      "evidence": {
+        "span": "It includes the `tags`, `parameters`, `requestBody`, `responses`, etc.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          71,
+          71
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00172",
+      "type": "MENTIONS",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-extra",
+      "to": "concept:tags",
+      "evidence": {
+        "span": "It includes the `tags`, `parameters`, `requestBody`, `responses`, etc.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          71,
+          71
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00173",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-operationid",
+      "to": "concept:app_get",
+      "evidence": {
+        "span": "@app.get(\"/items/\", operation_id=\"some_specific_id_you_define\")",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial001_py310.py",
+        "lines": [
+          6,
+          6
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00174",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-operationid",
+      "to": "concept:openapi",
+      "evidence": {
+        "span": "If you are not an \"expert\" in OpenAPI, you probably don't need this.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          7,
+          7
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00175",
+      "type": "DEFINES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-operationid",
+      "to": "concept:operation_id",
+      "evidence": {
+        "span": "You can set the OpenAPI `operationId` to be used in your *path operation* with the parameter `operation_id`.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          11,
+          11
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00176",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-operationid",
+      "to": "concept:operationid",
+      "evidence": {
+        "span": "You can set the OpenAPI `operationId` to be used in your *path operation*",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          11,
+          11
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00177",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#openapi-operationid",
+      "to": "concept:path_operation",
+      "evidence": {
+        "span": "to be used in your *path operation* with the parameter",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          11,
+          11
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00178",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#using-the-path-operation-function-name-as-the-operationid",
+      "to": "concept:apiroute",
+      "evidence": {
+        "span": "The function receives each `APIRoute` and returns the `operationId`",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          21,
+          21
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00179",
+      "type": "DEFINES",
+      "from": "sec:advanced/path-operation-advanced-configuration#using-the-path-operation-function-name-as-the-operationid",
+      "to": "concept:custom_generate_unique_id",
+      "evidence": {
+        "span": "def custom_generate_unique_id(route: APIRoute) -> str:",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial002_py310.py",
+        "lines": [
+          5,
+          5
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00180",
+      "type": "DEFINES",
+      "from": "sec:advanced/path-operation-advanced-configuration#using-the-path-operation-function-name-as-the-operationid",
+      "to": "concept:generate_unique_id_function",
+      "evidence": {
+        "span": "If you want to use your APIs' function names as `operationId`s, you can pass a custom `generate_unique_id_function` to `FastAPI`.",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          19,
+          19
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00181",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#using-the-path-operation-function-name-as-the-operationid",
+      "to": "concept:operationid",
+      "evidence": {
+        "span": "If you want to use your APIs' function names as `operationId`s",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          19,
+          19
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00182",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#using-the-path-operation-function-name-as-the-operationid",
+      "to": "concept:path_operation_function",
+      "evidence": {
+        "span": "you have to make sure each one of your *path operation functions* has a unique name",
+        "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+        "lines": [
+          27,
+          27
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-005",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00183",
+      "type": "REQUIRES",
+      "from": "sec:advanced/path-operation-advanced-configuration#using-the-path-operation-function-name-as-the-operationid",
+      "to": "concept:route_name",
+      "evidence": {
+        "span": "return route.name",
+        "path": "docs_src/path_operation_advanced_configuration/tutorial002_py310.py",
+        "lines": [
+          6,
+          6
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-005",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00184",
+      "type": "REQUIRES",
+      "from": "sec:advanced/stream-data#yield-from",
+      "to": "concept:app_get",
+      "evidence": {
+        "span": "@app.get(\"/image/stream-no-async-yield-from\", response_class=PNGStreamingResponse)",
+        "path": "docs_src/stream_data/tutorial002_py310.py",
+        "lines": [
+          37,
+          37
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-010",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00185",
+      "type": "REQUIRES",
+      "from": "sec:advanced/stream-data#yield-from",
+      "to": "concept:file_like_object",
+      "evidence": {
+        "span": "When you are iterating over something, like a file-like object",
+        "path": "docs/en/docs/advanced/stream-data.md",
+        "lines": [
+          113,
+          113
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-010",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00186",
+      "type": "REQUIRES",
+      "from": "sec:advanced/stream-data#yield-from",
+      "to": "concept:for_loop",
+      "evidence": {
+        "span": "skip the `for` loop",
+        "path": "docs/en/docs/advanced/stream-data.md",
+        "lines": [
+          113,
+          113
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-010",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00187",
+      "type": "REQUIRES",
+      "from": "sec:advanced/stream-data#yield-from",
+      "to": "concept:iterable",
+      "evidence": {
+        "span": "def stream_image_no_async_yield_from() -> Iterable[bytes]:",
+        "path": "docs_src/stream_data/tutorial002_py310.py",
+        "lines": [
+          38,
+          38
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-010",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00188",
+      "type": "REQUIRES",
+      "from": "sec:advanced/stream-data#yield-from",
+      "to": "concept:pngstreamingresponse",
+      "evidence": {
+        "span": "response_class=PNGStreamingResponse",
+        "path": "docs_src/stream_data/tutorial002_py310.py",
+        "lines": [
+          37,
+          37
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-010",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00189",
+      "type": "REQUIRES",
+      "from": "sec:advanced/stream-data#yield-from",
+      "to": "concept:read_image",
+      "evidence": {
+        "span": "with read_image() as image_file:",
+        "path": "docs_src/stream_data/tutorial002_py310.py",
+        "lines": [
+          39,
+          39
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-010",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00190",
+      "type": "REQUIRES",
+      "from": "sec:advanced/stream-data#yield-from",
+      "to": "concept:response_class",
+      "evidence": {
+        "span": "response_class=PNGStreamingResponse",
+        "path": "docs_src/stream_data/tutorial002_py310.py",
+        "lines": [
+          37,
+          37
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-010",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00191",
+      "type": "REQUIRES",
+      "from": "sec:advanced/stream-data#yield-from",
+      "to": "concept:with_statement",
+      "evidence": {
+        "span": "with read_image() as image_file:",
+        "path": "docs_src/stream_data/tutorial002_py310.py",
+        "lines": [
+          39,
+          39
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-010",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00192",
+      "type": "REQUIRES",
+      "from": "sec:advanced/stream-data#yield-from",
+      "to": "concept:yield",
+      "evidence": {
+        "span": "you are doing `yield` for each item",
+        "path": "docs/en/docs/advanced/stream-data.md",
+        "lines": [
+          113,
+          113
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-010",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00193",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#check-the-docs",
+      "to": "concept:cookie",
+      "evidence": {
+        "span": "as **browsers handle cookies** in special ways and behind the scenes",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          37,
+          37
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00194",
+      "type": "DEFINES",
+      "from": "sec:tutorial/cookie-param-models#check-the-docs",
+      "to": "concept:docs",
+      "evidence": {
+        "span": "If you go to the **API docs UI** at `/docs` you will be able to see the **documentation** for cookies for your *path operations*.",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          39,
+          39
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00195",
+      "type": "MENTIONS",
+      "from": "sec:tutorial/cookie-param-models#check-the-docs",
+      "to": "concept:execute",
+      "evidence": {
+        "span": "even if you **fill the data** and click \"Execute\"",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          41,
+          41
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00196",
+      "type": "MENTIONS",
+      "from": "sec:tutorial/cookie-param-models#check-the-docs",
+      "to": "concept:javascript",
+      "evidence": {
+        "span": "because the docs UI works with **JavaScript**, the cookies won't be sent",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          41,
+          41
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00197",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#check-the-docs",
+      "to": "concept:path_operation",
+      "evidence": {
+        "span": "see the **documentation** for cookies for your *path operations*",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          39,
+          39
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00198",
+      "type": "MENTIONS",
+      "from": "sec:tutorial/cookie-param-models#cookie-parameter-models",
+      "to": "concept:0_115_0",
+      "evidence": {
+        "span": "This is supported since FastAPI version `0.115.0`.",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          9,
+          9
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00199",
+      "type": "MENTIONS",
+      "from": "sec:tutorial/cookie-param-models#cookie-parameter-models",
+      "to": "concept:cookie",
+      "evidence": {
+        "span": "This same technique applies to `Query`, `Cookie`, and `Header`.",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          15,
+          15
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00200",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#cookie-parameter-models",
+      "to": "concept:cookie",
+      "evidence": {
+        "span": "If you have a group of **cookies** that are related",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          3,
+          3
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00201",
+      "type": "MENTIONS",
+      "from": "sec:tutorial/cookie-param-models#cookie-parameter-models",
+      "to": "concept:header",
+      "evidence": {
+        "span": "This same technique applies to `Query`, `Cookie`, and `Header`.",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          15,
+          15
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00202",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#cookie-parameter-models",
+      "to": "concept:pydantic_model",
+      "evidence": {
+        "span": "you can create a **Pydantic model** to declare them",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          3,
+          3
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00203",
+      "type": "MENTIONS",
+      "from": "sec:tutorial/cookie-param-models#cookie-parameter-models",
+      "to": "concept:query",
+      "evidence": {
+        "span": "This same technique applies to `Query`, `Cookie`, and `Header`.",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          15,
+          15
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00204",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#cookies-with-a-pydantic-model",
+      "to": "concept:annotated",
+      "evidence": {
+        "span": "async def read_items(cookies: Annotated[Cookies, Cookie()]):",
+        "path": "docs_src/cookie_param_models/tutorial001_an_py310.py",
+        "lines": [
+          16,
+          16
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00205",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#cookies-with-a-pydantic-model",
+      "to": "concept:app_get",
+      "evidence": {
+        "span": "@app.get(\"/items/\")",
+        "path": "docs_src/cookie_param_models/tutorial001_an_py310.py",
+        "lines": [
+          15,
+          15
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00206",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#cookies-with-a-pydantic-model",
+      "to": "concept:basemodel",
+      "evidence": {
+        "span": "class Cookies(BaseModel):",
+        "path": "docs_src/cookie_param_models/tutorial001_an_py310.py",
+        "lines": [
+          9,
+          9
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00207",
+      "type": "DEFINES",
+      "from": "sec:tutorial/cookie-param-models#cookies-with-a-pydantic-model",
+      "to": "concept:cookie",
+      "evidence": {
+        "span": "Declare the **cookie** parameters that you need in a **Pydantic model**, and then declare the parameter as `Cookie`",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          21,
+          21
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00208",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#cookies-with-a-pydantic-model",
+      "to": "concept:cookie",
+      "evidence": {
+        "span": "from the **cookies** received in the request",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          25,
+          25
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00209",
+      "type": "MENTIONS",
+      "from": "sec:tutorial/cookie-param-models#cookies-with-a-pydantic-model",
+      "to": "concept:cookies",
+      "evidence": {
+        "span": "class Cookies(BaseModel):\n    session_id: str",
+        "path": "docs_src/cookie_param_models/tutorial001_an_py310.py",
+        "lines": [
+          9,
+          10
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-020",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00210",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#cookies-with-a-pydantic-model",
+      "to": "concept:pydantic_model",
+      "evidence": {
+        "span": "Declare the **cookie** parameters that you need in a **Pydantic model**",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          21,
+          21
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00211",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#forbid-extra-cookies",
+      "to": "concept:annotated",
+      "evidence": {
+        "span": "from typing import Annotated",
+        "path": "docs_src/cookie_param_models/tutorial002_an_py310.py",
+        "lines": [
+          1,
+          1
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00212",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#forbid-extra-cookies",
+      "to": "concept:basemodel",
+      "evidence": {
+        "span": "class Cookies(BaseModel):",
+        "path": "docs_src/cookie_param_models/tutorial002_an_py310.py",
+        "lines": [
+          9,
+          9
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00213",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#forbid-extra-cookies",
+      "to": "concept:cookie",
+      "evidence": {
+        "span": "async def read_items(cookies: Annotated[Cookies, Cookie()]):",
+        "path": "docs_src/cookie_param_models/tutorial002_an_py310.py",
+        "lines": [
+          18,
+          18
+        ],
+        "kind": "code"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00214",
+      "type": "DEFINES",
+      "from": "sec:tutorial/cookie-param-models#forbid-extra-cookies",
+      "to": "concept:extra",
+      "evidence": {
+        "span": "You can use Pydantic's model configuration to `forbid` any `extra` fields",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          51,
+          51
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00215",
+      "type": "MENTIONS",
+      "from": "sec:tutorial/cookie-param-models#forbid-extra-cookies",
+      "to": "concept:extra_forbidden",
+      "evidence": {
+        "span": "\"type\": \"extra_forbidden\",",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          65,
+          65
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00216",
+      "type": "DEFINES",
+      "from": "sec:tutorial/cookie-param-models#forbid-extra-cookies",
+      "to": "concept:forbid",
+      "evidence": {
+        "span": "If a client tries to send some **extra cookies**, they will receive an **error** response.",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          55,
+          55
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00217",
+      "type": "DEFINES",
+      "from": "sec:tutorial/cookie-param-models#forbid-extra-cookies",
+      "to": "concept:model_config",
+      "evidence": {
+        "span": "You can use Pydantic's model configuration to `forbid` any `extra` fields",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          51,
+          51
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00218",
+      "type": "REQUIRES",
+      "from": "sec:tutorial/cookie-param-models#forbid-extra-cookies",
+      "to": "concept:pydantic",
+      "evidence": {
+        "span": "You can use Pydantic's model configuration",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          51,
+          51
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    },
+    {
+      "id": "e:00219",
+      "type": "MENTIONS",
+      "from": "sec:tutorial/cookie-param-models#summary",
+      "to": "concept:cookie",
+      "evidence": {
+        "span": "You can use **Pydantic models** to declare <dfn title=",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          76,
+          76
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "medium"
+    },
+    {
+      "id": "e:00220",
+      "type": "MENTIONS",
+      "from": "sec:tutorial/cookie-param-models#summary",
+      "to": "concept:pydantic_model",
+      "evidence": {
+        "span": "You can use **Pydantic models** to declare",
+        "path": "docs/en/docs/tutorial/cookie-param-models.md",
+        "lines": [
+          76,
+          76
+        ],
+        "kind": "prose"
+      },
+      "extractor": "batch-020",
+      "confidence": "high"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# Pinned. The pipeline is meant to reproduce a committed result, so a floating
+# version is a reproducibility bug.
+#
+# numpy is held below 2.0 because the torch wheel that sentence-transformers
+# pulls on macOS x86_64 was built against the 1.x ABI and raises
+# "Numpy is not available" at encode time otherwise.
+requests==2.32.3
+markdown-it-py==3.0.0
+networkx==3.2.1
+sentence-transformers==3.0.1
+numpy<2

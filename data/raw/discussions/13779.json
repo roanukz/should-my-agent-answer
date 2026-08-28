@@ -1,0 +1,19 @@
+{
+  "number": 13779,
+  "title": "Please delete Websocket.receive, it is outdated",
+  "body": "Websocket.receive doesn't throw WebsocketDisconnect only RuntimeError.\nThere is no point in keeping Websocket.receive.",
+  "body_text": "Websocket.receive doesn't throw WebsocketDisconnect only RuntimeError.\nThere is no point in keeping Websocket.receive.",
+  "created_at": "2025-06-09T07:41:06Z",
+  "url": "https://github.com/fastapi/fastapi/discussions/13779",
+  "answered": true,
+  "answer": {
+    "body": "`WebSocket` comes from Starlette. FastAPI just provides the alternative way to import it\r\n\r\nAnd, this method is used by other methods like `accept`, `receive_json`, etc..",
+    "body_text": "WebSocket comes from Starlette. FastAPI just provides the alternative way to import it\nAnd, this method is used by other methods like accept, receive_json, etc..",
+    "url": "https://github.com/fastapi/fastapi/discussions/13779#discussioncomment-13452903",
+    "created_at": "2025-06-12T19:59:33Z",
+    "upvotes": 2,
+    "author": "YuriiMotov",
+    "author_association": "MEMBER",
+    "is_maintainer": true
+  }
+}

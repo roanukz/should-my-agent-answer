@@ -1,0 +1,19 @@
+{
+  "number": 14596,
+  "title": "Korean language option disappeared from the docs language selector",
+  "body": "### First Check\n\n- [X] I added a very descriptive title here.\n- [X] I used the GitHub search to find a similar question and didn't find it.\n- [X] I searched the FastAPI documentation, with the integrated search.\n- [X] I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n- [X] I already read and followed all the tutorial in the docs and didn't find an answer.\n- [X] I already checked if it is not related to FastAPI but to [Pydantic](https://github.com/pydantic/pydantic).\n- [X] I already checked if it is not related to FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui).\n- [X] I already checked if it is not related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc).\n\n### Commit to Help\n\n- [X] I commit to help with one of those options 👆\n\n### Example Code\n\n```python\nPlease check the description\n```\n\n\n### Description\n\nThe Korean (한국어) translation option has disappeared from the language selector on the documentation.\r\n\r\nPreviously, Korean documentation was accessible via the language menu, but currently Korean is no longer listed among the available languages.\n\n### Operating System\n\nWindows\n\n### Operating System Details\n\n_No response_\n\n### FastAPI Version\n\ndocs\n\n### Pydantic Version\n\ndocs\n\n### Python Version\n\ndocs\n\n### Additional Context\n\n_No response_",
+  "body_text": "First Check\n\n I added a very descriptive title here.\n I used the GitHub search to find a similar question and didn't find it.\n I searched the FastAPI documentation, with the integrated search.\n I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n I already read and followed all the tutorial in the docs and didn't find an answer.\n I already checked if it is not related to FastAPI but to Pydantic.\n I already checked if it is not related to FastAPI but to Swagger UI.\n I already checked if it is not related to FastAPI but to ReDoc.\n\nCommit to Help\n\n I commit to help with one of those options 👆\n\nExample Code\nPlease check the description\nDescription\nThe Korean (한국어) translation option has disappeared from the language selector on the documentation.\nPreviously, Korean documentation was accessible via the language menu, but currently Korean is no longer listed among the available languages.\nOperating System\nWindows\nOperating System Details\nNo response\nFastAPI Version\ndocs\nPydantic Version\ndocs\nPython Version\ndocs\nAdditional Context\nNo response",
+  "created_at": "2025-12-24T00:19:34Z",
+  "url": "https://github.com/fastapi/fastapi/discussions/14596",
+  "answered": true,
+  "answer": {
+    "body": "We are working on new translations and we temporarily disabled outdated translations: https://github.com/fastapi/fastapi/pull/14555\r\n\r\nWe will enable them back soon after we re-translate them using our new approach (automated with LLM)",
+    "body_text": "We are working on new translations and we temporarily disabled outdated translations: #14555\nWe will enable them back soon after we re-translate them using our new approach (automated with LLM)",
+    "url": "https://github.com/fastapi/fastapi/discussions/14596#discussioncomment-15332882",
+    "created_at": "2025-12-24T07:09:54Z",
+    "upvotes": 2,
+    "author": "YuriiMotov",
+    "author_association": "MEMBER",
+    "is_maintainer": true
+  }
+}

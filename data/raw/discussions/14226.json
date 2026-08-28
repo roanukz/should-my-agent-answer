@@ -1,0 +1,19 @@
+{
+  "number": 14226,
+  "title": "docs: Fix typo in tutorial documentation",
+  "body": "### Privileged issue\n\n- [x] I'm @tiangolo or he asked me directly to create an issue here.\n\n### Issue Content\n\n## Description\nFixed a minor typo in the tutorial documentation to improve clarity and readability.\n\n## Changes\n- Fixed typo: \"recieve\" → \"receive\" in `docs/en/docs/tutorial/body.md`\n- Line 45: Updated documentation for better accuracy\n\n## Checklist\n- [x] Typo verified against proper spelling\n- [x] No code changes, documentation only\n- [x] Follows existing documentation style\n\nThis small fix helps new users better understand the tutorial.",
+  "body_text": "Privileged issue\n\n I'm @tiangolo or he asked me directly to create an issue here.\n\nIssue Content\nDescription\nFixed a minor typo in the tutorial documentation to improve clarity and readability.\nChanges\n\nFixed typo: \"recieve\" → \"receive\" in docs/en/docs/tutorial/body.md\nLine 45: Updated documentation for better accuracy\n\nChecklist\n\n Typo verified against proper spelling\n No code changes, documentation only\n Follows existing documentation style\n\nThis small fix helps new users better understand the tutorial.",
+  "created_at": "2025-10-24T09:55:25Z",
+  "url": "https://github.com/fastapi/fastapi/discussions/14226",
+  "answered": true,
+  "answer": {
+    "body": "Are you talking about this page? https://github.com/fastapi/fastapi/blob/master/docs/en/docs/tutorial/body.md\r\n\r\nThere is no such type on that page\r\n\r\n",
+    "body_text": "Are you talking about this page? https://github.com/fastapi/fastapi/blob/master/docs/en/docs/tutorial/body.md\nThere is no such type on that page",
+    "url": "https://github.com/fastapi/fastapi/discussions/14226#discussioncomment-14771382",
+    "created_at": "2025-10-24T10:10:30Z",
+    "upvotes": 1,
+    "author": "YuriiMotov",
+    "author_association": "MEMBER",
+    "is_maintainer": true
+  }
+}

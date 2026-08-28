@@ -1,0 +1,19 @@
+{
+  "number": 13652,
+  "title": "Just getting started",
+  "body": "Hey everyone!\nI'm just getting started with FastAPI, walking through its documentation. Do you know any other useful resources for mastering FastAPI?\nMy ultimate goal is to develop LLM apps.",
+  "body_text": "Hey everyone!\nI'm just getting started with FastAPI, walking through its documentation. Do you know any other useful resources for mastering FastAPI?\nMy ultimate goal is to develop LLM apps.",
+  "created_at": "2025-04-28T04:28:11Z",
+  "url": "https://github.com/fastapi/fastapi/discussions/13652",
+  "answered": true,
+  "answer": {
+    "body": "Hi Hussain, welcome to Fast API! The documentation is the best place to get started with FastAPI. I'm by no means an expert on FastAPI but I think the more you work on it the more you'll learn about it. So I would recommend to also implement things along the side on your own as you're reading documentation. \r\n\r\nIt's hard to specifically recommend how to use Fast API for building LLM apps as it'll depend on a lot of things and there's no one-size-fits-all solution. But here are a couple of articles that can be helpful in terms of using Fast API:\r\n1. https://medium.com/@igorbenav/creating-llm-powered-apis-with-fastapi-in-2024-aecb02e40b8f\r\n2. https://medium.com/@ramanbazhanau/preparing-fastapi-for-production-a-comprehensive-guide-d167e693aa2b\r\n\r\nThe articles might not be exactly relevant to your use case but they seem like a good place to start. Besides the articles, check out these external links on Fast API's documentation which point to a lot of resources related to Fast API: https://fastapi.tiangolo.com/az/external-links/ \r\n\r\nI hope this helps and happy coding!",
+    "body_text": "Hi Hussain, welcome to Fast API! The documentation is the best place to get started with FastAPI. I'm by no means an expert on FastAPI but I think the more you work on it the more you'll learn about it. So I would recommend to also implement things along the side on your own as you're reading documentation.\nIt's hard to specifically recommend how to use Fast API for building LLM apps as it'll depend on a lot of things and there's no one-size-fits-all solution. But here are a couple of articles that can be helpful in terms of using Fast API:\n\nhttps://medium.com/@igorbenav/creating-llm-powered-apis-with-fastapi-in-2024-aecb02e40b8f\nhttps://medium.com/@ramanbazhanau/preparing-fastapi-for-production-a-comprehensive-guide-d167e693aa2b\n\nThe articles might not be exactly relevant to your use case but they seem like a good place to start. Besides the articles, check out these external links on Fast API's documentation which point to a lot of resources related to Fast API: https://fastapi.tiangolo.com/az/external-links/\nI hope this helps and happy coding!",
+    "url": "https://github.com/fastapi/fastapi/discussions/13652#discussioncomment-12972811",
+    "created_at": "2025-04-28T17:49:42Z",
+    "upvotes": 2,
+    "author": "sachinh35",
+    "author_association": "NONE",
+    "is_maintainer": false
+  }
+}

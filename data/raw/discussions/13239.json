@@ -1,0 +1,19 @@
+{
+  "number": 13239,
+  "title": "Return annotation None in endpoint is displayed as any",
+  "body": "### First Check\n\n- [X] I added a very descriptive title here.\n- [X] I used the GitHub search to find a similar question and didn't find it.\n- [X] I searched the FastAPI documentation, with the integrated search.\n- [X] I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n- [X] I already read and followed all the tutorial in the docs and didn't find an answer.\n- [X] I already checked if it is not related to FastAPI but to [Pydantic](https://github.com/pydantic/pydantic).\n- [X] I already checked if it is not related to FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui).\n- [X] I already checked if it is not related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc).\n\n### Commit to Help\n\n- [X] I commit to help with one of those options 👆\n\n### Example Code\n\n```python\nfrom fastapi import FastAPI\r\n\r\napp = FastAPI()\r\n\r\n\r\n@app.get(\"/\")\r\ndef read_root() -> None:\r\n    return None\n```\n\n\n### Description\n\nOpen the swagger, in the Responses list you can see an example of the resulting value “string” and the schema will be of type any, although I expect null here\n\n### Operating System\n\nmacOS\n\n### Operating System Details\n\n_No response_\n\n### FastAPI Version\n\n0.115.6\n\n### Pydantic Version\n\n2.10.5\n\n### Python Version\n\nPython 3.13.1\n\n### Additional Context\n\n_No response_",
+  "body_text": "First Check\n\n I added a very descriptive title here.\n I used the GitHub search to find a similar question and didn't find it.\n I searched the FastAPI documentation, with the integrated search.\n I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n I already read and followed all the tutorial in the docs and didn't find an answer.\n I already checked if it is not related to FastAPI but to Pydantic.\n I already checked if it is not related to FastAPI but to Swagger UI.\n I already checked if it is not related to FastAPI but to ReDoc.\n\nCommit to Help\n\n I commit to help with one of those options 👆\n\nExample Code\nfrom fastapi import FastAPI\n\napp = FastAPI()\n\n\n@app.get(\"/\")\ndef read_root() -> None:\n    return None\nDescription\nOpen the swagger, in the Responses list you can see an example of the resulting value “string” and the schema will be of type any, although I expect null here\nOperating System\nmacOS\nOperating System Details\nNo response\nFastAPI Version\n0.115.6\nPydantic Version\n2.10.5\nPython Version\nPython 3.13.1\nAdditional Context\nNo response",
+  "created_at": "2025-01-21T07:28:53Z",
+  "url": "https://github.com/fastapi/fastapi/discussions/13239",
+  "answered": true,
+  "answer": {
+    "body": "This is because\r\n```\r\ndef read_root() -> None:\r\n```\r\n\r\nis equal to\r\n```\r\ndef read_root():\r\n```\r\n(if you don't specify return value type, it's `None` by default)\r\n\r\nIn addition to what @XiaoXinYo suggested, you can use `Literal[None]`:\r\n```\r\nfrom typing import Literal\r\nfrom fastapi import FastAPI\r\n\r\napp = FastAPI()\r\n\r\n@app.get(\"/\")\r\ndef read_root() -> Literal[None]:\r\n    return None\r\n```\r\n",
+    "body_text": "This is because\ndef read_root() -> None:\n\nis equal to\ndef read_root():\n\n(if you don't specify return value type, it's None by default)\nIn addition to what @XiaoXinYo suggested, you can use Literal[None]:\nfrom typing import Literal\nfrom fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/\")\ndef read_root() -> Literal[None]:\n    return None",
+    "url": "https://github.com/fastapi/fastapi/discussions/13239#discussioncomment-11905932",
+    "created_at": "2025-01-21T18:12:49Z",
+    "upvotes": 1,
+    "author": "YuriiMotov",
+    "author_association": "MEMBER",
+    "is_maintainer": true
+  }
+}

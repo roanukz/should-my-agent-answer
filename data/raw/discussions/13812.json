@@ -1,0 +1,19 @@
+{
+  "number": 13812,
+  "title": "Some JSON formats are not supported",
+  "body": "### First Check\n\n- [X] I added a very descriptive title here.\n- [X] I used the GitHub search to find a similar question and didn't find it.\n- [X] I searched the FastAPI documentation, with the integrated search.\n- [X] I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n- [X] I already read and followed all the tutorial in the docs and didn't find an answer.\n- [X] I already checked if it is not related to FastAPI but to [Pydantic](https://github.com/pydantic/pydantic).\n- [X] I already checked if it is not related to FastAPI but to [Swagger UI](https://github.com/swagger-api/swagger-ui).\n- [X] I already checked if it is not related to FastAPI but to [ReDoc](https://github.com/Redocly/redoc).\n\n### Commit to Help\n\n- [X] I commit to help with one of those options 👆\n\n### Example Code\n\n```python\nfrom fastapi import FastAPI\r\nfrom pydantic import BaseModel\r\n\r\napp = FastAPI()\r\n\r\nclass A(BaseModel):\r\n  b: str\r\n\r\n@app.post(\"/test\")\r\nasync def test(a: A, c: int):\r\n  return {\"a\":a, \"c\":c}\n```\n\n\n### Description\n\n{\r\n  \"a\": {\r\n    \"b\":b\r\n  },\r\n  \"c\":c\r\n}\r\nwhy not support this json?\n\n### Operating System\n\nLinux\n\n### Operating System Details\n\n_No response_\n\n### FastAPI Version\n\n0.115.12\n\n### Pydantic Version\n\n2.11.7\n\n### Python Version\n\n3.10.12\n\n### Additional Context\n\n_No response_",
+  "body_text": "First Check\n\n I added a very descriptive title here.\n I used the GitHub search to find a similar question and didn't find it.\n I searched the FastAPI documentation, with the integrated search.\n I already searched in Google \"How to X in FastAPI\" and didn't find any information.\n I already read and followed all the tutorial in the docs and didn't find an answer.\n I already checked if it is not related to FastAPI but to Pydantic.\n I already checked if it is not related to FastAPI but to Swagger UI.\n I already checked if it is not related to FastAPI but to ReDoc.\n\nCommit to Help\n\n I commit to help with one of those options 👆\n\nExample Code\nfrom fastapi import FastAPI\nfrom pydantic import BaseModel\n\napp = FastAPI()\n\nclass A(BaseModel):\n  b: str\n\n@app.post(\"/test\")\nasync def test(a: A, c: int):\n  return {\"a\":a, \"c\":c}\nDescription\n{\n\"a\": {\n\"b\":b\n},\n\"c\":c\n}\nwhy not support this json?\nOperating System\nLinux\nOperating System Details\nNo response\nFastAPI Version\n0.115.12\nPydantic Version\n2.11.7\nPython Version\n3.10.12\nAdditional Context\nNo response",
+  "created_at": "2025-06-20T10:59:02Z",
+  "url": "https://github.com/fastapi/fastapi/discussions/13812",
+  "answered": true,
+  "answer": {
+    "body": "In this case `c: int` is `Query` parameter, not `Body`.\r\n\r\nYou need to annotate `c` with `Body()` to turn it into `Body` parameter:\r\n\r\n```python\r\n@app.post(\"/test\")\r\nasync def test(a: A, c: Annotated[int, Body()]):\r\n  return {\"a\":a, \"c\":c}\r\n```",
+    "body_text": "In this case c: int is Query parameter, not Body.\nYou need to annotate c with Body() to turn it into Body parameter:\n@app.post(\"/test\")\nasync def test(a: A, c: Annotated[int, Body()]):\n  return {\"a\":a, \"c\":c}",
+    "url": "https://github.com/fastapi/fastapi/discussions/13812#discussioncomment-13530729",
+    "created_at": "2025-06-20T13:18:22Z",
+    "upvotes": 1,
+    "author": "YuriiMotov",
+    "author_association": "MEMBER",
+    "is_maintainer": true
+  }
+}
