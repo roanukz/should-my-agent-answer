@@ -334,6 +334,130 @@
             schema designed around one question, not a general ontology.
           </p>
 
+          <figure class="figure">
+            <div class="figure-scroll">
+              <svg
+                class="diagram"
+                viewBox="0 0 1000 300"
+                role="img"
+                aria-labelledby="schema-title schema-desc"
+              >
+                <title id="schema-title">
+                  The graph schema: five node types and seven edge types
+                </title>
+                <desc id="schema-desc">
+                  Documentation on the left: a Doc contains Sections, and a
+                  Section links back to a Doc. Demand on the right: a Question is
+                  answered by an Answer. Both sides meet at the Concept in the
+                  middle. Sections reach Concepts by three different edges,
+                  DEFINES, REQUIRES and MENTIONS, and Questions reach the same
+                  Concepts by ASKS_ABOUT. The full counts are in the table below.
+                </desc>
+
+                <defs>
+                  <marker
+                    id="arrow"
+                    viewBox="0 0 10 10"
+                    refX="9"
+                    refY="5"
+                    markerWidth="7"
+                    markerHeight="7"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--border-strong)" />
+                  </marker>
+                </defs>
+
+                <!-- the two sides, named -->
+                <rect x="8" y="112" width="360" height="168" rx="10"
+                      fill="none" stroke="var(--border-subtle)" stroke-dasharray="4 4" />
+                <text x="18" y="132" class="d-group">THE DOCUMENTATION</text>
+
+                <rect x="800" y="16" width="192" height="264" rx="10"
+                      fill="none" stroke="var(--border-subtle)" stroke-dasharray="4 4" />
+                <text x="810" y="36" class="d-group">WHAT PEOPLE ASKED</text>
+
+                <!-- Doc -->
+                <rect x="24" y="150" width="105" height="54" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="76" y="172" class="d-node">Doc</text>
+                <text x="76" y="190" class="d-count">60</text>
+
+                <!-- Section -->
+                <rect x="238" y="150" width="115" height="54" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="295" y="172" class="d-node">Section</text>
+                <text x="295" y="190" class="d-count">570</text>
+
+                <!-- Concept, the hub -->
+                <rect x="523" y="150" width="128" height="54" rx="6"
+                      fill="var(--notice-tint)" stroke="var(--notice-line)" stroke-width="2" />
+                <text x="587" y="172" class="d-node">Concept</text>
+                <text x="587" y="190" class="d-count">967</text>
+                <text x="587" y="232" class="d-hub">where the two sides meet</text>
+
+                <!-- Question -->
+                <rect x="822" y="150" width="128" height="54" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="886" y="172" class="d-node">Question</text>
+                <text x="886" y="190" class="d-count">300</text>
+
+                <!-- Answer -->
+                <rect x="822" y="52" width="128" height="54" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="886" y="74" class="d-node">Answer</text>
+                <text x="886" y="92" class="d-count">300</text>
+
+                <!-- Doc CONTAINS Section -->
+                <line x1="129" y1="177" x2="232" y2="177"
+                      stroke="var(--border-strong)" marker-end="url(#arrow)" />
+                <rect x="140" y="161" width="82" height="15" fill="var(--surface)" />
+                <text x="181" y="172" class="d-edge">CONTAINS 570</text>
+
+                <!-- Section LINKS_TO Doc, the back edge -->
+                <path d="M 295 204 C 295 258, 76 258, 76 210"
+                      fill="none" stroke="var(--border-strong)" marker-end="url(#arrow)" />
+                <rect x="144" y="243" width="80" height="15" fill="var(--surface)" />
+                <text x="184" y="254" class="d-edge">LINKS_TO 50</text>
+
+                <!-- Section to Concept, three relations -->
+                <line x1="353" y1="156" x2="517" y2="156"
+                      stroke="var(--fill)" stroke-width="2" marker-end="url(#arrow)" />
+                <rect x="392" y="141" width="86" height="15" fill="var(--surface)" />
+                <text x="435" y="152" class="d-edge d-key">DEFINES 914</text>
+
+                <line x1="353" y1="177" x2="517" y2="177"
+                      stroke="var(--fill)" stroke-width="2" marker-end="url(#arrow)" />
+                <rect x="390" y="162" width="90" height="15" fill="var(--surface)" />
+                <text x="435" y="173" class="d-edge d-key">REQUIRES 1,611</text>
+
+                <line x1="353" y1="198" x2="517" y2="198"
+                      stroke="var(--border-strong)" marker-end="url(#arrow)" />
+                <rect x="392" y="183" width="86" height="15" fill="var(--surface)" />
+                <text x="435" y="194" class="d-edge">MENTIONS 994</text>
+
+                <!-- Question ASKS_ABOUT Concept -->
+                <line x1="816" y1="177" x2="657" y2="177"
+                      stroke="var(--fill)" stroke-width="2" marker-end="url(#arrow)" />
+                <rect x="691" y="162" width="94" height="15" fill="var(--surface)" />
+                <text x="738" y="173" class="d-edge d-key">ASKS_ABOUT 960</text>
+
+                <!-- Question ANSWERED_BY Answer -->
+                <line x1="886" y1="150" x2="886" y2="112"
+                      stroke="var(--border-strong)" marker-end="url(#arrow)" />
+                <rect x="806" y="123" width="104" height="15" fill="var(--surface)" />
+                <text x="858" y="134" class="d-edge">ANSWERED_BY 300</text>
+              </svg>
+            </div>
+            <figcaption>
+              The whole schema. The three teal edges are the ones every finding
+              is made of, and the Concept in the middle is the only place the
+              documentation and the questions touch. Counts are from
+              <code>data/manifest.json</code>.
+            </figcaption>
+          </figure>
+
+
           <div class="table-scroll">
             <table>
               <caption>
@@ -403,11 +527,219 @@
             </table>
           </div>
 
+          <h3>What kind of graph this is, precisely</h3>
+          <p>
+            The label matters, because "knowledge graph" covers several
+            structures that can do quite different things. This one is a
+            <strong>directed, typed, attributed multigraph</strong>. Taking those
+            one at a time, and each is checked against the committed data by
+            <code>tests/test_invariant.py</code>:
+          </p>
+
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Every property below is derived from
+                <code>data/graph/edges.json</code>, not asserted.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Property</th>
+                  <th scope="col">What it means here</th>
+                  <th scope="col">How you can tell</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Directed</th>
+                  <td>
+                    Every edge runs one way. A Section defining a Concept is not
+                    the same claim as a Concept defining a Section
+                  </td>
+                  <td>Zero reciprocated pairs in 5,399 edges</td>
+                </tr>
+                <tr>
+                  <th scope="row">Typed, and strictly</th>
+                  <td>
+                    Five node types, seven edge types, and each edge type joins
+                    exactly one ordered pair of node types with no exceptions
+                  </td>
+                  <td>
+                    REQUIRES only ever runs Section to Concept, ASKS_ABOUT only
+                    ever Question to Concept, and so on for all seven
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Attributed</th>
+                  <td>
+                    Edges carry data, not just endpoints: the evidence span, its
+                    file, its line range, which batch produced it, and a
+                    confidence
+                  </td>
+                  <td>
+                    5,399 of 5,399 edges carry a span, re-checked against the
+                    source files by the test suite
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">A multigraph</th>
+                  <td>
+                    Two nodes can be joined more than once. A section can both
+                    teach a thing and lean on it elsewhere in the same section
+                  </td>
+                  <td>
+                    48 ordered pairs carry two edges, most often DEFINES
+                    alongside REQUIRES
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Sparse, and not a tree</th>
+                  <td>
+                    Mean degree 4.9 against a maximum of 116, and it contains
+                    cycles, because a Section links to a Doc that contains it
+                  </td>
+                  <td>
+                    Density 0.0011, 18 disconnected pieces, the largest holding
+                    2,163 of the 2,197 nodes
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            The multigraph property is not decoration, and it is worth saying
+            what the pipeline does with it. The extraction prompt asks for one
+            relation per concept per section, and 48 times it produced two. Where
+            a Section both DEFINES and REQUIRES a Concept, the finders treat the
+            concept as defined and drop it, which is the cautious direction: it
+            loses findings rather than inventing them.
+          </p>
+
+          <h3>Why this shape rather than another</h3>
           <p>
             The whole design turns on the distinction between DEFINES and
             REQUIRES. Every other graph over documentation I looked at models
             "this page is about that thing", which cannot express the finding,
             because being about a thing and teaching it are different claims.
+          </p>
+          <p>
+            Two other shapes were available for the same job. Here is what each
+            buys and what each costs, and the honest summary is that this graph
+            wins on what it can <em>express</em> and does not win on retrieval,
+            which <a href="#retrieval">Part 5</a> measures and finds no
+            difference on.
+          </p>
+
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Only the middle column was built and measured here. The other two
+                are argued, and the third was rejected on its documented
+                behaviour rather than on a benchmark I ran.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">A flat vector index</th>
+                  <th scope="col">This typed graph</th>
+                  <th scope="col">An untyped entity graph</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">What it stores</th>
+                  <td>One embedding per chunk, and nothing about how chunks relate</td>
+                  <td>
+                    Typed, evidenced relations between sections, concepts and
+                    questions
+                  </td>
+                  <td>
+                    Entities and one generic association, usually with a merged
+                    description per entity
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Can it express an absence</th>
+                  <td class="no">
+                    No. Similarity has no way to say "nothing here teaches this".
+                    The nearest chunk is always returned, however far away it is
+                  </td>
+                  <td class="yes">
+                    Yes. "No Section DEFINES this Concept" is a query, and it is
+                    the whole finding
+                  </td>
+                  <td class="partial">
+                    Partly. It can find an entity with few links, but not one that
+                    is depended on and never explained, because it has no edge
+                    type for the difference
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Can you audit a result</th>
+                  <td class="no">
+                    No. A cosine score is not a reason, and there is no sentence
+                    to point at
+                  </td>
+                  <td class="yes">
+                    Yes. Every edge carries the sentence, the file and the lines
+                  </td>
+                  <td class="no">
+                    No. Merging several sources into one description destroys the
+                    spans before you can read them
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Cost to build</th>
+                  <td class="yes">
+                    Minutes. One embedding pass, about 80MB of model, no
+                    judgement anywhere
+                  </td>
+                  <td class="no">
+                    High. 79 model batches for the documentation, 30 for the
+                    questions, then two definition sweeps and two rounds of
+                    checking, because the first round found 24 of 33 findings
+                    were wrong
+                  </td>
+                  <td class="partial">
+                    Moderate. One extraction pass, no evidence to validate, which
+                    is exactly why there is less to check
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Cost to keep true</th>
+                  <td class="yes">Re-embed the changed pages</td>
+                  <td class="no">
+                    Re-extract them, and every relation is a judgement that can
+                    be wrong in a way an embedding cannot
+                  </td>
+                  <td class="partial">Re-extract, with less to get wrong</td>
+                </tr>
+                <tr>
+                  <th scope="row">Measured retrieval quality</th>
+                  <td>5 confidently wrong answers over 300 questions</td>
+                  <td>5 confidently wrong answers over the same 300, p = 0.70</td>
+                  <td class="unclear">Not measured here</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pullquote">
+            <p>
+              The graph earned its cost as a diagnosis, not as a retriever.
+            </p>
+          </div>
+
+          <p>
+            That is the trade in one line. A vector index is close to free and
+            can never tell you what your documentation fails to say, because
+            every question gets its five nearest chunks whether or not any of
+            them contain the answer. This graph can tell you, and it cost a great
+            deal more to build, and most of that cost was not the graph. It was
+            the extraction and the checking that the graph makes it possible to
+            demand, which is also what caught 24 wrong findings before anybody
+            read them.
           </p>
 
           <h3>The one rule everything else hangs off</h3>
@@ -460,6 +792,87 @@
             Each one is a shape in the graph, and each one carries a proof path
             made of real edges you can follow to real lines in real files.
           </p>
+
+          <figure class="figure">
+            <div class="figure-scroll">
+              <svg
+                class="diagram"
+                viewBox="0 0 1000 270"
+                role="img"
+                aria-labelledby="nearmiss-title nearmiss-desc"
+              >
+                <title id="nearmiss-title">
+                  How a near miss is read off the graph
+                </title>
+                <desc id="nearmiss-desc">
+                  Three checks on one Concept. A Question points at it by
+                  ASKS_ABOUT, present. A Section points at it by REQUIRES,
+                  present. Any Section at all pointing at it by DEFINES, absent
+                  across all 570 sections. The finding is that third, absent
+                  edge, and the first two are what make the absence matter.
+                </desc>
+
+                <defs>
+                  <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5"
+                          markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--fill)" />
+                  </marker>
+                  <marker id="arrowmiss" viewBox="0 0 10 10" refX="9" refY="5"
+                          markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--error-text)" />
+                  </marker>
+                </defs>
+
+                <!-- Question -->
+                <rect x="14" y="30" width="250" height="60" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="30" y="52" class="d-lab">QUESTION</text>
+                <text x="30" y="72" class="d-body">6 threads asked about this</text>
+
+                <!-- Section -->
+                <rect x="14" y="180" width="250" height="60" rx="6"
+                      fill="var(--surface-sunken)" stroke="var(--border-default)" />
+                <text x="30" y="202" class="d-lab">SECTION</text>
+                <text x="30" y="222" class="d-body">Stream Data / Files and Async</text>
+
+                <!-- Concept -->
+                <rect x="418" y="102" width="190" height="66" rx="6"
+                      fill="var(--notice-tint)" stroke="var(--notice-line)" stroke-width="2" />
+                <text x="513" y="128" class="d-lab-c">CONCEPT</text>
+                <text x="513" y="150" class="d-body-c">event loop</text>
+
+                <!-- present edges -->
+                <path d="M 264 60 C 340 60, 350 115, 412 122"
+                      fill="none" stroke="var(--fill)" stroke-width="2" marker-end="url(#arrow2)" />
+                <text x="286" y="88" class="d-edge d-key">ASKS_ABOUT</text>
+                <text x="286" y="103" class="d-note">present, with the span</text>
+
+                <path d="M 264 210 C 340 210, 350 155, 412 148"
+                      fill="none" stroke="var(--fill)" stroke-width="2" marker-end="url(#arrow2)" />
+                <text x="286" y="172" class="d-edge d-key">REQUIRES</text>
+                <text x="286" y="187" class="d-note">present, with the span</text>
+
+                <!-- the absent edge -->
+                <rect x="736" y="102" width="250" height="66" rx="6"
+                      fill="var(--error-tint)" stroke="var(--error-line)" stroke-dasharray="5 4" />
+                <text x="861" y="128" class="d-lab-e">NO SECTION, OUT OF 570</text>
+                <text x="861" y="150" class="d-body-e">nothing DEFINES it</text>
+
+                <line x1="730" y1="135" x2="614" y2="135"
+                      stroke="var(--error-text)" stroke-width="2" stroke-dasharray="6 4"
+                      marker-end="url(#arrowmiss)" />
+                <text x="672" y="118" class="d-edge d-miss">DEFINES</text>
+                <text x="672" y="164" class="d-miss-x">absent</text>
+              </svg>
+            </div>
+            <figcaption>
+              A near miss is one absence, made to matter by two things that are
+              present. Take away the question and it is a gap nobody has hit yet.
+              Take away the dependency and it is a word the documentation simply
+              does not use.
+            </figcaption>
+          </figure>
+
 
           <div class="table-scroll">
             <table>

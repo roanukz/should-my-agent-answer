@@ -550,6 +550,150 @@ caption {
   min-width: 2px;
 }
 
+/* ---------- diagrams ----------
+   Inline SVG, because the zero-network rule applies to pictures too and a
+   diagram that is really an image cannot recolour itself for dark mode. Every
+   fill and stroke is a role token, so these follow the reader's system theme
+   with the rest of the page.
+
+   Text inside an SVG does not inherit the page's font, so the families are set
+   here rather than on each element. Sizes are in user units, which scale with
+   the viewBox, so the labels stay legible when the figure is scaled down. */
+
+.figure {
+  margin: var(--space-32) 0;
+}
+
+.figure-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  padding: var(--space-16);
+}
+
+.diagram {
+  display: block;
+  width: 100%;
+  /* Below this the labels stop being readable, so the figure scrolls inside
+     its own box rather than shrinking. The page never scrolls sideways. */
+  min-width: 660px;
+  height: auto;
+}
+
+.figure figcaption {
+  font-size: var(--size-13);
+  line-height: var(--lh-16);
+  color: var(--text-muted);
+  margin-top: var(--space-12);
+  max-width: var(--measure-16);
+}
+
+.diagram text {
+  font-family: var(--font-sans);
+  fill: var(--text-body);
+}
+
+.diagram .d-node {
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--text-heading);
+  text-anchor: middle;
+}
+
+.diagram .d-count {
+  font-size: 12px;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+.diagram .d-edge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+.diagram .d-key {
+  fill: var(--link);
+  font-weight: 600;
+}
+
+.diagram .d-group {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  fill: var(--text-muted);
+}
+
+.diagram .d-hub {
+  font-size: 12px;
+  font-style: italic;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+.diagram .d-lab {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  fill: var(--text-muted);
+}
+
+.diagram .d-body {
+  font-size: 14px;
+  fill: var(--text-heading);
+}
+
+.diagram .d-lab-c {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  fill: var(--notice-text);
+  text-anchor: middle;
+}
+
+.diagram .d-body-c {
+  font-size: 16px;
+  font-weight: 600;
+  fill: var(--text-heading);
+  text-anchor: middle;
+}
+
+.diagram .d-lab-e {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  fill: var(--error-text);
+  text-anchor: middle;
+}
+
+.diagram .d-body-e {
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--error-deep);
+  text-anchor: middle;
+}
+
+.diagram .d-miss {
+  fill: var(--error-text);
+  font-weight: 600;
+}
+
+.diagram .d-miss-x {
+  font-size: 12px;
+  font-style: italic;
+  fill: var(--error-text);
+  text-anchor: middle;
+}
+
+.diagram .d-note {
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
 /* ---------- evidence list ---------- */
 
 .evidence-list {

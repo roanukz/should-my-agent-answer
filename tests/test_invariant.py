@@ -200,3 +200,96 @@ class ReportedNumbersTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DiagramAccuracyTest(unittest.TestCase):
+    """The schema figure quotes counts. Pin them to the graph so they cannot drift.
+
+    A diagram is the part of a page a reader trusts most and checks least, so
+    the numbers drawn inside it are held to the same standard as the tables:
+    derived from data/graph/edges.json, never typed in and left.
+    """
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.page = (ROOT / "index.html").read_text(encoding="utf-8")
+        cls.nodes = load("graph/nodes.json")["nodes"]
+        cls.edges = load("graph/edges.json")["edges"]
+        cls.by_id = {n["id"]: n for n in cls.nodes}
+
+    def counts(self, key: str) -> int:
+        from collections import Counter
+        return Counter(e["type"] for e in self.edges)[key]
+
+    def test_the_figure_quotes_the_real_edge_counts(self) -> None:
+        for edge_type in ("CONTAINS", "DEFINES", "REQUIRES", "MENTIONS",
+                          "ASKS_ABOUT", "ANSWERED_BY", "LINKS_TO"):
+            n = self.counts(edge_type)
+            drawn = f"{edge_type} {n:,}"
+            self.assertIn(drawn, self.page,
+                          f"the figure should say {drawn!r}")
+
+    def test_the_figure_quotes_the_real_node_counts(self) -> None:
+        from collections import Counter
+        counted = Counter(n["type"] for n in self.nodes)
+        # Each node box carries its type name and its count on the next line.
+        for node_type, n in counted.items():
+            self.assertRegex(
+                self.page,
+                rf'>{node_type}</text>\s*<text[^>]*>{n:,}</text>',
+                f"the figure should draw {node_type} with {n:,}")
+
+    def test_every_edge_type_joins_exactly_one_ordered_pair_of_node_types(self) -> None:
+        """The page calls the schema strict. Check that it is."""
+        from collections import defaultdict
+        pairs = defaultdict(set)
+        for edge in self.edges:
+            pairs[edge["type"]].add(
+                (self.by_id[edge["from"]]["type"], self.by_id[edge["to"]]["type"]))
+        loose = {k: v for k, v in pairs.items() if len(v) != 1}
+        self.assertEqual(loose, {}, "an edge type joins more than one pair of types")
+
+    def test_the_graph_is_directed_with_no_reciprocated_pair(self) -> None:
+        seen = {(e["from"], e["to"]) for e in self.edges}
+        both_ways = [(a, b) for a, b in seen if (b, a) in seen]
+        self.assertEqual(both_ways, [])
+
+    def test_the_multigraph_claim_matches_the_data(self) -> None:
+        """The page says 48 ordered pairs carry two edges. Recount them."""
+        from collections import Counter
+        pair = Counter((e["from"], e["to"]) for e in self.edges)
+        parallel = sum(1 for v in pair.values() if v > 1)
+        self.assertIn(f"{parallel} ordered pairs carry two", self.page)
+
+    def test_defines_wins_where_a_pair_carries_two_relations(self) -> None:
+        """The page claims the cautious direction is taken. Check the finders."""
+        from collections import defaultdict
+        relations = defaultdict(set)
+        for edge in self.edges:
+            if edge["type"] in ("DEFINES", "REQUIRES", "MENTIONS"):
+                relations[(edge["from"], edge["to"])].add(edge["type"])
+        conflicted = {c for (_s, c), rel in relations.items()
+                      if "DEFINES" in rel and len(rel) > 1}
+        reported = {f["concept"] for f in load("findings.json")["findings"]
+                    if f["type"] in ("near_miss", "orphan_concept")}
+        self.assertEqual(conflicted & reported, set(),
+                         "a concept defined somewhere was still reported as a gap")
+
+    def test_the_retrieval_comparison_row_matches_answers_json(self) -> None:
+        """The costs table quotes the measured result; it must be the real one."""
+        summary = load("answers.json")["summary"]
+        for path in ("vector", "graph"):
+            self.assertEqual(summary[path]["wrong_confident"], 5)
+        self.assertIn("p = 0.70", self.page)
+        self.assertAlmostEqual(summary["paired"]["mcnemar_p_correct"], 0.7011, places=3)
+
+    def test_both_figures_are_labelled_for_a_screen_reader(self) -> None:
+        for token in ('role="img"', "schema-title", "schema-desc",
+                      "nearmiss-title", "nearmiss-desc"):
+            self.assertIn(token, self.page)
+
+    def test_the_figures_reference_no_external_resource(self) -> None:
+        import re
+        for match in re.finditer(r'<(?:image|use)\b[^>]*>', self.page):
+            self.fail(f"figure pulls an external resource: {match.group(0)[:80]}")
+        self.assertNotIn("url(http", self.page)
