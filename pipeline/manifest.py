@@ -65,7 +65,7 @@ def main() -> int:
             "edges_kept": extraction.get("edges_kept", 0),
             "dropped_span_not_found": extraction.get("dropped_no_span", 0),
             "dropped_short_span": extraction.get("dropped_short_span", 0),
-            "dropped_self_reference": extraction.get("dropped_self_reference", 0),
+            "dropped_heading_only_span": extraction.get("dropped_heading_only_span", 0),
             "dropped_duplicate": extraction.get("dropped_duplicate", 0),
         },
         "question_mapping": {

@@ -260,6 +260,15 @@ def main() -> int:
     nodes = nodes + qa_nodes
     edges = edges + structural + links + qa_edges
 
+    # A concept whose every edge was dropped by the validator is not a concept,
+    # it is the residue of one. Prune it rather than shipping a node nothing
+    # points at.
+    referenced = {e["from"] for e in edges} | {e["to"] for e in edges}
+    pruned = [n for n in nodes if n["type"] == "Concept" and n["id"] not in referenced]
+    if pruned:
+        log(f"  pruning {len(pruned)} concepts left with no surviving edge")
+        nodes = [n for n in nodes if n["id"] not in {p["id"] for p in pruned}]
+
     # Renumber every edge so ids are stable and dense across the whole graph.
     edges.sort(key=lambda e: (e["type"], e["from"], e["to"]))
     for i, edge in enumerate(edges):

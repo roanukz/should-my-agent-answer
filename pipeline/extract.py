@@ -112,8 +112,13 @@ A span may be copied from the SECTION TEXT or from any CODE SAMPLE block shown
 below the section text. Set "span_source" to "section" or to the code sample's
 path. Default is "section".
 
-Do not emit a concept for FastAPI itself, for Python, or for the name of the
-page. Those are the subject, not a dependency.
+Do not emit a concept for FastAPI itself or for Python. Those are the subject,
+not a dependency.
+
+DO emit a concept that shares its name with the page or the section heading. The
+page called "Middleware" is exactly the page that explains what middleware is,
+and that DEFINES edge is the most valuable one on the page. Skipping it makes
+the corpus look as though it never explains its own subjects.
 
 Prefer the name a reader would search for. `Query` not "the Query function".
 Strip backticks and markdown from the label. Lowercase a plain-English term;
@@ -152,12 +157,32 @@ def normalise(text: str) -> str:
     return text.strip().casefold()
 
 
-def locate_span(span: str, haystack: str, base_line: int) -> tuple[int, int] | None:
+MARKER_RE = re.compile(r"[`*_~]")
+LINK_RE = re.compile(r"\[([^\]]*)\]\([^)]*\)")
+
+
+def strip_markdown_markers(text: str) -> str:
+    """Drop the characters that are markup rather than content.
+
+    Used for ONE case, and only that case: a span copied out of a question.
+    GitHub's API serves a discussion body twice, once as markdown and once as
+    the plain text it renders to. The question mapper reads the plain text; the
+    thread file on disk holds the markdown. The difference between them is
+    exactly these characters, so removing them from both sides is matching like
+    with like, not loosening the match. It is still a substring search.
+    """
+    text = LINK_RE.sub(r"\1", text)
+    return MARKER_RE.sub("", text)
+
+
+def locate_span(span: str, haystack: str, base_line: int,
+                transform=None) -> tuple[int, int] | None:
     """Find `span` in `haystack` and return its 1-based line range.
 
     base_line is the file line number of haystack's first line.
     """
-    norm_span = normalise(span)
+    transform = transform or normalise
+    norm_span = transform(span)
     if len(norm_span) < MIN_SPAN_CHARS:
         return None
 
@@ -166,7 +191,7 @@ def locate_span(span: str, haystack: str, base_line: int) -> tuple[int, int] | N
     pieces: list[str] = []
     line_of_char: list[int] = []
     for offset, line in enumerate(lines):
-        norm_line = normalise(line)
+        norm_line = transform(line)
         if pieces and norm_line:
             pieces.append(" ")
             line_of_char.append(base_line + offset)
@@ -338,7 +363,7 @@ def cmd_assemble() -> int:
     stats = {
         "raw_edges": 0, "dropped_no_span": 0, "dropped_bad_type": 0,
         "dropped_unknown_section": 0, "dropped_short_span": 0,
-        "dropped_self_reference": 0, "dropped_duplicate": 0,
+        "dropped_heading_only_span": 0, "dropped_duplicate": 0,
     }
     dropped_examples: list[dict] = []
     seen_edge_keys: set[tuple] = set()
@@ -392,9 +417,14 @@ def cmd_assemble() -> int:
                     stats["dropped_short_span"] += 1
                     continue
 
-                # The concept must not be the section's own heading.
-                if normalise(label) == normalise(section["heading"]):
-                    stats["dropped_self_reference"] += 1
+                # A section titled "Middleware" that explains what middleware is
+                # is the canonical DEFINES edge, so a concept matching the
+                # heading is fine. What is not fine is a span that is nothing
+                # but the heading line, which evidences the title and not the
+                # claim.
+                heading_line = section["text"].splitlines()[0] if section["text"] else ""
+                if normalise(span) == normalise(heading_line):
+                    stats["dropped_heading_only_span"] += 1
                     continue
 
                 found = locate_span(span, section["text"], section["lines"][0])
@@ -490,7 +520,7 @@ def write_graph(docs, sections, concepts, edges, stats, dropped_examples, batche
     raw = stats["raw_edges"]
     print(f"{batches_done} batches -> {len(concepts)} concepts, {kept} edges kept of {raw}")
     for key in ("dropped_no_span", "dropped_short_span", "dropped_bad_type",
-                "dropped_self_reference", "dropped_duplicate", "dropped_unknown_section"):
+                "dropped_heading_only_span", "dropped_duplicate", "dropped_unknown_section"):
         if stats[key]:
             print(f"  {key}: {stats[key]}")
     by_type: dict[str, int] = {}
@@ -695,7 +725,7 @@ def cmd_assemble_questions() -> int:
     new_edges: list[dict] = []
     stats = {"raw": 0, "dropped_unknown_concept": 0, "dropped_no_span": 0,
              "dropped_short_span": 0, "dropped_unknown_question": 0,
-             "dropped_duplicate": 0}
+             "dropped_duplicate": 0, "recovered_after_markdown_strip": 0}
     seen: set[tuple] = set()
     unknown_labels: dict[str, int] = {}
 
@@ -725,9 +755,20 @@ def cmd_assemble_questions() -> int:
                     stats["dropped_short_span"] += 1
                     continue
                 found = locate_span(span, thread_text, 1)
+                recovered = False
+                if found is None:
+                    # The mapper read GitHub's plain-text rendering of the body
+                    # while this file holds the markdown source. Try again with
+                    # the markup characters removed from both sides.
+                    found = locate_span(
+                        span, thread_text, 1,
+                        transform=lambda t: strip_markdown_markers(normalise(t)))
+                    recovered = found is not None
                 if found is None:
                     stats["dropped_no_span"] += 1
                     continue
+                if recovered:
+                    stats["recovered_after_markdown_strip"] += 1
                 key = (qid, cid)
                 if key in seen:
                     stats["dropped_duplicate"] += 1
@@ -770,7 +811,8 @@ def cmd_assemble_questions() -> int:
     print(f"{len(outputs)} batches -> {len(new_edges)} ASKS_ABOUT edges "
           f"over {mapped}/{len(questions)} threads, from {stats['raw']} proposed")
     for key in ("dropped_unknown_concept", "dropped_no_span", "dropped_short_span",
-                "dropped_duplicate", "dropped_unknown_question"):
+                "dropped_duplicate", "dropped_unknown_question",
+                "recovered_after_markdown_strip"):
         if stats[key]:
             print(f"  {key}: {stats[key]}")
     assert all(e["evidence"].get("span") for e in edges), "edge with no span"
@@ -806,6 +848,251 @@ def cmd_run_questions() -> int:
     return llm.run_batches(QWORK_IN, QWORK_OUT, "qbatch-*", ".prompt.txt")
 
 
+
+# --------------------------------------------------------------------------
+# Definition sweep: the completeness pass over concepts nothing defines
+# --------------------------------------------------------------------------
+
+DWORK = ROOT / "data" / "work" / "definitions"
+DWORK_IN = DWORK / "in"
+DWORK_OUT = DWORK / "out"
+CONCEPTS_PER_SWEEP_BATCH = 8
+
+DEFINITION_PROMPT_HEADER = """\
+You are looking for definitions the first pass missed.
+
+Every concept below currently has NO section in the corpus that DEFINES it,
+while several sections depend on it or refer to it. That is what this project
+reports as a gap. Before it is reported, someone has to go and check, because
+the likeliest way this is wrong is simple: the section that does explain the
+thing is sitting in the corpus and the first pass did not emit the edge.
+
+There is a known reason for that. The first pass was told not to emit a concept
+for the name of the page it was reading. So the page called "Middleware", which
+is exactly the page that explains what middleware is, was the one page that
+never said so. Concepts whose name matches a page title or a section heading are
+therefore the most likely to be wrong here, not the least.
+
+THE CORPUS IS EXACTLY THESE FILES AND NOTHING ELSE:
+  data/raw/docs/          the 60 markdown pages
+  data/raw/docs_src/      the code samples those pages pull in
+
+A definition on fastapi.tiangolo.com in a page that is not under data/raw/docs/
+does not count. Neither do the Starlette, Pydantic or SQLModel docs.
+
+FOR EACH CONCEPT:
+  1. grep data/raw/docs/ for the label and for every surface form listed. Search
+     for the words, not just the exact string, and look at page titles and
+     headings first.
+  2. Read around the strongest hits. You are looking for text that TEACHES: it
+     says what the thing is, or shows and explains how to use it, such that a
+     reader who knew nothing could learn it there. A name appearing in a code
+     sample with no explanation is not a definition. A sentence that merely uses
+     the thing correctly is not a definition.
+  3. If you find one, return the file path, the line number, and the VERBATIM
+     span that does the teaching, copied character for character from the file.
+     A validator searches for your span in that file and drops it if it is not
+     there, so copy and paste; do not retype.
+  4. If you do not find one, say so. That is the expected answer for many of
+     these and it is just as useful as a hit. Do not manufacture a definition
+     out of a sentence that merely uses the term.
+
+Return JSON only, keyed by concept id:
+
+{
+  "concept:middleware": {
+    "defined": true,
+    "path": "data/raw/docs/tutorial/middleware.md",
+    "line": 5,
+    "span": "A \\"middleware\\" is a function that works with every **request** before it is processed by any specific *path operation*",
+    "confidence": "high"
+  },
+  "concept:some_other_thing": {
+    "defined": false,
+    "reason": "only ever appears inside code samples, never explained"
+  }
+}
+"""
+
+
+def cmd_prep_definitions() -> int:
+    """Write one payload per batch of orphan concepts worth re-checking."""
+    nodes = json.loads((GRAPH / "nodes.json").read_text(encoding="utf-8"))["nodes"]
+    edges = json.loads((GRAPH / "edges.json").read_text(encoding="utf-8"))["edges"]
+    node = {n["id"]: n for n in nodes}
+    concepts = {n["id"]: n for n in nodes if n["type"] == "Concept"}
+
+    defines: dict[str, int] = {cid: 0 for cid in concepts}
+    refs: dict[str, list] = {cid: [] for cid in concepts}
+    asked: dict[str, set] = {cid: set() for cid in concepts}
+    for edge in edges:
+        if edge["to"] not in concepts:
+            continue
+        if edge["type"] == "DEFINES":
+            defines[edge["to"]] += 1
+        elif edge["type"] in ("REQUIRES", "MENTIONS"):
+            refs[edge["to"]].append(edge)
+        elif edge["type"] == "ASKS_ABOUT":
+            asked[edge["to"]].add(edge["from"])
+
+    # Worth re-checking: nothing defines it, and either two sections lean on it
+    # or somebody asked about it. Those are exactly the ones that become
+    # findings, so they are the ones a false positive would cost most.
+    targets = [
+        cid for cid, c in concepts.items()
+        if defines[cid] == 0
+        and ({e["from"] for e in refs[cid]}.__len__() >= 2 or asked[cid])
+    ]
+    targets.sort(key=lambda cid: (-len({e["from"] for e in refs[cid]}), cid))
+
+    DWORK_IN.mkdir(parents=True, exist_ok=True)
+    DWORK_OUT.mkdir(parents=True, exist_ok=True)
+    batches = []
+    for i in range(0, len(targets), CONCEPTS_PER_SWEEP_BATCH):
+        chunk = targets[i: i + CONCEPTS_PER_SWEEP_BATCH]
+        batch_id = f"def-{i // CONCEPTS_PER_SWEEP_BATCH:03d}"
+        batches.append(batch_id)
+        blocks = [DEFINITION_PROMPT_HEADER, ""]
+        for cid in chunk:
+            concept = concepts[cid]
+            sections = sorted({e["from"] for e in refs[cid]})
+            blocks += [
+                "=" * 70,
+                f"CONCEPT ID: {cid}",
+                f"LABEL: {concept['label']}   kind: {concept['kind']}",
+                f"SURFACE FORMS: {', '.join(concept.get('surface_forms', []))}",
+                f"ALIASES: {', '.join(concept.get('aliases', [])) or 'none'}",
+                f"ASKED ABOUT BY: {len(asked[cid])} threads",
+                f"REFERENCED BY {len(sections)} sections:",
+            ]
+            for sid in sections[:10]:
+                sec = node[sid]
+                blocks.append(f"  {sec['path']} lines {sec['lines'][0]}-{sec['lines'][1]}"
+                              f"  ({sec['heading']})")
+            blocks += ["  how they refer to it:"]
+            for edge in refs[cid][:4]:
+                blocks.append(f"    {edge['type']}: {edge['evidence']['span'][:140]!r}")
+            blocks.append("")
+        (DWORK_IN / f"{batch_id}.txt").write_text("\n".join(blocks), encoding="utf-8")
+
+    (DWORK / "batches.json").write_text(
+        json.dumps({"targets": len(targets), "batches": batches}, indent=2),
+        encoding="utf-8")
+    print(f"{len(batches)} definition-sweep batches over {len(targets)} "
+          f"concepts nothing currently defines")
+    return 0
+
+
+def cmd_run_definitions() -> int:
+    llm = _llm()
+    if not llm.available():
+        print("No API key. Have a Claude Code session fill "
+              f"{DWORK_IN.relative_to(ROOT)}/*.txt -> {DWORK_OUT.relative_to(ROOT)}/*.json")
+        return 1
+    return llm.run_batches(DWORK_IN, DWORK_OUT, "def-*")
+
+
+def cmd_assemble_definitions() -> int:
+    """Fold any definitions the sweep found back in as real DEFINES edges.
+
+    They go through the same validator as everything else. A span the sweep
+    reports that is not in the file it names is dropped, exactly as it would be
+    from the first pass.
+    """
+    nodes = json.loads((GRAPH / "nodes.json").read_text(encoding="utf-8"))["nodes"]
+    edges = json.loads((GRAPH / "edges.json").read_text(encoding="utf-8"))["edges"]
+    sections = [n for n in nodes if n["type"] == "Section"]
+    concepts = {n["id"] for n in nodes if n["type"] == "Concept"}
+
+    # A reported file and line maps to whichever section owns that line.
+    by_raw: dict[str, list] = {}
+    for sec in sections:
+        by_raw.setdefault(sec["raw_path"], []).append(sec)
+
+    found: dict[str, dict] = {}
+    for path in sorted(DWORK_OUT.glob("def-*.json")):
+        try:
+            found.update(json.loads(path.read_text(encoding="utf-8")))
+        except json.JSONDecodeError:
+            print(f"  unreadable: {path.name}")
+
+    stats = {"reported": 0, "not_defined": 0, "added": 0, "dropped_no_span": 0,
+             "dropped_unknown_section": 0, "dropped_unknown_concept": 0}
+    new_edges = []
+    existing = {(e["from"], e["to"], e["type"]) for e in edges}
+
+    for cid, record in found.items():
+        if not record.get("defined"):
+            stats["not_defined"] += 1
+            continue
+        stats["reported"] += 1
+        if cid not in concepts:
+            stats["dropped_unknown_concept"] += 1
+            continue
+        raw_path = str(record.get("path", "")).strip()
+        span = str(record.get("span", "") or "")
+        candidates = by_raw.get(raw_path, [])
+        if not candidates:
+            stats["dropped_unknown_section"] += 1
+            continue
+
+        hit = None
+        for sec in candidates:
+            located = locate_span(span, sec["text"], sec["lines"][0])
+            if located:
+                hit = (sec, located, sec["path"])
+                break
+            for code in sec["code"]:
+                located = locate_span(span, code["text"], code["lines"][0])
+                if located:
+                    hit = (sec, located, code["path"])
+                    break
+            if hit:
+                break
+        if hit is None:
+            stats["dropped_no_span"] += 1
+            continue
+
+        sec, located, span_path = hit
+        key = (sec["id"], cid, "DEFINES")
+        if key in existing:
+            continue
+        existing.add(key)
+        new_edges.append({
+            "id": "",
+            "type": "DEFINES",
+            "from": sec["id"],
+            "to": cid,
+            "evidence": {
+                "span": span.strip(),
+                "path": span_path,
+                "lines": [located[0], located[1]],
+                "kind": "prose" if span_path == sec["path"] else "code",
+            },
+            "extractor": "definition-sweep",
+            "confidence": str(record.get("confidence", "medium")).lower()
+            if str(record.get("confidence", "")).lower() in CONFIDENCES else "medium",
+        })
+        stats["added"] += 1
+
+    edges = [e for e in edges if e["extractor"] != "definition-sweep"] + new_edges
+    edges.sort(key=lambda e: (e["type"], e["from"], e["to"]))
+    for i, edge in enumerate(edges):
+        edge["id"] = f"e:{i:05d}"
+    (GRAPH / "edges.json").write_text(
+        json.dumps({"schema_version": 1, "edges": edges}, indent=2, ensure_ascii=False),
+        encoding="utf-8")
+    (GRAPH / "definition_sweep_report.json").write_text(
+        json.dumps(stats, indent=2), encoding="utf-8")
+
+    print(f"definition sweep: {stats['added']} DEFINES edges added, "
+          f"{stats['not_defined']} concepts confirmed as defined nowhere")
+    for key in ("dropped_no_span", "dropped_unknown_section", "dropped_unknown_concept"):
+        if stats[key]:
+            print(f"  {key}: {stats[key]}")
+    return 0
+
+
 def main() -> int:
     command = sys.argv[1] if len(sys.argv) > 1 else "assemble"
     if command == "prep":
@@ -824,6 +1111,12 @@ def main() -> int:
         return cmd_run()
     if command == "run-questions":
         return cmd_run_questions()
+    if command == "prep-definitions":
+        return cmd_prep_definitions()
+    if command == "run-definitions":
+        return cmd_run_definitions()
+    if command == "assemble-definitions":
+        return cmd_assemble_definitions()
     print(f"unknown subcommand: {command}")
     return 2
 

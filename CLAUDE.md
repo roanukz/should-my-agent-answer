@@ -25,7 +25,15 @@ searches for every returned span in the file the edge claims it came from and DR
 edge whose span is not found there. Dropped counts are reported and land in
 `data/manifest.json`. Do not relax the search into fuzzy matching. The permitted
 normalisations are Unicode NFKC, whitespace collapsing, quote and dash flattening, and
-case folding, and that is the complete list.
+case folding.
+
+There is exactly one addition, and only for a span copied out of a question. GitHub's
+API serves a discussion body twice, once as markdown and once as the plain text it
+renders to. The question mapper reads the plain text; the thread file on disk holds the
+markdown. So a question span that fails the first search is searched once more with the
+markup characters removed from BOTH sides, which is matching like with like rather than
+loosening the match. It is still a substring search, it is counted separately in
+`data/graph/question_report.json`, and it is not available to any other edge type.
 
 ## Other constraints, all deliberate
 - **The published pages never call a model, and never call the network at all.** Both

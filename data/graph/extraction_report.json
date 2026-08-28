@@ -1,13 +1,13 @@
 {
-  "batches_processed": 5,
-  "concepts": 102,
-  "edges_kept": 221,
-  "raw_edges": 240,
+  "batches_processed": 79,
+  "concepts": 967,
+  "edges_kept": 3418,
+  "raw_edges": 3509,
   "dropped_no_span": 0,
-  "dropped_bad_type": 0,
+  "dropped_bad_type": 2,
   "dropped_unknown_section": 0,
   "dropped_short_span": 0,
-  "dropped_self_reference": 10,
-  "dropped_duplicate": 9,
+  "dropped_heading_only_span": 0,
+  "dropped_duplicate": 89,
   "dropped_examples": []
 }

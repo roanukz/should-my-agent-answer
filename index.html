@@ -1,0 +1,1117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Should My Agent Answer This? A Product Teardown</title>
+    <meta
+      name="description"
+      content="The thinking behind a pipeline that maps documentation as a knowledge graph and finds the articles that make an AI assistant answer confidently and wrong: the failure nobody measures, the graph, the real numbers, a vector against graph retrieval comparison, and the limits."
+    />
+    <meta property="og:title" content="Should My Agent Answer This? A Product Teardown" />
+    <meta
+      property="og:description"
+      content="Models given no context answer wrongly about 10% of the time. Given insufficient context, about 66%. This finds the articles that supply insufficient context, and names the missing fact."
+    />
+    <meta property="og:url" content="https://roanukz.github.io/should-my-agent-answer/" />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%231f6379'/%3E%3Ctext x='50' y='70' font-size='56' text-anchor='middle' fill='white' font-family='sans-serif'%3E%3F%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <nav class="topbar" aria-label="Site">
+      <div class="wrap">
+        <a href="tool.html">Try the tool &rarr;</a>
+        <a href="https://github.com/Roanukz/should-my-agent-answer">View source</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Product teardown</p>
+        <h1>Should My Agent Answer This?</h1>
+        <p class="lede">
+          When an AI assistant cannot find an answer in your documentation, it
+          declines, somebody complains, and you learn something is missing. When
+          it finds an article that is nearly right, it answers confidently and
+          wrong, the metric records a success, and nobody ever tells you. This is
+          a pipeline that goes looking for the second case on purpose, and this
+          is the thinking behind it.
+        </p>
+        <p class="byline">
+          Roanuk Zaman &middot; Product teardown of a tool I designed, directed
+          and shipped
+        </p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="tool.html">Try the tool &rarr;</a>
+          <a
+            class="btn btn-secondary"
+            href="https://github.com/Roanukz/should-my-agent-answer"
+            >View the source</a
+          >
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="fact-value">10% to 66%</span>
+            <span class="fact-label"
+              >How much more often a model answers wrongly when it is handed
+              partial context instead of none. Measured by Google Research</span
+            >
+          </div>
+          <div class="fact">
+            <span class="fact-value">5,370</span>
+            <span class="fact-label"
+              >Edges in the graph, every one carrying the sentence that justifies
+              it and the lines it came from</span
+            >
+          </div>
+          <div class="fact">
+            <span class="fact-value">45%</span>
+            <span class="fact-label"
+              >Of the gaps the first pass reported were not gaps. A recheck found
+              them before any of this was published</span
+            >
+          </div>
+          <div class="fact">
+            <span class="fact-value">{{WC_DELTA}}</span>
+            <span class="fact-label"
+              >Fewer confidently wrong answers from graph retrieval than from the
+              vector baseline, over 300 real questions</span
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="wrap layout">
+      <nav class="toc" aria-label="Contents">
+        <p class="toc-title">Contents</p>
+        <ol>
+          <li><a href="#tldr">Summary</a></li>
+          <li><a href="#outcomes">1. The three outcomes</a></li>
+          <li><a href="#invisible">2. Why nobody sees the third one</a></li>
+          <li><a href="#built">3. What I built</a></li>
+          <li><a href="#found">4. What it found</a></li>
+          <li><a href="#retrieval">5. Vector against graph retrieval</a></li>
+          <li><a href="#validation">6. Validation</a></li>
+          <li><a href="#limits">7. What this does not do</a></li>
+          <li><a href="#prior">8. Prior work</a></li>
+          <li><a href="#try">Try it</a></li>
+        </ol>
+      </nav>
+
+      <main id="main">
+        <section id="tldr" class="tldr">
+          <p class="section-kicker">The short version</p>
+          <h2>Summary</h2>
+          <ul>
+            <li>
+              <strong>The dangerous failure is the one that looks like a
+                success.</strong>
+              Google Research measured it: models handed no supporting context
+              answered incorrectly about 10% of the time, and models handed
+              <em>insufficient</em> context about 66% of the time
+              (<a href="#outcomes">Part 1</a>). Every prioritisation signal a
+              content team has surfaces the first case and none of them surface
+              the second.
+            </li>
+            <li>
+              <strong>So the finding has to be manufactured, not
+                collected.</strong>
+              I built a knowledge graph over 60 pages of the FastAPI
+              documentation where no edge exists without the verbatim sentence
+              that justifies it, crossed it against 300 answered questions from
+              the project's own GitHub Discussions, and looked for articles that
+              depend on something the documentation never explains
+              (<a href="#built">Part 3</a>).
+            </li>
+            <li>
+              <strong>The check that mattered most was the one that deleted
+                work.</strong>
+              A second pass over every reported gap found that 45% of them were
+              not gaps: the documentation did explain the thing and my first
+              extraction pass had missed it. Those findings are gone
+              (<a href="#found">Part 4</a>), and the number is on this page
+              because a tool that reports gaps has to be judged on its false
+              positives, not its total.
+            </li>
+            <li>
+              <strong>Graph retrieval is a real improvement and not a
+                large one.</strong>
+              Answering all 300 questions twice, once from a vector baseline and
+              once by traversing the graph, moved the confidently wrong rate
+              from {{WC_VECTOR}} to {{WC_GRAPH}}
+              (<a href="#retrieval">Part 5</a>). The comparison has been
+              published before on other corpora, and this reproduces it rather
+              than claiming it.
+            </li>
+          </ul>
+        </section>
+
+        <section id="outcomes">
+          <p class="section-kicker">Part 1</p>
+          <h2>The three outcomes</h2>
+          <p>
+            A company points an AI assistant at its documentation. Three things
+            can happen.
+          </p>
+          <p>
+            <strong>It works.</strong> The answer is in the docs, retrieval finds
+            it, the assistant answers correctly.
+          </p>
+          <p>
+            <strong>It finds nothing.</strong> No article is close, so the
+            assistant declines. Annoying, but safe, and above all
+            <em>visible</em>. The user complains, a ticket gets filed, a search
+            with no results gets logged, and the content team learns that
+            something is missing.
+          </p>
+          <p>
+            <strong>It finds something close but incomplete.</strong> An article
+            looks relevant, gets retrieved, and is missing one fact the answer
+            depends on. The assistant answers confidently and wrong. Nobody sees
+            it, because the assistant resolved the request and the deflection
+            metric counted it as a success. The article looks healthy forever.
+          </p>
+
+          <p>
+            The third case is not a rarer version of the second. It is
+            substantially more dangerous, and that has been measured.
+          </p>
+
+          <div class="callout callout-notice">
+            <h4>What Google Research measured</h4>
+            <p>
+              Across several models and datasets, answers were scored by whether
+              the retrieved context was <em>sufficient</em> to answer the
+              question. Given no supporting context at all, models answered
+              incorrectly about <strong>10%</strong> of the time, mostly by
+              abstaining instead. Given <em>insufficient</em> context, they
+              answered incorrectly about <strong>66%</strong> of the time.
+            </p>
+            <p>
+              Partial information does not make a model more cautious. It makes
+              it confident.
+              <a href="https://arxiv.org/abs/2411.06037" rel="noopener"
+                >Sufficient Context: A New Lens on Retrieval Augmented Generation
+                Systems, arXiv 2411.06037</a
+              >.
+            </p>
+          </div>
+
+          <p>
+            That is the whole premise. An article that is 90% of an answer is
+            worse than an article that is 0% of one, and it is the 90% article
+            that no process in a content team is currently looking for.
+          </p>
+        </section>
+
+        <section id="invisible">
+          <p class="section-kicker">Part 2</p>
+          <h2>Why nobody sees the third one</h2>
+          <p>
+            Content teams do not prioritise at random. They prioritise from
+            signals, and there are three of them.
+          </p>
+
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Every routine prioritisation signal surfaces the safe failure and
+                misses the dangerous one.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Signal</th>
+                  <th scope="col">Fires when the assistant declines</th>
+                  <th scope="col">Fires when the assistant is confidently wrong</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Customer complaints</th>
+                  <td class="yes">Yes. The user did not get an answer and says so</td>
+                  <td class="no">
+                    No. The user got an answer, believed it, and left
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Escalations to a human</th>
+                  <td class="yes">Yes. The conversation gets handed over</td>
+                  <td class="no">No. The assistant resolved it</td>
+                </tr>
+                <tr>
+                  <th scope="row">Searches returning nothing</th>
+                  <td class="yes">Yes. That is exactly what the log records</td>
+                  <td class="no">No. Retrieval returned five confident results</td>
+                </tr>
+                <tr>
+                  <th scope="row">Deflection rate</th>
+                  <td class="partial">Counts against you, correctly</td>
+                  <td class="no">
+                    Counts <em>for</em> you. The failure improves the metric
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pullquote">
+            <p>
+              The failure mode that does the most damage is the one that makes
+              the dashboard look better.
+            </p>
+          </div>
+
+          <p>
+            This is not an oversight in anyone's tooling. It is structural. Every
+            one of those signals is a report of dissatisfaction, and the defining
+            feature of a confident wrong answer is that nobody is dissatisfied at
+            the moment it happens. The person who finds out is a customer, three
+            days later, when the thing they were told does not work.
+          </p>
+          <p>
+            A signal that does not arrive cannot be collected. It has to be
+            manufactured, before deployment, from the documentation itself.
+            That is what the rest of this is.
+          </p>
+        </section>
+
+        <section id="built">
+          <p class="section-kicker">Part 3</p>
+          <h2>What I built</h2>
+          <p>
+            A pipeline that maps a documentation set as a knowledge graph,
+            crosses it against questions real users actually asked, and produces
+            a ranked list of the articles most likely to make an assistant answer
+            confidently and wrong, naming the specific missing fact in each case.
+          </p>
+
+          <h3>The corpus, and why this one</h3>
+          <p>
+            60 pages of the
+            <a href="https://fastapi.tiangolo.com/" rel="noopener"
+              >FastAPI documentation</a
+            >, taken in the documentation's own reading order: all 51 tutorial
+            pages, then the first 9 advanced pages, pinned to one commit.
+          </p>
+          <p>
+            The corpus is not the interesting decision. The demand signal is. The
+            same repository runs a GitHub Discussions board with roughly 3,900
+            answered questions, so one source supplies the documentation, the
+            questions people actually asked about it, and the correct answers,
+            written by people who know. That last part is what removes the need
+            to hand label anything.
+          </p>
+
+          <div class="callout callout-info">
+            <h4>The decision the whole project rests on</h4>
+            <p>
+              If a question was answered in a discussion and that answer is not
+              in the documentation, then the gap is real and the missing content
+              already exists in somebody's reply. Free ground truth, verifiable
+              by anyone, and no annotation budget.
+            </p>
+            <p>
+              The cost is that it only sees gaps somebody bothered to ask about
+              in public, which is a narrower set than a real team's search log.
+            </p>
+          </div>
+
+          <h3>The graph</h3>
+          <p>
+            Five node types and seven edge types. Deliberately small: this is a
+            schema designed around one question, not a general ontology.
+          </p>
+
+          <div class="table-scroll">
+            <table>
+              <caption>
+                The three edges that matter are DEFINES, REQUIRES and ASKS_ABOUT.
+                Everything else is scaffolding around them.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Edge</th>
+                  <th scope="col">From, to</th>
+                  <th scope="col">What it claims</th>
+                  <th scope="col" class="num">Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">DEFINES</th>
+                  <td>Section, Concept</td>
+                  <td>
+                    This section explains what the thing is or how to use it. A
+                    reader who knew nothing could learn it here
+                  </td>
+                  <td class="num">885</td>
+                </tr>
+                <tr>
+                  <th scope="row">REQUIRES</th>
+                  <td>Section, Concept</td>
+                  <td>
+                    This section's instructions assume the reader already knows
+                    the thing. Following them without it would fail
+                  </td>
+                  <td class="num">1,611</td>
+                </tr>
+                <tr>
+                  <th scope="row">MENTIONS</th>
+                  <td>Section, Concept</td>
+                  <td>Named in passing, neither explained nor depended upon</td>
+                  <td class="num">994</td>
+                </tr>
+                <tr>
+                  <th scope="row">ASKS_ABOUT</th>
+                  <td>Question, Concept</td>
+                  <td>
+                    Answering this question requires understanding this concept
+                  </td>
+                  <td class="num">960</td>
+                </tr>
+                <tr>
+                  <th scope="row">CONTAINS</th>
+                  <td>Doc, Section</td>
+                  <td>Structural</td>
+                  <td class="num">570</td>
+                </tr>
+                <tr>
+                  <th scope="row">ANSWERED_BY</th>
+                  <td>Question, Answer</td>
+                  <td>GitHub marked this reply as the accepted answer</td>
+                  <td class="num">300</td>
+                </tr>
+                <tr>
+                  <th scope="row">LINKS_TO</th>
+                  <td>Section, Doc</td>
+                  <td>An internal documentation link</td>
+                  <td class="num">50</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            The whole design turns on the distinction between DEFINES and
+            REQUIRES. Every other graph over documentation I looked at models
+            "this page is about that thing", which cannot express the finding,
+            because being about a thing and teaching it are different claims.
+          </p>
+
+          <h3>The one rule everything else hangs off</h3>
+
+          <div class="pullquote">
+            <p>No edge without evidence.</p>
+          </div>
+
+          <p>
+            Every edge carries the verbatim source span that justifies it, plus
+            the file path and the line range where that span lives. There are no
+            exceptions, including for the structural edges where the span is
+            obvious. It is the difference between "the graph says so" and "here
+            is the sentence the graph read", and without it none of the findings
+            are actionable, because nobody acts on a finding they cannot check.
+          </p>
+          <p>
+            It is also enforced rather than requested. A model asked for a
+            verbatim span will sometimes paraphrase, so no span is believed. Each
+            one is searched for in the file its edge claims it came from, and an
+            edge whose span is not found there is <em>dropped</em>, not
+            downgraded to low confidence. The permitted normalisations are
+            Unicode form, whitespace, quote and dash shapes, and case, and that
+            is the complete list.
+          </p>
+
+          <div class="callout callout-success">
+            <h4>What the enforcement actually caught</h4>
+            <p>
+              Of 3,509 documentation edges proposed across 79 batches,
+              <strong>zero</strong> were dropped for an unfindable span. That is
+              not a sign the check was unnecessary. It is a sign the instruction
+              worked, and it is only knowable <em>because</em> the check exists.
+            </p>
+            <p>
+              The same check on question spans dropped 13% on the first attempt,
+              for a reason worth knowing: GitHub serves a discussion body twice,
+              once as markdown and once as the plain text it renders to. The
+              mapper read the plain text and the file on disk holds the markdown,
+              so a span containing a backtick could not be found. Matching the
+              two like with like recovered 124 of 125.
+            </p>
+          </div>
+
+          <h3>The three findings</h3>
+          <p>
+            Each one is a shape in the graph, and each one carries a proof path
+            made of real edges you can follow to real lines in real files.
+          </p>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Type</th>
+                  <th scope="col">The shape</th>
+                  <th scope="col">The proof</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">F1 Near miss</th>
+                  <td>
+                    A Concept that Questions ask about, that a Section REQUIRES,
+                    and that no Section in the corpus DEFINES
+                  </td>
+                  <td>
+                    The asking span, the depending span, and the empty define set
+                    with the count of sections checked. Confirmed by the answer
+                    on the thread, quoted verbatim
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">F2 Orphan concept</th>
+                  <td>
+                    A Concept with REQUIRES or MENTIONS in-degree above zero,
+                    DEFINES in-degree of zero, and at least two sections leaning
+                    on it
+                  </td>
+                  <td>The in-edge list and the empty define set</td>
+                </tr>
+                <tr>
+                  <th scope="row">F3 Retrieval collision</th>
+                  <td>
+                    Two Sections a single Question maps to with comparable
+                    concept overlap, where only one carries the answer
+                  </td>
+                  <td>
+                    The competing sections, their overlap scores, and each one's
+                    similarity to what the maintainer actually replied
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            Everything is ranked by <strong>demand</strong>, meaning the number
+            of distinct discussion threads touching the concept. A gap nobody
+            asks about is real and is not worth writing this quarter, and a tool
+            that cannot tell the difference produces a backlog instead of a
+            priority.
+          </p>
+        </section>
+
+        <section id="found">
+          <p class="section-kicker">Part 4</p>
+          <h2>What it found</h2>
+
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Over 60 pages, 570 sections, 967 concepts and 300 answered
+                threads.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Type</th>
+                  <th scope="col" class="num">Findings</th>
+                  <th scope="col" class="num">With demand above zero</th>
+                  <th scope="col">What that means here</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">F1 Near miss</th>
+                  <td class="num">33</td>
+                  <td class="num">33</td>
+                  <td>
+                    Touching 77 of the 300 threads. 13 of them were asked about
+                    by more than one person
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">F2 Orphan concept</th>
+                  <td class="num">59</td>
+                  <td class="num">0</td>
+                  <td>
+                    Zero by construction: any orphan somebody asked about is
+                    promoted to F1, so F2 is precisely the tail nobody has asked
+                    about yet
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">F3 Retrieval collision</th>
+                  <td class="num">98</td>
+                  <td class="num">98</td>
+                  <td>
+                    12 of them caught more than one question. Each one is a
+                    question, so demand is never zero
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>The recheck that removed a third of the findings</h3>
+          <p>
+            The first version of this section reported 57 near misses and 108
+            orphan concepts. It was wrong, and the way it was wrong is the most
+            useful thing in this teardown.
+          </p>
+          <p>
+            My extraction prompt told the model not to emit a concept named after
+            the page it was reading, on the reasoning that a page's own subject
+            is not a dependency. The effect was the opposite of the intent. The
+            page called <em>Middleware</em> is exactly the page that explains what
+            middleware is, and it became the one page in the corpus that never
+            recorded doing so, while five other pages recorded depending on it.
+            The graph then reported, correctly given what it had been told,
+            that the FastAPI documentation never explains middleware.
+          </p>
+          <p>
+            So I added a pass that goes back over every concept nothing defines
+            and searches the corpus again, with an agent that has to produce a
+            verbatim span or say plainly that it found nothing. It checked 164
+            concepts and found real definitions for <strong>74</strong> of them.
+          </p>
+
+          <div class="callout callout-warning">
+            <h4>45% of the reported gaps were not gaps</h4>
+            <p>
+              Near misses fell from 57 to 33 and orphan concepts from 108 to 59.
+              A third of everything this tool was going to publish would have
+              been an instruction to write documentation that already existed.
+            </p>
+            <p>
+              The prompt is fixed for future runs, and the recheck stays in the
+              pipeline anyway, because the general failure it catches is not
+              specific to that one bad instruction: an extractor that misses a
+              DEFINES edge produces a finding that looks exactly like a real one.
+            </p>
+          </div>
+
+          <h3>The ten most asked about</h3>
+
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Every row links to the finding in the explorer, where the proof
+                path and the confirming answer are one click away.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="num">Threads</th>
+                  <th scope="col">The concept nothing explains</th>
+                  <th scope="col">The article that looks like the answer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0001">15</a></td>
+                  <td><code>async def</code></td>
+                  <td>Stream Data / Files and Async</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0002">10</a></td>
+                  <td>Starlette</td>
+                  <td>Handling Errors / Install custom exception handlers</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0003">7</a></td>
+                  <td><code>fastapi</code> command</td>
+                  <td>
+                    Bigger Applications / Configure the entrypoint in
+                    pyproject.toml
+                  </td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0004">6</a></td>
+                  <td>event loop</td>
+                  <td>Stream Data / Files and Async</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0005">6</a></td>
+                  <td>deployment</td>
+                  <td>First Steps / Deploy to other cloud providers</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0006">6</a></td>
+                  <td>FastAPI CLI</td>
+                  <td>First Steps / Deploy your app</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0007">4</a></td>
+                  <td>async generator</td>
+                  <td>Custom Response / StreamingResponse</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0008">3</a></td>
+                  <td><code>APIRoute</code></td>
+                  <td>
+                    Path Operation Advanced Configuration / Using the function
+                    name as the operationId
+                  </td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0009">3</a></td>
+                  <td>exception</td>
+                  <td>Dependencies with yield / A dependency with yield and try</td>
+                </tr>
+                <tr>
+                  <td class="num"><a href="tool.html#F1-0010">3</a></td>
+                  <td><code>uvicorn.run</code></td>
+                  <td>Debugging / Call uvicorn</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            Look at that list honestly and a pattern jumps out. <code>async def</code>,
+            event loop, deployment, the FastAPI CLI: FastAPI documents all of
+            these, on pages that are not in this corpus, because the scope rule
+            took the tutorial and the first nine advanced pages and
+            <code>async.md</code>, <code>fastapi-cli.md</code> and the whole
+            <code>deployment/</code> directory sit outside it.
+          </p>
+
+          <div class="pullquote">
+            <p>
+              A corpus boundary and a documentation gap are the same thing from
+              the retriever's side.
+            </p>
+          </div>
+
+          <p>
+            That is not an excuse for the result, it is the most transferable
+            thing in it. If your assistant indexes your tutorial and not your
+            reference, then for that assistant those concepts genuinely are
+            undefined, and it will answer from the tutorial page that depends on
+            them exactly as this predicts. The finding is correct with respect to
+            the corpus it was given, which is the same corpus the assistant would
+            be given, and the fix is either to write the page or to widen the
+            index. Both are decisions somebody has to make on purpose.
+          </p>
+        </section>
+
+        <section id="retrieval">
+          <p class="section-kicker">Part 5</p>
+          <h2>Vector against graph retrieval</h2>
+          <p>
+            Everything up to here builds and analyses a graph. That is knowledge
+            graph work, not GraphRAG. GraphRAG means the graph drives
+            <em>retrieval</em> that feeds <em>generation</em>, so both paths get
+            built, both answer all 300 questions, and both get scored against the
+            maintainer's own reply.
+          </p>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Path</th>
+                  <th scope="col">How it retrieves</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">A, vector baseline</th>
+                  <td>
+                    Every Section and every Question embedded with
+                    sentence-transformers all-MiniLM-L6-v2, pinned, local, on
+                    CPU. Top five sections by cosine similarity
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">B, graph retrieval</th>
+                  <td>
+                    Seed on the Sections that DEFINE the concepts the question
+                    asks about. Then one hop: for each seed, also retrieve the
+                    Sections that DEFINE anything that seed REQUIRES. Capped at
+                    five to match
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            The traversal is the point. Path B can pull in the prerequisite a
+            section depends on. Path A cannot, because a prerequisite is not
+            lexically similar to the question that needs it. Across the 300
+            questions the two paths never once returned the same five sections,
+            and in 282 of them the graph reached at least one section the vector
+            path did not.
+          </p>
+
+          <h3>A question where the traversal did something</h3>
+          <p>
+            Discussion 14334 asks why
+            <code>jsonable_encoder</code> is not respecting <code>exclude</code>
+            on a <code>Field</code>.
+          </p>
+
+          <div class="table-scroll">
+            <table>
+              <caption>
+                The vector path retrieves five things about excluding and about
+                OpenAPI. The graph path retrieves the section on the actual
+                function, and then the section that defines Field, which is what
+                the question turns on.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Path A retrieved</th>
+                  <th scope="col">Path B retrieved</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Declare Request Example Data / Pydantic and FastAPI examples</td>
+                  <td>
+                    Return a Response Directly / Using the jsonable_encoder in a
+                    Response
+                  </td>
+                </tr>
+                <tr>
+                  <td>Custom Response / JSON Responses</td>
+                  <td>Body Fields / Import Field</td>
+                </tr>
+                <tr>
+                  <td>Path Operation Advanced Configuration / Custom OpenAPI content type</td>
+                  <td>Body Fields / Declare model attributes</td>
+                </tr>
+                <tr>
+                  <td>Query Parameters and String Validations / Exclude parameters from OpenAPI</td>
+                  <td>Body Fields / Add extra information</td>
+                </tr>
+                <tr>
+                  <td>Response Model / response_model Priority</td>
+                  <td>Body Fields</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            The step that got it there is recorded on the answer, in the same
+            form as every other claim in this repository:
+          </p>
+
+          <div class="callout callout-info">
+            <h4>The traversal, as committed</h4>
+            <p>
+              <code
+                >q:14334 ASKS_ABOUT concept:jsonable_encoder &rarr; DEFINES
+                &rarr; sec:advanced/response-directly#using-the-jsonable-encoder-in-a-response</code
+              >
+            </p>
+            <p>
+              <code
+                >sec:advanced/response-directly#using-the-jsonable-encoder-in-a-response
+                REQUIRES concept:basemodel &rarr; DEFINES &rarr;
+                sec:tutorial/body#create-your-data-model</code
+              >
+            </p>
+          </div>
+
+          <h3>The scores</h3>
+          <p>
+            Every generated answer was scored into one of three buckets against
+            the maintainer's reply: <strong>correct</strong>,
+            <strong>confidently wrong</strong>, meaning it asserts an answer that
+            contradicts or omits the key fact with no hedge, and
+            <strong>declined</strong>, meaning it said it could not answer from
+            the material.
+          </p>
+
+          <div class="table-scroll">
+            <table>
+              <caption>{{SCORE_CAPTION}}</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Path</th>
+                  <th scope="col" class="num">Correct</th>
+                  <th scope="col" class="num">Confidently wrong</th>
+                  <th scope="col" class="num">Declined</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">A, vector</th>
+                  <td class="num">{{V_CORRECT}}</td>
+                  <td class="num">{{V_WRONG}}</td>
+                  <td class="num">{{V_DECL}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">B, graph</th>
+                  <td class="num">{{G_CORRECT}}</td>
+                  <td class="num">{{G_WRONG}}</td>
+                  <td class="num">{{G_DECL}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {{SCORE_PROSE}}
+
+          <div class="callout callout-notice">
+            <h4>Prior work on exactly this comparison</h4>
+            <p>
+              A vector against graph retrieval comparison on abstention
+              behaviour has been published before. This reproduces the comparison
+              on a new corpus and does not claim the idea. Treat the numbers
+              above as one more data point rather than as a result.
+            </p>
+          </div>
+        </section>
+
+        <section id="validation">
+          <p class="section-kicker">Part 6</p>
+          <h2>Validation</h2>
+          <p>
+            50 near-miss findings drawn uniformly at random with a fixed seed.
+            Each one handed to an independent check that was told to be sceptical,
+            given the corpus, and told to go looking for a definition rather than
+            to judge from memory. The verdict is valid only when no section
+            explains the concept <em>and</em> the thread answer supplies a fact
+            the corpus does not contain.
+          </p>
+
+          {{VALIDATION_BLOCK}}
+
+          <h3>Why there is no pass or fail gate</h3>
+          <p>
+            A threshold at this sample size would be decided by two or three
+            items. At 43 valid out of 50, the Wilson 95% interval runs from about
+            0.74 to 0.93, so a binary gate at 90% and a binary gate at 75% would
+            disagree about the same sample. RefusalBench human validated 180
+            items and scored 93.1%, which means a 90% gate would fail work done
+            by a funded team with expert annotators.
+          </p>
+          <p>
+            So the number is reported with its interval and no gate is drawn.
+            There is one threshold in the build plan, and it is an instruction to
+            me rather than a claim to a reader: below roughly 70%, stop and fix
+            extraction instead of building anything on top.
+          </p>
+
+          <h3>What this does and does not establish</h3>
+          <p>
+            It establishes that a randomly drawn near miss is, at the observed
+            rate, a genuine absence in the corpus confirmed by an answer written
+            outside it. It says nothing at all about
+            <em>recall</em>: how many real gaps the pipeline never noticed is not
+            measured here and could not be, because measuring it would need the
+            hand labelling this design was built to avoid. The number is a
+            precision estimate on a sample of 50, and nothing more.
+          </p>
+        </section>
+
+        <section id="limits">
+          <p class="section-kicker">Part 7</p>
+          <h2>What this does not do</h2>
+
+          <ul>
+            <li>
+              <strong>One corpus.</strong> Everything here is FastAPI. Nothing has
+              been run against a second documentation set, so the method
+              generalises in principle and is demonstrated in exactly one place.
+            </li>
+            <li>
+              <strong>Developer documentation, not a consumer help centre.</strong>
+              The buyer this is aimed at is a content team at a software company,
+              and the corpus is a developer tutorial. Those are different writing
+              problems, and a help centre has no equivalent of a code sample to
+              extract concepts from.
+            </li>
+            <li>
+              <strong>Extraction quality bounds every number downstream.</strong>
+              This is not a hedge, it is the measured behaviour: one bad line in
+              one prompt produced 45% false positives, and it took a second pass
+              to find them. Every count on this page inherits whatever is still
+              wrong in the extraction that produced it.
+            </li>
+            <li>
+              <strong>Demand comes from public discussions, not a search log.</strong>
+              A real team has the queries their users typed, including the ones
+              that got a confident wrong answer. This has only the questions
+              somebody cared enough to post in public, which is a smaller and
+              differently shaped set.
+            </li>
+            <li>
+              <strong>A sample, not an audit.</strong> 60 of 155 English pages and
+              300 of roughly 3,900 answered threads. The counts are counts within
+              that slice and are not an estimate of the whole.
+            </li>
+            <li>
+              <strong>No claim about a deployed assistant.</strong> This measures
+              documentation. It does not measure escalations, deflection, or
+              anything that happened to a real user, and no number here should be
+              read as predicting one.
+            </li>
+          </ul>
+        </section>
+
+        <section id="prior">
+          <p class="section-kicker">Part 8</p>
+          <h2>Prior work</h2>
+          <p>
+            None of the technique here is new, and it is worth being specific
+            about who did what, because a portfolio project that quietly implies
+            otherwise is worse than one that cites properly.
+          </p>
+
+          <ul class="evidence-list">
+            <li>
+              <span class="src">Sufficient Context, Google Research</span>
+              <span class="yr">arXiv 2411.06037</span>
+              <p>
+                The 10% against 66% result, and the framing of sufficiency as the
+                thing to measure rather than relevance. This is the method behind
+                the near-miss finding. I did not come up with it and the finding
+                type is an application of it.
+                <a href="https://arxiv.org/abs/2411.06037" rel="noopener"
+                  >Read it</a
+                >.
+              </p>
+            </li>
+            <li>
+              <span class="src">Ragas</span>
+              <span class="yr">open source</span>
+              <p>
+                Already builds a knowledge graph from a corpus, for the purpose of
+                generating a test set. The graph-over-documentation idea is
+                theirs and others', not mine. What is different here is the
+                question asked of the graph and who the answer is addressed to.
+              </p>
+            </li>
+            <li>
+              <span class="src">Giskard</span>
+              <span class="yr">open source</span>
+              <p>
+                Ships an out-of-scope question generator, which attacks a
+                neighbouring problem: finding questions your assistant should
+                refuse rather than articles that will make it answer wrongly.
+              </p>
+            </li>
+            <li>
+              <span class="src">BRINK, UAEval4RAG, RefusalBench, AbstentionBench</span>
+              <span class="yr">benchmarks</span>
+              <p>
+                All cover measuring whether a model abstains when it should. The
+                technique of evaluating abstention is well populated, which is
+                exactly why this project does not claim it.
+              </p>
+            </li>
+          </ul>
+
+          <h3>So what is the contribution</h3>
+          <p>
+            Routing, not method. Every piece of prior work above produces a number
+            about a <em>system</em>, and hands it to whoever owns the system.
+            Nobody who can fix a documentation gap can act on "your RAG pipeline
+            scores 0.71 on sufficiency".
+          </p>
+          <p>
+            The output of this pipeline is addressed to the person who owns the
+            content, in their units: this article, this missing fact, this many
+            people asked, and here is the sentence in your own file that shows the
+            article depends on something you never wrote. That is a work item.
+            The benchmark score is not.
+          </p>
+          <p>
+            Whether that repackaging is worth anything is a fair question, and
+            this repository does not try to answer it with adoption numbers,
+            because there are none and inventing a traction story would undercut
+            everything else on this page.
+          </p>
+        </section>
+
+        <section id="try">
+          <p class="section-kicker">The tool</p>
+          <h2>Try it</h2>
+          <p>
+            The explorer holds all 190 findings against the real corpus. Every
+            card carries a "How this was computed" toggle that opens the graph
+            path, the verbatim sentence behind each hop, and a link to the exact
+            lines of the exact file at the pinned commit.
+          </p>
+          <p>
+            That toggle is the point of the whole thing. A finding you cannot
+            audit is a finding nobody acts on.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="tool.html">Try the tool &rarr;</a>
+            <a
+              class="btn btn-secondary"
+              href="https://github.com/Roanukz/should-my-agent-answer"
+              >View the source</a
+            >
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          Corpus pinned at fastapi/fastapi commit
+          <code>49033471</code>. All results committed and reproducible with
+          <code>pipeline/run.sh</code>. Neither page on this site makes a network
+          call.
+        </p>
+        <p>
+          Related:
+          <a href="https://roanukz.github.io/agent-answer/" rel="noopener"
+            >Will My Agent Answer This?</a
+          >
+          scores a single knowledge-base article. This one maps a whole set.
+        </p>
+      </div>
+    </footer>
+    <!-- The only script on this page: it marks the contents entry for whichever
+         section you are reading. Everything else here is static HTML, and if
+         this never runs the page loses a highlight and nothing else. -->
+    <script>
+      (function () {
+        var links = {};
+        document.querySelectorAll('.toc a').forEach(function (a) {
+          links[a.getAttribute('href').slice(1)] = a;
+        });
+        var sections = document.querySelectorAll('main > section');
+        if (!sections.length || !('IntersectionObserver' in window)) return;
+
+        var visible = {};
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              visible[entry.target.id] = entry.isIntersecting;
+            });
+            var current = null;
+            sections.forEach(function (section) {
+              if (visible[section.id] && !current) current = section.id;
+            });
+            Object.keys(links).forEach(function (id) {
+              links[id].classList.toggle('active', id === current);
+            });
+          },
+          { rootMargin: '-10% 0px -70% 0px' }
+        );
+        sections.forEach(function (section) {
+          observer.observe(section);
+        });
+      })();
+    </script>
+  </body>
+</html>

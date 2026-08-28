@@ -1,0 +1,14 @@
+{
+  "batches_processed": 30,
+  "asks_about_edges": 960,
+  "questions_mapped": 283,
+  "questions_total": 300,
+  "raw": 961,
+  "dropped_unknown_concept": 0,
+  "dropped_no_span": 1,
+  "dropped_short_span": 0,
+  "dropped_unknown_question": 0,
+  "dropped_duplicate": 0,
+  "recovered_after_markdown_strip": 124,
+  "unknown_label_examples": []
+}

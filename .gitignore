@@ -12,3 +12,8 @@ __pycache__/
 # data/graph/ and data/. Committing hundreds of prompt files would bury the
 # artifacts that matter.
 data/work/
+
+# Local preview config. The site needs no server to work; this is only so the
+# pages can be checked over http:// during development, where a browser will
+# not resolve relative paths inside a file:// snapshot.
+.claude/

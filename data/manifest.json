@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "corpus": "fastapi/fastapi",
+  "corpus_commit": "49033471594ea5d99a80abdf1043231b7791ee49",
+  "corpus_commit_date": "2026-08-26T17:53:57Z",
+  "docs_pages": 60,
+  "discussion_threads": 300,
+  "run_date": "2026-08-28",
+  "nodes": 2197,
+  "edges": 5370,
+  "nodes_by_type": {
+    "Doc": 60,
+    "Section": 570,
+    "Concept": 967,
+    "Question": 300,
+    "Answer": 300
+  },
+  "edges_by_type": {
+    "ANSWERED_BY": 300,
+    "ASKS_ABOUT": 960,
+    "CONTAINS": 570,
+    "DEFINES": 885,
+    "LINKS_TO": 50,
+    "MENTIONS": 994,
+    "REQUIRES": 1611
+  },
+  "findings": {
+    "near_miss": 33,
+    "orphan_concept": 59,
+    "retrieval_collision": 98
+  },
+  "extractor": "claude-code-batch",
+  "embedding_model": "",
+  "generator": "",
+  "extraction": {
+    "batches": 79,
+    "edges_proposed": 3509,
+    "edges_kept": 3418,
+    "dropped_span_not_found": 0,
+    "dropped_short_span": 0,
+    "dropped_heading_only_span": 0,
+    "dropped_duplicate": 89
+  },
+  "question_mapping": {
+    "batches": 30,
+    "edges": 960,
+    "questions_mapped": 283,
+    "questions_total": 300
+  },
+  "validation": {},
+  "retrieval_comparison": {},
+  "pipeline_commit": "127bf63e8ff3458cc15fd0febcfd0bfd36c02356"
+}

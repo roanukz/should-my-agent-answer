@@ -1,0 +1,27 @@
+{
+  "nodes": 2197,
+  "edges": 5370,
+  "nodes_by_type": {
+    "Doc": 60,
+    "Section": 570,
+    "Concept": 967,
+    "Question": 300,
+    "Answer": 300
+  },
+  "edges_by_type": {
+    "ANSWERED_BY": 300,
+    "ASKS_ABOUT": 960,
+    "CONTAINS": 570,
+    "DEFINES": 885,
+    "LINKS_TO": 50,
+    "MENTIONS": 994,
+    "REQUIRES": 1611
+  },
+  "concepts_total": 967,
+  "concepts_defined_somewhere": 583,
+  "concepts_required_somewhere": 397,
+  "concepts_orphan": 384,
+  "concepts_in_two_or_more_sections": 462,
+  "isolated_nodes": 0,
+  "isolated_examples": []
+}

@@ -89,15 +89,22 @@ needs_model "Question mapping" extract.py run-questions data/work/questions/out 
 "$PY" pipeline/extract.py assemble-questions
 "$PY" pipeline/build_graph.py
 
-step "6. Find F1, F2 and F3"
+step "6. Re-check every concept nothing defines"
+note "the first pass can miss the page that explains its own subject; this looks again"
+"$PY" pipeline/extract.py prep-definitions
+needs_model "Definition sweep" extract.py run-definitions data/work/definitions/out "def-*.json"
+"$PY" pipeline/extract.py assemble-definitions
+"$PY" pipeline/build_graph.py
+
+step "7. Find F1, F2 and F3"
 "$PY" pipeline/find.py
 
-step "7. Name the missing fact on each near miss"
+step "8. Name the missing fact on each near miss"
 "$PY" pipeline/describe.py prep
 needs_model "Gap descriptions" describe.py run data/work/describe/out "desc-*.json"
 "$PY" pipeline/describe.py assemble
 
-step "8. Retrieve both ways, generate, and score"
+step "9. Retrieve both ways, generate, and score"
 "$PY" pipeline/compare.py retrieve
 needs_model "Vector path generation" compare.py run-vector data/work/compare/vector/out "gen-vector-*.json"
 needs_model "Graph path generation" compare.py run-graph data/work/compare/graph/out "gen-graph-*.json"
@@ -105,12 +112,12 @@ needs_model "Graph path generation" compare.py run-graph data/work/compare/graph
 needs_model "Scoring" compare.py run-score data/work/compare/score/out "score-*.json"
 "$PY" pipeline/compare.py assemble
 
-step "9. Check a random sample of the findings"
+step "10. Check a random sample of the findings"
 "$PY" pipeline/validate.py prep
 needs_model "Validation" validate.py run data/work/validate/out "val-*.json"
 "$PY" pipeline/validate.py assemble
 
-step "10. Write the manifest and the site payload"
+step "11. Write the manifest and the site payload"
 "$PY" pipeline/manifest.py
 "$PY" pipeline/site_data.py
 
