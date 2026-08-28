@@ -695,6 +695,11 @@ class ShareCardTest(unittest.TestCase):
             for banned in ("<image", "xlink:href", "@import", "url(http", ".woff", "<use"):
                 self.assertNotIn(banned, svg, f"{stem} reaches outside itself")
 
+    def test_both_pages_name_their_author(self) -> None:
+        for page in self.PAGES:
+            html = (ROOT / page).read_text(encoding="utf-8")
+            self.assertIn('<meta name="author" content="Roanuk Zaman" />', html, page)
+
     def test_each_page_points_at_its_own_card_with_dimensions_and_alt(self) -> None:
         for page, stem in self.PAGES.items():
             html = (ROOT / page).read_text(encoding="utf-8")
