@@ -413,19 +413,19 @@ li {
   margin-bottom: var(--space-8);
 }
 
-.tldr ul {
+.summary ul {
   list-style: none;
   padding: 0;
   max-width: var(--measure-16);
 }
 
-.tldr li {
+.summary li {
   position: relative;
   padding-left: var(--space-32);
   margin-bottom: var(--space-16);
 }
 
-.tldr li::before {
+.summary li::before {
   content: '';
   position: absolute;
   left: 0;
@@ -1327,4 +1327,14 @@ caption {
   h2 { font-size: var(--size-25); line-height: var(--lh-25); }
   .card { padding: var(--space-16); }
   .hops { padding-left: var(--space-16); }
+}
+
+/* The TL;DR: the whole page in five sentences, set apart so a skimmer lands on it. */
+.brief { margin: 2.25rem 0 0; padding: 1.5rem 1.75rem; background: var(--surface); border: 1px solid var(--border-subtle); border-left: 5px solid var(--fill); border-radius: var(--radius-lg); }
+.brief h2 { margin-top: 0.25rem; }
+.brief-definition { color: var(--text-muted); font-size: 0.95rem; margin: 0 0 0.75rem; }
+.brief-body { font-size: 1.2rem; line-height: 1.6; color: var(--text-heading); margin: 0; }
+@media (max-width: 720px) {
+  .brief { padding: 1.1rem 1.2rem; }
+  .brief-body { font-size: 1.08rem; }
 }

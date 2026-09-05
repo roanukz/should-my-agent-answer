@@ -709,3 +709,57 @@ class ShareCardTest(unittest.TestCase):
             self.assertIn('property="og:image:alt"', html, page)
             self.assertIn('name="twitter:card" content="summary_large_image"', html, page)
             self.assertIn('property="og:url"', html, page)
+
+
+class FrontMatterTest(unittest.TestCase):
+    """The front of the teardown is layered: the lede hooks, the TL;DR answers,
+    the Summary argues, the parts show. Each layer has a length and a shape,
+    and the format is held here rather than remembered."""
+
+    PAGE = (ROOT / "index.html").read_text(encoding="utf-8")
+
+    @staticmethod
+    def text(fragment: str) -> str:
+        plain = re.sub(r"<[^>]+>", " ", fragment)
+        plain = re.sub(r"&[a-z]+;", " ", plain)
+        return re.sub(r"\s+", " ", plain).strip()
+
+    @staticmethod
+    def sentences(plain: str) -> list[str]:
+        return [s for s in re.split(r'(?<=[.!?])\s+(?=[A-Z"])', plain) if s]
+
+    def section(self, section_id: str) -> str:
+        match = re.search(rf'<section id="{section_id}"[\s\S]*?</section>', self.PAGE)
+        self.assertIsNotNone(match, f"section #{section_id}")
+        return match.group(0)
+
+    def test_the_lede_is_the_hook_at_most_three_sentences(self) -> None:
+        lede = re.search(r'<p class="lede">([\s\S]*?)</p>', self.PAGE)
+        self.assertIsNotNone(lede)
+        self.assertLessEqual(len(self.sentences(self.text(lede.group(1)))), 3)
+
+    def test_the_tldr_spells_out_the_acronym_stands_alone_and_fits_thirty_seconds(self) -> None:
+        brief = self.section("tldr")
+        self.assertIn('<p class="section-kicker">Thirty seconds</p>', brief)
+        self.assertIn("<h2>TL;DR</h2>", brief)
+        self.assertIn("Too long; didn't read", brief)
+        body = re.search(r'<p class="brief-body">([\s\S]*?)</p>', brief)
+        self.assertIsNotNone(body)
+        plain = self.text(body.group(1))
+        self.assertLessEqual(len(self.sentences(plain)), 5)
+        self.assertLessEqual(len(plain.split(" ")), 100)
+        self.assertNotIn("<a ", body.group(1))
+        self.assertLessEqual(len(re.findall(r"\d+", plain)), 1)
+
+    def test_the_summary_has_the_six_leads_in_scientific_method_order(self) -> None:
+        summary = self.section("summary")
+        self.assertIn('<p class="section-kicker">Three minutes</p>', summary)
+        leads = [m.strip() for m in re.findall(r"<strong>([^<]*)</strong>", summary)]
+        self.assertEqual(
+            leads,
+            ["The problem.", "The thesis.", "The method.", "The results.", "What it means.", "Cautions, and how to check."],
+        )
+
+    def test_the_contents_rail_lists_both_as_unnumbered_front_matter(self) -> None:
+        self.assertIn('<li><a href="#tldr">TL;DR</a></li>', self.PAGE)
+        self.assertIn('<li><a href="#summary">Summary</a></li>', self.PAGE)

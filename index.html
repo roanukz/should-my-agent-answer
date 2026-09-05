@@ -108,11 +108,31 @@
       </div>
     </header>
 
+    <div class="wrap">
+      <section id="tldr" class="brief" aria-label="TL;DR">
+        <p class="section-kicker">Thirty seconds</p>
+        <h2>TL;DR</h2>
+        <p class="brief-definition">Too long; didn't read. The whole page in five sentences.</p>
+        <p class="brief-body">
+          When an AI assistant answers from documentation that is nearly right,
+          it answers confidently and wrong, and the metric counts a success. I
+          built a pipeline that maps a documentation set, crosses it with
+          questions users actually asked, and names the articles most likely to
+          fail that way and the fact each is missing. On one project's
+          documentation it found fourteen gaps, and three independent readers
+          confirmed eleven. Using the same map to pick what the assistant reads
+          did not beat ordinary search. Each finding is a work item for the
+          content owner, not a score for the system owner.
+        </p>
+      </section>
+    </div>
+
     <div class="wrap layout">
       <nav class="toc" aria-label="Contents">
         <p class="toc-title">Contents</p>
         <ol>
-          <li><a href="#tldr">Summary</a></li>
+          <li><a href="#tldr">TL;DR</a></li>
+          <li><a href="#summary">Summary</a></li>
           <li><a href="#outcomes">1. The three outcomes</a></li>
           <li><a href="#invisible">2. Why nobody sees the third one</a></li>
           <li><a href="#built">3. What I built</a></li>
@@ -126,58 +146,84 @@
       </nav>
 
       <main id="main" tabindex="-1">
-        <section id="tldr" class="tldr">
-          <p class="section-kicker">The short version</p>
+        <section id="summary" class="summary">
+          <p class="section-kicker">Three minutes</p>
           <h2>Summary</h2>
           <ul>
             <li>
-              <strong>The dangerous failure is the one that looks like a
-                success.</strong>
-              Google Research measured it: models handed no supporting context
-              answered incorrectly about 10% of the time, and models handed
-              <em>insufficient</em> context about 66% of the time
-              (<a href="#outcomes">Part 1</a>). Every prioritization signal a
-              content team has surfaces the first case and none of them surface
-              the second.
+              <strong>The problem.</strong> Three things can happen when an
+              assistant is asked a question: it answers, it declines, or it finds
+              an article that is nearly right and answers confidently and wrong.
+              Every signal a content team has (complaints, escalations, empty
+              searches, the deflection rate) surfaces the decline and hides the
+              confident wrong answer, because the person who was misled left
+              satisfied. Google Research measured the danger: handed no context,
+              models are wrong about 10% of the time; handed insufficient
+              context, about 66%
+              (<a href="#outcomes">Part 1</a>, <a href="#invisible">Part 2</a>).
             </li>
             <li>
-              <strong>So the finding has to be manufactured, not
-                collected.</strong>
-              I mapped 60 pages of the FastAPI documentation as a knowledge
-              graph, which here means boxes and arrows: a box for each section
-              and each idea, an arrow every time a section either explains an
-              idea or quietly assumes you already know it, and no arrow allowed
-              to exist without the verbatim sentence that justifies it. Then I
-              crossed it against 300 answered questions from the project's own
-              GitHub Discussions and asked those arrows one question: which ideas
-              do the docs lean on and never explain
-              (<a href="#built">Part 3</a>)? It produced 153 findings, 14 of them
-              near misses (<a href="#found">Part 4</a>).
+              <strong>The thesis.</strong> Since no signal arrives, the signal
+              has to be manufactured from the documentation itself, before
+              deployment. A map of the documentation as boxes and arrows, one
+              box per section and per idea, an arrow wherever a section explains
+              an idea or quietly assumes it, can express an absence: an idea
+              that sections depend on, that users ask about, and that no section
+              explains. Ordinary similarity search cannot express that, because
+              it always returns the nearest piece however far away it is
+              (<a href="#built">Part 3</a>).
             </li>
             <li>
-              <strong>Every finding was independently checked, and three of them
-                did not survive it.</strong>
-              11 of the 14 near misses held up when three readers each went back
-              to the pages, and all fourteen verdicts were unanimous
-              (<a href="#validation">Part 6</a>). Checking against the 95 pages I
-              did not index knocked three more out, so measured as a claim about
-              FastAPI rather than about my index it is 8 of 14. Both numbers are
-              on this page, because a gap-finding tool is judged on its false
-              positives and picking the flattering one would be the same failure
-              this project is about.
+              <strong>The method.</strong> 60 pages of the FastAPI documentation
+              were mapped, with no arrow allowed to exist without the verbatim
+              sentence that justifies it, and crossed with 300 answered
+              questions from the project's own discussion board, whose accepted
+              answers served as the known-correct answers. Every one of the
+              fourteen near misses went to three independent readers told to
+              search rather than judge from memory, and the bar was set in
+              advance: none of the 60 pages explains the idea, and the thread's
+              answer supplies a fact the pages lack. The same map was then tried a
+              second way, choosing what the assistant reads, against ordinary
+              similarity search over the same 300 questions, which is the control
+              (<a href="#built">Part 3</a>, <a href="#retrieval">Part 5</a>,
+              <a href="#validation">Part 6</a>).
             </li>
             <li>
-              <strong>Using the graph to pick what the assistant reads did not
-                beat ordinary similarity search.</strong>
-              Both were run over the same 300 questions. The graph did not make
-              the assistant more right, 23 correct against 24, and it did make it
-              more cautious, 3 confidently wrong against 5
-              (<a href="#retrieval">Part 5</a>). The test was also too small to
-              have caught a modest difference, and the reason is the most
-              interesting thing the project found by accident: those 300
-              questions come, by construction, from people the documentation had
-              already failed. Excellent for finding gaps. Useless as a benchmark
-              of answering.
+              <strong>The results.</strong> 153 findings in all, 14 of them near
+              misses. Eleven of the fourteen held up, unanimously; measured
+              against all 155 pages of FastAPI's documentation rather than the 60
+              indexed, eight did, because three are documented on pages outside
+              the index. As a way of choosing what the assistant reads, the map
+              did not beat similarity search: 23 correct answers against 24, 3
+              confidently wrong against 5, on a comparison that could only have
+              detected a much larger difference
+              (<a href="#found">Part 4</a>, <a href="#retrieval">Part 5</a>,
+              <a href="#validation">Part 6</a>).
+            </li>
+            <li>
+              <strong>What it means.</strong> The map earns its cost as a
+              diagnosis and has not earned it as a retriever. The null on
+              retrieval has a known cause: 282 of the 300 questions came from
+              people who said they had already read the documentation and not
+              found the answer, which makes them excellent for finding gaps and
+              useless for judging answering. Both precision numbers are
+              published, because a gap-finding tool is judged on its false
+              positives, and picking the flattering one would be the same
+              failure this project is about
+              (<a href="#retrieval">Part 5</a>, <a href="#validation">Part 6</a>,
+              <a href="#limits">Part 7</a>).
+            </li>
+            <li>
+              <strong>Cautions, and how to check.</strong> Recall, the share of
+              real gaps found, is unmeasured and cannot be measured without the
+              hand labeling this design avoids, so fourteen is a floor. The
+              scorer of the retrieval comparison was not blind to which path
+              produced each answer, which is on the record and, if anything,
+              favored the map. Only the 14 near misses were checked; the other
+              139 findings are labeled as unchecked in the explorer. Every number
+              on this page is tested against the data files, and every finding
+              carries the sentence, file and line it was read from
+              (<a href="#validation">Part 6</a>, <a href="#limits">Part 7</a>).
             </li>
           </ul>
         </section>
